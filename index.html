@@ -3,129 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIRR JAR</title>
+<title>AIRR</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#0a0a0a;color:#fff;padding:12px;padding-bottom:110px}
-.top{display:flex;gap:8px;align-items:center;margin-bottom:12px;overflow-x:auto;white-space:nowrap}
-.top button{background:#111;border:2px solid #fff;border-radius:10px;color:#fff;padding:8px 12px;font-weight:bold}
-.logo{background:#000;border-radius:20px;padding:8px 18px;font-weight:bold}
-.banner{border:3px solid #fff;border-radius:18px;overflow:hidden;height:140px;margin-bottom:12px;background:#222;display:flex;align-items:center;justify-content:center;font-size:40px}
-.card{background:#111;border:2px solid #fff;border-radius:18px;padding:14px;margin-bottom:12px}
-.profile{display:flex;gap:12px;align-items:center}
-.profile img{width:70px;height:70px;border-radius:10px;border:2px dashed #fff;object-fit:cover}
-.badge{display:inline-block;background:#3a0000;color:#ff4d4d;border:1px solid #ff4d4d;border-radius:20px;padding:2px 10px;font-size:12px;font-weight:bold;margin-top:4px}
-.btn{width:100%;background:#222;border:2px solid #fff;color:#fff;border-radius:12px;padding:12px;margin-top:12px;font-weight:bold}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mini{background:#111;border:2px solid #fff;border-radius:14px;padding:12px}
-.mini h3{font-size:14px;color:#aaa}
-.mini p{font-size:20px;font-weight:bold;margin-top:6px}
-.bottom{position:fixed;bottom:12px;left:12px;right:12px;background:#111;border:2px solid #fff;border-radius:25px;display:flex;justify-content:space-around;padding:8px 4px;z-index:99}
-.bottom button{background:none;border:none;color:#888;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px}
-.bottom button.active{color:#fff}
-.bottom button span{font-size:22px}
-.page{display:none}
-.page.active{display:block}
-.game-btn{background:#222;border:2px solid #fff;color:#fff;border-radius:14px;padding:16px;width:100%;margin-bottom:10px;font-size:16px;font-weight:bold;text-align:left}
-input{width:100%;background:#000;border:2px solid #fff;color:#fff;border-radius:12px;padding:12px;margin-top:10px}
+body{background:#fff;color:#202124;padding:12px;padding-bottom:110px}
+.top{height:30px}
+.center{margin-top:50px;text-align:center}
+.logo{font-size:64px;letter-spacing:-2px}
+.logo span:nth-child(1){color:#4285F4}.logo span:nth-child(2){color:#EA4335}.logo span:nth-child(3){color:#FBBC05}.logo span:nth-child(4){color:#4285F4}
+.nama{font-size:18px;color:#5f6368;margin-top:8px}
+.search{margin:24px auto 0;max-width:580px;display:flex;gap:10px;border:1px solid #dfe1e5;border-radius:30px;padding:12px 18px;box-shadow:0 1px 6px rgba(32,33,36,.28)}
+.search input{border:none;outline:none;font-size:16px;width:100%}
+.apps{max-width:580px;margin:30px auto 0;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+.app{text-align:center;padding:14px 6px;border-radius:16px;cursor:pointer}
+.app:active{background:#f1f3f4}.app div{font-size:32px}.app p{font-size:13px;color:#5f6368;margin-top:6px}
+.card{background:#f8f9fa;border-radius:18px;padding:16px;margin-bottom:12px}
+.tool-btn{background:#fff;border:1px solid #dadce0;border-radius:14px;padding:16px;width:100%;margin-bottom:10px;font-size:16px;text-align:left;display:flex;gap:12px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.bottom{position:fixed;bottom:12px;left:12px;right:12px;background:#fff;border:1px solid #dadce0;box-shadow:0 2px 10px rgba(0,0,0,.15);border-radius:30px;display:flex;justify-content:space-around;padding:10px 4px;z-index:99}
+.bottom button{background:none;border:none;color:#5f6368;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 20px}
+.bottom button.active{color:#1a73e8}.bottom button span{font-size:24px}
+.page{display:none}.page.active{display:block}
+input[type=text]{width:100%;border:1px solid #dadce0;border-radius:12px;padding:12px;font-size:15px;outline:none;margin-top:8px}
+.btn{width:100%;background:#1a73e8;color:#fff;border:none;border-radius:12px;padding:12px;margin-top:10px;font-weight:bold}
+.btn2{width:100%;background:#fff;border:1px solid #dadce0;border-radius:12px;padding:12px;margin-top:8px}
+.hasil{margin-top:12px;background:#fff;border:1px solid #dadce0;border-radius:12px;padding:12px;font-size:14px;display:none}
+video{width:100%;border-radius:12px;margin-top:10px}
+img.prev{width:100%;border-radius:12px;margin-top:10px}
+a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;border-radius:12px;margin-top:10px;text-decoration:none;font-weight:bold}
 </style>
 </head>
 <body>
+<div class="top"></div>
 
-<div class="top">
-<button>☰</button><button>📱</button><button>🎨</button>
-<div class="logo">● AIRR ●</div>
-<button style="color:#00d4ff;border-color:#00d4ff">ANIME JAR</button>
+<div id="page-home" class="page active">
+<div class="center">
+<div class="logo"><span>A</span><span>I</span><span>R</span><span>R</span></div>
+<div class="nama" id="namaTxt">Halo, jar</div>
+<div class="search"><span>🔍</span><input id="cari" placeholder="Telusuri atau ketik URL" onkeydown="if(event.key==='Enter')cariGoogle()"></div>
+<div style="margin-top:16px"><button onclick="cariGoogle()" style="background:#f8f9fa;border:1px solid #f8f9fa;border-radius:6px;padding:10px 16px">Penelusuran AIRR</button></div>
 </div>
-
-<!-- HALAMAN UTAMA -->
-<div id="page-utama" class="page active">
-<div class="banner">👨‍🚀 Among Us</div>
-<div class="card">
-<div>PROFIL</div>
-<div class="profile" style="margin-top:8px">
-<img src="https://i.pravatar.cc/150?img=12">
-<div><h2>jar</h2><span class="badge">IMPOSTOR</span></div>
+<div class="apps">
+<div class="app" onclick="bukaTools('t-tiktok')"><div>🎵</div><p>TikTok DL</p></div>
+<div class="app" onclick="bukaTools('t-ig')"><div>📸</div><p>IG DL</p></div>
+<div class="app" onclick="bukaTools('t-yt')"><div>▶️</div><p>YT DL</p></div>
+<div class="app" onclick="bukaTools('t-hd')"><div>✨</div><p>HD Foto</p></div>
+<div class="app" onclick="bukaTools('t-kalk')"><div>🧮</div><p>Kalkulator</p></div>
+<div class="app" onclick="bukaTools('t-stop')"><div>⏱️</div><p>Stopwatch</p></div>
+<div class="app" onclick="bukaTools('t-acak')"><div>🎲</div><p>Acak</p></div>
+<div class="app" onclick="gantiNama()"><div>✏️</div><p>Ganti Nama</p></div>
 </div>
-<button class="btn" onclick="showPage('profile')">Edit profil</button>
-<div class="grid" style="margin-top:12px">
-<div class="mini"><h3>BATERAI</h3><p>9%</p><small>Tidak mengisi</small></div>
-<div class="mini"><h3>JAM</h3><p id="jam">19:47</p><small>Lokal</small></div>
-<div class="mini"><h3>CUACA</h3><p>26°C</p><small>Cerah</small></div>
-<div class="mini"><h3>TANGGAL</h3><p>6 Nov</p><small>Jakarta</small></div>
-</div>
-</div>
-<div style="display:flex;gap:10px">
-<div class="card" style="flex:1"><div>ERUPSI <span style="background:#00d4ff;color:#000;border-radius:10px;padding:2px 8px;font-size:12px">GDACS</span></div><p style="color:#ff4d4d;text-align:center;margin-top:15px;font-weight:bold">Gagal memuat data</p></div>
-<div class="card" style="flex:1"><div>GEMPA</div><p style="color:#00d4ff;font-size:28px;font-weight:bold;margin-top:10px">M 5.3</p><small>1 km BaratDaya</small></div>
-</div>
+<div class="card" style="max-width:580px;margin:18px auto 0"><h3>👋 Selamat datang</h3><p style="color:#5f6368;font-size:14px;margin-top:4px">Downloader & Tools semua ada di tab Tools bawah.</p></div>
 </div>
 
-<!-- HALAMAN GAME -->
-<div id="page-game" class="page">
-<h2 style="margin-bottom:12px">🎮 GAME</h2>
-<button class="game-btn" onclick="alert('Tebak Impostor - Segera!')">🕵️ Tebak Impostor</button>
-<button class="game-btn" onclick="alert('Quiz Among Us - Segera!')">❓ Quiz Among Us</button>
-<button class="game-btn" onclick="alert('Memory Game - Segera!')">🧠 Memory Game</button>
-<div class="card">Skor kamu: <b>0</b><br><small>Main terus biar naik rank!</small></div>
-</div>
-
-<!-- HALAMAN PROFILE -->
-<div id="page-profile" class="page">
-<h2 style="margin-bottom:12px">👤 Profile</h2>
-<div class="card">
-<div class="profile">
-<img src="https://i.pravatar.cc/150?img=12">
-<div><h2>jar</h2><span class="badge">IMPOSTOR</span></div>
-</div>
-<input id="namaBaru" placeholder="Ganti nama...">
-<button class="btn" onclick="gantiNama()">Simpan Nama</button>
-</div>
-<div class="card">Level: <b>1 - Crewmate</b><br>Misi selesai: <b>0</b></div>
-</div>
-
-<!-- HALAMAN DEV -->
-<div id="page-dev" class="page">
-<h2 style="margin-bottom:12px">&lt;/&gt; Dev</h2>
-<div class="card">Versi: <b>1.0</b><br> Dibuat oleh: <b>jar</b><br> Status: <b style="color:#00ff00">Online ✅</b></div>
-<button class="game-btn" onclick="alert('Cache dibersihkan!')">🧹 Clear Cache</button>
-<button class="game-btn" onclick="location.reload()">🔄 Reload Web</button>
-</div>
-
-<!-- HALAMAN TOOLS -->
 <div id="page-tools" class="page">
-<h2 style="margin-bottom:12px">🔧 Tools</h2>
-<button class="game-btn" onclick="alert('Kalkulator - Segera!')">🧮 Kalkulator</button>
-<button class="game-btn" onclick="alert('Jam Stopwatch - Segera!')">⏱️ Stopwatch</button>
-<button class="game-btn" onclick="alert('QR Generator - Segera!')">📷 QR Generator</button>
+<h2 style="font-weight:400">Tools</h2>
+<p style="color:#5f6368;margin:6px 0 16px">Downloader + HD Foto</p>
+
+<button class="tool-btn" onclick="toggle('t-tiktok')">🎵 <b>TikTok Downloader - Tanpa Watermark</b></button>
+<div id="t-tiktok" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Tempel link TikTok, klik download. Video tanpa watermark.</p>
+<input type="text" id="ttLink" placeholder="https://www.tiktok.com/@.../video/...">
+<button class="btn" onclick="dlTiktok()">🔥 Ambil Video</button>
+<div id="ttHasil" class="hasil"></div>
 </div>
 
-<!-- BOTTOM NAV -->
+<button class="tool-btn" onclick="toggle('t-ig')">📸 <b>IG Downloader - Reels / Foto / Video</b></button>
+<div id="t-ig" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Tempel link Instagram Reels / Post. Nanti kebuka downloadernya.</p>
+<input type="text" id="igLink" placeholder="https://www.instagram.com/reel/...">
+<button class="btn" onclick="dlIG()">📥 Buka IG Downloader</button>
+<button class="btn2" onclick="dlIG2()">⚡ Cara Cepat (ddinstagram)</button>
+<div id="igHasil" class="hasil"></div>
+</div>
+
+<button class="tool-btn" onclick="toggle('t-yt')">▶️ <b>YouTube Downloader - MP4 / MP3</b></button>
+<div id="t-yt" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Tempel link YouTube, pilih mau MP4 atau MP3.</p>
+<input type="text" id="ytLink" placeholder="https://www.youtube.com/watch?v=...">
+<button class="btn" onclick="dlYT('mp4')">🎬 Download MP4</button>
+<button class="btn2" onclick="dlYT('mp3')">🎵 Download MP3</button>
+<div id="ytHasil" class="hasil"></div>
+</div>
+
+<button class="tool-btn" onclick="toggle('t-hd')">✨ <b>HD Foto - Naikin Resolusi 2x</b></button>
+<div id="t-hd" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Upload foto buram / pecah, jadi lebih tajem & HD. Proses di HP lu, gak upload ke server.</p>
+<input type="file" id="hdFile" accept="image/*" onchange="previewHD(event)" style="margin-top:10px">
+<img id="hdPreview" class="prev" style="display:none">
+<button class="btn" onclick="buatHD()">✨ Jadikan HD 2x</button>
+<div id="hdHasil" class="hasil"></div>
+</div>
+
+<button class="tool-btn" onclick="toggle('t-kalk')">🧮 <b>Kalkulator</b></button>
+<div id="t-kalk" class="card" style="display:none">
+<input type="text" id="calcInput" placeholder="Contoh: 10+5*2">
+<button class="btn" onclick="hitung()">Hitung</button><div id="calcHasil" class="hasil"></div>
+</div>
+
+<button class="tool-btn" onclick="toggle('t-stop')">⏱️ <b>Stopwatch</b></button>
+<div id="t-stop" class="card" style="display:none">
+<div style="font-size:36px;text-align:center" id="stopTampil">00:00</div>
+<button class="btn" onclick="stopStart()">Mulai / Jeda</button>
+<button class="btn2" onclick="stopReset()">Reset</button>
+</div>
+
+<button class="tool-btn" onclick="toggle('t-acak')">🎲 <b>Acak Angka 1-100</b></button>
+<div id="t-acak" class="card" style="display:none">
+<div style="font-size:40px;text-align:center" id="acakAngka">?</div>
+<button class="btn" onclick="acakAngka()">Acak Sekarang</button>
+</div>
+</div>
+
 <div class="bottom">
-<button id="btn-utama" class="active" onclick="showPage('utama')"><span>🏠</span>Utama</button>
-<button id="btn-game" onclick="showPage('game')"><span>🎮</span>Game</button>
-<button id="btn-profile" onclick="showPage('profile')"><span>👤</span>Profile</button>
-<button id="btn-dev" onclick="showPage('dev')"><span>&lt;/&gt;</span>Dev</button>
+<button id="btn-home" class="active" onclick="showPage('home')"><span>🏠</span>Home</button>
 <button id="btn-tools" onclick="showPage('tools')"><span>🔧</span>Tools</button>
 </div>
 
 <script>
-function showPage(nama){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+nama).classList.add('active');
-  document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('btn-'+nama).classList.add('active');
-  window.scrollTo(0,0);
+let nama = localStorage.getItem('nama') || 'jar';
+document.getElementById('namaTxt').innerText = 'Halo, ' + nama;
+let stopDetik=0, stopJalan=false, stopTimer;
+function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+n).classList.add('active');window.scrollTo(0,0);}
+function bukaTools(id){showPage('tools');setTimeout(()=>{let el=document.getElementById(id);if(el)el.style.display='block';el.scrollIntoView({behavior:'smooth'});},100);}
+function toggle(id){let el=document.getElementById(id);el.style.display=el.style.display=='none'?'block':'none';}
+function gantiNama(){let n=prompt('Nama baru:',nama);if(n){nama=n;localStorage.setItem('nama',n);document.getElementById('namaTxt').innerText='Halo, '+n;}}
+function cariGoogle(){let q=document.getElementById('cari').value;if(!q)return alert('Ketik dulu!');window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+
+// TIKTOK - pake API tikwm gratis
+async function dlTiktok(){
+  let link=document.getElementById('ttLink').value.trim();
+  if(!link) return alert('Tempel link TikTok dulu!');
+  let box=document.getElementById('ttHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi ngambil video...';
+  try{
+    let r=await fetch('https://www.tikwm.com/api/?url='+encodeURIComponent(link));
+    let j=await r.json();
+    if(j.data && j.data.play){
+      box.innerHTML=`<b>@${j.data.author?.nickname||''}</b><br><p style="margin:6px 0">${(j.data.title||'').slice(0,100)}</p><video controls src="${j.data.play}" poster="${j.data.cover}"></video><a class="dl" href="${j.data.play}" target="_blank" download>⬇️ DOWNLOAD TANPA WATERMARK</a><a class="dl" style="background:#1a73e8" href="${j.data.wmplay}" target="_blank">⬇️ Download Dengan Watermark</a><a class="dl" style="background:#EA4335" href="${j.data.music}" target="_blank">🎵 Download Musiknya</a>`;
+    } else { box.innerHTML='❌ Gagal. Coba link lain / video mungkin private. <br><br><a href="https://ssstik.io/en?url='+encodeURIComponent(link)+'" target="_blank">Buka di SSSTik →</a>'; }
+  }catch(e){ box.innerHTML='❌ Error koneksi. Coba lagi / buka <a href="https://ssstik.io/" target="_blank">ssstik.io</a>'; }
 }
-function gantiNama(){
-  let n = document.getElementById('namaBaru').value;
-  if(n) alert('Nama diganti jadi: '+n);
-  else alert('Isi dulu namanya!');
+
+// IG
+function dlIG(){
+  let link=document.getElementById('igLink').value.trim();
+  if(!link) return alert('Tempel link IG dulu!');
+  let box=document.getElementById('igHasil'); box.style.display='block';
+  box.innerHTML=`Link kamu: <br>${link}<br><br><a class="dl" href="https://saveinsta.app/en?url=${encodeURIComponent(link)}" target="_blank">📥 Buka SaveInsta - Download IG</a><a class="dl" style="background:#1a73e8" href="https://igram.world/?url=${encodeURIComponent(link)}" target="_blank">📥 Buka Igram - Alternatif</a>`;
 }
-setInterval(()=>{
-  let d = new Date();
-  document.getElementById('jam').innerText = d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
-},1000);
+function dlIG2(){
+  let link=document.getElementById('igLink').value.trim();
+  if(!link) return alert('Tempel link IG dulu!');
+  // ddinstagram = ganti domain biar bisa preview/download langsung
+  let dd = link.replace('instagram.com','ddinstagram.com').replace('www.','');
+  window.open(dd,'_blank');
+}
+
+// YT
+function dlYT(tipe){
+  let link=document.getElementById('ytLink').value.trim();
+  if(!link) return alert('Tempel link YouTube dulu!');
+  let box=document.getElementById('ytHasil'); box.style.display='block';
+  box.innerHTML=`<a class="dl" href="https://ytmp3.nu/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download ${tipe.toUpperCase()} via YTMP3</a><a class="dl" style="background:#1a73e8" href="https://cobalt.tools/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download via Cobalt (HD)</a><a class="dl" style="background:#EA4335" href="https://www.y2mate.com/youtube/${link.split('v=')[1]?.split('&')[0]||''}" target="_blank">⬇️ Download via Y2Mate</a><p style="margin-top:8px;color:#5f6368">Pilih salah satu, terus pilih kualitasnya di sana.</p>`;
+}
+
+// HD FOTO - upscale di browser pake canvas
+let hdImg=null;
+function previewHD(e){
+  let f=e.target.files[0]; if(!f) return;
+  let r=new FileReader();
+  r.onload=()=>{ hdImg=new Image(); hdImg.onload=()=>{let p=document.getElementById('hdPreview'); p.src=r.result; p.style.display='block';}; hdImg.src=r.result; };
+  r.readAsDataURL(f);
+}
+function buatHD(){
+  if(!hdImg) return alert('Upload foto dulu!');
+  let c=document.createElement('canvas');
+  c.width=hdImg.width*2; c.height=hdImg.height*2;
+  let ctx=c.getContext('2d');
+  ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+  ctx.drawImage(hdImg,0,0,c.width,c.height);
+  // sharpen dikit
+  ctx.filter='contrast(1.08) brightness(1.03) saturate(1.1)';
+  ctx.drawImage(c,0,0);
+  let url=c.toDataURL('image/jpeg',0.92);
+  let box=document.getElementById('hdHasil'); box.style.display='block';
+  box.innerHTML=`✅ Berhasil! Dari ${hdImg.width}x${hdImg.height} jadi ${c.width}x${c.height}<br><img src="${url}" class="prev"><a class="dl" href="${url}" download="foto-HD-airr.jpg">⬇️ DOWNLOAD FOTO HD</a>`;
+}
+
+function hitung(){try{let h=eval(document.getElementById('calcInput').value);let el=document.getElementById('calcHasil');el.style.display='block';el.innerText='Hasil: '+h;}catch(e){alert('Rumus salah!');}}
+function stopStart(){if(stopJalan){clearInterval(stopTimer);stopJalan=false;}else{stopJalan=true;stopTimer=setInterval(()=>{stopDetik++;let m=String(Math.floor(stopDetik/60)).padStart(2,'0');let s=String(stopDetik%60).padStart(2,'0');document.getElementById('stopTampil').innerText=m+':'+s;},1000);}}
+function stopReset(){clearInterval(stopTimer);stopJalan=false;stopDetik=0;document.getElementById('stopTampil').innerText='00:00';}
+function acakAngka(){document.getElementById('acakAngka').innerText=Math.floor(Math.random()*100)+1;}
 </script>
 </body>
 </html>
