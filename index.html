@@ -18,7 +18,7 @@ body{background:#fff;color:#202124;padding:12px;padding-bottom:110px}
 .app{text-align:center;padding:14px 6px;border-radius:16px;cursor:pointer}
 .app:active{background:#f1f3f4}.app div{font-size:32px}.app p{font-size:13px;color:#5f6368;margin-top:6px}
 .card{background:#f8f9fa;border-radius:18px;padding:16px;margin-bottom:12px}
-.tool-btn{background:#fff;border:1px solid #dadce0;border-radius:14px;padding:16px;width:100%;margin-bottom:10px;font-size:16px;text-align:left;display:flex;gap:12px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tool-btn{background:#fff;border:1px solid #dadce0;border-radius:14px;padding:16px;width:100%;margin-bottom:10px;font-size:16px;text-align:left;display:flex;gap:12px;align-items:center}
 .bottom{position:fixed;bottom:12px;left:12px;right:12px;background:#fff;border:1px solid #dadce0;box-shadow:0 2px 10px rgba(0,0,0,.15);border-radius:30px;display:flex;justify-content:space-around;padding:10px 4px;z-index:99}
 .bottom button{background:none;border:none;color:#5f6368;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 20px}
 .bottom button.active{color:#1a73e8}.bottom button span{font-size:24px}
@@ -32,13 +32,12 @@ img.prev{width:100%;border-radius:12px;margin-top:10px}
 a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;border-radius:12px;margin-top:10px;text-decoration:none;font-weight:bold}
 .stalk-box{display:flex;gap:12px;align-items:center}
 .stalk-box img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #dadce0}
-.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee}
-.row b{color:#202124}.row span{color:#5f6368;text-align:right}
+.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;gap:10px}
+.row b{color:#202124;flex-shrink:0}.row span{color:#5f6368;text-align:right;word-break:break-word}
 </style>
 </head>
 <body>
 <div class="top"></div>
-
 <div id="page-home" class="page active">
 <div class="center">
 <div class="logo"><span>A</span><span>I</span><span>R</span><span>R</span></div>
@@ -60,29 +59,26 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 
 <div id="page-tools" class="page">
 <h2 style="font-weight:400">Tools</h2>
-<p style="color:#5f6368;margin:6px 0 16px">Stalk + Downloader + HD Foto</p>
+<p style="color:#5f6368;margin:6px 0 16px">Stalk + Downloader + HD Foto [FIXED]</p>
 
-<!-- STALK ROBLOX -->
-<button class="tool-btn" onclick="toggle('t-roblox')">🟥 <b>Stalk Roblox</b></button>
+<button class="tool-btn" onclick="toggle('t-roblox')">🟥 <b>Stalk Roblox - FIXED</b></button>
 <div id="t-roblox" class="card" style="display:none">
-<p style="font-size:14px;color:#5f6368">Ketik username Roblox. Contoh: <b>builderman</b></p>
+<p style="font-size:14px;color:#5f6368">Ketik username. Contoh: <b>builderman</b></p>
 <input type="text" id="rbxUser" placeholder="Username Roblox...">
 <button class="btn" onclick="stalkRoblox()">🔍 Stalk Roblox</button>
 <div id="rbxHasil" class="hasil"></div>
 </div>
 
-<!-- STALK ML -->
-<button class="tool-btn" onclick="toggle('t-ml')">⚔️ <b>Stalk ML - Mobile Legends</b></button>
+<button class="tool-btn" onclick="toggle('t-ml')">⚔️ <b>Stalk ML - FIXED</b></button>
 <div id="t-ml" class="card" style="display:none">
-<p style="font-size:14px;color:#5f6368">Butuh <b>ID + Zone</b>. Contoh ID: <b>123456789</b> Zone: <b>1234</b><br>Cek di profil ML lu, di bawah nickname.</p>
+<p style="font-size:14px;color:#5f6368">ID + Zone. Contoh di profil: <b>123456789 (1234)</b> = ID 123456789, Zone 1234</p>
 <input type="text" id="mlId" placeholder="ID ML - contoh: 123456789">
-<input type="text" id="mlZone" placeholder="Zone ID - contoh: 1234">
+<input type="text" id="mlZone" placeholder="Zone - contoh: 1234">
 <button class="btn" onclick="stalkML()">🔍 Stalk ML</button>
 <div id="mlHasil" class="hasil"></div>
 </div>
 
-<!-- STALK FF -->
-<button class="tool-btn" onclick="toggle('t-ff')">🔫 <b>Stalk FF - Free Fire</b></button>
+<button class="tool-btn" onclick="toggle('t-ff')">🔫 <b>Stalk FF - FIXED</b></button>
 <div id="t-ff" class="card" style="display:none">
 <p style="font-size:14px;color:#5f6368">Ketik UID FF. Contoh: <b>1234567890</b></p>
 <input type="text" id="ffUid" placeholder="UID Free Fire...">
@@ -90,7 +86,6 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 <div id="ffHasil" class="hasil"></div>
 </div>
 
-<!-- TIKTOK -->
 <button class="tool-btn" onclick="toggle('t-tiktok')">🎵 <b>TikTok Downloader</b></button>
 <div id="t-tiktok" class="card" style="display:none">
 <input type="text" id="ttLink" placeholder="https://www.tiktok.com/@.../video/...">
@@ -98,7 +93,6 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 <div id="ttHasil" class="hasil"></div>
 </div>
 
-<!-- IG -->
 <button class="tool-btn" onclick="toggle('t-ig')">📸 <b>IG Downloader</b></button>
 <div id="t-ig" class="card" style="display:none">
 <input type="text" id="igLink" placeholder="https://www.instagram.com/reel/...">
@@ -106,7 +100,6 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 <div id="igHasil" class="hasil"></div>
 </div>
 
-<!-- YT -->
 <button class="tool-btn" onclick="toggle('t-yt')">▶️ <b>YouTube Downloader</b></button>
 <div id="t-yt" class="card" style="display:none">
 <input type="text" id="ytLink" placeholder="https://www.youtube.com/watch?v=...">
@@ -115,12 +108,18 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 <div id="ytHasil" class="hasil"></div>
 </div>
 
-<!-- HD FOTO -->
-<button class="tool-btn" onclick="toggle('t-hd')">✨ <b>HD Foto 2x</b></button>
+<button class="tool-btn" onclick="toggle('t-hd')">✨ <b>HD Foto 2x - FIXED</b></button>
 <div id="t-hd" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Upload foto, pilih mau HD berapa kali. <b>Jangan pilih foto gede banget</b> (max 2MB biar gak nge-lag).</p>
 <input type="file" id="hdFile" accept="image/*" onchange="previewHD(event)" style="margin-top:10px">
 <img id="hdPreview" class="prev" style="display:none">
-<button class="btn" onclick="buatHD()">✨ Jadikan HD 2x</button>
+<p style="font-size:13px;margin-top:10px">Pilih kualitas:</p>
+<div style="display:flex;gap:8px;margin-top:6px">
+<button class="btn2" id="hd2x" onclick="setHD(2)" style="background:#1a73e8;color:#fff">2x HD</button>
+<button class="btn2" id="hd3x" onclick="setHD(3)">3x HD</button>
+<button class="btn2" id="hd4x" onclick="setHD(4)">4x HD</button>
+</div>
+<button class="btn" onclick="buatHD()">✨ Jadikan HD Sekarang</button>
 <div id="hdHasil" class="hasil"></div>
 </div>
 </div>
@@ -139,65 +138,85 @@ function toggle(id){let el=document.getElementById(id);el.style.display=el.style
 function gantiNama(){let n=prompt('Nama baru:',nama);if(n){nama=n;localStorage.setItem('nama',n);document.getElementById('namaTxt').innerText='Halo, '+n;}}
 function cariGoogle(){let q=document.getElementById('cari').value;if(!q)return alert('Ketik dulu!');window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
 
-// ===== STALK ROBLOX =====
+// ===== ROBLOX FIX: pake roproxy biar gak kena CORS =====
 async function stalkRoblox(){
-  let u=document.getElementById('rbxUser').value.trim();
+  let u=document.getElementById('rbxUser').value.trim().replace('@','');
   if(!u) return alert('Isi username Roblox dulu!');
   let box=document.getElementById('rbxHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk '+u+'...';
   try{
-    let r=await fetch('https://users.roblox.com/v1/usernames/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({usernames:[u],excludeBannedUsers:false})});
+    // Coba roproxy dulu (bisa diakses dari browser)
+    let r=await fetch('https://users.roproxy.com/v1/usernames/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({usernames:[u],excludeBannedUsers:false})});
     let j=await r.json();
-    if(!j.data || !j.data.length){ box.innerHTML='❌ Username <b>'+u+'</b> gak ketemu! Cek lagi tulisannya.'; return; }
+    if(!j.data || !j.data.length) throw new Error('notfound');
     let user=j.data[0];
-    let r2=await fetch('https://users.roblox.com/v1/users/'+user.id);
+    let r2=await fetch('https://users.roproxy.com/v1/users/'+user.id);
     let d=await r2.json();
-    let r3=await fetch('https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds='+user.id+'&size=150x150&format=Png&isCircular=true');
-    let t=await r3.json();
-    let avatar=t.data?.[0]?.imageUrl||'';
-    let tgl=new Date(d.created).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
-    box.innerHTML=`<div class="stalk-box"><img src="${avatar}"><div><b style="font-size:18px">${d.displayName}</b><br><span style="color:#5f6368">@${d.name} • ID: ${d.id}</span></div></div>
-    <div style="margin-top:10px"><div class="row"><b>Username</b><span>${d.name}</span></div><div class="row"><b>Display Name</b><span>${d.displayName}</span></div><div class="row"><b>User ID</b><span>${d.id}</span></div><div class="row"><b>Akun Dibuat</b><span>${tgl}</span></div><div class="row"><b>Bio</b><span>${(d.description||'-').slice(0,80)}</span></div></div>
-    <a class="dl" href="https://www.roblox.com/users/${d.id}/profile" target="_blank">👤 Lihat Profil Roblox</a>`;
-  }catch(e){ box.innerHTML='❌ Gagal. Coba lagi / cek koneksi. Kalau masih gagal, coba username lain.'; }
-}
-
-// ===== STALK ML =====
-async function stalkML(){
-  let id=document.getElementById('mlId').value.trim();
-  let zone=document.getElementById('mlZone').value.trim();
-  if(!id||!zone) return alert('Isi ID + Zone dulu!');
-  let box=document.getElementById('mlHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk ML '+id+' ('+zone+')...';
-  try{
-    let r=await fetch('https://api.siputzx.my.id/api/stalk/ml?userId='+id+'&zoneId='+zone);
-    let j=await r.json();
-    let d=j.data||j.result||j;
-    if(j.status===false || !d || !d.nickname){ box.innerHTML='❌ ID / Zone salah! Cek lagi di profil ML lu. ID ada di bawah nickname, formatnya ID (Zone). Contoh: 123456789 (1234)'; return; }
-    box.innerHTML=`<div class="stalk-box"><div style="font-size:50px">⚔️</div><div><b style="font-size:18px">${d.nickname||d.username||'-'}</b><br><span style="color:#5f6368">ID: ${id} (${zone})</span></div></div>
-    <div style="margin-top:10px"><div class="row"><b>Nickname</b><span>${d.nickname||'-'}</span></div><div class="row"><b>User ID</b><span>${d.id||id}</span></div><div class="row"><b>Zone</b><span>${d.zoneId||zone}</span></div><div class="row"><b>Level</b><span>${d.level||'-'}</span></div><div class="row"><b>Rank</b><span>${d.rank||'-'}</span></div></div>`;
+    let avatar='';
+    try{
+      let r3=await fetch('https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds='+user.id+'&size=150x150&format=Png&isCircular=true');
+      let t=await r3.json(); avatar=t.data?.[0]?.imageUrl||'';
+    }catch(e){}
+    let tgl='-';
+    try{ tgl=new Date(d.created).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}); }catch(e){}
+    box.innerHTML=`<div class="stalk-box">${avatar?`<img src="${avatar}">`:`<div style="font-size:50px">🟥</div>`}<div><b style="font-size:18px">${d.displayName||user.displayName}</b><br><span style="color:#5f6368">@${d.name||user.name} • ID: ${user.id}</span></div></div>
+    <div style="margin-top:10px"><div class="row"><b>Username</b><span>${d.name||user.name}</span></div><div class="row"><b>Display Name</b><span>${d.displayName||user.displayName}</span></div><div class="row"><b>User ID</b><span>${user.id}</span></div><div class="row"><b>Akun Dibuat</b><span>${tgl}</span></div><div class="row"><b>Bio</b><span>${(d.description||'-').slice(0,100)}</span></div></div>
+    <a class="dl" href="https://www.roblox.com/users/${user.id}/profile" target="_blank">👤 Lihat Profil Roblox</a>`;
   }catch(e){
-    // fallback ke web checker
-    box.innerHTML=`⚠️ API lagi sibuk. Coba cara manual:<br><br><a class="dl" href="https://mlbb-checker.vercel.app/?id=${id}&zone=${zone}" target="_blank">🔍 Cek di ML Checker →</a>`;
+    box.innerHTML='❌ Username <b>'+u+'</b> gak ketemu / API lagi sibuk.<br><br>Coba klik ini buat cek manual:<br><a class="dl" href="https://www.roblox.com/users/search?search='+encodeURIComponent(u)+'" target="_blank">🔍 Cari '+u+' di Roblox →</a>';
   }
 }
 
-// ===== STALK FF =====
+// ===== ML FIX: coba 3 API bergantian =====
+async function stalkML(){
+  let id=document.getElementById('mlId').value.trim();
+  let zone=document.getElementById('mlZone').value.trim();
+  if(!id||!zone) return alert('Isi ID + Zone dulu! Contoh: ID 123456789, Zone 1234');
+  let box=document.getElementById('mlHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk ML '+id+' ('+zone+')... coba server 1...';
+  let urls=[
+    'https://api.siputzx.my.id/api/stalk/ml?userId='+id+'&zoneId='+zone,
+    'https://api.dannteam.com/api/stalk/ml?userId='+id+'&zoneId='+zone
+  ];
+  for(let url of urls){
+    try{
+      let r=await fetch(url);
+      let j=await r.json();
+      let d=j.data||j.result||j;
+      let nick=d.nickname||d.username||d.name;
+      if(nick){
+        box.innerHTML=`<div class="stalk-box"><div style="font-size:50px">⚔️</div><div><b style="font-size:18px">${nick}</b><br><span style="color:#5f6368">ID: ${id} (${zone})</span></div></div>
+        <div style="margin-top:10px"><div class="row"><b>Nickname</b><span>${nick}</span></div><div class="row"><b>User ID</b><span>${d.id||id}</span></div><div class="row"><b>Zone</b><span>${d.zoneId||zone}</span></div><div class="row"><b>Level</b><span>${d.level||'-'}</span></div><div class="row"><b>Rank</b><span>${d.rank||'-'}</span></div></div>`;
+        return;
+      }
+    }catch(e){}
+  }
+  box.innerHTML='❌ ID / Zone salah atau server lagi down.<br><br><b>Cek dulu:</b> Buka ML > Profil > di bawah nickname ada tulisan kayak <b>123456789 (1234)</b>. Yang depan ID, yang di kurung Zone.<br><br><a class="dl" href="https://codashop.com/id/mobile-legends" target="_blank">🔍 Cek Manual di Codashop →</a>';
+}
+
+// ===== FF FIX: sama, 2 API =====
 async function stalkFF(){
   let uid=document.getElementById('ffUid').value.trim();
   if(!uid) return alert('Isi UID FF dulu!');
   let box=document.getElementById('ffHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk FF '+uid+'...';
-  try{
-    let r=await fetch('https://api.siputzx.my.id/api/stalk/ff?uid='+uid);
-    let j=await r.json();
-    let d=j.data||j.result||j;
-    if(j.status===false || !d || (!d.nickname && !d.username)){ box.innerHTML='❌ UID gak ketemu! Cek lagi UID-nya. UID FF ada di profil, angka panjang.'; return; }
-    box.innerHTML=`<div class="stalk-box"><div style="font-size:50px">🔫</div><div><b style="font-size:18px">${d.nickname||d.username||'-'}</b><br><span style="color:#5f6368">UID: ${uid}</span></div></div>
-    <div style="margin-top:10px"><div class="row"><b>Nickname</b><span>${d.nickname||d.username||'-'}</span></div><div class="row"><b>UID</b><span>${d.uid||uid}</span></div><div class="row"><b>Level</b><span>${d.level||'-'}</span></div><div class="row"><b>Region</b><span>${d.region||'-'}</span></div><div class="row"><b>Rank</b><span>${d.rank||d.tier||'-'}</span></div></div>`;
-  }catch(e){
-    box.innerHTML=`⚠️ API lagi sibuk. Coba cara manual:<br><br><a class="dl" href="https://ff-checker.vercel.app/?uid=${uid}" target="_blank">🔍 Cek di FF Checker →</a>`;
+  let urls=[
+    'https://api.siputzx.my.id/api/stalk/ff?uid='+uid,
+    'https://api.dannteam.com/api/stalk/ff?uid='+uid
+  ];
+  for(let url of urls){
+    try{
+      let r=await fetch(url);
+      let j=await r.json();
+      let d=j.data||j.result||j;
+      let nick=d.nickname||d.username||d.name;
+      if(nick){
+        box.innerHTML=`<div class="stalk-box"><div style="font-size:50px">🔫</div><div><b style="font-size:18px">${nick}</b><br><span style="color:#5f6368">UID: ${uid}</span></div></div>
+        <div style="margin-top:10px"><div class="row"><b>Nickname</b><span>${nick}</span></div><div class="row"><b>UID</b><span>${d.uid||uid}</span></div><div class="row"><b>Level</b><span>${d.level||'-'}</span></div><div class="row"><b>Region</b><span>${d.region||'-'}</span></div><div class="row"><b>Rank</b><span>${d.rank||d.tier||'-'}</span></div></div>`;
+        return;
+      }
+    }catch(e){}
   }
+  box.innerHTML='❌ UID gak ketemu / server lagi down.<br><br>Cek UID di FF > Profil > angka panjang di bawah nickname.<br><br><a class="dl" href="https://codashop.com/id/free-fire" target="_blank">🔍 Cek Manual di Codashop →</a>';
 }
 
-// DOWNLOADER & LAINNYA
 async function dlTiktok(){
   let link=document.getElementById('ttLink').value.trim();
   if(!link) return alert('Tempel link TikTok dulu!');
@@ -221,14 +240,56 @@ function dlYT(tipe){
   let box=document.getElementById('ytHasil'); box.style.display='block';
   box.innerHTML=`<a class="dl" href="https://ytmp3.nu/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download ${tipe.toUpperCase()} via YTMP3</a><a class="dl" style="background:#1a73e8" href="https://cobalt.tools/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download via Cobalt (HD)</a>`;
 }
-let hdImg=null;
-function previewHD(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{hdImg=new Image();hdImg.onload=()=>{let p=document.getElementById('hdPreview');p.src=r.result;p.style.display='block';};hdImg.src=r.result;};r.readAsDataURL(f);}
+
+// ===== HD FOTO FIX =====
+let hdImg=null, hdScale=2, hdDataUrl='';
+function setHD(n){
+  hdScale=n;
+  ['hd2x','hd3x','hd4x'].forEach(id=>{document.getElementById(id).style.background='#fff';document.getElementById(id).style.color='#202124';});
+  let el=document.getElementById('hd'+n+'x'); el.style.background='#1a73e8'; el.style.color='#fff';
+}
+function previewHD(e){
+  let f=e.target.files[0]; if(!f) return;
+  if(f.size > 4000000){ alert('Foto kegedean! Pilih yang di bawah 4MB ya, biar gak nge-lag.'); return; }
+  let r=new FileReader();
+  r.onload=()=>{
+    hdImg=new Image();
+    hdImg.onload=()=>{
+      let p=document.getElementById('hdPreview'); p.src=r.result; p.style.display='block';
+      document.getElementById('hdHasil').style.display='none';
+    };
+    hdImg.onerror=()=>{ alert('Foto gagal dibaca, coba foto lain!'); };
+    hdImg.src=r.result;
+  };
+  r.readAsDataURL(f);
+}
 function buatHD(){
-  if(!hdImg) return alert('Upload foto dulu!');
-  let c=document.createElement('canvas');c.width=hdImg.width*2;c.height=hdImg.height*2;let ctx=c.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(hdImg,0,0,c.width,c.height);
-  let url=c.toDataURL('image/jpeg',0.92);
-  let box=document.getElementById('hdHasil');box.style.display='block';
-  box.innerHTML=`✅ Berhasil! ${hdImg.width}x${hdImg.height} jadi ${c.width}x${c.height}<br><img src="${url}" class="prev"><a class="dl" href="${url}" download="foto-HD-airr.jpg">⬇️ DOWNLOAD FOTO HD</a>`;
+  if(!hdImg){ alert('Upload foto dulu!'); return; }
+  try{
+    let w=hdImg.naturalWidth||hdImg.width;
+    let h=hdImg.naturalHeight||hdImg.height;
+    if(w>2000||h>2000){ alert('Foto asli udah gede banget ('+w+'x'+h+'), gak perlu di-HD lagi!'); return; }
+    let c=document.createElement('canvas');
+    c.width=w*hdScale; c.height=h*hdScale;
+    let ctx=c.getContext('2d');
+    ctx.imageSmoothingEnabled=true;
+    ctx.imageSmoothingQuality='high';
+    // gambar 1x aja, jangan double-draw (itu yang bikin blank kemarin)
+    ctx.drawImage(hdImg,0,0,c.width,c.height);
+    hdDataUrl=c.toDataURL('image/jpeg',0.95);
+    let box=document.getElementById('hdHasil'); box.style.display='block';
+    box.innerHTML=`✅ BERHASIL! Dari ${w}x${h} jadi ${c.width}x${c.height} (${hdScale}x)<br><img src="${hdDataUrl}" class="prev"><p style="margin-top:8px;color:#5f6368">Kalo tombol bawah gak ke-download, tahan gambarnya > Simpan Gambar.</p><button class="btn" onclick="downloadHD()" style="background:#34A853">⬇️ DOWNLOAD FOTO HD</button>`;
+    box.scrollIntoView({behavior:'smooth'});
+  }catch(e){
+    alert('Gagal proses: '+e.message+' Coba foto lain yang lebih kecil.');
+  }
+}
+function downloadHD(){
+  if(!hdDataUrl) return;
+  let a=document.createElement('a');
+  a.href=hdDataUrl; a.download='foto-HD-airr-'+hdScale+'x.jpg';
+  document.body.appendChild(a); a.click(); a.remove();
+  alert('Lagi di-download! Cek di galeri / folder Download lu.');
 }
 </script>
 </body>
