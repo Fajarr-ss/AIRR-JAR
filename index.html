@@ -30,6 +30,10 @@ input[type=text]{width:100%;border:1px solid #dadce0;border-radius:12px;padding:
 video{width:100%;border-radius:12px;margin-top:10px}
 img.prev{width:100%;border-radius:12px;margin-top:10px}
 a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;border-radius:12px;margin-top:10px;text-decoration:none;font-weight:bold}
+.stalk-box{display:flex;gap:12px;align-items:center}
+.stalk-box img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #dadce0}
+.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee}
+.row b{color:#202124}.row span{color:#5f6368;text-align:right}
 </style>
 </head>
 <body>
@@ -43,74 +47,81 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 <div style="margin-top:16px"><button onclick="cariGoogle()" style="background:#f8f9fa;border:1px solid #f8f9fa;border-radius:6px;padding:10px 16px">Penelusuran AIRR</button></div>
 </div>
 <div class="apps">
+<div class="app" onclick="bukaTools('t-roblox')"><div>🟥</div><p>Stalk Roblox</p></div>
+<div class="app" onclick="bukaTools('t-ml')"><div>⚔️</div><p>Stalk ML</p></div>
+<div class="app" onclick="bukaTools('t-ff')"><div>🔫</div><p>Stalk FF</p></div>
 <div class="app" onclick="bukaTools('t-tiktok')"><div>🎵</div><p>TikTok DL</p></div>
 <div class="app" onclick="bukaTools('t-ig')"><div>📸</div><p>IG DL</p></div>
 <div class="app" onclick="bukaTools('t-yt')"><div>▶️</div><p>YT DL</p></div>
 <div class="app" onclick="bukaTools('t-hd')"><div>✨</div><p>HD Foto</p></div>
-<div class="app" onclick="bukaTools('t-kalk')"><div>🧮</div><p>Kalkulator</p></div>
-<div class="app" onclick="bukaTools('t-stop')"><div>⏱️</div><p>Stopwatch</p></div>
-<div class="app" onclick="bukaTools('t-acak')"><div>🎲</div><p>Acak</p></div>
 <div class="app" onclick="gantiNama()"><div>✏️</div><p>Ganti Nama</p></div>
 </div>
-<div class="card" style="max-width:580px;margin:18px auto 0"><h3>👋 Selamat datang</h3><p style="color:#5f6368;font-size:14px;margin-top:4px">Downloader & Tools semua ada di tab Tools bawah.</p></div>
 </div>
 
 <div id="page-tools" class="page">
 <h2 style="font-weight:400">Tools</h2>
-<p style="color:#5f6368;margin:6px 0 16px">Downloader + HD Foto</p>
+<p style="color:#5f6368;margin:6px 0 16px">Stalk + Downloader + HD Foto</p>
 
-<button class="tool-btn" onclick="toggle('t-tiktok')">🎵 <b>TikTok Downloader - Tanpa Watermark</b></button>
+<!-- STALK ROBLOX -->
+<button class="tool-btn" onclick="toggle('t-roblox')">🟥 <b>Stalk Roblox</b></button>
+<div id="t-roblox" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Ketik username Roblox. Contoh: <b>builderman</b></p>
+<input type="text" id="rbxUser" placeholder="Username Roblox...">
+<button class="btn" onclick="stalkRoblox()">🔍 Stalk Roblox</button>
+<div id="rbxHasil" class="hasil"></div>
+</div>
+
+<!-- STALK ML -->
+<button class="tool-btn" onclick="toggle('t-ml')">⚔️ <b>Stalk ML - Mobile Legends</b></button>
+<div id="t-ml" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Butuh <b>ID + Zone</b>. Contoh ID: <b>123456789</b> Zone: <b>1234</b><br>Cek di profil ML lu, di bawah nickname.</p>
+<input type="text" id="mlId" placeholder="ID ML - contoh: 123456789">
+<input type="text" id="mlZone" placeholder="Zone ID - contoh: 1234">
+<button class="btn" onclick="stalkML()">🔍 Stalk ML</button>
+<div id="mlHasil" class="hasil"></div>
+</div>
+
+<!-- STALK FF -->
+<button class="tool-btn" onclick="toggle('t-ff')">🔫 <b>Stalk FF - Free Fire</b></button>
+<div id="t-ff" class="card" style="display:none">
+<p style="font-size:14px;color:#5f6368">Ketik UID FF. Contoh: <b>1234567890</b></p>
+<input type="text" id="ffUid" placeholder="UID Free Fire...">
+<button class="btn" onclick="stalkFF()">🔍 Stalk FF</button>
+<div id="ffHasil" class="hasil"></div>
+</div>
+
+<!-- TIKTOK -->
+<button class="tool-btn" onclick="toggle('t-tiktok')">🎵 <b>TikTok Downloader</b></button>
 <div id="t-tiktok" class="card" style="display:none">
-<p style="font-size:14px;color:#5f6368">Tempel link TikTok, klik download. Video tanpa watermark.</p>
 <input type="text" id="ttLink" placeholder="https://www.tiktok.com/@.../video/...">
 <button class="btn" onclick="dlTiktok()">🔥 Ambil Video</button>
 <div id="ttHasil" class="hasil"></div>
 </div>
 
-<button class="tool-btn" onclick="toggle('t-ig')">📸 <b>IG Downloader - Reels / Foto / Video</b></button>
+<!-- IG -->
+<button class="tool-btn" onclick="toggle('t-ig')">📸 <b>IG Downloader</b></button>
 <div id="t-ig" class="card" style="display:none">
-<p style="font-size:14px;color:#5f6368">Tempel link Instagram Reels / Post. Nanti kebuka downloadernya.</p>
 <input type="text" id="igLink" placeholder="https://www.instagram.com/reel/...">
 <button class="btn" onclick="dlIG()">📥 Buka IG Downloader</button>
-<button class="btn2" onclick="dlIG2()">⚡ Cara Cepat (ddinstagram)</button>
 <div id="igHasil" class="hasil"></div>
 </div>
 
-<button class="tool-btn" onclick="toggle('t-yt')">▶️ <b>YouTube Downloader - MP4 / MP3</b></button>
+<!-- YT -->
+<button class="tool-btn" onclick="toggle('t-yt')">▶️ <b>YouTube Downloader</b></button>
 <div id="t-yt" class="card" style="display:none">
-<p style="font-size:14px;color:#5f6368">Tempel link YouTube, pilih mau MP4 atau MP3.</p>
 <input type="text" id="ytLink" placeholder="https://www.youtube.com/watch?v=...">
 <button class="btn" onclick="dlYT('mp4')">🎬 Download MP4</button>
 <button class="btn2" onclick="dlYT('mp3')">🎵 Download MP3</button>
 <div id="ytHasil" class="hasil"></div>
 </div>
 
-<button class="tool-btn" onclick="toggle('t-hd')">✨ <b>HD Foto - Naikin Resolusi 2x</b></button>
+<!-- HD FOTO -->
+<button class="tool-btn" onclick="toggle('t-hd')">✨ <b>HD Foto 2x</b></button>
 <div id="t-hd" class="card" style="display:none">
-<p style="font-size:14px;color:#5f6368">Upload foto buram / pecah, jadi lebih tajem & HD. Proses di HP lu, gak upload ke server.</p>
 <input type="file" id="hdFile" accept="image/*" onchange="previewHD(event)" style="margin-top:10px">
 <img id="hdPreview" class="prev" style="display:none">
 <button class="btn" onclick="buatHD()">✨ Jadikan HD 2x</button>
 <div id="hdHasil" class="hasil"></div>
-</div>
-
-<button class="tool-btn" onclick="toggle('t-kalk')">🧮 <b>Kalkulator</b></button>
-<div id="t-kalk" class="card" style="display:none">
-<input type="text" id="calcInput" placeholder="Contoh: 10+5*2">
-<button class="btn" onclick="hitung()">Hitung</button><div id="calcHasil" class="hasil"></div>
-</div>
-
-<button class="tool-btn" onclick="toggle('t-stop')">⏱️ <b>Stopwatch</b></button>
-<div id="t-stop" class="card" style="display:none">
-<div style="font-size:36px;text-align:center" id="stopTampil">00:00</div>
-<button class="btn" onclick="stopStart()">Mulai / Jeda</button>
-<button class="btn2" onclick="stopReset()">Reset</button>
-</div>
-
-<button class="tool-btn" onclick="toggle('t-acak')">🎲 <b>Acak Angka 1-100</b></button>
-<div id="t-acak" class="card" style="display:none">
-<div style="font-size:40px;text-align:center" id="acakAngka">?</div>
-<button class="btn" onclick="acakAngka()">Acak Sekarang</button>
 </div>
 </div>
 
@@ -122,14 +133,71 @@ a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;
 <script>
 let nama = localStorage.getItem('nama') || 'jar';
 document.getElementById('namaTxt').innerText = 'Halo, ' + nama;
-let stopDetik=0, stopJalan=false, stopTimer;
 function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+n).classList.add('active');window.scrollTo(0,0);}
 function bukaTools(id){showPage('tools');setTimeout(()=>{let el=document.getElementById(id);if(el)el.style.display='block';el.scrollIntoView({behavior:'smooth'});},100);}
 function toggle(id){let el=document.getElementById(id);el.style.display=el.style.display=='none'?'block':'none';}
 function gantiNama(){let n=prompt('Nama baru:',nama);if(n){nama=n;localStorage.setItem('nama',n);document.getElementById('namaTxt').innerText='Halo, '+n;}}
 function cariGoogle(){let q=document.getElementById('cari').value;if(!q)return alert('Ketik dulu!');window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
 
-// TIKTOK - pake API tikwm gratis
+// ===== STALK ROBLOX =====
+async function stalkRoblox(){
+  let u=document.getElementById('rbxUser').value.trim();
+  if(!u) return alert('Isi username Roblox dulu!');
+  let box=document.getElementById('rbxHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk '+u+'...';
+  try{
+    let r=await fetch('https://users.roblox.com/v1/usernames/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({usernames:[u],excludeBannedUsers:false})});
+    let j=await r.json();
+    if(!j.data || !j.data.length){ box.innerHTML='❌ Username <b>'+u+'</b> gak ketemu! Cek lagi tulisannya.'; return; }
+    let user=j.data[0];
+    let r2=await fetch('https://users.roblox.com/v1/users/'+user.id);
+    let d=await r2.json();
+    let r3=await fetch('https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds='+user.id+'&size=150x150&format=Png&isCircular=true');
+    let t=await r3.json();
+    let avatar=t.data?.[0]?.imageUrl||'';
+    let tgl=new Date(d.created).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+    box.innerHTML=`<div class="stalk-box"><img src="${avatar}"><div><b style="font-size:18px">${d.displayName}</b><br><span style="color:#5f6368">@${d.name} • ID: ${d.id}</span></div></div>
+    <div style="margin-top:10px"><div class="row"><b>Username</b><span>${d.name}</span></div><div class="row"><b>Display Name</b><span>${d.displayName}</span></div><div class="row"><b>User ID</b><span>${d.id}</span></div><div class="row"><b>Akun Dibuat</b><span>${tgl}</span></div><div class="row"><b>Bio</b><span>${(d.description||'-').slice(0,80)}</span></div></div>
+    <a class="dl" href="https://www.roblox.com/users/${d.id}/profile" target="_blank">👤 Lihat Profil Roblox</a>`;
+  }catch(e){ box.innerHTML='❌ Gagal. Coba lagi / cek koneksi. Kalau masih gagal, coba username lain.'; }
+}
+
+// ===== STALK ML =====
+async function stalkML(){
+  let id=document.getElementById('mlId').value.trim();
+  let zone=document.getElementById('mlZone').value.trim();
+  if(!id||!zone) return alert('Isi ID + Zone dulu!');
+  let box=document.getElementById('mlHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk ML '+id+' ('+zone+')...';
+  try{
+    let r=await fetch('https://api.siputzx.my.id/api/stalk/ml?userId='+id+'&zoneId='+zone);
+    let j=await r.json();
+    let d=j.data||j.result||j;
+    if(j.status===false || !d || !d.nickname){ box.innerHTML='❌ ID / Zone salah! Cek lagi di profil ML lu. ID ada di bawah nickname, formatnya ID (Zone). Contoh: 123456789 (1234)'; return; }
+    box.innerHTML=`<div class="stalk-box"><div style="font-size:50px">⚔️</div><div><b style="font-size:18px">${d.nickname||d.username||'-'}</b><br><span style="color:#5f6368">ID: ${id} (${zone})</span></div></div>
+    <div style="margin-top:10px"><div class="row"><b>Nickname</b><span>${d.nickname||'-'}</span></div><div class="row"><b>User ID</b><span>${d.id||id}</span></div><div class="row"><b>Zone</b><span>${d.zoneId||zone}</span></div><div class="row"><b>Level</b><span>${d.level||'-'}</span></div><div class="row"><b>Rank</b><span>${d.rank||'-'}</span></div></div>`;
+  }catch(e){
+    // fallback ke web checker
+    box.innerHTML=`⚠️ API lagi sibuk. Coba cara manual:<br><br><a class="dl" href="https://mlbb-checker.vercel.app/?id=${id}&zone=${zone}" target="_blank">🔍 Cek di ML Checker →</a>`;
+  }
+}
+
+// ===== STALK FF =====
+async function stalkFF(){
+  let uid=document.getElementById('ffUid').value.trim();
+  if(!uid) return alert('Isi UID FF dulu!');
+  let box=document.getElementById('ffHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk FF '+uid+'...';
+  try{
+    let r=await fetch('https://api.siputzx.my.id/api/stalk/ff?uid='+uid);
+    let j=await r.json();
+    let d=j.data||j.result||j;
+    if(j.status===false || !d || (!d.nickname && !d.username)){ box.innerHTML='❌ UID gak ketemu! Cek lagi UID-nya. UID FF ada di profil, angka panjang.'; return; }
+    box.innerHTML=`<div class="stalk-box"><div style="font-size:50px">🔫</div><div><b style="font-size:18px">${d.nickname||d.username||'-'}</b><br><span style="color:#5f6368">UID: ${uid}</span></div></div>
+    <div style="margin-top:10px"><div class="row"><b>Nickname</b><span>${d.nickname||d.username||'-'}</span></div><div class="row"><b>UID</b><span>${d.uid||uid}</span></div><div class="row"><b>Level</b><span>${d.level||'-'}</span></div><div class="row"><b>Region</b><span>${d.region||'-'}</span></div><div class="row"><b>Rank</b><span>${d.rank||d.tier||'-'}</span></div></div>`;
+  }catch(e){
+    box.innerHTML=`⚠️ API lagi sibuk. Coba cara manual:<br><br><a class="dl" href="https://ff-checker.vercel.app/?uid=${uid}" target="_blank">🔍 Cek di FF Checker →</a>`;
+  }
+}
+
+// DOWNLOADER & LAINNYA
 async function dlTiktok(){
   let link=document.getElementById('ttLink').value.trim();
   if(!link) return alert('Tempel link TikTok dulu!');
@@ -137,62 +205,31 @@ async function dlTiktok(){
   try{
     let r=await fetch('https://www.tikwm.com/api/?url='+encodeURIComponent(link));
     let j=await r.json();
-    if(j.data && j.data.play){
-      box.innerHTML=`<b>@${j.data.author?.nickname||''}</b><br><p style="margin:6px 0">${(j.data.title||'').slice(0,100)}</p><video controls src="${j.data.play}" poster="${j.data.cover}"></video><a class="dl" href="${j.data.play}" target="_blank" download>⬇️ DOWNLOAD TANPA WATERMARK</a><a class="dl" style="background:#1a73e8" href="${j.data.wmplay}" target="_blank">⬇️ Download Dengan Watermark</a><a class="dl" style="background:#EA4335" href="${j.data.music}" target="_blank">🎵 Download Musiknya</a>`;
-    } else { box.innerHTML='❌ Gagal. Coba link lain / video mungkin private. <br><br><a href="https://ssstik.io/en?url='+encodeURIComponent(link)+'" target="_blank">Buka di SSSTik →</a>'; }
-  }catch(e){ box.innerHTML='❌ Error koneksi. Coba lagi / buka <a href="https://ssstik.io/" target="_blank">ssstik.io</a>'; }
+    if(j.data && j.data.play){ box.innerHTML=`<b>@${j.data.author?.nickname||''}</b><p style="margin:6px 0">${(j.data.title||'').slice(0,100)}</p><video controls src="${j.data.play}" poster="${j.data.cover}"></video><a class="dl" href="${j.data.play}" target="_blank">⬇️ DOWNLOAD TANPA WATERMARK</a>`; }
+    else{ box.innerHTML='❌ Gagal. Coba link lain.'; }
+  }catch(e){ box.innerHTML='❌ Error. Coba lagi.'; }
 }
-
-// IG
 function dlIG(){
   let link=document.getElementById('igLink').value.trim();
   if(!link) return alert('Tempel link IG dulu!');
   let box=document.getElementById('igHasil'); box.style.display='block';
-  box.innerHTML=`Link kamu: <br>${link}<br><br><a class="dl" href="https://saveinsta.app/en?url=${encodeURIComponent(link)}" target="_blank">📥 Buka SaveInsta - Download IG</a><a class="dl" style="background:#1a73e8" href="https://igram.world/?url=${encodeURIComponent(link)}" target="_blank">📥 Buka Igram - Alternatif</a>`;
+  box.innerHTML=`<a class="dl" href="https://saveinsta.app/en?url=${encodeURIComponent(link)}" target="_blank">📥 Buka SaveInsta</a><a class="dl" style="background:#1a73e8" href="https://igram.world/?url=${encodeURIComponent(link)}" target="_blank">📥 Buka Igram</a>`;
 }
-function dlIG2(){
-  let link=document.getElementById('igLink').value.trim();
-  if(!link) return alert('Tempel link IG dulu!');
-  // ddinstagram = ganti domain biar bisa preview/download langsung
-  let dd = link.replace('instagram.com','ddinstagram.com').replace('www.','');
-  window.open(dd,'_blank');
-}
-
-// YT
 function dlYT(tipe){
   let link=document.getElementById('ytLink').value.trim();
-  if(!link) return alert('Tempel link YouTube dulu!');
+  if(!link) return alert('Tempel link YT dulu!');
   let box=document.getElementById('ytHasil'); box.style.display='block';
-  box.innerHTML=`<a class="dl" href="https://ytmp3.nu/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download ${tipe.toUpperCase()} via YTMP3</a><a class="dl" style="background:#1a73e8" href="https://cobalt.tools/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download via Cobalt (HD)</a><a class="dl" style="background:#EA4335" href="https://www.y2mate.com/youtube/${link.split('v=')[1]?.split('&')[0]||''}" target="_blank">⬇️ Download via Y2Mate</a><p style="margin-top:8px;color:#5f6368">Pilih salah satu, terus pilih kualitasnya di sana.</p>`;
+  box.innerHTML=`<a class="dl" href="https://ytmp3.nu/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download ${tipe.toUpperCase()} via YTMP3</a><a class="dl" style="background:#1a73e8" href="https://cobalt.tools/?url=${encodeURIComponent(link)}" target="_blank">⬇️ Download via Cobalt (HD)</a>`;
 }
-
-// HD FOTO - upscale di browser pake canvas
 let hdImg=null;
-function previewHD(e){
-  let f=e.target.files[0]; if(!f) return;
-  let r=new FileReader();
-  r.onload=()=>{ hdImg=new Image(); hdImg.onload=()=>{let p=document.getElementById('hdPreview'); p.src=r.result; p.style.display='block';}; hdImg.src=r.result; };
-  r.readAsDataURL(f);
-}
+function previewHD(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{hdImg=new Image();hdImg.onload=()=>{let p=document.getElementById('hdPreview');p.src=r.result;p.style.display='block';};hdImg.src=r.result;};r.readAsDataURL(f);}
 function buatHD(){
   if(!hdImg) return alert('Upload foto dulu!');
-  let c=document.createElement('canvas');
-  c.width=hdImg.width*2; c.height=hdImg.height*2;
-  let ctx=c.getContext('2d');
-  ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
-  ctx.drawImage(hdImg,0,0,c.width,c.height);
-  // sharpen dikit
-  ctx.filter='contrast(1.08) brightness(1.03) saturate(1.1)';
-  ctx.drawImage(c,0,0);
+  let c=document.createElement('canvas');c.width=hdImg.width*2;c.height=hdImg.height*2;let ctx=c.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(hdImg,0,0,c.width,c.height);
   let url=c.toDataURL('image/jpeg',0.92);
-  let box=document.getElementById('hdHasil'); box.style.display='block';
-  box.innerHTML=`✅ Berhasil! Dari ${hdImg.width}x${hdImg.height} jadi ${c.width}x${c.height}<br><img src="${url}" class="prev"><a class="dl" href="${url}" download="foto-HD-airr.jpg">⬇️ DOWNLOAD FOTO HD</a>`;
+  let box=document.getElementById('hdHasil');box.style.display='block';
+  box.innerHTML=`✅ Berhasil! ${hdImg.width}x${hdImg.height} jadi ${c.width}x${c.height}<br><img src="${url}" class="prev"><a class="dl" href="${url}" download="foto-HD-airr.jpg">⬇️ DOWNLOAD FOTO HD</a>`;
 }
-
-function hitung(){try{let h=eval(document.getElementById('calcInput').value);let el=document.getElementById('calcHasil');el.style.display='block';el.innerText='Hasil: '+h;}catch(e){alert('Rumus salah!');}}
-function stopStart(){if(stopJalan){clearInterval(stopTimer);stopJalan=false;}else{stopJalan=true;stopTimer=setInterval(()=>{stopDetik++;let m=String(Math.floor(stopDetik/60)).padStart(2,'0');let s=String(stopDetik%60).padStart(2,'0');document.getElementById('stopTampil').innerText=m+':'+s;},1000);}}
-function stopReset(){clearInterval(stopTimer);stopJalan=false;stopDetik=0;document.getElementById('stopTampil').innerText='00:00';}
-function acakAngka(){document.getElementById('acakAngka').innerText=Math.floor(Math.random()*100)+1;}
 </script>
 </body>
 </html>
