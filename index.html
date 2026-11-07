@@ -140,10 +140,10 @@ function cariGoogle(){let q=document.getElementById('cari').value;if(!q)return a
 
 // ===== ROBLOX FIX: pake roproxy biar gak kena CORS =====
 async function stalkRoblox(){
-  let u=document.getElementById('rbxUser').value.trim().replace('@','');
-  if(!u) return alert('Isi username Roblox dulu!');
-  let box=document.getElementById('rbxHasil'); box.style.display='block'; box.innerHTML='⏳ Lagi stalk '+u+'...';
-  try{
+  fetch('https://users.roproxy.com/v1/usernames/users', {
+  method: 'POST',
+  body: JSON.stringify({usernames: ["builderman"]})
+})
     // Coba roproxy dulu (bisa diakses dari browser)
     let r=await fetch('https://users.roproxy.com/v1/usernames/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({usernames:[u],excludeBannedUsers:false})});
     let j=await r.json();
@@ -166,7 +166,7 @@ async function stalkRoblox(){
   }
 }
 
-// ===== ML FIX: coba 3 API bergantian =====
+// ===== ML: coba 3 API bergantian =====
 async function stalkML(){
   let id=document.getElementById('mlId').value.trim();
   let zone=document.getElementById('mlZone').value.trim();
