@@ -1,39 +1,233 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOOGLEkw</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#fff;color:#202124;padding:12px;padding-bottom:110px}
-.top{height:30px}
-.center{margin-top:50px;text-align:center}
-.logo{font-size:64px;letter-spacing:-2px}
-.logo span:nth-child(1){color:#4285F4}.logo span:nth-child(2){color:#EA4335}.logo span:nth-child(3){color:#FBBC05}.logo span:nth-child(4){color:#4285F4}
-.nama{font-size:18px;color:#5f6368;margin-top:8px}
-.search{margin:24px auto 0;max-width:580px;display:flex;gap:10px;border:1px solid #dfe1e5;border-radius:30px;padding:12px 18px;box-shadow:0 1px 6px rgba(32,33,36,.28)}
-.search input{border:none;outline:none;font-size:16px;width:100%}
-.apps{max-width:580px;margin:30px auto 0;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
-.app{text-align:center;padding:14px 6px;border-radius:16px;cursor:pointer}
-.app:active{background:#f1f3f4}.app div{font-size:32px}.app p{font-size:13px;color:#5f6368;margin-top:6px}
-.card{background:#f8f9fa;border-radius:18px;padding:16px;margin-bottom:12px}
-.tool-btn{background:#fff;border:1px solid #dadce0;border-radius:14px;padding:16px;width:100%;margin-bottom:10px;font-size:16px;text-align:left;display:flex;gap:12px;align-items:center}
-.bottom{position:fixed;bottom:12px;left:12px;right:12px;background:#fff;border:1px solid #dadce0;box-shadow:0 2px 10px rgba(0,0,0,.15);border-radius:30px;display:flex;justify-content:space-around;padding:10px 4px;z-index:99}
-.bottom button{background:none;border:none;color:#5f6368;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 20px}
-.bottom button.active{color:#1a73e8}.bottom button span{font-size:24px}
-.page{display:none}.page.active{display:block}
-input[type=text]{width:100%;border:1px solid #dadce0;border-radius:12px;padding:12px;font-size:15px;outline:none;margin-top:8px}
-.btn{width:100%;background:#1a73e8;color:#fff;border:none;border-radius:12px;padding:12px;margin-top:10px;font-weight:bold}
-.btn2{width:100%;background:#fff;border:1px solid #dadce0;border-radius:12px;padding:12px;margin-top:8px}
-.hasil{margin-top:12px;background:#fff;border:1px solid #dadce0;border-radius:12px;padding:12px;font-size:14px;display:none}
-video{width:100%;border-radius:12px;margin-top:10px}
-img.prev{width:100%;border-radius:12px;margin-top:10px}
-a.dl{display:block;background:#34A853;color:#fff;text-align:center;padding:12px;border-radius:12px;margin-top:10px;text-decoration:none;font-weight:bold}
-.stalk-box{display:flex;gap:12px;align-items:center}
-.stalk-box img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #dadce0}
-.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;gap:10px}
-.row b{color:#202124;flex-shrink:0}.row span{color:#5f6368;text-align:right;word-break:break-word}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Video Downloader (HD)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+        p.subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        input[type="url"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        input[type="url"]:focus, select:focus {
+            border-color: #38bdf8;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0369a1;
+        }
+        button:disabled {
+            background-color: #475569;
+            cursor: not-allowed;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #0f172a;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            display: none;
+            text-align: center;
+        }
+        .download-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .download-link:hover {
+            background-color: #059669;
+        }
+        .error {
+            color: #f87171;
+            font-size: 0.9rem;
+        }
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .badge {
+            background-color: #334155;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Video Downloader HD</h1>
+    <p class="subtitle">Mendukung pengunduhan video tanpa watermark</p>
+    
+    <div class="badges">
+        <span class="badge">TikTok</span>
+        <span class="badge">YouTube</span>
+        <span class="badge">Instagram</span>
+    </div>
+
+    <form id="downloadForm">
+        <div class="form-group">
+            <label for="videoUrl">Tautan Video (URL)</label>
+            <input type="url" id="videoUrl" placeholder="Tempel link TikTok, YouTube, atau IG di sini..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="quality">Kualitas Video</label>
+            <select id="quality">
+                <option value="1080">Full HD (1080p)</option>
+                <option value="720" selected>HD (720p)</option>
+                <option value="480">SD (480p)</option>
+                <option value="max">Kualitas Maksimal (4K/Asli)</option>
+            </select>
+        </div>
+
+        <button type="submit" id="submitBtn">Proses Video</button>
+    </form>
+
+    <div class="result-box" id="resultBox"></div>
+</div>
+
+<script>
+    const form = document.getElementById('downloadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultBox = document.getElementById('resultBox');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const url = document.getElementById('videoUrl').value.trim();
+        const quality = document.getElementById('quality').value;
+
+        // Reset tampilan
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = '<p>Sedang memproses tautan video...</p>';
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Memproses...';
+
+        try {
+            // Menggunakan Endpoint Cobalt API
+            // Catatan: API publik sering memiliki batasan CORS atau rate-limit.
+            // Jika gagal, ganti URL ini dengan endpoint backend/RapidAPI Anda sendiri.
+            const apiEndpoint = 'https://api.cobalt.tools/api/json';
+
+            const response = await fetch(apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    url: url,
+                    vQuality: quality,
+                    filenamePattern: 'basic',
+                    isAudioOnly: false
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.status === 'stream' || data.status === 'redirect' || data.url) {
+                resultBox.innerHTML = `
+                    <p style="color: #34d399; margin-bottom: 8px;">Video siap diunduh!</p>
+                    <a href="${data.url}" target="_blank" rel="noopener noreferrer" class="download-link">
+                        Download Video (${quality === 'max' ? 'Max' : quality + 'p'})
+                    </a>
+                `;
+            } else if (data.status === 'error') {
+                throw new Error(data.text || 'Gagal memproses video dari API.');
+            } else {
+                throw new Error('Format respons API tidak dikenali atau video diprivasi.');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            resultBox.innerHTML = `
+                <p class="error"><strong>Terjadi Kesalahan:</strong> ${error.message}</p>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">
+                    Tips: API publik sering memblokir permintaan langsung dari browser (CORS) atau membutuhkan autentikasi. 
+                    Gunakan layanan seperti RapidAPI (misal: All-in-One Video Downloader API) dan masukkan API Key Anda.
+                </p>
+            `;
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Proses Video';
+        }
+    });
+</script>
+
+</body>
+</html>
+
 </style>
 </head>
 <body>
