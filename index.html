@@ -16,7 +16,7 @@ body{background:#0a0a0a;color:#fff;min-height:100vh}
 .konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center}
 .konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
 .konten p{color:rgba(255,255,255,.7);margin-top:8px;font-size:14px}
-.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
+.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left;will-change:transform,opacity}
 .kartu h2{font-size:18px;margin-bottom:6px}
 .kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
 input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
@@ -37,7 +37,7 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 
-/* ===== MUSIK - MUNG NENG MENU TOK ===== */
+/* ===== MUSIK ===== */
 .lagu-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer}
 .lagu-item:last-child{border:none}
 .lagu-item img{width:56px;height:56px;border-radius:14px;object-fit:cover;background:#333;flex-shrink:0}
@@ -116,25 +116,65 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
   flex:1;border:none;background:transparent;
   display:flex;flex-direction:column;align-items:center;gap:2px;
   padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
-  font-size:9px;font-weight:600;transition:color .3s;
+  font-size:9px;font-weight:600;
+  transition:color .45s cubic-bezier(.22,1,.36,1);
   -webkit-tap-highlight-color:transparent;
   pointer-events:auto !important;
   touch-action:manipulation;
 }
-.nav button .ikon{font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.nav button .ikon{font-size:20px;line-height:1;transition:transform .6s cubic-bezier(.34,1.56,.64,1);pointer-events:none;will-change:transform}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
 .nav button:active{transform:scale(.94)}
 .hilang{display:none}
-.muncul{animation:muncul .5s cubic-bezier(.22,1.1,.36,1) both}
-@keyframes muncul{from{opacity:0;transform:translateY(14px) scale(.97);filter:blur(4px)}to{opacity:1;transform:none;filter:blur(0)}}
+
+/* ===== PERPINDAHAN SUPER SMOOTH ===== */
+.konten > div{
+  will-change:transform,opacity,filter;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+/* Halaman masuk - alus banget, ada stagger kartu */
+.muncul{animation:munculSmooth .65s cubic-bezier(.22,1,.36,1) both}
+.muncul-kiri{animation:munculKiriSmooth .65s cubic-bezier(.22,1,.36,1) both}
+.muncul-kanan{animation:munculKananSmooth .65s cubic-bezier(.22,1,.36,1) both}
+@keyframes munculSmooth{
+  from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(6px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes munculKiriSmooth{
+  from{opacity:0;transform:translateX(34px) scale(.985);filter:blur(5px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes munculKananSmooth{
+  from{opacity:0;transform:translateX(-34px) scale(.985);filter:blur(5px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+/* Kartu muncul nyusul satu-satu, staggered */
+.muncul .kartu, .muncul-kiri .kartu, .muncul-kanan .kartu{
+  animation:kartuMasuk .6s cubic-bezier(.22,1,.36,1) both;
+}
+.muncul .kartu:nth-child(2), .muncul-kiri .kartu:nth-child(2), .muncul-kanan .kartu:nth-child(2){animation-delay:.06s}
+.muncul .kartu:nth-child(3), .muncul-kiri .kartu:nth-child(3), .muncul-kanan .kartu:nth-child(3){animation-delay:.12s}
+.muncul .kartu:nth-child(4), .muncul-kiri .kartu:nth-child(4), .muncul-kanan .kartu:nth-child(4){animation-delay:.18s}
+.muncul .kartu:nth-child(5), .muncul-kiri .kartu:nth-child(5), .muncul-kanan .kartu:nth-child(5){animation-delay:.24s}
+@keyframes kartuMasuk{
+  from{opacity:0;transform:translateY(14px) scale(.98)}
+  to{opacity:1;transform:none}
+}
+/* Halaman keluar - fade alus */
+.keluar{animation:keluarSmooth .28s ease-in both}
+@keyframes keluarSmooth{
+  from{opacity:1;transform:none;filter:blur(0)}
+  to{opacity:0;transform:translateY(-8px) scale(.99);filter:blur(3px)}
+}
 </style>
 </head>
 <body>
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
 
 <div class="konten">
-  <!-- HOME - BALIK ASLI, ORA ANA MUSIK -->
+  <!-- HOME -->
   <div id="page-home">
     <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Iso Diedit</p>
     <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba pencet menu ngisor, deloken <b>blok-e mlaku</b>: molor koyo permen karet, terus balik bunder alus.</p></div>
@@ -157,7 +197,7 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
     <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
 
-  <!-- MUSIK - MUNG NENG KENE TOK -->
+  <!-- MUSIK -->
   <div id="page-musik" class="hilang">
     <h1>YMusic 🎵</h1><p>Audio wae • Hemat kuota 90% • Background Play • Download MP3</p>
     <div class="kartu">
@@ -238,26 +278,37 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 let blok=document.getElementById('blok');
 let blokX=0, blokW=58, targetX=0, targetW=58;
 let animasiJalan=false;
+let halamanSaatIni=0;
+let lagiPindah=false;
+
+// ===== GERAK BLOK - SPRING SUPER HALUS (60FPS) =====
 function gerakBlok(){
   if(animasiJalan) return;
   animasiJalan=true;
   let kecepatan=0;
-  let kaku=0.14, redam=0.78;
-  function frame(){
+  // Kaku lebih kecil + redam lebih tinggi = meluncur alus, ora mantul kakean
+  let kaku=0.09, redam=0.84;
+  let lastTime=performance.now();
+  function frame(now){
+    let dt=Math.min(32, now-lastTime)/16.666;
+    lastTime=now;
     let jarak=targetX-blokX;
-    kecepatan=(kecepatan + jarak*kaku)*redam;
-    blokX+=kecepatan;
+    // Spring dengan dt biar konsisten di semua HP
+    kecepatan=(kecepatan + jarak*kaku*dt)*Math.pow(redam,dt);
+    blokX+=kecepatan*dt;
     let speed=Math.abs(kecepatan);
-    let molor=Math.min(1.45, 1 + speed*0.09);
-    let gepeng=1-(molor-1)*0.38;
-    blokW += (targetW-blokW)*0.18;
-    let radius = speed>1 ? `38% 62% 60% 40% / 58% 44% 56% 42%` : `999px`;
-    blok.style.transform=`translateX(${blokX}px) scaleX(${molor}) scaleY(${gepeng})`;
+    // Molor lebih lembut, maksimal cuma 1.28x (wingi 1.45x terlalu lebay)
+    let molor=Math.min(1.28, 1 + speed*0.045);
+    let gepeng=1-(molor-1)*0.28;
+    blokW += (targetW-blokW)*0.12;
+    // Bentuk lebur alus - transisi border-radius tidak loncat
+    let radius = speed>0.8 ? `42% 58% 56% 44% / 58% 46% 54% 42%` : `999px`;
+    blok.style.transform=`translate3d(${blokX}px,0,0) scaleX(${molor}) scaleY(${gepeng})`;
     blok.style.width=blokW+'px';
     blok.style.borderRadius=radius;
-    if(Math.abs(jarak)<0.4 && Math.abs(kecepatan)<0.4){
+    if(Math.abs(jarak)<0.3 && Math.abs(kecepatan)<0.3){
       blokX=targetX; blokW=targetW;
-      blok.style.transform=`translateX(${blokX}px) scaleX(1) scaleY(1)`;
+      blok.style.transform=`translate3d(${blokX}px,0,0) scaleX(1) scaleY(1)`;
       blok.style.width=blokW+'px';
       blok.style.borderRadius='999px';
       animasiJalan=false;
@@ -267,10 +318,196 @@ function gerakBlok(){
   }
   requestAnimationFrame(frame);
 }
+
+// ===== PINDAH HALAMAN - SUPER SMOOTH =====
 function pindah(btn,page,index){
+  // Cegah spam klik biar animasi tidak numpuk / patah
+  if(lagiPindah && index===halamanSaatIni) return;
+  if(index===halamanSaatIni) return;
+  lagiPindah=true;
+
+  let arah = index > halamanSaatIni ? 'kiri' : 'kanan';
+  halamanSaatIni=index;
+
+  // 1. Nav - warna + blok langsung jalan
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
   btn.classList.add('aktif');
   targetX=btn.offsetLeft-10;
   targetW=btn.offsetWidth;
   gerakBlok();
-  document.querySelectorAll('.konten )
+
+  // 2. Halaman lama fade keluar dulu (0.18 detik, alus)
+  let halamanLama=document.querySelector('.konten > div:not(.hilang)');
+  let halamanBaru=document.getElementById('page-'+page);
+
+  if(halamanLama && halamanLama!==halamanBaru){
+    halamanLama.classList.add('keluar');
+    // Tunggu fade keluar selesai, baru tampilkan yang baru - jadi tidak kedip
+    setTimeout(()=>{
+      halamanLama.classList.add('hilang');
+      halamanLama.classList.remove('keluar','muncul','muncul-kiri','muncul-kanan');
+      tampilkanBaru(halamanBaru, arah, page);
+    }, 170);
+  }else{
+    tampilkanBaru(halamanBaru, arah, page);
+  }
+
+  if(navigator.vibrate) navigator.vibrate(5);
+}
+
+function tampilkanBaru(t, arah, page){
+  t.classList.remove('hilang','muncul','muncul-kiri','muncul-kanan');
+  void t.offsetWidth; // restart animasi
+  if(arah==='kiri') t.classList.add('muncul-kiri');
+  else t.classList.add('muncul-kanan');
+  // Scroll ke atas dengan smooth, tidak loncat
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(page==='info') loadGempa(),loadCuaca(),loadBerita();
+  // Buka kunci setelah animasi selesai
+  setTimeout(()=>{ lagiPindah=false; }, 450);
+}
+
+window.addEventListener('load',()=>{
+  try{
+    let b=document.querySelector('.nav button.aktif');
+    blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth;
+    blok.style.transform=`translate3d(${blokX}px,0,0)`; blok.style.width=blokW+'px';
+    loadProfil(); tampilkanLagu(); tampilkanFavorit();
+    // Halaman pertama juga masuk alus
+    let home=document.getElementById('page-home');
+    home.classList.add('muncul');
+  }catch(e){ console.log(e); }
+});
+let daftarLaguData=[
+  {judul:'Satu Bulan', penyanyi:'Bernadya', id:'-oE7yGq4Y8E', img:'https://i.ytimg.com/vi/-oE7yGq4Y8E/hqdefault.jpg'},
+  {judul:'Untungnya, Hidup Harus Tetap Berjalan', penyanyi:'Bernadya', id:'g5R6U1b8PzE', img:'https://i.ytimg.com/vi/g5R6U1b8PzE/hqdefault.jpg'},
+  {judul:'Cincin', penyanyi:'Hindia', id:'3v0Q4R9Rq9Q', img:'https://i.ytimg.com/vi/3v0Q4R9Rq9Q/hqdefault.jpg'},
+  {judul:'Sialan', penyanyi:'Juicy Luicy', id:'qQZz2J8b2QY', img:'https://i.ytimg.com/vi/qQZz2J8b2QY/hqdefault.jpg'},
+  {judul:'Lantas', penyanyi:'Juicy Luicy', id:'Y7c8x4m8m8k', img:'https://i.ytimg.com/vi/Y7c8x4m8m8k/hqdefault.jpg'},
+  {judul:'Bertaut', penyanyi:'Nadin Amizah', id:'1xXzQ3Zq5kY', img:'https://i.ytimg.com/vi/1xXzQ3Zq5kY/hqdefault.jpg'},
+  {judul:'Hati-Hati di Jalan', penyanyi:'Tulus', id:'dQw4w9WgXcQ', img:'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg'},
+  {judul:'Kita Bikin Romantis', penyanyi:'Malik & The Essentials', id:'sQ2xZx4b2QY', img:'https://i.ytimg.com/vi/sQ2xZx4b2QY/hqdefault.jpg'},
+];
+let laguAktifIndex=-1, sedangMain=true, audioOnlyMode=false;
+let favorit = JSON.parse(localStorage.getItem('favoritLagu')||'[]');
+let linkTerakhir='';
+function tampilkanLagu(){
+  let box=document.getElementById('daftarLagu');
+  if(!box) return;
+  box.innerHTML=daftarLaguData.map((lagu,i)=>{
+    let isFav=favorit.includes(i) ? '❤️' : '🤍';
+    return `<div class="lagu-item ${i===laguAktifIndex?'aktif-play':''}" onclick="putarLagu(${i})">
+      <img src="${lagu.img}" onerror="this.src='https://i.pravatar.cc/100?img=${i+1}'">
+      <div class="lagu-info"><b>${lagu.judul}</b><span>${lagu.penyanyi} • Audio Only - Hemat Kuota</span></div>
+      <button type="button" class="play-btn" onclick="event.stopPropagation(); toggleFavorit(${i})">${isFav}</button>
+      <button type="button" class="play-btn" onclick="event.stopPropagation(); downloadLaguIni(${i})">⬇️</button>
+      <button type="button" class="play-btn" onclick="event.stopPropagation(); putarLagu(${i})">${i===laguAktifIndex?'⏸️':'▶️'}</button>
+    </div>`;
+  }).join('');
+}
+function putarLagu(i){
+  laguAktifIndex=i;
+  let lagu=daftarLaguData[i];
+  linkTerakhir=`https://www.youtube.com/watch?v=${lagu.id}`;
+  document.getElementById('inputLinkYT').value=linkTerakhir;
+  document.getElementById('judulLagu').innerText='🎵 '+lagu.judul;
+  document.getElementById('judulLagu2').innerText=lagu.judul;
+  document.getElementById('coverLagu').src=lagu.img;
+  document.getElementById('penyanyiLagu').innerText=lagu.penyanyi + ' • Lagi diputer • Audio Only';
+  document.getElementById('eqAnim').style.display='flex';
+  document.getElementById('playerMusik').src=`https://www.youtube.com/embed/${lagu.id}?autoplay=1&rel=0`;
+  sedangMain=true;
+  tampilkanLagu();
+  if(navigator.vibrate) navigator.vibrate(10);
+}
+function laguBerikutnya(){ if(laguAktifIndex===-1) putarLagu(0); else putarLagu((laguAktifIndex+1)%daftarLaguData.length); }
+function laguSebelumnya(){ if(laguAktifIndex===-1) putarLagu(0); else putarLagu((laguAktifIndex-1+daftarLaguData.length)%daftarLaguData.length); }
+function togglePlay(){
+  let frame=document.getElementById('playerMusik');
+  if(laguAktifIndex===-1){ putarLagu(0); return; }
+  if(sedangMain){ frame.src=''; document.getElementById('eqAnim').style.display='none'; document.getElementById('penyanyiLagu').innerText='Dijeda - klik Play gawe lanjut'; sedangMain=false; }
+  else{ let lagu=daftarLaguData[laguAktifIndex]; frame.src=`https://www.youtube.com/embed/${lagu.id}?autoplay=1&rel=0`; document.getElementById('eqAnim').style.display='flex'; document.getElementById('penyanyiLagu').innerText=lagu.penyanyi+' • Lagi diputer'; sedangMain=true; }
+}
+function toggleAudioMode(){
+  audioOnlyMode=!audioOnlyMode;
+  let sw=document.getElementById('switchAudio');
+  let box=document.getElementById('playerBox');
+  let label=document.getElementById('modeLabel');
+  sw.classList.toggle('on', audioOnlyMode);
+  box.classList.toggle('audio-mode', audioOnlyMode);
+  label.innerText=audioOnlyMode ? 'MODE: AUDIO WAE - HEMAT 90%' : 'MODE: VIDEO';
+  label.style.background=audioOnlyMode ? '#00c853' : '#ff9800';
+  if(audioOnlyMode) alert('Mode Audio Wae AKTIF ✅\nVideo disembunyikan, mung suara tok sing jalan. Hemat kuota 90% koyo ymusic.io');
+}
+function cariMusik(){
+  let q=document.getElementById('inputMusik').value.trim();
+  if(!q){ alert('Tulis judul lagu dulu mas'); return; }
+  cariMusikLangsung(q);
+}
+function cariMusikLangsung(q){
+  document.getElementById('inputMusik').value=q;
+  document.getElementById('judulLagu').innerText='🔍 Hasil: '+q;
+  document.getElementById('judulLagu2').innerText=q;
+  document.getElementById('penyanyiLagu').innerText='Hasil pencarian YMusic - klik Download gawe simpen MP3';
+  document.getElementById('playerMusik').src=`https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(q)}&autoplay=1`;
+  document.getElementById('eqAnim').style.display='flex';
+  linkTerakhir=`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+  document.getElementById('inputLinkYT').value=linkTerakhir;
+  sedangMain=true;
+}
+function downloadMP3(){
+  if(!linkTerakhir){ alert('Pilih lagu dulu / golek lagu dulu'); return; }
+  if(navigator.clipboard) navigator.clipboard.writeText(linkTerakhir);
+  alert('Link lagu wis di-copy! 📋\n\nSaiki:\n1. Buka ymusic.io\n2. Tempel link-e\n3. Pilih MP3 / 128kbps\n4. Download\n\nLink: '+linkTerakhir);
+  window.open('https://ymusic.io','_blank');
+}
+function downloadLaguIni(i){
+  let lagu=daftarLaguData[i];
+  let link=`https://www.youtube.com/watch?v=${lagu.id}`;
+  if(navigator.clipboard) navigator.clipboard.writeText(link);
+  alert('Download MP3: '+lagu.judul+'\n\nLink wis di-copy. Tempel neng ymusic.io > Download MP3.');
+  window.open('https://ymusic.io','_blank');
+}
+function downloadDariLink(){
+  let link=document.getElementById('inputLinkYT').value.trim();
+  if(!link){ alert('Tempel link YouTube dulu'); return; }
+  if(navigator.clipboard) navigator.clipboard.writeText(link);
+  alert('Link wis di-copy! Tempel neng ymusic.io gawe download MP3.');
+  window.open('https://ymusic.io','_blank');
+}
+function toggleFavorit(i){
+  if(favorit.includes(i)) favorit=favorit.filter(x=>x!==i);
+  else favorit.push(i);
+  localStorage.setItem('favoritLagu', JSON.stringify(favorit));
+  tampilkanLagu(); tampilkanFavorit();
+}
+function tampilkanFavorit(){
+  let box=document.getElementById('daftarFavorit');
+  let kosong=document.getElementById('playlistKosong');
+  if(!box) return;
+  if(favorit.length===0){ kosong.style.display='block'; box.innerHTML=''; return; }
+  kosong.style.display='none';
+  box.innerHTML=favorit.map(i=>{
+    let lagu=daftarLaguData[i];
+    return `<div class="lagu-item" onclick="putarLagu(${i})"><img src="${lagu.img}"><div class="lagu-info"><b>${lagu.judul}</b><span>${lagu.penyanyi}</span></div><button type="button" class="play-btn" onclick="event.stopPropagation(); putarLagu(${i})">▶️</button></div>`;
+  }).join('');
+}
+function isiSearch(teks){document.getElementById('inputSearch').value=teks; cariGoogle();}
+function goSearch(teks){pindah(document.querySelectorAll('.nav button')[1],'search',1); document.getElementById('inputSearch').value=teks;}
+function cariGoogle(mode){let q=document.getElementById('inputSearch').value.trim(); if(!q){alert('Tulis kata kunci dulu mas');return;} if(mode==='gambar') window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q),'_blank'); else window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+let fotoAsli=null;
+function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.result;}; r.readAsDataURL(f);}
+function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasHD'), ctx=c.getContext('2d'); c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value; ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`; ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctx.drawImage(fotoAsli,0,0,c.width,c.height); document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95); document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px`;}
+function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu mas');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
+function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
+function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;}catch(e){box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;}}
+async function loadCuaca(){let box=document.getElementById('cuacaBox'); try{let res=await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001'); let j=await res.json(); let d=j.data[0].cuaca[0][0]; box.innerHTML=`<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;}catch(e){box.innerHTML=`🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;}}
+async function loadBerita(){let box=document.getElementById('beritaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss'); let j=await res.json(); box.innerHTML=j.items.slice(0,5).map(it=>`<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');}catch(e){box.innerHTML=`<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;}}
+function loadProfil(){let nama=localStorage.getItem('nama')||'Jarr'; let bio=localStorage.getItem('bio')||'Yogyakarta • Seneng ngoprek HTML modal AI😹'; let foto=localStorage.getItem('fotoProfil'); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; document.getElementById('editNama').value=nama; document.getElementById('editBio').value=bio; if(foto) document.getElementById('avatarPreview').src=foto;}
+function simpanProfil(){let nama=document.getElementById('editNama').value.trim()||'Jarr'; let bio=document.getElementById('editBio').value.trim()||'Yogyakarta'; localStorage.setItem('nama',nama); localStorage.setItem('bio',bio); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; alert('Profil tersimpan! ✅ '+nama);}
+function gantiFotoProfil(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{document.getElementById('avatarPreview').src=ev.target.result; localStorage.setItem('fotoProfil',ev.target.result);}; r.readAsDataURL(f);}
+function resetProfil(){localStorage.clear(); location.reload();}
+</script>
+</body>
+</html>
