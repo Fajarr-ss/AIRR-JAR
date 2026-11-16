@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Liquid Glass - All In One</title>
+<title>AIRR - J</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
 body{background:#0a0a0a;color:#fff;min-height:100vh}
@@ -66,8 +66,8 @@ input[type=range]{width:100%;margin-top:8px}
   <div id="page-search" class="hilang">
     <h1>Search 🔍</h1><p>Langsung nyambung Google</p>
     <div class="kartu">
-      <h2>🔎 Golek neng Google</h2>
-      <input type="text" id="inputSearch" placeholder="Tulis opo wae... misal: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()">
+      <h2>🔎 Pencarian Google</h2>
+      <input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()">
       <button class="btn" onclick="cariGoogle()">Cari di Google →</button>
       <button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button>
       <p style="margin-top:10px">Trending:</p>
@@ -76,7 +76,7 @@ input[type=range]{width:100%;margin-top:8px}
       <span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span>
       <span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span>
     </div>
-    <div class="kartu"><h2>🌐 Cari Cepet Liyane</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
+    <div class="kartu"><h2>🌐 Mungkin u cari</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
   </div>
 
   <!-- TOOLS - HD -->
@@ -84,8 +84,8 @@ input[type=range]{width:100%;margin-top:8px}
     <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
 
     <div class="kartu">
-      <h2>📸 1. HD FOTO - Jernihke Foto Buram</h2>
-      <p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam. File-mu ora dikirim neng endi-endi, diproses neng HP-mu dewe.</p>
+      <h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2>
+      <p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam. File-mu aman tidak tersimpan di sever, diproses langsung di hp mu.</p>
       <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
       <img id="fotoPreview" class="preview">
       <label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()">
@@ -96,13 +96,13 @@ input[type=range]{width:100%;margin-top:8px}
     </div>
 
     <div class="kartu">
-      <h2>🎬 2. HD VIDEO - Jernihke Video</h2>
-      <p>Pilih video, atur filter HD, terus play. Video-mu iso di-download versi filter HD (format webm).</p>
+      <h2>🎬 2. HD VIDEO - JernihkanVideo</h2>
+      <p>Pilih video, atur filter HD, terus play. Video-mu bisa di download versi filter HD (format webm).</p>
       <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
       <video id="videoPreview" class="preview" controls playsinline></video>
       <label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()">
       <label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()">
-      <button class="btn" onclick="alert('Video wis HD neng preview. Kanggo download, pencet titik 3 neng video > Download (neng Chrome HP).')">✅ Video Wis HD</button>
+      <button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button>
     </div>
   </div>
 
@@ -129,17 +129,17 @@ input[type=range]{width:100%;margin-top:8px}
 
   <!-- PROFIL - EDIT -->
   <div id="page-profil" class="hilang">
-    <h1>Profil 👤</h1><p>Ganti jeneng & foto, langsung kesimpen</p>
+    <h1>Profil 👤</h1><p>Ganti nama & foto, langsung kesimpan</p>
     <div class="kartu" style="text-align:center">
       <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12">
-      <h2 id="namaProfil" style="margin-top:10px">Mas Jogja</h2>
-      <p id="bioProfil">Yogyakarta • Seneng ngoprek HTML & motor</p>
+      <h2 id="namaProfil" style="margin-top:10px">Jarr</h2>
+      <p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p>
       <input type="text" id="editNama" placeholder="Ganti nama... misal: Andi Pratama">
       <textarea id="editBio" rows="2" placeholder="Ganti bio... misal: Anak CB, Jogja"></textarea>
       <label style="font-size:13px">📸 Ganti Foto Profil</label>
       <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
       <div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div>
-      <p style="font-size:11px;margin-top:8px">Jeneng & foto kesimpen otomatis neng HP-mu (localStorage)</p>
+      <p style="font-size:11px;margin-top:8px">Nama & foto kesimpan otomatis di HP-mu (localStorage)</p>
     </div>
   </div>
 </div>
@@ -159,7 +159,7 @@ input[type=range]{width:100%;margin-top:8px}
 let blob=document.getElementById('blob'), nav=document.getElementById('nav');
 function pindah(btn,page,index){
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif')); btn.classList.add('aktif');
-  nav.classList.add('mleyot'); setTimeout(()=>nav.classList.remove('mleyot'),180);
+  nav.classList.add('mleyot'); setTimeout(()=>nav.classList.remove('lebur'),180);
   blob.style.transform=`translateX(${btn.offsetLeft-10}px)`; blob.style.width=btn.offsetWidth+'px';
   document.querySelectorAll('.konten > div').forEach(d=>d.classList.add('hilang'));
   let t=document.getElementById('page-'+page); t.classList.remove('hilang'); t.classList.remove('muncul'); void t.offsetWidth; t.classList.add('muncul');
