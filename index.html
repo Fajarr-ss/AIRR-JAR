@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liquid Glass Menu</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
+body{background:#0a0a0a;color:#fff;min-height:100vh;overflow:hidden}
 
+/* BACKGROUND BIAR KACA-NE KETOK */
+.bg{position:fixed;inset:0;z-index:0}
+.bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}
+.bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}
+.bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
+@keyframes gerak{to{transform:translate(80px,60px) scale(1.2)}}
+@keyframes gerak2{to{transform:translate(-80px,-60px) scale(1.1)}}
+
+/* KONTEN */
+.konten{position:relative;z-index:1;padding:30px 20px 140px;text-align:center}
+.konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
+.konten p{color:rgba(255,255,255,.7);margin-top:8px}
+.kartu{margin:22px auto;max-width:420px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:22px;text-align:left}
+.kartu h2{font-size:20px}
+.kartu p{font-size:14px;line-height:1.6}
+.emoji{font-size:42px}
+
+/* ===== LIQUID GLASS BOTTOM MENU ===== */
+.nav-wrap{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+  z-index:10;width:min(430px,calc(100% - 28px));
+}
+.nav{
+  position:relative;display:flex;justify-content:space-between;align-items:center;
+  padding:10px 10px;
+  /* KACA-NE */
+  background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.18));
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(255,255,255,.15);
+  overflow:visible;
+}
+/* Kilau atas koyo kaca */
+.nav::before{
+  content:"";position:absolute;inset:0;border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.45), transparent 35%);
+  pointer-events:none;
+}
+/* BLOB SING PINDAH - LIQUID */
+.blob{
+  position:absolute;top:8px;left:10px;width:68px;height:56px;
+  background:rgba(255,255,255,.92);
+  border-radius:999px;
+  box-shadow:0 10px 25px rgba(0,0,0,.35), inset 0 1px 0 #fff;
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1), width .55s cubic-bezier(.34,1.56,.64,1), border-radius .4s;
+  z-index:0;
+}
+/* Efek mleyot pas pindah */
+.nav.mleyot .blob{
+  border-radius:40% 60% 55% 45% / 60% 45% 55% 40%;
+  transform:scaleX(1.25) scaleY(.85) !important;
+}
+.nav button{
+  position:relative;z-index:1;flex:1;border:none;background:transparent;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.75);
+  transition:color .3s, transform .3s;
+  font-size:10px;font-weight:600;letter-spacing:.3px;
+}
+.nav button .ikon{font-size:22px;line-height:1;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.nav button.aktif{color:#111}
+.nav button.aktif .ikon{transform:scale(1.25) translateY(-1px)}
+.nav button:active{transform:scale(.92)}
+
+.hilang{display:none}
+.muncul{animation:muncul .45s ease both}
+@keyframes muncul{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
+
+<div class="konten">
+  <!-- HOME -->
+  <div id="page-home">
+    <h1>Liquid Glass</h1>
+    <p>Menu ngisor koyo iPhone iOS 26 • dipencet mleyot</p>
+    <div class="kartu"><div class="emoji">🏠</div><h2>Home</h2><p>Menu putih sing pindah-pindah iki jenenge Liquid Glass. Pas kowe pencet, blob-e mlaku alus karo efek mleyot koyo banyu.</p></div>
+    <div class="kartu"><div class="emoji">✨</div><h2>Coba Pencet Menu Liyane</h2><p>Pencet Search, Tambah, Notif, Profil neng ngisor. Rasakne animasi-ne.</p></div>
+  </div>
+
+  <!-- SEARCH -->
+  <div id="page-search" class="hilang">
+    <h1>Search 🔍</h1><p>Golek opo wae neng kene</p>
+    <div class="kartu"><h2>🔎 Trending</h2><p>• Liquid Glass iPhone<br>• iOS 26<br>• Menu bawah pindah-pindah<br>• Desain kaca cair</p></div>
+  </div>
+
+  <!-- TAMBAH -->
+  <div id="page-tambah" class="hilang">
+    <h1>Tambah ➕</h1><p>Gawe postingan anyar</p>
+    <div class="kartu"><h2>📸 Upload</h2><p>Tombol tengah iki paling gede efek-e. Nek dipencet, blob-e ngembang koyo gelembung.</p></div>
+  </div>
+
+  <!-- NOTIF -->
+  <div id="page-notif" class="hilang">
+    <h1>Notifikasi 🔔</h1><p>Ana 3 notif anyar</p>
+    <div class="kartu"><h2>🔔 Info</h2><p>• Budi nge-like fotomu<br>• Sinta komen: "apik men!"<br>• Update anyar tersedia</p></div>
+  </div>
+
+  <!-- PROFIL -->
+  <div id="page-profil" class="hilang">
+    <h1>Profil 👤</h1><p>Akunmu</p>
+    <div class="kartu"><div class="emoji">😎</div><h2>Mas Jogja</h2><p>Yogyakarta • 128 Followers<br>Seneng ngoprek HTML & motor</p></div>
+  </div>
+</div>
+
+<!-- MENU BAWAH -->
+<div class="nav-wrap">
+  <div class="nav" id="nav">
+    <div class="blob" id="blob"></div>
+    <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+    <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
+    <button onclick="pindah(this,'tambah',2)"><span class="ikon">➕</span>Tambah</button>
+    <button onclick="pindah(this,'notif',3)"><span class="ikon">🔔</span>Notif</button>
+    <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
+  </div>
+</div>
+
+<script>
+let blob = document.getElementById('blob');
+let nav = document.getElementById('nav');
+
+function pindah(btn, page, index){
+  // 1. Ganti warna tombol aktif
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
+  btn.classList.add('aktif');
+
+  // 2. Pindah blob - itung posisi tombol
+  let lebarBtn = btn.offsetWidth;
+  let posisi = btn.offsetLeft;
+  // Efek mleyot sekedip
+  nav.classList.add('mleyot');
+  setTimeout(()=> nav.classList.remove('mleyot'), 180);
+
+  // Blob mlaku alus
+  blob.style.transform = `translateX(${posisi - 10}px)`;
+  blob.style.width = lebarBtn + 'px';
+
+  // 3. Ganti halaman
+  document.querySelectorAll('.konten > div').forEach(d=> d.classList.add('hilang'));
+  let target = document.getElementById('page-'+page);
+  target.classList.remove('hilang');
+  target.classList.remove('muncul');
+  void target.offsetWidth; // restart animasi
+  target.classList.add('muncul');
+
+  // Getar cilik koyo iPhone (nek neng HP)
+  if(navigator.vibrate) navigator.vibrate(10);
+}
+
+// Set posisi awal blob pas load
+window.addEventListener('load', ()=>{
+  let btnAktif = document.querySelector('.nav button.aktif');
+  blob.style.width = btnAktif.offsetWidth + 'px';
+  blob.style.transform = `translateX(${btnAktif.offsetLeft - 10}px)`;
+});
+</script>
+</body>
+</html>
