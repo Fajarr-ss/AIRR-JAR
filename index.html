@@ -13,7 +13,7 @@ body{background:#0a0a0a;color:#fff;min-height:100vh;overscroll-behavior:none}
 .bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
 @keyframes gerak{to{transform:translate(80px,60px) scale(1.2)}}
 @keyframes gerak2{to{transform:translate(-80px,-60px) scale(1.1)}}
-.konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center}
+.konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
 .konten p{color:rgba(255,255,255,.7);margin-top:8px;font-size:14px}
 .kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
@@ -36,9 +36,9 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px}
-.swipe-hint{font-size:11px;opacity:.55;margin-top:10px}
+.swipe-hint{font-size:11px;opacity:.55;margin-top:10px;letter-spacing:.5px}
 
-/* ===== NAV ===== */
+/* ===== NAV - BLOK BERGERAK ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
 .nav{
   position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
@@ -49,10 +49,7 @@ input[type=range]{width:100%;margin-top:8px}
   border-radius:999px;
   box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
   overflow:visible;
-  touch-action:pan-y; /* BIAR TAP NORMAL, DRAG TETAP JALAN */
-  cursor:grab;
 }
-.nav.dragging{cursor:grabbing}
 .nav::before{
   content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;
   background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
@@ -67,7 +64,6 @@ input[type=range]{width:100%;margin-top:8px}
   border-radius:999px;
   box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -3px 8px rgba(255,255,255,.28);
   will-change:transform,width,border-radius;z-index:0;
-  pointer-events:none;
 }
 .blok::before{
   content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
@@ -91,8 +87,7 @@ input[type=range]{width:100%;margin-top:8px}
 .nav button .ikon{font-size:22px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
-.nav button.preview-aktif{color:#111}
-.nav button.preview-aktif .ikon{transform:scale(1.15)}
+.nav button:active{transform:scale(.94)}
 .hilang{display:none}
 .muncul{animation:muncul .45s cubic-bezier(.22,1.1,.36,1) both}
 .muncul-kiri{animation:munculKiri .45s cubic-bezier(.22,1.1,.36,1) both}
@@ -106,38 +101,43 @@ input[type=range]{width:100%;margin-top:8px}
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
 
 <div class="konten" id="konten">
+  <!-- HOME -->
   <div id="page-home">
-    <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Bisa Diedit</p>
-    <p class="swipe-hint">👇 Tap biasa bisa, seret blok di bar bawah juga bisa 👇</p>
-    <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p><b>Tap</b> menu di bawah untuk pindah. Atau <b>tekan & seret</b> bar bawah ke kiri / kanan, blok-nya akan ngikutin jari kamu!</p></div>
+    <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG</p>
+    <p class="swipe-hint">Sigma kau ni lek</p>
+    <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba <b>swipe layar</b> ke kiri: Home > Search > Tools > Info > Profil. Blok di bawah ikut bergerak lentur!</p></div>
     <div class="kartu"><h2>⚡ Akses Cepat</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div>
   </div>
+  <!-- SEARCH -->
   <div id="page-search" class="hilang">
-    <h1>Search 🔍</h1><p>Langsung terhubung ke Google</p>
+    <h1>Search 🔍</h1><p>Langsung terhubung ke Google</p><p class="swipe-hint">swipe</p>
     <div class="kartu"><h2>🔎 Pencarian Google</h2><input type="text" id="inputSearch" placeholder="Tulis apa saja... contoh: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()"><button class="btn" onclick="cariGoogle()">Cari di Google →</button><button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button><p style="margin-top:10px">Trending:</p><span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span><span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span><span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span><span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span></div>
     <div class="kartu"><h2>🌐 Mungkin Kamu Cari</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
   </div>
+  <!-- TOOLS -->
   <div id="page-tools" class="hilang">
-    <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
-    <div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto yang buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Belum ada foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
+    <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p><p class="swipe-hint">Swipe</p>
+    <div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto yang buram / pecah, langsung di-upscale 2x + dipertajam. File kamu aman, diproses di HP kamu sendiri.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Belum ada foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
     <div class="kartu"><h2>🎬 2. HD VIDEO - Jernihkan Video</h2><p>Pilih video, atur filter HD, lalu putar.</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"><button class="btn" onclick="alert('Video sudah jadi. Untuk download, tekan titik 3 di video > Download (di Chrome HP).')">✅ Video Sudah HD</button></div>
   </div>
+  <!-- INFO -->
   <div id="page-info" class="hilang">
-    <h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p>
-    <div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Memuat data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div>
+    <h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p><p class="swipe-hint">swipe</p>
+    <div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Memuat data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button><p style="font-size:11px;margin-top:8px">Sumber: data.bmkg.go.id - autogempa.json</p></div>
     <div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Memuat cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
     <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Memuat berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
+  <!-- PROFIL -->
   <div id="page-profil" class="hilang">
-    <h1>Profil 👤</h1><p>Ganti nama & foto, langsung tersimpan</p>
-    <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Suka ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
+    <h1>Profil 👤</h1><p>Ganti nama & foto, langsung tersimpan</p><p class="swipe-hint">swipe</p>
+    <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Suka ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama... contoh: Andi Pratama"><textarea id="editBio" rows="2" placeholder="Ganti bio... contoh: Anak CB, Jogja"></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div><p style="font-size:11px;margin-top:8px">Nama & foto tersimpan otomatis di HP kamu (localStorage)</p></div>
   </div>
 </div>
 
 <div class="nav-wrap">
   <div class="nav" id="nav">
     <div class="blok" id="blok"></div>
-    <button onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+    <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
     <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
     <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
     <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
@@ -146,12 +146,11 @@ input[type=range]{width:100%;margin-top:8px}
 </div>
 
 <script>
-let blok=document.getElementById('blok'), navEl=document.getElementById('nav');
+let blok=document.getElementById('blok');
 let blokX=0, blokW=68, targetX=0, targetW=68;
 let animasiJalan=false;
 let halamanSaatIni=0;
 const daftarHalaman=['home','search','tools','info','profil'];
-let tombolNav=[...document.querySelectorAll('.nav button')];
 
 function gerakBlok(){
   if(animasiJalan) return;
@@ -183,8 +182,8 @@ function gerakBlok(){
   requestAnimationFrame(frame);
 }
 
-function pindahKe(btn,page,index,arah='tengah'){
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif','preview-aktif'));
+function pindah(btn,page,index,arah='tengah'){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
   btn.classList.add('aktif');
   halamanSaatIni=index;
   targetX=btn.offsetLeft-10;
@@ -201,127 +200,73 @@ function pindahKe(btn,page,index,arah='tengah'){
   if(page==='info') loadGempa(),loadCuaca(),loadBerita();
   if(navigator.vibrate) navigator.vibrate(8);
 }
-// Fungsi untuk onclick di HTML - kalau habis drag, jangan double pindah
-let habisDrag=false;
-function pindah(btn,page,index){
-  if(habisDrag){ habisDrag=false; return; }
-  let arah = index > halamanSaatIni ? 'kiri' : index < halamanSaatIni ? 'kanan' : 'tengah';
-  pindahKe(btn,page,index,arah);
+function pindahKeIndex(indexBaru,arah){
+  if(indexBaru<0 || indexBaru>4 || indexBaru===halamanSaatIni) return;
+  let btns=document.querySelectorAll('.nav button');
+  pindah(btns[indexBaru], daftarHalaman[indexBaru], indexBaru, arah);
 }
 
-// ===== SWIPE / SERET DI BAR BAWAH - VERSI DIPERBAIKI =====
-let sedangDrag=false, dragStartX=0, dragStartBlokX=0, totalGeser=0, dragIndexSekarang=0;
-let sudahPindahKarenaDrag=false;
-
-function dapatIndexDariX(clientX){
-  let rect=navEl.getBoundingClientRect();
-  let xRelatif=clientX-rect.left;
-  let jarakTerdekat=Infinity, indexTerdekat=0;
-  tombolNav.forEach((btn,i)=>{
-    let tengah=btn.offsetLeft + btn.offsetWidth/2;
-    let jarak=Math.abs(xRelatif - tengah);
-    if(jarak < jarakTerdekat){ jarakTerdekat=jarak; indexTerdekat=i; }
-  });
-  return indexTerdekat;
-}
-
-navEl.addEventListener('touchstart', e=>{
-  sedangDrag=true;
-  sudahPindahKarenaDrag=false;
-  totalGeser=0;
-  dragStartX=e.touches[0].clientX;
-  dragStartBlokX=blokX;
-  dragIndexSekarang=halamanSaatIni;
-  animasiJalan=false;
+// ===== SWIPE - GESER LAYAR =====
+let swipeStartX=0, swipeStartY=0, swipeStartTime=0, lagiSwipe=false, swipeDeltaX=0;
+let kontenEl=document.getElementById('konten');
+kontenEl.addEventListener('touchstart', e=>{
+  if(e.target.closest('input, textarea, select, video, button, a')) return;
+  let t=e.touches[0];
+  swipeStartX=t.clientX; swipeStartY=t.clientY; swipeStartTime=Date.now();
+  lagiSwipe=true; swipeDeltaX=0;
+}, {passive:true});
+kontenEl.addEventListener('touchmove', e=>{
+  if(!lagiSwipe) return;
+  let t=e.touches[0];
+  let dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY;
+  if(Math.abs(dy) > Math.abs(dx)+10){ lagiSwipe=false; return; }
+  swipeDeltaX=dx;
+  let aktif=document.querySelector('.konten > div:not(.hilang)');
+  if(aktif) aktif.style.transform=`translateX(${dx*0.25}px)`;
+}, {passive:true});
+kontenEl.addEventListener('touchend', e=>{
+  if(!lagiSwipe) return;
+  lagiSwipe=false;
+  let aktif=document.querySelector('.konten > div:not(.hilang)');
+  if(aktif) aktif.style.transform='';
+  let durasi=Date.now()-swipeStartTime;
+  let minimal = durasi<300 ? 35 : 60;
+  if(Math.abs(swipeDeltaX) > minimal){
+    if(swipeDeltaX < 0) pindahKeIndex(halamanSaatIni+1, 'kiri');
+    else pindahKeIndex(halamanSaatIni-1, 'kanan');
+  }
+  swipeDeltaX=0;
 }, {passive:true});
 
-navEl.addEventListener('touchmove', e=>{
-  if(!sedangDrag) return;
-  let x=e.touches[0].clientX;
-  let delta=x - dragStartX;
-  totalGeser=Math.abs(delta);
-  // Baru dianggap drag kalau gesernya sudah > 12px
-  // Kalau masih < 12px, anggap tap, jangan gerakkan blok
-  if(totalGeser < 12) return;
-  navEl.classList.add('dragging');
-  let posisiBaru=dragStartBlokX + delta;
-  let minX=tombolNav[0].offsetLeft-10;
-  let maxX=tombolNav[4].offsetLeft-10;
-  posisiBaru=Math.max(minX, Math.min(maxX, posisiBaru));
-  blokX=posisiBaru;
-  let molor=Math.min(1.3, 1 + Math.abs(delta)*0.0008);
-  blok.style.transform=`translateX(${blokX}px) scaleX(${molor}) scaleY(${1-(molor-1)*0.3})`;
-  blok.style.borderRadius=`40% 60% 58% 42% / 60% 45% 55% 40%`;
-  let idx=dapatIndexDariX(x);
-  if(idx!==dragIndexSekarang){
-    dragIndexSekarang=idx;
-    tombolNav.forEach((b,i)=>b.classList.toggle('preview-aktif', i===idx));
-    if(navigator.vibrate) navigator.vibrate(3);
-  }
-}, {passive:true});
-
-navEl.addEventListener('touchend', e=>{
-  if(!sedangDrag) return;
-  sedangDrag=false;
-  navEl.classList.remove('dragging');
-  tombolNav.forEach(b=>b.classList.remove('preview-aktif'));
-  // Kalau gesernya kecil (<12px) = ini TAP, biarkan onclick yang jalan
-  if(totalGeser < 12){
-    return;
-  }
-  // Kalau gesernya besar = ini DRAG, pindah ke tombol terdekat
-  habisDrag=true;
-  sudahPindahKarenaDrag=true;
-  let idx=dragIndexSekarang;
-  let arah = idx > halamanSaatIni ? 'kiri' : idx < halamanSaatIni ? 'kanan' : 'tengah';
-  pindahKe(tombolNav[idx], daftarHalaman[idx], idx, arah);
-  // Reset flag habis drag setelah 300ms biar klik berikutnya normal
-  setTimeout(()=>{ habisDrag=false; }, 300);
-});
-
-// Untuk mouse di laptop - logika sama
-let mouseDown=false, mouseStartX=0, mouseTotalGeser=0;
-navEl.addEventListener('mousedown', e=>{
-  mouseDown=true; mouseTotalGeser=0; mouseStartX=e.clientX; dragStartBlokX=blokX; animasiJalan=false;
-});
-window.addEventListener('mousemove', e=>{
-  if(!mouseDown) return;
-  let delta=e.clientX - mouseStartX;
-  mouseTotalGeser=Math.abs(delta);
-  if(mouseTotalGeser < 12) return;
-  navEl.classList.add('dragging');
-  let posisiBaru=dragStartBlokX + delta;
-  let minX=tombolNav[0].offsetLeft-10;
-  let maxX=tombolNav[4].offsetLeft-10;
-  posisiBaru=Math.max(minX, Math.min(maxX, posisiBaru));
-  blokX=posisiBaru;
-  blok.style.transform=`translateX(${blokX}px) scaleX(1.15) scaleY(0.92)`;
-  let idx=dapatIndexDariX(e.clientX);
-  tombolNav.forEach((b,i)=>b.classList.toggle('preview-aktif', i===idx));
-  dragIndexSekarang=idx;
+// Swipe pakai mouse (untuk di laptop)
+let mouseDown=false, mouseStartX=0;
+kontenEl.addEventListener('mousedown', e=>{
+  if(e.target.closest('input, textarea, select, video, button, a')) return;
+  mouseDown=true; mouseStartX=e.clientX;
 });
 window.addEventListener('mouseup', e=>{
   if(!mouseDown) return;
   mouseDown=false;
-  navEl.classList.remove('dragging');
-  tombolNav.forEach(b=>b.classList.remove('preview-aktif'));
-  if(mouseTotalGeser < 12) return; // Tap, biarkan onclick jalan
-  habisDrag=true;
-  let idx=dragIndexSekarang;
-  let arah = idx > halamanSaatIni ? 'kiri' : idx < halamanSaatIni ? 'kanan' : 'tengah';
-  pindahKe(tombolNav[idx], daftarHalaman[idx], idx, arah);
-  setTimeout(()=>{ habisDrag=false; }, 300);
+  let dx=e.clientX-mouseStartX;
+  if(Math.abs(dx)>80){
+    if(dx<0) pindahKeIndex(halamanSaatIni+1,'kiri');
+    else pindahKeIndex(halamanSaatIni-1,'kanan');
+  }
 });
 
 window.addEventListener('load',()=>{
-  let b=tombolNav[0];
-  b.classList.add('aktif');
+  let b=document.querySelector('.nav button.aktif');
   blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth;
   blok.style.transform=`translateX(${blokX}px)`; blok.style.width=blokW+'px';
   loadProfil();
 });
 function isiSearch(teks){document.getElementById('inputSearch').value=teks; cariGoogle();}
-function goSearch(teks){pindahKe(tombolNav[1],'search',1,'kiri'); document.getElementById('inputSearch').value=teks;}
+function goSearch(teks){pindah(document.querySelectorAll('.nav button')[1],'search',1); document.getElementById('inputSearch').value=teks;}
 function cariGoogle(mode){let q=document.getElementById('inputSearch').value.trim(); if(!q){alert('Tulis kata kunci dulu');return;} if(mode==='gambar') window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q),'_blank'); else window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
 let fotoAsli=null;
-function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.re
+function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.result;}; r.readAsDataURL(f);}
+function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasHD'), ctx=c.getContext('2d'); c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value; ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`; ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctx.drawImage(fotoAsli,0,0,c.width,c.height); document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95); document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px`;}
+function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
+function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
+function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Memuat...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br
