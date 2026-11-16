@@ -37,7 +37,7 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 
-/* ===== MUSIK ===== */
+/* ===== MUSIK - MUNG NENG MENU TOK ===== */
 .lagu-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer}
 .lagu-item:last-child{border:none}
 .lagu-item img{width:56px;height:56px;border-radius:14px;object-fit:cover;background:#333;flex-shrink:0}
@@ -63,7 +63,7 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 .switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.3s}
 .switch.on::after{left:27px}
 
-/* ===== NAV - GERAK BLOK FOKUS ===== */
+/* ===== NAV ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
 .nav{
   position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
@@ -80,7 +80,6 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
   background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
   pointer-events:none;z-index:2;
 }
-/* BLOK SING GERAK - ABU TRANSPARAN GLOSSY - FIX: ORA ISO NUTUPI TOMBOL */
 .blok{
   position:absolute;top:8px;left:10px;width:58px;height:56px;
   background:linear-gradient(135deg,
@@ -135,11 +134,11 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
 
 <div class="konten">
+  <!-- HOME - BALIK ASLI, ORA ANA MUSIK -->
   <div id="page-home">
     <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Iso Diedit</p>
     <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba pencet menu ngisor, deloken <b>blok-e mlaku</b>: molor koyo permen karet, terus balik bunder alus.</p></div>
-    <div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'musik',4)">🎵 YMusic</span></p></div>
-    <div class="kartu"><h2>🎵 Lagi Diputer</h2><p id="miniNowPlaying">Durung ana lagu. Klik menu Musik gawe mulai.</p><button class="btn" onclick="pindah(document.querySelectorAll('.nav button')[4],'musik',4)">▶️ Buka YMusic</button></div>
+    <div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div>
   </div>
   <div id="page-search" class="hilang">
     <h1>Search 🔍</h1><p>Langsung nyambung Google</p>
@@ -158,7 +157,7 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
     <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
 
-  <!-- MUSIK -->
+  <!-- MUSIK - MUNG NENG KENE TOK -->
   <div id="page-musik" class="hilang">
     <h1>YMusic 🎵</h1><p>Audio wae • Hemat kuota 90% • Background Play • Download MP3</p>
     <div class="kartu">
@@ -261,4 +260,17 @@ function gerakBlok(){
       blok.style.transform=`translateX(${blokX}px) scaleX(1) scaleY(1)`;
       blok.style.width=blokW+'px';
       blok.style.borderRadius='999px';
-      animasiJalan
+      animasiJalan=false;
+      return;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+function pindah(btn,page,index){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
+  btn.classList.add('aktif');
+  targetX=btn.offsetLeft-10;
+  targetW=btn.offsetWidth;
+  gerakBlok();
+  document.querySelectorAll('.konten )
