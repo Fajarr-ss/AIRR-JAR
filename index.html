@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
 body{background:#0a0a0a;color:#fff;min-height:100vh}
-.bg{position:fixed;inset:0;z-index:0}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 .bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}
 .bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}
 .bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
@@ -21,10 +21,10 @@ body{background:#0a0a0a;color:#fff;min-height:100vh}
 .kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
 input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
 input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
-button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
+button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px;position:relative;z-index:2}
 button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
 button.btn:active{transform:scale(.97)}
-.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer}
+.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer;position:relative;z-index:2}
 img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:none;background:#000}
 .avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}
 .row{display:flex;gap:8px}
@@ -35,23 +35,23 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item:last-child{border:none}
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
-input[type=range]{width:100%;margin-top:8px}
+input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 
-/* ===== TAMBAHAN MUSIK TOK - LIYANE ORA DIUBAH ===== */
+/* ===== MUSIK ===== */
 .lagu-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer}
 .lagu-item:last-child{border:none}
 .lagu-item img{width:56px;height:56px;border-radius:14px;object-fit:cover;background:#333;flex-shrink:0}
 .lagu-item .lagu-info{flex:1;text-align:left;min-width:0}
 .lagu-item .lagu-info b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lagu-item .lagu-info span{font-size:12px;color:rgba(255,255,255,.6)}
-.lagu-item .play-btn{width:40px;height:40px;border-radius:50%;background:#fff;color:#111;border:none;font-size:16px;flex-shrink:0;cursor:pointer}
+.lagu-item .play-btn{width:40px;height:40px;border-radius:50%;background:#fff;color:#111;border:none;font-size:16px;flex-shrink:0;cursor:pointer;position:relative;z-index:2}
 .lagu-item.aktif-play{background:rgba(255,255,255,.12);border-radius:16px;padding-left:10px;padding-right:10px}
 .lagu-item.aktif-play .lagu-info b{color:#ff5e8a}
-.player-box{position:sticky;top:0;z-index:2;background:rgba(20,20,20,.92);backdrop-filter:blur(20px);border-radius:20px;padding:14px;margin-bottom:12px;border:1px solid rgba(255,255,255,.2)}
+.player-box{position:relative;z-index:2;background:rgba(20,20,20,.92);backdrop-filter:blur(20px);border-radius:20px;padding:14px;margin-bottom:12px;border:1px solid rgba(255,255,255,.2)}
 .player-box iframe{width:100%;height:180px;border:none;border-radius:14px;background:#000}
 .player-box.audio-mode iframe{height:0;opacity:0;pointer-events:none}
 .player-kontrol{display:flex;gap:8px;margin-top:10px}
-.player-kontrol button{flex:1;padding:10px;border:none;border-radius:14px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;cursor:pointer}
+.player-kontrol button{flex:1;padding:10px;border:none;border-radius:14px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;cursor:pointer;position:relative;z-index:2}
 .player-kontrol button.utama{background:#fff;color:#111}
 .eq{display:flex;gap:3px;align-items:flex-end;height:18px}
 .eq span{width:4px;background:#ff5e8a;border-radius:2px;animation:eq 0.8s ease-in-out infinite alternate}
@@ -80,7 +80,7 @@ input[type=range]{width:100%;margin-top:8px}
   background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
   pointer-events:none;z-index:2;
 }
-/* BLOK SING GERAK - ABU TRANSPARAN GLOSSY */
+/* BLOK SING GERAK - ABU TRANSPARAN GLOSSY - FIX: ORA ISO NUTUPI TOMBOL */
 .blok{
   position:absolute;top:8px;left:10px;width:58px;height:56px;
   background:linear-gradient(135deg,
@@ -96,9 +96,9 @@ input[type=range]{width:100%;margin-top:8px}
     0 8px 22px rgba(0,0,0,.28),
     inset 0 1px 0 rgba(255,255,255,.95),
     inset 0 -3px 8px rgba(255,255,255,.28);
-  /* TRANSISI ORA NENG KENE - DIATUR LEWAT JS BIAR SMOOTH 60FPS */
   will-change:transform,width,border-radius;
   z-index:0;
+  pointer-events:none !important;
 }
 .blok::before{
   content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
@@ -113,13 +113,16 @@ input[type=range]{width:100%;margin-top:8px}
   filter:blur(1px);pointer-events:none;
 }
 .nav button{
-  position:relative;z-index:1;flex:1;border:none;background:transparent;
+  position:relative;z-index:5 !important;
+  flex:1;border:none;background:transparent;
   display:flex;flex-direction:column;align-items:center;gap:2px;
   padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
   font-size:9px;font-weight:600;transition:color .3s;
   -webkit-tap-highlight-color:transparent;
+  pointer-events:auto !important;
+  touch-action:manipulation;
 }
-.nav button .ikon{font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.nav button .ikon{font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
 .nav button:active{transform:scale(.94)}
@@ -155,7 +158,7 @@ input[type=range]{width:100%;margin-top:8px}
     <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
 
-  <!-- ===== HALAMAN MUSIK ANYAR - TAMBAHAN TOK ===== -->
+  <!-- MUSIK -->
   <div id="page-musik" class="hilang">
     <h1>YMusic 🎵</h1><p>Audio wae • Hemat kuota 90% • Background Play • Download MP3</p>
     <div class="kartu">
@@ -223,12 +226,12 @@ input[type=range]{width:100%;margin-top:8px}
 <div class="nav-wrap">
   <div class="nav" id="nav">
     <div class="blok" id="blok"></div>
-    <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
-    <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
-    <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
-    <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
-    <button onclick="pindah(this,'musik',4)"><span class="ikon">🎵</span>Musik</button>
-    <button onclick="pindah(this,'profil',5)"><span class="ikon">👤</span>Profil</button>
+    <button type="button" class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+    <button type="button" onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
+    <button type="button" onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
+    <button type="button" onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
+    <button type="button" onclick="pindah(this,'musik',4)"><span class="ikon">🎵</span>Musik</button>
+    <button type="button" onclick="pindah(this,'profil',5)"><span class="ikon">👤</span>Profil</button>
   </div>
 </div>
 
@@ -236,32 +239,26 @@ input[type=range]{width:100%;margin-top:8px}
 let blok=document.getElementById('blok');
 let blokX=0, blokW=58, targetX=0, targetW=58;
 let animasiJalan=false;
-
-// ===== GERAK BLOK - SPRING FISIKA =====
 function gerakBlok(){
   if(animasiJalan) return;
   animasiJalan=true;
   let kecepatan=0;
-  // Spring: kaku sitik ben mantul, redam ben ora goyang terus
   let kaku=0.14, redam=0.78;
   function frame(){
     let jarak=targetX-blokX;
     kecepatan=(kecepatan + jarak*kaku)*redam;
     blokX+=kecepatan;
-    // LEBUR - kecepatan makin banter, blok makin molor
     let speed=Math.abs(kecepatan);
     let molor=Math.min(1.45, 1 + speed*0.09);
     let gepeng=1-(molor-1)*0.38;
-    // Lebar ngikut target alus
     blokW += (targetW-blokW)*0.18;
-    // Bentuk lebur - arah ngikut gerakan
-    let arah = kecepatan>0 ? 1 : -1;
     let radius = speed>1 ? `38% 62% 60% 40% / 58% 44% 56% 42%` : `999px`;
     blok.style.transform=`translateX(${blokX}px) scaleX(${molor}) scaleY(${gepeng})`;
     blok.style.width=blokW+'px';
     blok.style.borderRadius=radius;
-    // Nek wis cedak banget + kecepatan cilik, mandeg
     if(Math.abs(jarak)<0.4 && Math.abs(kecepatan)<0.4){
       blokX=targetX; blokW=targetW;
       blok.style.transform=`translateX(${blokX}px) scaleX(1) scaleY(1)`;
-      blok.style.width=b
+      blok.style.width=blokW+'px';
+      blok.style.borderRadius='999px';
+      animasiJalan
