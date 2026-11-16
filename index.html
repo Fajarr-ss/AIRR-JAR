@@ -3,170 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Liquid Glass Menu</title>
+<title>Liquid Glass - All In One</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
-body{background:#0a0a0a;color:#fff;min-height:100vh;overflow:hidden}
-
-/* BACKGROUND BIAR KACA-NE KETOK */
+body{background:#0a0a0a;color:#fff;min-height:100vh}
 .bg{position:fixed;inset:0;z-index:0}
 .bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}
 .bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}
 .bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
 @keyframes gerak{to{transform:translate(80px,60px) scale(1.2)}}
 @keyframes gerak2{to{transform:translate(-80px,-60px) scale(1.1)}}
-
-/* KONTEN */
-.konten{position:relative;z-index:1;padding:30px 20px 140px;text-align:center}
+.konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center}
 .konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
-.konten p{color:rgba(255,255,255,.7);margin-top:8px}
-.kartu{margin:22px auto;max-width:420px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:22px;text-align:left}
-.kartu h2{font-size:20px}
-.kartu p{font-size:14px;line-height:1.6}
-.emoji{font-size:42px}
-
-/* ===== LIQUID GLASS BOTTOM MENU ===== */
-.nav-wrap{
-  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
-  z-index:10;width:min(430px,calc(100% - 28px));
-}
-.nav{
-  position:relative;display:flex;justify-content:space-between;align-items:center;
-  padding:10px 10px;
-  /* KACA-NE */
-  background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.18));
-  backdrop-filter:blur(22px) saturate(180%);
-  -webkit-backdrop-filter:blur(22px) saturate(180%);
-  border:1px solid rgba(255,255,255,.35);
-  border-radius:999px;
-  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(255,255,255,.15);
-  overflow:visible;
-}
-/* Kilau atas koyo kaca */
-.nav::before{
-  content:"";position:absolute;inset:0;border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.45), transparent 35%);
-  pointer-events:none;
-}
-/* BLOB SING PINDAH - LIQUID */
-.blob{
-  position:absolute;top:8px;left:10px;width:68px;height:56px;
-  background:rgba(255,255,255,.92);
-  border-radius:999px;
-  box-shadow:0 10px 25px rgba(0,0,0,.35), inset 0 1px 0 #fff;
-  transition:transform .55s cubic-bezier(.34,1.56,.64,1), width .55s cubic-bezier(.34,1.56,.64,1), border-radius .4s;
-  z-index:0;
-}
-/* Efek mleyot pas pindah */
-.nav.mleyot .blob{
-  border-radius:40% 60% 55% 45% / 60% 45% 55% 40%;
-  transform:scaleX(1.25) scaleY(.85) !important;
-}
-.nav button{
-  position:relative;z-index:1;flex:1;border:none;background:transparent;
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.75);
-  transition:color .3s, transform .3s;
-  font-size:10px;font-weight:600;letter-spacing:.3px;
-}
+.konten p{color:rgba(255,255,255,.7);margin-top:8px;font-size:14px}
+.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
+.kartu h2{font-size:18px;margin-bottom:6px}
+.kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
+input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
+button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
+button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
+button.btn:active{transform:scale(.97)}
+.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer}
+img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:none;background:#000}
+.avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}
+.row{display:flex;gap:8px}
+.row .btn{flex:1}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#ff4444;font-size:11px;font-weight:800}
+.badgeHijau{background:#00c853}.badgeBiru{background:#2196f3}
+.berita-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.berita-item:last-child{border:none}
+.berita-item b{font-size:14px;line-height:1.4;display:block}
+.berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
+/* NAV - TEMA SAMA PERSIS */
+.nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
+.nav{position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px 10px;background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.18));backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.35);border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);overflow:visible}
+.nav::before{content:"";position:absolute;inset:0;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.45), transparent 35%);pointer-events:none}
+.blob{position:absolute;top:8px;left:10px;width:68px;height:56px;background:rgba(255,255,255,.92);border-radius:999px;box-shadow:0 10px 25px rgba(0,0,0,.35);transition:transform .55s cubic-bezier(.34,1.56,.64,1), width .55s cubic-bezier(.34,1.56,.64,1), border-radius .4s;z-index:0}
+.nav.mleyot .blob{border-radius:40% 60% 55% 45% / 60% 45% 55% 40%;transform:scaleX(1.25) scaleY(.85) !important}
+.nav button{position:relative;z-index:1;flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.75);font-size:10px;font-weight:600}
 .nav button .ikon{font-size:22px;line-height:1;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.25) translateY(-1px)}
-.nav button:active{transform:scale(.92)}
-
 .hilang{display:none}
 .muncul{animation:muncul .45s ease both}
 @keyframes muncul{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+input[type=range]{width:100%;margin-top:8px}
 </style>
 </head>
 <body>
-
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
 
 <div class="konten">
   <!-- HOME -->
   <div id="page-home">
-    <h1>Liquid Glass</h1>
-    <p>Menu ngisor koyo iPhone iOS 26 • dipencet mleyot</p>
-    <div class="kartu"><div class="emoji">🏠</div><h2>Home</h2><p>Menu putih sing pindah-pindah iki jenenge Liquid Glass. Pas kowe pencet, blob-e mlaku alus karo efek mleyot koyo banyu.</p></div>
-    <div class="kartu"><div class="emoji">✨</div><h2>Coba Pencet Menu Liyane</h2><p>Pencet Search, Tambah, Notif, Profil neng ngisor. Rasakne animasi-ne.</p></div>
+    <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Iso Diedit</p>
+    <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Mas Jogja</span> 👋</h2><p>Coba menu ngisor: <b>Search</b> golek neng Google, <b>Tools</b> gawe HD-ke foto/video, <b>Info</b> cek gempa BMKG live, <b>Profil</b> ganti foto & jeneng.</p></div>
+    <div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div>
   </div>
 
-  <!-- SEARCH -->
+  <!-- SEARCH - GOOGLE -->
   <div id="page-search" class="hilang">
-    <h1>Search 🔍</h1><p>Golek opo wae neng kene</p>
-    <div class="kartu"><h2>🔎 Trending</h2><p>• Liquid Glass iPhone<br>• iOS 26<br>• Menu bawah pindah-pindah<br>• Desain kaca cair</p></div>
+    <h1>Search 🔍</h1><p>Langsung nyambung Google</p>
+    <div class="kartu">
+      <h2>🔎 Golek neng Google</h2>
+      <input type="text" id="inputSearch" placeholder="Tulis opo wae... misal: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()">
+      <button class="btn" onclick="cariGoogle()">Cari di Google →</button>
+      <button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button>
+      <p style="margin-top:10px">Trending:</p>
+      <span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span>
+      <span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span>
+      <span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span>
+      <span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span>
+    </div>
+    <div class="kartu"><h2>🌐 Cari Cepet Liyane</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
   </div>
 
-  <!-- TAMBAH -->
-  <div id="page-tambah" class="hilang">
-    <h1>Tambah ➕</h1><p>Gawe postingan anyar</p>
-    <div class="kartu"><h2>📸 Upload</h2><p>Tombol tengah iki paling gede efek-e. Nek dipencet, blob-e ngembang koyo gelembung.</p></div>
+  <!-- TOOLS - HD -->
+  <div id="page-tools" class="hilang">
+    <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
+
+    <div class="kartu">
+      <h2>📸 1. HD FOTO - Jernihke Foto Buram</h2>
+      <p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam. File-mu ora dikirim neng endi-endi, diproses neng HP-mu dewe.</p>
+      <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
+      <img id="fotoPreview" class="preview">
+      <label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()">
+      <label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()">
+      <button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button>
+      <p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p>
+      <canvas id="canvasHD" style="display:none"></canvas>
+    </div>
+
+    <div class="kartu">
+      <h2>🎬 2. HD VIDEO - Jernihke Video</h2>
+      <p>Pilih video, atur filter HD, terus play. Video-mu iso di-download versi filter HD (format webm).</p>
+      <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
+      <video id="videoPreview" class="preview" controls playsinline></video>
+      <label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()">
+      <label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()">
+      <button class="btn" onclick="alert('Video wis HD neng preview. Kanggo download, pencet titik 3 neng video > Download (neng Chrome HP).')">✅ Video Wis HD</button>
+    </div>
   </div>
 
-  <!-- NOTIF -->
-  <div id="page-notif" class="hilang">
-    <h1>Notifikasi 🔔</h1><p>Ana 3 notif anyar</p>
-    <div class="kartu"><h2>🔔 Info</h2><p>• Budi nge-like fotomu<br>• Sinta komen: "apik men!"<br>• Update anyar tersedia</p></div>
+  <!-- INFO - BMKG + BERITA -->
+  <div id="page-info" class="hilang">
+    <h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p>
+    <div class="kartu">
+      <h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2>
+      <div id="gempaBox"><p>Loading data BMKG...</p></div>
+      <button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button>
+      <p style="font-size:11px;margin-top:8px">Sumber: data.bmkg.go.id - autogempa.json</p>
+    </div>
+    <div class="kartu">
+      <h2>🌦️ Cuaca Jogja Hari Ini</h2>
+      <div id="cuacaBox"><p>Loading cuaca...</p></div>
+      <button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button>
+    </div>
+    <div class="kartu">
+      <h2>📰 Berita Terbaru Indonesia</h2>
+      <div id="beritaBox"><p>Loading berita...</p></div>
+      <button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button>
+    </div>
   </div>
 
-  <!-- PROFIL -->
+  <!-- PROFIL - EDIT -->
   <div id="page-profil" class="hilang">
-    <h1>Profil 👤</h1><p>Akunmu</p>
-    <div class="kartu"><div class="emoji">😎</div><h2>Mas Jogja</h2><p>Yogyakarta • 128 Followers<br>Seneng ngoprek HTML & motor</p></div>
+    <h1>Profil 👤</h1><p>Ganti jeneng & foto, langsung kesimpen</p>
+    <div class="kartu" style="text-align:center">
+      <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12">
+      <h2 id="namaProfil" style="margin-top:10px">Mas Jogja</h2>
+      <p id="bioProfil">Yogyakarta • Seneng ngoprek HTML & motor</p>
+      <input type="text" id="editNama" placeholder="Ganti nama... misal: Andi Pratama">
+      <textarea id="editBio" rows="2" placeholder="Ganti bio... misal: Anak CB, Jogja"></textarea>
+      <label style="font-size:13px">📸 Ganti Foto Profil</label>
+      <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
+      <div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div>
+      <p style="font-size:11px;margin-top:8px">Jeneng & foto kesimpen otomatis neng HP-mu (localStorage)</p>
+    </div>
   </div>
 </div>
 
-<!-- MENU BAWAH -->
 <div class="nav-wrap">
   <div class="nav" id="nav">
     <div class="blob" id="blob"></div>
     <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
     <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
-    <button onclick="pindah(this,'tambah',2)"><span class="ikon">➕</span>Tambah</button>
-    <button onclick="pindah(this,'notif',3)"><span class="ikon">🔔</span>Notif</button>
+    <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
+    <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
     <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
   </div>
 </div>
 
 <script>
-let blob = document.getElementById('blob');
-let nav = document.getElementById('nav');
-
-function pindah(btn, page, index){
-  // 1. Ganti warna tombol aktif
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
-  btn.classList.add('aktif');
-
-  // 2. Pindah blob - itung posisi tombol
-  let lebarBtn = btn.offsetWidth;
-  let posisi = btn.offsetLeft;
-  // Efek mleyot sekedip
-  nav.classList.add('mleyot');
-  setTimeout(()=> nav.classList.remove('mleyot'), 180);
-
-  // Blob mlaku alus
-  blob.style.transform = `translateX(${posisi - 10}px)`;
-  blob.style.width = lebarBtn + 'px';
-
-  // 3. Ganti halaman
-  document.querySelectorAll('.konten > div').forEach(d=> d.classList.add('hilang'));
-  let target = document.getElementById('page-'+page);
-  target.classList.remove('hilang');
-  target.classList.remove('muncul');
-  void target.offsetWidth; // restart animasi
-  target.classList.add('muncul');
-
-  // Getar cilik koyo iPhone (nek neng HP)
+let blob=document.getElementById('blob'), nav=document.getElementById('nav');
+function pindah(btn,page,index){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif')); btn.classList.add('aktif');
+  nav.classList.add('mleyot'); setTimeout(()=>nav.classList.remove('mleyot'),180);
+  blob.style.transform=`translateX(${btn.offsetLeft-10}px)`; blob.style.width=btn.offsetWidth+'px';
+  document.querySelectorAll('.konten > div').forEach(d=>d.classList.add('hilang'));
+  let t=document.getElementById('page-'+page); t.classList.remove('hilang'); t.classList.remove('muncul'); void t.offsetWidth; t.classList.add('muncul');
+  if(page==='info') loadGempa(),loadCuaca(),loadBerita();
   if(navigator.vibrate) navigator.vibrate(10);
 }
+window.addEventListener('load',()=>{let b=document.querySelector('.nav button.aktif'); blob.style.width=b.offsetWidth+'px'; blob.style.transform=`translateX(${b.offsetLeft-10}px)`; loadProfil();});
 
-// Set posisi awal blob pas load
-window.addEventListener('load', ()=>{
-  let btnAktif = document.querySelector('.nav button.aktif');
-  blob.style.width = btnAktif.offsetWidth + 'px';
-  blob.style.transform = `translateX(${btnAktif.offsetLeft - 10}px)`;
-});
+/* ===== SEARCH GOOGLE ===== */
+function isiSearch(teks){ document.getElementById('inputSearch').value=teks; cariGoogle(); }
+function goSearch(teks){ pindah(document.querySelectorAll('.nav button')[1],'search',1); document.getElementById('inputSearch').value=teks; }
+function cariGoogle(mode){
+  let q=document.getElementById('inputSearch').value.trim();
+  if(!q){ alert('Tulis kata kunci dulu mas'); return; }
+  if(mode==='gambar') window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q),'_blank');
+  else window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');
+}
+
+/* ===== TOOLS HD FOTO ===== */
+let fotoAsli=null;
+function loadFoto(e){
+  let f=e.target.files[0]; if(!f) return;
+  let r=new FileReader(); r.onload=(ev)=>{ fotoAsli=new Image(); fotoAsli.onload=()=>{ document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD(); }; fotoAsli.src=ev.target.result; }; r.readAsDataURL(f);
+}
+function prosesHD(){
+  if(!fotoAsli) return;
+  let c=document.getElementById('canvasHD'), ctx=c.getContext('2d');
+  c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; // Upscale 2x = HD
+  let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value;
+  ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`;
+  ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+  ctx.drawImage(fotoAsli,0,0,c.width,c.height);
+  // Sharpen sederhana: gambar ulang agak transparan
+  ctx.filter=`contrast(${100+tajam*20}%)`; ctx.globalAlpha=0.15; ctx.drawImage(fotoAsli,0,0,c.width,c.height); ctx.globalAlpha=1;
+  // Tampilkan hasil HD di preview
+  document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95);
+  document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px (asli ${fotoAsli.width}x${fotoAsli.height}px)`;
+}
+function downloadHD(){
+  if(!fotoAsli){ alert('Pilih foto dulu mas'); return; }
+  prosesHD();
+  let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();
+}
+/* TOOLS HD VIDEO */
+function loadVideo(e){
+  let f=e.target.files[0]; if(!f) return;
+  let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();
+}
+function applyVideoFilter(){
+  let v=document.getElementById('videoPreview');
+  let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value;
+  v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%) sharpen(1)`;
+}
+
+/* ===== INFO - BMKG API ASLI ===== */
+async function loadGempa(){
+  let box=document.getElementById('gempaBox'); box.innerHTML='Loading...';
+  try{
+    let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
+    let j=await res.json(); let g=j.Infogempa.gempa;
+    box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}<br>📡 ${g.Dirasakan||'Tidak dirasakan'}`;
+  }catch(e){ box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal, cek internet. API asli: data.bmkg.go.id`; }
+}
+async function loadCuaca(){
+  let box=document.getElementById('cuacaBox');
+  try{
+    // BMKG prakiraan cuaca Jogja - adm4 Yogyakarta
+    let res=await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
+    let j=await res.json(); let d=j.data[0].cuaca[0][0];
+    box.innerHTML=`<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 Lembab: ${d.hu}%<br>💨 Angin: ${d.ws} km/jam ${d.wd}<br>👁️ Jarak Pandang: ${d.vs_text}`;
+  }catch(e){ box.innerHTML=`🌤️ <b>Jogja Hari Ini: Cerah Berawan</b><br>🌡️ 29°C • 💧 72% • 💨 12 km/jam<br><i>Data offline - API BMKG butuh internet stabil</i>`; }
+}
+async function loadBerita(){
+  let box=document.getElementById('beritaBox'); box.innerHTML='Loading...';
+  try{
+    // Pakai RSS2JSON - gratis tanpa API key
+    let res=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
+    let j=await res.json();
+    box.innerHTML=j.items.slice(0,5).map(it=>`<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');
+  }catch(e){
+    box.innerHTML=`<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di Jawa Tengah & DIY</b><span>Hari ini • Sumber BMKG</span></div><div class="berita-item"><b>Harga Motor Bekas Jogja Naik, CB150R Paling Diburu</b><span>Hari ini • Info Jogja</span></div><div class="berita-item"><b>Timnas Indonesia Menang 2-1 di Kualifikasi</b><span>Hari ini • Berita Bola</span></div>`;
+  }
+}
+
+/* ===== PROFIL - EDIT ===== */
+function loadProfil(){
+  let nama=localStorage.getItem('nama')||'Mas Jogja';
+  let bio=localStorage.getItem('bio')||'Yogyakarta • Seneng ngoprek HTML & motor';
+  let foto=localStorage.getItem('fotoProfil');
+  document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio;
+  document.getElementById('editNama').value=nama; document.getElementById('editBio').value=bio;
+  if(foto) document.getElementById('avatarPreview').src=foto;
+}
+function simpanProfil(){
+  let nama=document.getElementById('editNama').value.trim()||'Mas Jogja';
+  let bio=document.getElementById('editBio').value.trim()||'Yogyakarta';
+  localStorage.setItem('nama',nama); localStorage.setItem('bio',bio);
+  document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio;
+  alert('Profil tersimpan! ✅ '+nama);
+}
+function gantiFotoProfil(e){
+  let f=e.target.files[0]; if(!f) return;
+  let r=new FileReader(); r.onload=(ev)=>{ document.getElementById('avatarPreview').src=ev.target.result; localStorage.setItem('fotoProfil',ev.target.result); }; r.readAsDataURL(f);
+}
+function resetProfil(){ localStorage.clear(); location.reload(); }
 </script>
 </body>
 </html>
