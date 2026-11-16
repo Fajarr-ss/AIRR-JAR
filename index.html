@@ -30,17 +30,16 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .row{display:flex;gap:8px}
 .row .btn{flex:1}
 .badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#ff4444;font-size:11px;font-weight:800}
-.badgeHijau{background:#00c853}.badgeBiru{background:#2196f3}.badgeKuning{background:#ff9800}
+.badgeHijau{background:#00c853}.badgeBiru{background:#2196f3}
 .berita-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12)}
 .berita-item:last-child{border:none}
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px}
 
-/* ===== YMUSIC.IO ===== */
+/* ===== TAMBAHAN MUSIK TOK - LIYANE ORA DIUBAH ===== */
 .lagu-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer}
 .lagu-item:last-child{border:none}
-.lagu-item:active{background:rgba(255,255,255,.08);border-radius:14px}
 .lagu-item img{width:56px;height:56px;border-radius:14px;object-fit:cover;background:#333;flex-shrink:0}
 .lagu-item .lagu-info{flex:1;text-align:left;min-width:0}
 .lagu-item .lagu-info b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -50,7 +49,7 @@ input[type=range]{width:100%;margin-top:8px}
 .lagu-item.aktif-play .lagu-info b{color:#ff5e8a}
 .player-box{position:sticky;top:0;z-index:2;background:rgba(20,20,20,.92);backdrop-filter:blur(20px);border-radius:20px;padding:14px;margin-bottom:12px;border:1px solid rgba(255,255,255,.2)}
 .player-box iframe{width:100%;height:180px;border:none;border-radius:14px;background:#000}
-.player-box.audio-mode iframe{height:0;opacity:0;pointer-events:none;margin:0;padding:0}
+.player-box.audio-mode iframe{height:0;opacity:0;pointer-events:none}
 .player-kontrol{display:flex;gap:8px;margin-top:10px}
 .player-kontrol button{flex:1;padding:10px;border:none;border-radius:14px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;cursor:pointer}
 .player-kontrol button.utama{background:#fff;color:#111}
@@ -58,23 +57,68 @@ input[type=range]{width:100%;margin-top:8px}
 .eq span{width:4px;background:#ff5e8a;border-radius:2px;animation:eq 0.8s ease-in-out infinite alternate}
 .eq span:nth-child(2){animation-delay:.2s}.eq span:nth-child(3){animation-delay:.4s}.eq span:nth-child(4){animation-delay:.1s}
 @keyframes eq{from{height:5px}to{height:18px}}
-.ymusic-banner{background:linear-gradient(135deg,#ff5e8a,#a855f7);border-radius:18px;padding:16px;margin-bottom:12px;text-align:left}
-.ymusic-banner b{font-size:16px}
-.ymusic-banner p{font-size:12px!important;color:rgba(255,255,255,.9)!important;margin-top:4px!important}
 .toggle-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:14px;padding:12px;margin-top:10px}
 .switch{position:relative;width:52px;height:28px;background:#555;border-radius:999px;cursor:pointer;flex-shrink:0;transition:.3s}
 .switch.on{background:#00c853}
 .switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.3s}
 .switch.on::after{left:27px}
 
-/* ===== NAV ===== */
+/* ===== NAV - GERAK BLOK FOKUS ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
-.nav{position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.35);border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);overflow:visible}
-.nav::before{content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);pointer-events:none;z-index:2}
-.blok{position:absolute;top:8px;left:10px;width:60px;height:56px;background:linear-gradient(135deg, rgba(255,255,255,.62) 0%, rgba(195,202,215,.40) 38%, rgba(165,175,190,.34) 68%, rgba(255,255,255,.50) 100%);backdrop-filter:blur(16px) saturate(160%) brightness(1.15);-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);border:1px solid rgba(255,255,255,.68);border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -3px 8px rgba(255,255,255,.28);will-change:transform,width,border-radius;z-index:0}
-.blok::before{content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);pointer-events:none}
-.blok::after{content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;border-radius:999px;background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));filter:blur(1px);pointer-events:none}
-.nav button{position:relative;z-index:1;flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);font-size:9px;font-weight:600;transition:color .3s;-webkit-tap-highlight-color:transparent}
+.nav{
+  position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
+  background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
+  overflow:visible;
+}
+.nav::before{
+  content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
+  pointer-events:none;z-index:2;
+}
+/* BLOK SING GERAK - ABU TRANSPARAN GLOSSY */
+.blok{
+  position:absolute;top:8px;left:10px;width:58px;height:56px;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.62) 0%,
+    rgba(195,202,215,.40) 38%,
+    rgba(165,175,190,.34) 68%,
+    rgba(255,255,255,.50) 100%);
+  backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
+  -webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
+  border:1px solid rgba(255,255,255,.68);
+  border-radius:999px;
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -3px 8px rgba(255,255,255,.28);
+  /* TRANSISI ORA NENG KENE - DIATUR LEWAT JS BIAR SMOOTH 60FPS */
+  will-change:transform,width,border-radius;
+  z-index:0;
+}
+.blok::before{
+  content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);
+  pointer-events:none;
+}
+.blok::after{
+  content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;
+  border-radius:999px;
+  background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));
+  filter:blur(1px);pointer-events:none;
+}
+.nav button{
+  position:relative;z-index:1;flex:1;border:none;background:transparent;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
+  font-size:9px;font-weight:600;transition:color .3s;
+  -webkit-tap-highlight-color:transparent;
+}
 .nav button .ikon{font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
@@ -88,54 +132,41 @@ input[type=range]{width:100%;margin-top:8px}
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
 
 <div class="konten">
-  <!-- HOME -->
   <div id="page-home">
-    <h1>Liquid Glass</h1><p>Search • Tools HD • Info BMKG • YMusic.io • Profil</p>
-    <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba menu <b>🎵 Musik</b> gaya <b>ymusic.io</b> - audio saja, hemat kuota 90%, bisa download MP3.</p></div>
-    <div class="kartu"><h2>⚡ Akses Cepat</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'musik',4)">🎵 YMusic.io</span></p></div>
-    <div class="kartu"><h2>🎵 Lagi Diputar</h2><p id="miniNowPlaying">Belum ada lagu. Klik menu Musik untuk mulai.</p><button class="btn" onclick="pindah(document.querySelectorAll('.nav button')[4],'musik',4)">▶️ Buka YMusic.io</button></div>
+    <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Iso Diedit</p>
+    <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba pencet menu ngisor, deloken <b>blok-e mlaku</b>: molor koyo permen karet, terus balik bunder alus.</p></div>
+    <div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'musik',4)">🎵 YMusic</span></p></div>
+    <div class="kartu"><h2>🎵 Lagi Diputer</h2><p id="miniNowPlaying">Durung ana lagu. Klik menu Musik gawe mulai.</p><button class="btn" onclick="pindah(document.querySelectorAll('.nav button')[4],'musik',4)">▶️ Buka YMusic</button></div>
   </div>
-
-  <!-- SEARCH -->
   <div id="page-search" class="hilang">
-    <h1>Search 🔍</h1><p>Langsung terhubung ke Google</p>
-    <div class="kartu"><h2>🔎 Pencarian Google</h2><input type="text" id="inputSearch" placeholder="Tulis apa saja... contoh: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()"><button class="btn" onclick="cariGoogle()">Cari di Google →</button><button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button><p style="margin-top:10px">Trending:</p><span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span><span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span><span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span></div>
+    <h1>Search 🔍</h1><p>Langsung nyambung Google</p>
+    <div class="kartu"><h2>🔎 Pencarian Google</h2><input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()"><button class="btn" onclick="cariGoogle()">Cari di Google →</button><button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button><p style="margin-top:10px">Trending:</p><span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span><span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span><span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span><span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span></div>
+    <div class="kartu"><h2>🌐 Mungkin u cari</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
   </div>
-
-  <!-- TOOLS -->
   <div id="page-tools" class="hilang">
     <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
-    <div class="kartu"><h2>📸 1. HD FOTO</h2><p>Pilih foto yang buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Belum ada foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
-    <div class="kartu"><h2>🎬 2. HD VIDEO</h2><p>Pilih video, atur filter HD, lalu putar.</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"><button class="btn" onclick="alert('Video sudah jadi. Untuk download, tekan titik 3 di video > Download (di Chrome HP).')">✅ Video Sudah HD</button></div>
+    <div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
+    <div class="kartu"><h2>🎬 2. HD VIDEO - Jernihkan Video</h2><p>Pilih video, atur filter HD, terus play.</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"><button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button></div>
   </div>
-
-  <!-- INFO -->
   <div id="page-info" class="hilang">
     <h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p>
-    <div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Memuat data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div>
-    <div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Memuat cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
-    <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Memuat berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
+    <div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Loading data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div>
+    <div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Loading cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
+    <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
 
-  <!-- YMUSIC.IO - GAYA ASLI -->
+  <!-- ===== HALAMAN MUSIK ANYAR - TAMBAHAN TOK ===== -->
   <div id="page-musik" class="hilang">
-    <h1>YMusic.io 🎵</h1><p>Audio saja • Hemat kuota 90% • Background Play • Download MP3</p>
-
+    <h1>YMusic 🎵</h1><p>Audio wae • Hemat kuota 90% • Background Play • Download MP3</p>
     <div class="kartu">
-      <div class="ymusic-banner">
-        <b>🎧 YMusic.io - Official Style</b>
-        <p>Persis seperti aplikasi YMusic di ymusic.io: cuma load audio, tidak load video. Layar mati tetap bunyi, kuota irit banget.</p>
-        <button class="btn" style="margin-top:10px;background:#111;color:#fff" onclick="window.open('https://ymusic.io','_blank')">🌐 Buka Situs Resmi ymusic.io →</button>
-      </div>
-
       <div class="player-box" id="playerBox">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <b id="judulLagu">🎵 Pilih lagu di bawah</b>
+          <b id="judulLagu">🎵 Pilih lagu neng ngisor</b>
           <div class="eq" id="eqAnim" style="display:none"><span></span><span></span><span></span><span></span></div>
         </div>
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
           <img id="coverLagu" src="https://i.pravatar.cc/100?img=12" style="width:64px;height:64px;border-radius:16px;object-fit:cover">
-          <div style="flex:1;text-align:left"><b id="judulLagu2" style="font-size:15px">Belum ada lagu</b><p id="penyanyiLagu" style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Klik salah satu lagu untuk mulai</p><span class="badge badgeKuning" id="modeLabel">MODE: VIDEO</span></div>
+          <div style="flex:1;text-align:left"><b id="judulLagu2" style="font-size:15px">Durung ana lagu</b><p id="penyanyiLagu" style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Klik salah siji lagu gawe mulai</p><span class="badge" id="modeLabel" style="background:#ff9800">MODE: VIDEO</span></div>
         </div>
         <iframe id="playerMusik" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <div class="player-kontrol">
@@ -145,58 +176,47 @@ input[type=range]{width:100%;margin-top:8px}
         </div>
         <div class="row" style="margin-top:8px">
           <button class="btn btn2" onclick="downloadMP3()">⬇️ Download MP3 via ymusic.io</button>
-          <button class="btn btn2" onclick="bukaDiYMusic()">🔗 Buka di ymusic.io</button>
+          <button class="btn btn2" onclick="window.open('https://ymusic.io','_blank')">🔗 Buka ymusic.io</button>
         </div>
-        <!-- Toggle Audio Only ala ymusic.io -->
         <div class="toggle-row">
-          <div><b>🎧 Mode Audio Saja (Hemat Kuota)</b><p style="font-size:12px">Sembunyikan video, cuma putar suara. Hemat 90% kuota.</p></div>
+          <div><b>🎧 Mode Audio Wae (Hemat Kuota)</b><p style="font-size:12px">Sembunyikan video, mung suara tok. Hemat 90% kuota.</p></div>
           <div class="switch" id="switchAudio" onclick="toggleAudioMode()"></div>
         </div>
-        <div class="toggle-row">
-          <div><b>🌙 Background Play</b><p style="font-size:12px">Lagu tetap jalan walau pindah menu / layar mati*</p></div>
-          <div class="switch on" id="switchBg" onclick="toggleBgInfo()"></div>
-        </div>
-        <p style="font-size:11px;margin-top:8px">*Di browser HP, agar tetap bunyi saat layar mati: buka di Chrome > titik 3 > Add to Home Screen, atau pakai aplikasi resmi di ymusic.io</p>
+        <p style="font-size:11px;margin-top:8px">Lagu tetep muni walau pindah menu Home / Tools / Info, soale player-e ora di-reset.</p>
       </div>
-
-      <h2>🔍 Cari Lagu - YMusic.io Style</h2>
-      <input type="text" id="inputMusik" placeholder="Cari lagu... contoh: Bernadya - Satu Bulan" onkeydown="if(event.key==='Enter') cariMusik()">
-      <input type="text" id="inputLinkYT" placeholder="Atau tempel link YouTube di sini untuk download MP3...">
-      <button class="btn" onclick="cariMusik()">▶️ Putar Sekarang</button>
-      <button class="btn btn2" onclick="downloadDariLink()">⬇️ Download MP3 Dari Link Ini</button>
-      <p style="margin-top:10px">Cepat:</p>
+      <h2>🔍 Golek Lagu</h2>
+      <input type="text" id="inputMusik" placeholder="Golek lagu... misal: Bernadya - Satu Bulan" onkeydown="if(event.key==='Enter') cariMusik()">
+      <input type="text" id="inputLinkYT" placeholder="Utawa tempel link YouTube neng kene gawe download MP3...">
+      <button class="btn" onclick="cariMusik()">▶️ Puter Saiki</button>
+      <button class="btn btn2" onclick="downloadDariLink()">⬇️ Download MP3 Soko Link Iki</button>
+      <p style="margin-top:10px">Cepet:</p>
       <span class="chip" onclick="cariMusikLangsung('Bernadya Satu Bulan')">Bernadya</span>
       <span class="chip" onclick="cariMusikLangsung('Hindia')">Hindia</span>
       <span class="chip" onclick="cariMusikLangsung('Juicy Luicy')">Juicy Luicy</span>
       <span class="chip" onclick="cariMusikLangsung('Nadin Amizah')">Nadin Amizah</span>
       <span class="chip" onclick="cariMusikLangsung('lagu viral tiktok 2026')">Viral TikTok</span>
     </div>
-
     <div class="kartu">
-      <h2>🔥 Lagi Viral - YMusic Chart</h2>
-      <p style="font-size:12px">Klik untuk putar audio saja. Klik ⬇️ untuk download MP3 via ymusic.io</p>
+      <h2>🔥 Lagi Viral</h2>
+      <p style="font-size:12px">Klik gawe puter, klik ⬇️ gawe download MP3 via ymusic.io</p>
       <div id="daftarLagu"></div>
     </div>
-
     <div class="kartu">
-      <h2>🎧 Playlist Saya</h2>
-      <p id="playlistKosong">Belum ada favorit. Klik ❤️ di lagu untuk simpan.</p>
+      <h2>🎧 Playlist Ku</h2>
+      <p id="playlistKosong">Durung ana favorit. Klik ❤️ neng lagu gawe nyimpen.</p>
       <div id="daftarFavorit"></div>
     </div>
-
     <div class="kartu">
       <h2>📱 Download Aplikasi Resmi YMusic</h2>
-      <p>Versi APK asli cuma dari <b>ymusic.io</b> & GitHub resmi. Jangan download dari web lain, banyak yang palsu bisa curi akun Google.</p>
-      <button class="btn" onclick="window.open('https://ymusic.io','_blank')">⬇️ Download APK di ymusic.io</button>
-      <button class="btn btn2" onclick="window.open('https://github.com/ymusic-io','_blank')">💻 Lihat GitHub Resmi</button>
-      <p style="font-size:11px;margin-top:8px">Catatan: Gunakan hanya untuk lagu yang legal / Creative Commons / milik kamu sendiri. Jangan download lagu berhak cipta tanpa izin.</p>
+      <p>Versi APK asli mung soko <b>ymusic.io</b>. Ojo download soko web liyo, akeh sing palsu iso nyolong akun Google.</p>
+      <button class="btn" onclick="window.open('https://ymusic.io','_blank')">⬇️ Download APK neng ymusic.io</button>
+      <p style="font-size:11px;margin-top:8px">Catatan: Gunakno mung gawe lagu sing legal / milikmu dewe.</p>
     </div>
   </div>
 
-  <!-- PROFIL -->
   <div id="page-profil" class="hilang">
-    <h1>Profil 👤</h1><p>Ganti nama & foto, langsung tersimpan</p>
-    <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Suka ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
+    <h1>Profil 👤</h1><p>Ganti nama & foto, langsung kesimpan</p>
+    <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
   </div>
 </div>
 
@@ -214,25 +234,34 @@ input[type=range]{width:100%;margin-top:8px}
 
 <script>
 let blok=document.getElementById('blok');
-let blokX=0, blokW=68, targetX=0, targetW=68;
+let blokX=0, blokW=58, targetX=0, targetW=58;
 let animasiJalan=false;
+
+// ===== GERAK BLOK - SPRING FISIKA =====
 function gerakBlok(){
   if(animasiJalan) return;
   animasiJalan=true;
   let kecepatan=0;
+  // Spring: kaku sitik ben mantul, redam ben ora goyang terus
   let kaku=0.14, redam=0.78;
   function frame(){
     let jarak=targetX-blokX;
     kecepatan=(kecepatan + jarak*kaku)*redam;
     blokX+=kecepatan;
+    // LEBUR - kecepatan makin banter, blok makin molor
     let speed=Math.abs(kecepatan);
     let molor=Math.min(1.45, 1 + speed*0.09);
     let gepeng=1-(molor-1)*0.38;
+    // Lebar ngikut target alus
     blokW += (targetW-blokW)*0.18;
+    // Bentuk lebur - arah ngikut gerakan
+    let arah = kecepatan>0 ? 1 : -1;
     let radius = speed>1 ? `38% 62% 60% 40% / 58% 44% 56% 42%` : `999px`;
     blok.style.transform=`translateX(${blokX}px) scaleX(${molor}) scaleY(${gepeng})`;
     blok.style.width=blokW+'px';
     blok.style.borderRadius=radius;
+    // Nek wis cedak banget + kecepatan cilik, mandeg
     if(Math.abs(jarak)<0.4 && Math.abs(kecepatan)<0.4){
       blokX=targetX; blokW=targetW;
-      blok.style.transform=`translateX(${b
+      blok.style.transform=`translateX(${blokX}px) scaleX(1) scaleY(1)`;
+      blok.style.width=b
