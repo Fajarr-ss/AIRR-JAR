@@ -65,37 +65,116 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 
 /* ===== NAV ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
-.nav{position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.35);border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);overflow:visible}
-.nav::before{content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);pointer-events:none;z-index:2}
-.blok{position:absolute;top:8px;left:10px;width:58px;height:56px;background:linear-gradient(135deg, rgba(255,255,255,.62) 0%, rgba(195,202,215,.40) 38%, rgba(165,175,190,.34) 68%, rgba(255,255,255,.50) 100%);backdrop-filter:blur(16px) saturate(160%) brightness(1.15);-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);border:1px solid rgba(255,255,255,.68);border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -3px 8px rgba(255,255,255,.28);will-change:transform,width,border-radius;z-index:0;pointer-events:none !important}
-.blok::before{content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);pointer-events:none}
-.blok::after{content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;border-radius:999px;background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));filter:blur(1px);pointer-events:none}
-.nav button{position:relative;z-index:5 !important;flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);font-size:9px;font-weight:600;transition:color .45s cubic-bezier(.22,1,.36,1);-webkit-tap-highlight-color:transparent;pointer-events:auto !important;touch-action:manipulation}
+.nav{
+  position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
+  background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
+  overflow:visible;
+}
+.nav::before{
+  content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
+  pointer-events:none;z-index:2;
+}
+.blok{
+  position:absolute;top:8px;left:10px;width:58px;height:56px;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.62) 0%,
+    rgba(195,202,215,.40) 38%,
+    rgba(165,175,190,.34) 68%,
+    rgba(255,255,255,.50) 100%);
+  backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
+  -webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
+  border:1px solid rgba(255,255,255,.68);
+  border-radius:999px;
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -3px 8px rgba(255,255,255,.28);
+  will-change:transform,width,border-radius;
+  z-index:0;
+  pointer-events:none !important;
+}
+.blok::before{
+  content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);
+  pointer-events:none;
+}
+.blok::after{
+  content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;
+  border-radius:999px;
+  background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));
+  filter:blur(1px);pointer-events:none;
+}
+.nav button{
+  position:relative;z-index:5 !important;
+  flex:1;border:none;background:transparent;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
+  font-size:9px;font-weight:600;
+  transition:color .45s cubic-bezier(.22,1,.36,1);
+  -webkit-tap-highlight-color:transparent;
+  pointer-events:auto !important;
+  touch-action:manipulation;
+}
 .nav button .ikon{font-size:20px;line-height:1;transition:transform .6s cubic-bezier(.34,1.56,.64,1);pointer-events:none;will-change:transform}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
 .nav button:active{transform:scale(.94)}
 .hilang{display:none}
-.konten > div{will-change:transform,opacity,filter;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+
+/* ===== PERPINDAHAN SUPER SMOOTH ===== */
+.konten > div{
+  will-change:transform,opacity,filter;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+/* Halaman masuk - alus banget, ada stagger kartu */
 .muncul{animation:munculSmooth .65s cubic-bezier(.22,1,.36,1) both}
 .muncul-kiri{animation:munculKiriSmooth .65s cubic-bezier(.22,1,.36,1) both}
 .muncul-kanan{animation:munculKananSmooth .65s cubic-bezier(.22,1,.36,1) both}
-@keyframes munculSmooth{from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
-@keyframes munculKiriSmooth{from{opacity:0;transform:translateX(34px) scale(.985);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
-@keyframes munculKananSmooth{from{opacity:0;transform:translateX(-34px) scale(.985);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
-.muncul .kartu, .muncul-kiri .kartu, .muncul-kanan .kartu{animation:kartuMasuk .6s cubic-bezier(.22,1,.36,1) both}
+@keyframes munculSmooth{
+  from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(6px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes munculKiriSmooth{
+  from{opacity:0;transform:translateX(34px) scale(.985);filter:blur(5px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes munculKananSmooth{
+  from{opacity:0;transform:translateX(-34px) scale(.985);filter:blur(5px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+/* Kartu muncul nyusul satu-satu, staggered */
+.muncul .kartu, .muncul-kiri .kartu, .muncul-kanan .kartu{
+  animation:kartuMasuk .6s cubic-bezier(.22,1,.36,1) both;
+}
 .muncul .kartu:nth-child(2), .muncul-kiri .kartu:nth-child(2), .muncul-kanan .kartu:nth-child(2){animation-delay:.06s}
 .muncul .kartu:nth-child(3), .muncul-kiri .kartu:nth-child(3), .muncul-kanan .kartu:nth-child(3){animation-delay:.12s}
 .muncul .kartu:nth-child(4), .muncul-kiri .kartu:nth-child(4), .muncul-kanan .kartu:nth-child(4){animation-delay:.18s}
 .muncul .kartu:nth-child(5), .muncul-kiri .kartu:nth-child(5), .muncul-kanan .kartu:nth-child(5){animation-delay:.24s}
-@keyframes kartuMasuk{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes kartuMasuk{
+  from{opacity:0;transform:translateY(14px) scale(.98)}
+  to{opacity:1;transform:none}
+}
+/* Halaman keluar - fade alus */
 .keluar{animation:keluarSmooth .28s ease-in both}
-@keyframes keluarSmooth{from{opacity:1;transform:none;filter:blur(0)}to{opacity:0;transform:translateY(-8px) scale(.99);filter:blur(3px)}}
+@keyframes keluarSmooth{
+  from{opacity:1;transform:none;filter:blur(0)}
+  to{opacity:0;transform:translateY(-8px) scale(.99);filter:blur(3px)}
+}
 </style>
 </head>
 <body>
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
+
 <div class="konten">
+  <!-- HOME -->
   <div id="page-home">
     <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Iso Diedit</p>
     <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba pencet menu ngisor, deloken <b>blok-e mlaku</b>: molor koyo permen karet, terus balik bunder alus.</p></div>
@@ -154,15 +233,15 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
       <button class="btn btn2" onclick="downloadDariLink()">⬇️ Download MP3 Soko Link Iki</button>
       <p style="margin-top:10px">Cepet:</p>
       <span class="chip" onclick="cariMusikLangsung('Bernadya Satu Bulan')">Bernadya</span>
-      <span class="chip" onclick="cariMusikLangsung('Hindia Cincin')">Hindia</span>
-      <span class="chip" onclick="cariMusikLangsung('Juicy Luicy Lantas')">Juicy Luicy</span>
-      <span class="chip" onclick="cariMusikLangsung('Nadin Amizah Bertaut')">Nadin Amizah</span>
+      <span class="chip" onclick="cariMusikLangsung('Hindia')">Hindia</span>
+      <span class="chip" onclick="cariMusikLangsung('Juicy Luicy')">Juicy Luicy</span>
+      <span class="chip" onclick="cariMusikLangsung('Nadin Amizah')">Nadin Amizah</span>
       <span class="chip" onclick="cariMusikLangsung('lagu viral tiktok 2026')">Viral TikTok</span>
     </div>
     <div class="kartu">
       <h2>🔥 Lagi Viral</h2>
-      <p style="font-size:12px">Klik gawe puter. Nek video ora metu, pencet chip neng nduwur gawe mode pencarian.</p>
-      <div id="daftarLagu"><p style="font-size:13px">Loading lagu...</p></div>
+      <p style="font-size:12px">Klik gawe puter, klik ⬇️ gawe download MP3 via ymusic.io</p>
+      <div id="daftarLagu"></div>
     </div>
     <div class="kartu">
       <h2>🎧 Playlist Ku</h2>
@@ -188,7 +267,4 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
     <div class="blok" id="blok"></div>
     <button type="button" class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
     <button type="button" onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
-    <button type="button" onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
-    <button type="button" onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
-    <button type="button" onclick="pindah(this,'musik',4)"><span class="ikon">🎵</span>Musik</button>
-    <button type="button" onclick="pindah(this,'profil',5)"><span class="ikon"
+    <button type="button" onclick="pindah(this,'tools',2)"><span class="iko
