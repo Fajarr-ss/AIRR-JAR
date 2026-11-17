@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
 body{background:#0a0a0a;color:#fff;min-height:100vh}
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg{position:fixed;inset:0;z-index:0}
 .bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}
 .bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}
 .bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
@@ -16,15 +16,15 @@ body{background:#0a0a0a;color:#fff;min-height:100vh}
 .konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center}
 .konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
 .konten p{color:rgba(255,255,255,.7);margin-top:8px;font-size:14px}
-.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left;will-change:transform,opacity}
+.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
 .kartu h2{font-size:18px;margin-bottom:6px}
 .kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
 input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
 input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
-button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px;position:relative;z-index:2}
+button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
 button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
 button.btn:active{transform:scale(.97)}
-.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer;position:relative;z-index:2}
+.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer}
 img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:none;background:#000}
 .avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}
 .row{display:flex;gap:8px}
@@ -35,35 +35,9 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item:last-child{border:none}
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
-input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
+input[type=range]{width:100%;margin-top:8px}
 
-/* ===== MUSIK ===== */
-.lagu-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer}
-.lagu-item:last-child{border:none}
-.lagu-item img{width:56px;height:56px;border-radius:14px;object-fit:cover;background:#333;flex-shrink:0}
-.lagu-item .lagu-info{flex:1;text-align:left;min-width:0}
-.lagu-item .lagu-info b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lagu-item .lagu-info span{font-size:12px;color:rgba(255,255,255,.6)}
-.lagu-item .play-btn{width:40px;height:40px;border-radius:50%;background:#fff;color:#111;border:none;font-size:16px;flex-shrink:0;cursor:pointer;position:relative;z-index:2}
-.lagu-item.aktif-play{background:rgba(255,255,255,.12);border-radius:16px;padding-left:10px;padding-right:10px}
-.lagu-item.aktif-play .lagu-info b{color:#ff5e8a}
-.player-box{position:relative;z-index:2;background:rgba(20,20,20,.92);backdrop-filter:blur(20px);border-radius:20px;padding:14px;margin-bottom:12px;border:1px solid rgba(255,255,255,.2)}
-.player-box iframe{width:100%;height:180px;border:none;border-radius:14px;background:#000}
-.player-box.audio-mode iframe{height:0;opacity:0;pointer-events:none}
-.player-kontrol{display:flex;gap:8px;margin-top:10px}
-.player-kontrol button{flex:1;padding:10px;border:none;border-radius:14px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;cursor:pointer;position:relative;z-index:2}
-.player-kontrol button.utama{background:#fff;color:#111}
-.eq{display:flex;gap:3px;align-items:flex-end;height:18px}
-.eq span{width:4px;background:#ff5e8a;border-radius:2px;animation:eq 0.8s ease-in-out infinite alternate}
-.eq span:nth-child(2){animation-delay:.2s}.eq span:nth-child(3){animation-delay:.4s}.eq span:nth-child(4){animation-delay:.1s}
-@keyframes eq{from{height:5px}to{height:18px}}
-.toggle-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:14px;padding:12px;margin-top:10px}
-.switch{position:relative;width:52px;height:28px;background:#555;border-radius:999px;cursor:pointer;flex-shrink:0;transition:.3s}
-.switch.on{background:#00c853}
-.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.3s}
-.switch.on::after{left:27px}
-
-/* ===== NAV ===== */
+/* ===== NAV - GERAK BLOK FOKUS ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
 .nav{
   position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
@@ -80,8 +54,9 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
   background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
   pointer-events:none;z-index:2;
 }
+/* BLOK SING GERAK - ABU TRANSPARAN GLOSSY */
 .blok{
-  position:absolute;top:8px;left:10px;width:58px;height:56px;
+  position:absolute;top:8px;left:10px;width:68px;height:56px;
   background:linear-gradient(135deg,
     rgba(255,255,255,.62) 0%,
     rgba(195,202,215,.40) 38%,
@@ -95,9 +70,9 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
     0 8px 22px rgba(0,0,0,.28),
     inset 0 1px 0 rgba(255,255,255,.95),
     inset 0 -3px 8px rgba(255,255,255,.28);
+  /* TRANSISI ORA NENG KENE - DIATUR LEWAT JS BIAR SMOOTH 60FPS */
   will-change:transform,width,border-radius;
   z-index:0;
-  pointer-events:none !important;
 }
 .blok::before{
   content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
@@ -112,69 +87,25 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
   filter:blur(1px);pointer-events:none;
 }
 .nav button{
-  position:relative;z-index:5 !important;
-  flex:1;border:none;background:transparent;
+  position:relative;z-index:1;flex:1;border:none;background:transparent;
   display:flex;flex-direction:column;align-items:center;gap:2px;
   padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
-  font-size:9px;font-weight:600;
-  transition:color .45s cubic-bezier(.22,1,.36,1);
+  font-size:10px;font-weight:600;transition:color .3s;
   -webkit-tap-highlight-color:transparent;
-  pointer-events:auto !important;
-  touch-action:manipulation;
 }
-.nav button .ikon{font-size:20px;line-height:1;transition:transform .6s cubic-bezier(.34,1.56,.64,1);pointer-events:none;will-change:transform}
+.nav button .ikon{font-size:22px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
 .nav button:active{transform:scale(.94)}
 .hilang{display:none}
-
-/* ===== PERPINDAHAN SUPER SMOOTH ===== */
-.konten > div{
-  will-change:transform,opacity,filter;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-}
-/* Halaman masuk - alus banget, ada stagger kartu */
-.muncul{animation:munculSmooth .65s cubic-bezier(.22,1,.36,1) both}
-.muncul-kiri{animation:munculKiriSmooth .65s cubic-bezier(.22,1,.36,1) both}
-.muncul-kanan{animation:munculKananSmooth .65s cubic-bezier(.22,1,.36,1) both}
-@keyframes munculSmooth{
-  from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(6px)}
-  to{opacity:1;transform:none;filter:blur(0)}
-}
-@keyframes munculKiriSmooth{
-  from{opacity:0;transform:translateX(34px) scale(.985);filter:blur(5px)}
-  to{opacity:1;transform:none;filter:blur(0)}
-}
-@keyframes munculKananSmooth{
-  from{opacity:0;transform:translateX(-34px) scale(.985);filter:blur(5px)}
-  to{opacity:1;transform:none;filter:blur(0)}
-}
-/* Kartu muncul nyusul satu-satu, staggered */
-.muncul .kartu, .muncul-kiri .kartu, .muncul-kanan .kartu{
-  animation:kartuMasuk .6s cubic-bezier(.22,1,.36,1) both;
-}
-.muncul .kartu:nth-child(2), .muncul-kiri .kartu:nth-child(2), .muncul-kanan .kartu:nth-child(2){animation-delay:.06s}
-.muncul .kartu:nth-child(3), .muncul-kiri .kartu:nth-child(3), .muncul-kanan .kartu:nth-child(3){animation-delay:.12s}
-.muncul .kartu:nth-child(4), .muncul-kiri .kartu:nth-child(4), .muncul-kanan .kartu:nth-child(4){animation-delay:.18s}
-.muncul .kartu:nth-child(5), .muncul-kiri .kartu:nth-child(5), .muncul-kanan .kartu:nth-child(5){animation-delay:.24s}
-@keyframes kartuMasuk{
-  from{opacity:0;transform:translateY(14px) scale(.98)}
-  to{opacity:1;transform:none}
-}
-/* Halaman keluar - fade alus */
-.keluar{animation:keluarSmooth .28s ease-in both}
-@keyframes keluarSmooth{
-  from{opacity:1;transform:none;filter:blur(0)}
-  to{opacity:0;transform:translateY(-8px) scale(.99);filter:blur(3px)}
-}
+.muncul{animation:muncul .5s cubic-bezier(.22,1.1,.36,1) both}
+@keyframes muncul{from{opacity:0;transform:translateY(14px) scale(.97);filter:blur(4px)}to{opacity:1;transform:none;filter:blur(0)}}
 </style>
 </head>
 <body>
 <div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
 
 <div class="konten">
-  <!-- HOME -->
   <div id="page-home">
     <h1>Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG • Profil Iso Diedit</p>
     <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Coba pencet menu ngisor, deloken <b>blok-e mlaku</b>: molor koyo permen karet, terus balik bunder alus.</p></div>
@@ -196,66 +127,6 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
     <div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Loading cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
     <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
-
-  <!-- MUSIK -->
-  <div id="page-musik" class="hilang">
-    <h1>YMusic 🎵</h1><p>Audio wae • Hemat kuota 90% • Background Play • Download MP3</p>
-    <div class="kartu">
-      <div class="player-box" id="playerBox">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <b id="judulLagu">🎵 Pilih lagu neng ngisor</b>
-          <div class="eq" id="eqAnim" style="display:none"><span></span><span></span><span></span><span></span></div>
-        </div>
-        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
-          <img id="coverLagu" src="https://i.pravatar.cc/100?img=12" style="width:64px;height:64px;border-radius:16px;object-fit:cover">
-          <div style="flex:1;text-align:left"><b id="judulLagu2" style="font-size:15px">Durung ana lagu</b><p id="penyanyiLagu" style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Klik salah siji lagu gawe mulai</p><span class="badge" id="modeLabel" style="background:#ff9800">MODE: VIDEO</span></div>
-        </div>
-        <iframe id="playerMusik" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <div class="player-kontrol">
-          <button onclick="laguSebelumnya()">⏮️ Prev</button>
-          <button class="utama" onclick="togglePlay()">⏸️ Pause / ▶️ Play</button>
-          <button onclick="laguBerikutnya()">Next ⏭️</button>
-        </div>
-        <div class="row" style="margin-top:8px">
-          <button class="btn btn2" onclick="downloadMP3()">⬇️ Download MP3 via ymusic.io</button>
-          <button class="btn btn2" onclick="window.open('https://ymusic.io','_blank')">🔗 Buka ymusic.io</button>
-        </div>
-        <div class="toggle-row">
-          <div><b>🎧 Mode Audio Wae (Hemat Kuota)</b><p style="font-size:12px">Sembunyikan video, mung suara tok. Hemat 90% kuota.</p></div>
-          <div class="switch" id="switchAudio" onclick="toggleAudioMode()"></div>
-        </div>
-        <p style="font-size:11px;margin-top:8px">Lagu tetep muni walau pindah menu Home / Tools / Info, soale player-e ora di-reset.</p>
-      </div>
-      <h2>🔍 Golek Lagu</h2>
-      <input type="text" id="inputMusik" placeholder="Golek lagu... misal: Bernadya - Satu Bulan" onkeydown="if(event.key==='Enter') cariMusik()">
-      <input type="text" id="inputLinkYT" placeholder="Utawa tempel link YouTube neng kene gawe download MP3...">
-      <button class="btn" onclick="cariMusik()">▶️ Puter Saiki</button>
-      <button class="btn btn2" onclick="downloadDariLink()">⬇️ Download MP3 Soko Link Iki</button>
-      <p style="margin-top:10px">Cepet:</p>
-      <span class="chip" onclick="cariMusikLangsung('Bernadya Satu Bulan')">Bernadya</span>
-      <span class="chip" onclick="cariMusikLangsung('Hindia')">Hindia</span>
-      <span class="chip" onclick="cariMusikLangsung('Juicy Luicy')">Juicy Luicy</span>
-      <span class="chip" onclick="cariMusikLangsung('Nadin Amizah')">Nadin Amizah</span>
-      <span class="chip" onclick="cariMusikLangsung('lagu viral tiktok 2026')">Viral TikTok</span>
-    </div>
-    <div class="kartu">
-      <h2>🔥 Lagi Viral</h2>
-      <p style="font-size:12px">Klik gawe puter, klik ⬇️ gawe download MP3 via ymusic.io</p>
-      <div id="daftarLagu"></div>
-    </div>
-    <div class="kartu">
-      <h2>🎧 Playlist Ku</h2>
-      <p id="playlistKosong">Durung ana favorit. Klik ❤️ neng lagu gawe nyimpen.</p>
-      <div id="daftarFavorit"></div>
-    </div>
-    <div class="kartu">
-      <h2>📱 Download Aplikasi Resmi YMusic</h2>
-      <p>Versi APK asli mung soko <b>ymusic.io</b>. Ojo download soko web liyo, akeh sing palsu iso nyolong akun Google.</p>
-      <button class="btn" onclick="window.open('https://ymusic.io','_blank')">⬇️ Download APK neng ymusic.io</button>
-      <p style="font-size:11px;margin-top:8px">Catatan: Gunakno mung gawe lagu sing legal / milikmu dewe.</p>
-    </div>
-  </div>
-
   <div id="page-profil" class="hilang">
     <h1>Profil 👤</h1><p>Ganti nama & foto, langsung kesimpan</p>
     <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
@@ -265,6 +136,89 @@ input[type=range]{width:100%;margin-top:8px;position:relative;z-index:2}
 <div class="nav-wrap">
   <div class="nav" id="nav">
     <div class="blok" id="blok"></div>
-    <button type="button" class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
-    <button type="button" onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
-    <button type="button" onclick="pindah(this,'tools',2)"><span class="iko
+    <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+    <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
+    <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
+    <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
+    <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
+  </div>
+</div>
+
+<script>
+let blok=document.getElementById('blok');
+let blokX=0, blokW=68, targetX=0, targetW=68;
+let animasiJalan=false;
+
+// ===== GERAK BLOK - SPRING FISIKA =====
+function gerakBlok(){
+  if(animasiJalan) return;
+  animasiJalan=true;
+  let kecepatan=0;
+  // Spring: kaku sitik ben mantul, redam ben ora goyang terus
+  let kaku=0.14, redam=0.78;
+  function frame(){
+    let jarak=targetX-blokX;
+    kecepatan=(kecepatan + jarak*kaku)*redam;
+    blokX+=kecepatan;
+    // LEBUR - kecepatan makin banter, blok makin molor
+    let speed=Math.abs(kecepatan);
+    let molor=Math.min(1.45, 1 + speed*0.09);
+    let gepeng=1-(molor-1)*0.38;
+    // Lebar ngikut target alus
+    blokW += (targetW-blokW)*0.18;
+    // Bentuk lebur - arah ngikut gerakan
+    let arah = kecepatan>0 ? 1 : -1;
+    let radius = speed>1 ? `38% 62% 60% 40% / 58% 44% 56% 42%` : `999px`;
+    blok.style.transform=`translateX(${blokX}px) scaleX(${molor}) scaleY(${gepeng})`;
+    blok.style.width=blokW+'px';
+    blok.style.borderRadius=radius;
+    // Nek wis cedak banget + kecepatan cilik, mandeg
+    if(Math.abs(jarak)<0.4 && Math.abs(kecepatan)<0.4){
+      blokX=targetX; blokW=targetW;
+      blok.style.transform=`translateX(${blokX}px) scaleX(1) scaleY(1)`;
+      blok.style.width=blokW+'px';
+      blok.style.borderRadius='999px';
+      animasiJalan=false;
+      return;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+function pindah(btn,page,index){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
+  btn.classList.add('aktif');
+  targetX=btn.offsetLeft-10;
+  targetW=btn.offsetWidth;
+  gerakBlok();
+  document.querySelectorAll('.konten > div').forEach(d=>d.classList.add('hilang'));
+  let t=document.getElementById('page-'+page); t.classList.remove('hilang'); t.classList.remove('muncul'); void t.offsetWidth; t.classList.add('muncul');
+  if(page==='info') loadGempa(),loadCuaca(),loadBerita();
+  if(navigator.vibrate) navigator.vibrate(8);
+}
+window.addEventListener('load',()=>{
+  let b=document.querySelector('.nav button.aktif');
+  blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth;
+  blok.style.transform=`translateX(${blokX}px)`; blok.style.width=blokW+'px';
+  loadProfil();
+});
+function isiSearch(teks){document.getElementById('inputSearch').value=teks; cariGoogle();}
+function goSearch(teks){pindah(document.querySelectorAll('.nav button')[1],'search',1); document.getElementById('inputSearch').value=teks;}
+function cariGoogle(mode){let q=document.getElementById('inputSearch').value.trim(); if(!q){alert('Tulis kata kunci dulu mas');return;} if(mode==='gambar') window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q),'_blank'); else window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+let fotoAsli=null;
+function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.result;}; r.readAsDataURL(f);}
+function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasHD'), ctx=c.getContext('2d'); c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value; ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`; ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctx.drawImage(fotoAsli,0,0,c.width,c.height); document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95); document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px`;}
+function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu mas');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
+function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
+function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;}catch(e){box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;}}
+async function loadCuaca(){let box=document.getElementById('cuacaBox'); try{let res=await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001'); let j=await res.json(); let d=j.data[0].cuaca[0][0]; box.innerHTML=`<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;}catch(e){box.innerHTML=`🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;}}
+async function loadBerita(){let box=document.getElementById('beritaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss'); let j=await res.json(); box.innerHTML=j.items.slice(0,5).map(it=>`<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');}catch(e){box.innerHTML=`<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;}}
+function loadProfil(){let nama=localStorage.getItem('nama')||'Jarr'; let bio=localStorage.getItem('bio')||'Yogyakarta • Seneng ngoprek HTML modal AI😹'; let foto=localStorage.getItem('fotoProfil'); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; document.getElementById('editNama').value=nama; document.getElementById('editBio').value=bio; if(foto) document.getElementById('avatarPreview').src=foto;}
+function simpanProfil(){let nama=document.getElementById('editNama').value.trim()||'Jarr'; let bio=document.getElementById('editBio').value.trim()||'Yogyakarta'; localStorage.setItem('nama',nama); localStorage.setItem('bio',bio); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; alert('Profil tersimpan! ✅ '+nama);}
+function gantiFotoProfil(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{document.getElementById('avatarPreview').src=ev.target.result; localStorage.setItem('fotoProfil',ev.target.result);}; r.readAsDataURL(f);}
+function resetProfil(){localStorage.clear(); location.reload();}
+</script>
+</body>
+</html>
