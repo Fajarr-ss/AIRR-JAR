@@ -5,26 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AIRR - J</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
-body{background:#0a0a0a;color:#fff;min-height:100vh}
-.bg{position:fixed;inset:0;z-index:0}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#0a0a0a;color:#fff;min-height:100vh;overflow-x:hidden}
+/* FIX UTAMA: BG JANGAN NANGKEP KLIK */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg *{pointer-events:none}
 .bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}
 .bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}
 .bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
 @keyframes gerak{to{transform:translate(80px,60px) scale(1.2)}}
 @keyframes gerak2{to{transform:translate(-80px,-60px) scale(1.1)}}
-.konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center}
+.konten{position:relative;z-index:5;padding:28px 20px 140px;text-align:center}
 .konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
 .konten p{color:rgba(255,255,255,.7);margin-top:8px;font-size:14px}
-.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
+.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left;position:relative;z-index:5}
 .kartu h2{font-size:18px;margin-bottom:6px}
 .kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
 input[type=text],input[type=password],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
 input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
-button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
+button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px;position:relative;z-index:5}
 button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
 button.btn:active{transform:scale(.97)}
-.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer}
+.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer;position:relative;z-index:5}
 img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:none;background:#000}
 .avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}
 .row{display:flex;gap:8px}
@@ -36,71 +38,22 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px}
-
-/* CHAT AI */
 .chat-box{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px 2px}
 .msg{max-width:85%;padding:12px 14px;border-radius:18px;font-size:14px;line-height:1.5;text-align:left;white-space:pre-wrap;word-break:break-word}
 .msg-user{align-self:flex-end;background:#fff;color:#111;border-bottom-right-radius:6px}
 .msg-ai{align-self:flex-start;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);border-bottom-left-radius:6px}
-.msg-loading{opacity:.7;font-style:italic}
 .chat-input-row{display:flex;gap:8px;align-items:flex-end;margin-top:10px}
 .chat-input-row textarea{flex:1;margin:0;max-height:100px;resize:none}
 .chat-input-row button{width:52px;height:52px;border-radius:16px;border:none;background:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
 
-/* ===== NAV - GERAK BLOK FOKUS ===== */
-.nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
-.nav{
-  position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
-  background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));
-  backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid rgba(255,255,255,.35);
-  border-radius:999px;
-  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
-  overflow:visible;
-}
-.nav::before{
-  content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
-  pointer-events:none;z-index:2;
-}
-.blok{
-  position:absolute;top:8px;left:10px;width:68px;height:56px;
-  background:linear-gradient(135deg,
-    rgba(255,255,255,.62) 0%,
-    rgba(195,202,215,.40) 38%,
-    rgba(165,175,190,.34) 68%,
-    rgba(255,255,255,.50) 100%);
-  backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
-  -webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
-  border:1px solid rgba(255,255,255,.68);
-  border-radius:999px;
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.95),
-    inset 0 -3px 8px rgba(255,255,255,.28);
-  will-change:transform,width,border-radius;
-  z-index:0;
-}
-.blok::before{
-  content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
-  border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);
-  pointer-events:none;
-}
-.blok::after{
-  content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;
-  border-radius:999px;
-  background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));
-  filter:blur(1px);pointer-events:none;
-}
-.nav button{
-  position:relative;z-index:1;flex:1;border:none;background:transparent;
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
-  font-size:10px;font-weight:600;transition:color .3s;
-  -webkit-tap-highlight-color:transparent;
-}
+/* NAV FIX */
+.nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:100;width:min(430px,calc(100% - 28px));pointer-events:auto}
+.nav{position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.35);border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);overflow:visible}
+.nav::before{content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);pointer-events:none;z-index:1}
+.blok{position:absolute;top:8px;left:10px;width:68px;height:56px;background:linear-gradient(135deg,rgba(255,255,255,.62) 0%,rgba(195,202,215,.40) 38%,rgba(165,175,190,.34) 68%,rgba(255,255,255,.50) 100%);backdrop-filter:blur(16px) saturate(160%) brightness(1.15);-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);border:1px solid rgba(255,255,255,.68);border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -3px 8px rgba(255,255,255,.28);will-change:transform,width,border-radius;z-index:2;pointer-events:none}
+.blok::before{content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);pointer-events:none}
+.blok::after{content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;border-radius:999px;background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));filter:blur(1px);pointer-events:none}
+.nav button{position:relative;z-index:10;flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);font-size:10px;font-weight:600;transition:color .3s;pointer-events:auto}
 .nav button .ikon{font-size:22px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .nav button.aktif{color:#111}
 .nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
@@ -119,68 +72,50 @@ input[type=range]{width:100%;margin-top:8px}
     <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Treat Your Better.</p></div>
     <div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goAI('Cuaca Jogja hari ini gimana?')">🌦️ Tanya Cuaca</span><span class="chip" onclick="goAI('Ada gempa terbaru?')">🌋 Tanya Gempa</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div>
   </div>
-
-  <!-- ===== PAGE AI - GANTINYA SEARCH ===== -->
   <div id="page-search" class="hilang">
     <h1>AI Chat 🤖</h1><p>Gratis pake Groq • Langsung jawab</p>
     <div class="kartu" id="aiSetupBox">
       <h2>🔑 Setting API Key (1x aja)</h2>
-      <p style="font-size:13px">Gratis, tanpa kartu kredit. Key kesimpen di HP lu doang, aman.</p>
+      <p style="font-size:13px">Gratis, tanpa kartu kredit. Key kesimpen di HP lu doang.</p>
       <input type="password" id="groqKey" placeholder="Paste key gsk_... disini">
-      <button class="btn" onclick="simpanKey()">💾 Simpan & Mulai Chat</button>
-      <button class="btn btn2" onclick="window.open('https://console.groq.com/keys','_blank')">🌐 Dapetin Key Gratis →</button>
-      <p style="font-size:12px;margin-top:8px">Cara: Buka link di atas > Login Google > Create API Key > Copy > Paste disini</p>
+      <button type="button" class="btn" onclick="simpanKey()">💾 Simpan & Mulai Chat</button>
+      <button type="button" class="btn btn2" onclick="window.open('https://console.groq.com/keys','_blank')">🌐 Dapetin Key Gratis →</button>
     </div>
     <div class="kartu" id="aiChatBox" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h2>💬 AIRR AI</h2>
-        <span class="badge badgeHijau" id="aiStatus">ONLINE</span>
-      </div>
-      <select id="aiModel" style="margin-top:10px">
-        <option value="llama-3.3-70b-versatile">Llama 3.3 70B - Paling Pinter</option>
-        <option value="llama-3.1-8b-instant">Llama 3.1 8B - Paling Cepet</option>
-        <option value="openai/gpt-oss-120b">GPT-OSS 120B - Terbaru</option>
-      </select>
-      <div class="chat-box" id="chatBox" style="margin-top:12px">
-        <div class="msg msg-ai">Halo <span id="namaAI">Jarr</span>! 👋 Gue AIRR AI. Tanya apa aja, mau bikin cerita Roblox, cari info, bikin kode, bebas. Gas!</div>
-      </div>
-      <p style="margin-top:8px">Cepet tanya:</p>
+      <div style="display:flex;justify-content:space-between;align-items:center"><h2>💬 AIRR AI</h2><span class="badge badgeHijau">ONLINE</span></div>
+      <select id="aiModel"><option value="llama-3.3-70b-versatile">Llama 3.3 70B - Paling Pinter</option><option value="llama-3.1-8b-instant">Llama 3.1 8B - Paling Cepet</option><option value="openai/gpt-oss-120b">GPT-OSS 120B - Terbaru</option></select>
+      <div class="chat-box" id="chatBox" style="margin-top:12px"><div class="msg msg-ai">Halo <span id="namaAI">Jarr</span>! 👋 Gue AIRR AI. Tanya apa aja, gas!</div></div>
       <span class="chip" onclick="tanyaCepet('Buatin nama keren buat game Roblox')">🎮 Nama Game Roblox</span>
-      <span class="chip" onclick="tanyaCepet('Cuaca Jogja hari ini gimana?')">🌦️ Cuaca</span>
       <span class="chip" onclick="tanyaCepet('Buatin script Roblox biar bisa double jump')">🛠️ Script Roblox</span>
-      <div class="chat-input-row">
-        <textarea id="chatInput" rows="1" placeholder="Tanya apa aja..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();kirimChat()}"></textarea>
-        <button onclick="kirimChat()">➤</button>
-      </div>
-      <button class="btn btn2" style="padding:8px;font-size:12px" onclick="hapusChat()">🗑️ Hapus Chat • Ganti Key</button>
+      <div class="chat-input-row"><textarea id="chatInput" rows="1" placeholder="Tanya apa aja..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();kirimChat()}"></textarea><button type="button" onclick="kirimChat()">➤</button></div>
+      <button type="button" class="btn btn2" style="padding:8px;font-size:12px" onclick="hapusChat()">🗑️ Hapus Chat • Ganti Key</button>
     </div>
   </div>
-
   <div id="page-tools" class="hilang">
-    <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
-    <div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
-    <div class="kartu"><h2>🎬 2. HD VIDEO - Jernihkan Video</h2><p>Pilih video, atur filter HD, terus play.</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"><button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button></div>
+    <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis</p>
+    <div class="kartu"><h2>📸 1. HD FOTO</h2><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button type="button" class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
+    <div class="kartu"><h2>🎬 2. HD VIDEO</h2><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"></div>
   </div>
   <div id="page-info" class="hilang">
     <h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p>
-    <div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Loading data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div>
-    <div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Loading cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
-    <div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
+    <div class="kartu"><h2>🌋 Gempa Terbaru - BMKG</h2><div id="gempaBox"><p>Loading...</p></div><button type="button" class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div>
+    <div class="kartu"><h2>🌦️ Cuaca Jogja</h2><div id="cuacaBox"><p>Loading...</p></div><button type="button" class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
+    <div class="kartu"><h2>📰 Berita</h2><div id="beritaBox"><p>Loading...</p></div><button type="button" class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
   </div>
   <div id="page-profil" class="hilang">
-    <h1>Profil 👤</h1><p>Ganti nama & foto, langsung kesimpan</p>
-    <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
+    <h1>Profil 👤</h1><p>Ganti nama & foto</p>
+    <div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button type="button" class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button type="button" class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
   </div>
 </div>
 
 <div class="nav-wrap">
   <div class="nav" id="nav">
     <div class="blok" id="blok"></div>
-    <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
-    <button onclick="pindah(this,'search',1)"><span class="ikon">🤖</span>AI</button>
-    <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
-    <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
-    <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
+    <button type="button" class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+    <button type="button" onclick="pindah(this,'search',1)"><span class="ikon">🤖</span>AI</button>
+    <button type="button" onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
+    <button type="button" onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
+    <button type="button" onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
   </div>
 </div>
 
@@ -231,15 +166,12 @@ function pindah(btn,page,index){
 }
 window.addEventListener('load',()=>{
   let b=document.querySelector('.nav button.aktif');
-  blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth;
-  blok.style.transform=`translateX(${blokX}px)`; blok.style.width=blokW+'px';
-  loadProfil(); cekKey();
+  if(b){ blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth; blok.style.transform=`translateX(${blokX}px)`; blok.style.width=blokW+'px'; }
+  try{ loadProfil(); cekKey(); }catch(e){ console.log(e); }
 });
-
-// ===== AI CHAT - GROQ FREE =====
-let riwayatChat = [{role:"system", content:"Kamu adalah AIRR AI, asisten gaul Indonesia, dari Jogja. Jawab pake bahasa Indonesia santai, campur Jawa dikit, lucu, singkat tapi jelas. Bantu soal Roblox, coding, tugas, dll."}];
+let riwayatChat = [{role:"system", content:"Kamu adalah AIRR AI, asisten gaul Indonesia, dari Jogja. Jawab pake bahasa Indonesia santai, campur Jawa dikit, lucu, singkat tapi jelas."}];
 function cekKey(){
-  let key = localStorage.getItem('groqKey');
+  let key = null; try{ key = localStorage.getItem('groqKey'); }catch(e){}
   if(key){
     document.getElementById('aiSetupBox').style.display='none';
     document.getElementById('aiChatBox').style.display='block';
@@ -252,56 +184,41 @@ function cekKey(){
 function simpanKey(){
   let k = document.getElementById('groqKey').value.trim();
   if(!k.startsWith('gsk_')){ alert('Key-nya salah mas, harusnya depannya gsk_'); return; }
-  localStorage.setItem('groqKey', k);
-  cekKey();
-  alert('Key tersimpan! Gas chat sekarang ✅');
+  try{ localStorage.setItem('groqKey', k); }catch(e){ alert('Browser lu nggak bisa simpen, tapi tetep bisa dipake sementara'); }
+  cekKey(); alert('Key tersimpan! Gas chat ✅');
 }
 function hapusChat(){
-  if(confirm('Hapus chat + ganti key?')){ localStorage.removeItem('groqKey'); riwayatChat = riwayatChat.slice(0,1); document.getElementById('chatBox').innerHTML='<div class="msg msg-ai">Halo! Tanya apa aja...</div>'; cekKey(); }
+  if(confirm('Hapus chat + ganti key?')){ try{ localStorage.removeItem('groqKey'); }catch(e){} riwayatChat = riwayatChat.slice(0,1); document.getElementById('chatBox').innerHTML='<div class="msg msg-ai">Halo! Tanya apa aja...</div>'; cekKey(); }
 }
 function tambahPesan(teks, siapa){
   let box = document.getElementById('chatBox');
   let div = document.createElement('div');
   div.className = 'msg ' + (siapa==='user' ? 'msg-user' : 'msg-ai');
   div.innerText = teks;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-  return div;
+  box.appendChild(div); box.scrollTop = box.scrollHeight; return div;
 }
 function tanyaCepet(teks){ document.getElementById('chatInput').value = teks; kirimChat(); }
 function goAI(teks){ pindah(document.querySelectorAll('.nav button')[1],'search',1); setTimeout(()=>{ document.getElementById('chatInput').value=teks; kirimChat(); },300); }
 async function kirimChat(){
   let input = document.getElementById('chatInput');
-  let teks = input.value.trim();
-  if(!teks) return;
-  let key = localStorage.getItem('groqKey');
+  let teks = input.value.trim(); if(!teks) return;
+  let key = null; try{ key = localStorage.getItem('groqKey'); }catch(e){}
   if(!key){ alert('Masukin API Key dulu mas'); cekKey(); return; }
-  tambahPesan(teks, 'user');
-  input.value = '';
+  tambahPesan(teks, 'user'); input.value = '';
   riwayatChat.push({role:"user", content: teks});
   let loading = tambahPesan('AIRR lagi mikir...', 'ai');
-  loading.classList.add('msg-loading');
   try{
-    let res = await fetch('https://api.groq.com/openai/v1/chat/completions',{
-      method:'POST',
-      headers:{ 'Authorization':'Bearer '+key, 'Content-Type':'application/json' },
-      body: JSON.stringify({ model: document.getElementById('aiModel').value, messages: riwayatChat, temperature: 0.7, max_tokens: 1000 })
-    });
+    let res = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{ 'Authorization':'Bearer '+key, 'Content-Type':'application/json' },body: JSON.stringify({ model: document.getElementById('aiModel').value, messages: riwayatChat, temperature: 0.7, max_tokens: 1000 })});
     let j = await res.json();
     if(j.error) throw new Error(j.error.message);
     let jawaban = j.choices[0].message.content;
-    loading.remove();
-    tambahPesan(jawaban, 'ai');
-    riwayatChat.push({role:"assistant", content: jawaban});
-  }catch(e){
-    loading.remove();
-    tambahPesan('Waduh error: '+e.message+'\nCek key-nya, mungkin salah / habis limit. Coba bikin key baru.', 'ai');
-  }
+    loading.remove(); tambahPesan(jawaban, 'ai'); riwayatChat.push({role:"assistant", content: jawaban});
+  }catch(e){ loading.remove(); tambahPesan('Waduh error: '+e.message+'\nCek key-nya, mungkin salah / habis limit.', 'ai'); }
 }
-
-// ===== TOOLS & INFO LAMA - TETEP SAMA =====
 let fotoAsli=null;
 function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.result;}; r.readAsDataURL(f);}
 function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasHD'), ctx=c.getContext('2d'); c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value; ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`; ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctx.drawImage(fotoAsli,0,0,c.width,c.height); document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95); document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px`;}
 function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu mas');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
-function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();
+function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
+function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;}catch(e){box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;}
