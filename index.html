@@ -37,7 +37,7 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px}
 
-/* ===== NAV - GERAK BLOK FOKUS ===== */
+/* ===== NAV - SMOOTH & SEIMBANG ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
 .nav{
   position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
@@ -54,7 +54,7 @@ input[type=range]{width:100%;margin-top:8px}
   background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
   pointer-events:none;z-index:2;
 }
-/* BLOK SING GERAK - ABU TRANSPARAN GLOSSY */
+/* BLOK - UDAH DIBIKIN SMOOTH */
 .blok{
   position:absolute;top:8px;left:10px;width:68px;height:56px;
   background:linear-gradient(135deg,
@@ -70,8 +70,9 @@ input[type=range]{width:100%;margin-top:8px}
     0 8px 22px rgba(0,0,0,.28),
     inset 0 1px 0 rgba(255,255,255,.95),
     inset 0 -3px 8px rgba(255,255,255,.28);
-  /* TRANSISI ORA NENG KENE - DIATUR LEWAT JS BIAR SMOOTH 60FPS */
-  will-change:transform,width,border-radius;
+  /* INI KUNCINYA: TRANSISI HALUS, SEMUA GERAK BARENG */
+  transition:transform .48s cubic-bezier(.22,1,.36,1), width .48s cubic-bezier(.22,1,.36,1), border-radius .48s cubic-bezier(.22,1,.36,1);
+  will-change:transform,width;
   z-index:0;
 }
 .blok::before{
@@ -90,16 +91,17 @@ input[type=range]{width:100%;margin-top:8px}
   position:relative;z-index:1;flex:1;border:none;background:transparent;
   display:flex;flex-direction:column;align-items:center;gap:2px;
   padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
-  font-size:10px;font-weight:600;transition:color .3s;
+  font-size:10px;font-weight:600;transition:color .35s ease;
   -webkit-tap-highlight-color:transparent;
 }
-.nav button .ikon{font-size:22px;line-height:1;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+/* IKON JUGA IKUT HALUS, NGGAK LANGSUNG JEDAG */
+.nav button .ikon{font-size:22px;line-height:1;transition:transform .48s cubic-bezier(.22,1,.36,1)}
 .nav button.aktif{color:#111}
-.nav button.aktif .ikon{transform:scale(1.22) translateY(-1px)}
+.nav button.aktif .ikon{transform:scale(1.15) translateY(-1px)}
 .nav button:active{transform:scale(.94)}
 .hilang{display:none}
-.muncul{animation:muncul .5s cubic-bezier(.22,1.1,.36,1) both}
-@keyframes muncul{from{opacity:0;transform:translateY(14px) scale(.97);filter:blur(4px)}to{opacity:1;transform:none;filter:blur(0)}}
+.muncul{animation:muncul .45s cubic-bezier(.22,1,.36,1) both}
+@keyframes muncul{from{opacity:0;transform:translateY(10px) scale(.98);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}
 </style>
 </head>
 <body>
@@ -146,61 +148,43 @@ input[type=range]{width:100%;margin-top:8px}
 
 <script>
 let blok=document.getElementById('blok');
-let blokX=0, blokW=68, targetX=0, targetW=68;
-let animasiJalan=false;
 
-// ===== GERAK BLOK - SPRING FISIKA =====
-function gerakBlok(){
-  if(animasiJalan) return;
-  animasiJalan=true;
-  let kecepatan=0;
-  // Spring: kaku sitik ben mantul, redam ben ora goyang terus
-  let kaku=0.14, redam=0.78;
-  function frame(){
-    let jarak=targetX-blokX;
-    kecepatan=(kecepatan + jarak*kaku)*redam;
-    blokX+=kecepatan;
-    // LEBUR - kecepatan makin banter, blok makin molor
-    let speed=Math.abs(kecepatan);
-    let molor=Math.min(1.45, 1 + speed*0.09);
-    let gepeng=1-(molor-1)*0.38;
-    // Lebar ngikut target alus
-    blokW += (targetW-blokW)*0.18;
-    // Bentuk lebur - arah ngikut gerakan
-    let arah = kecepatan>0 ? 1 : -1;
-    let radius = speed>1 ? `38% 62% 60% 40% / 58% 44% 56% 42%` : `999px`;
-    blok.style.transform=`translateX(${blokX}px) scaleX(${molor}) scaleY(${gepeng})`;
-    blok.style.width=blokW+'px';
-    blok.style.borderRadius=radius;
-    // Nek wis cedak banget + kecepatan cilik, mandeg
-    if(Math.abs(jarak)<0.4 && Math.abs(kecepatan)<0.4){
-      blokX=targetX; blokW=targetW;
-      blok.style.transform=`translateX(${blokX}px) scaleX(1) scaleY(1)`;
-      blok.style.width=blokW+'px';
-      blok.style.borderRadius='999px';
-      animasiJalan=false;
-      return;
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-
+// ===== GERAK BLOK - VERSI SMOOTH & SEIMBANG =====
+// Nggak pake spring goyang lagi. Pake CSS transition, jadi dijamin 60fps + halus.
+// Efek molor cuma dikit (1.08x) biar tetep keliatan cair tapi seimbang.
 function pindah(btn,page,index){
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
   btn.classList.add('aktif');
-  targetX=btn.offsetLeft-10;
-  targetW=btn.offsetWidth;
-  gerakBlok();
+
+  // 1. Hitung tujuan
+  let targetX = btn.offsetLeft - 10;
+  let targetW = btn.offsetWidth;
+
+  // 2. Fase molor dikit pas jalan (biar cair)
+  blok.style.transform = `translateX(${targetX}px) scaleX(1.08) scaleY(0.97)`;
+  blok.style.width = targetW + 'px';
+  blok.style.borderRadius = '38% 62% 60% 40% / 58% 44% 56% 42%';
+
+  // 3. Balikin ke bentuk bulat pas udah nyampe - timing pas 240ms
+  clearTimeout(blok._timer);
+  blok._timer = setTimeout(()=>{
+    blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
+    blok.style.borderRadius = '999px';
+  }, 240);
+
   document.querySelectorAll('.konten > div').forEach(d=>d.classList.add('hilang'));
   let t=document.getElementById('page-'+page); t.classList.remove('hilang'); t.classList.remove('muncul'); void t.offsetWidth; t.classList.add('muncul');
   if(page==='info') loadGempa(),loadCuaca(),loadBerita();
-  if(navigator.vibrate) navigator.vibrate(8);
+  if(navigator.vibrate) navigator.vibrate(5);
 }
 window.addEventListener('load',()=>{
   let b=document.querySelector('.nav button.aktif');
-  blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth;
-  blok.style.transform=`translateX(${blokX}px)`; blok.style.width=blokW+'px';
+  // Pas pertama load, tanpa animasi biar langsung pas
+  blok.style.transition = 'none';
+  blok.style.transform = `translateX(${b.offsetLeft-10}px)`;
+  blok.style.width = b.offsetWidth + 'px';
+  // Balikin transisinya setelah nempel
+  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ blok.style.transition = ''; }); });
   loadProfil();
 });
 function isiSearch(teks){document.getElementById('inputSearch').value=teks; cariGoogle();}
