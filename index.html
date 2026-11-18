@@ -19,7 +19,7 @@ body{background:#0a0a0a;color:#fff;min-height:100vh}
 .kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
 .kartu h2{font-size:18px;margin-bottom:6px}
 .kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
-input[type=text],input[type=password],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
+input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
 input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
 button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
 button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
@@ -36,15 +36,6 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px}
-
-/* TAMBAHAN KHUSUS AI - LAINNYA SAMA PERSIS */
-.chat-box{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px 2px}
-.msg{max-width:85%;padding:12px 14px;border-radius:18px;font-size:14px;line-height:1.5;text-align:left;white-space:pre-wrap;word-break:break-word}
-.msg-user{align-self:flex-end;background:#fff;color:#111;border-bottom-right-radius:6px}
-.msg-ai{align-self:flex-start;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);border-bottom-left-radius:6px}
-.chat-input-row{display:flex;gap:8px;align-items:flex-end;margin-top:10px}
-.chat-input-row textarea{flex:1;margin:0;max-height:100px;resize:none}
-.chat-input-row button{width:52px;height:52px;border-radius:16px;border:none;background:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
 
 /* ===== NAV - GERAK BLOK FOKUS ===== */
 .nav-wrap{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;width:min(430px,calc(100% - 28px))}
@@ -120,30 +111,11 @@ input[type=range]{width:100%;margin-top:8px}
     <div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Treat Your Better.</p></div>
     <div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div>
   </div>
-
-  <!-- ===== INI DOANG YANG DIGANTI: SEARCH JADI AI ===== -->
   <div id="page-search" class="hilang">
-    <h1>AI Chat 🤖</h1><p>Gratis pake Groq • Langsung jawab</p>
-    <div class="kartu" id="aiSetupBox">
-      <h2>🔑 Setting API Key (1x aja)</h2>
-      <p style="font-size:13px">Gratis, tanpa kartu kredit. Key kesimpen di HP lu doang.</p>
-      <input type="password" id="groqKey" placeholder="Paste key gsk_... disini">
-      <button class="btn" onclick="simpanKey()">💾 Simpan & Mulai Chat</button>
-      <button class="btn btn2" onclick="window.open('https://console.groq.com/keys','_blank')">🌐 Dapetin Key Gratis →</button>
-    </div>
-    <div class="kartu" id="aiChatBox" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center"><h2>💬 AIRR AI</h2><span class="badge badgeHijau">ONLINE</span></div>
-      <select id="aiModel"><option value="llama-3.3-70b-versatile">Llama 3.3 70B - Paling Pinter</option><option value="llama-3.1-8b-instant">Llama 3.1 8B - Paling Cepet</option><option value="openai/gpt-oss-120b">GPT-OSS 120B - Terbaru</option></select>
-      <div class="chat-box" id="chatBox" style="margin-top:12px"><div class="msg msg-ai">Halo Jarr! 👋 Gue AIRR AI. Tanya apa aja, gas!</div></div>
-      <p style="margin-top:8px">Cepet tanya:</p>
-      <span class="chip" onclick="tanyaCepet('Buatin nama keren buat game Roblox')">🎮 Nama Game Roblox</span>
-      <span class="chip" onclick="tanyaCepet('Buatin script Roblox biar bisa double jump')">🛠️ Script Roblox</span>
-      <div class="chat-input-row"><textarea id="chatInput" rows="1" placeholder="Tanya apa aja..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();kirimChat()}"></textarea><button onclick="kirimChat()">➤</button></div>
-      <button class="btn btn2" style="padding:8px;font-size:12px" onclick="hapusChat()">🗑️ Hapus Chat • Ganti Key</button>
-    </div>
+    <h1>Search </h1><p>connect Google</p>
+    <div class="kartu"><h2>🔎 Pencarian Google</h2><input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()"><button class="btn" onclick="cariGoogle()">Cari di Google →</button><button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button><p style="margin-top:10px">Trending:</p><span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span><span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span><span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span><span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span></div>
+    <div class="kartu"><h2>🌐 Mungkin u cari</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
   </div>
-  <!-- ===== SAMPE SINI DOANG YANG DIGANTI ===== -->
-
   <div id="page-tools" class="hilang">
     <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
     <div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
@@ -165,7 +137,7 @@ input[type=range]{width:100%;margin-top:8px}
   <div class="nav" id="nav">
     <div class="blok" id="blok"></div>
     <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
-    <button onclick="pindah(this,'search',1)"><span class="ikon">🤖</span>AI</button>
+    <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
     <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
     <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
     <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
@@ -223,7 +195,6 @@ function pindah(btn,page,index){
   document.querySelectorAll('.konten > div').forEach(d=>d.classList.add('hilang'));
   let t=document.getElementById('page-'+page); t.classList.remove('hilang'); t.classList.remove('muncul'); void t.offsetWidth; t.classList.add('muncul');
   if(page==='info') loadGempa(),loadCuaca(),loadBerita();
-  if(page==='search') cekKey();
   if(navigator.vibrate) navigator.vibrate(8);
 }
 window.addEventListener('load',()=>{
@@ -231,75 +202,23 @@ window.addEventListener('load',()=>{
   blokX=targetX=b.offsetLeft-10; blokW=targetW=b.offsetWidth;
   blok.style.transform=`translateX(${blokX}px)`; blok.style.width=blokW+'px';
   loadProfil();
-  cekKey();
 });
-
-// ===== INI DOANG YANG DIGANTI: DARI SEARCH GOOGLE JADI AI =====
-let riwayatChat = [{role:"system", content:"Kamu adalah AIRR AI, asisten gaul Indonesia, dari Jogja. Jawab pake bahasa Indonesia santai, campur Jawa dikit, lucu, singkat tapi jelas."}];
-function cekKey(){
-  let key = localStorage.getItem('groqKey');
-  if(key){
-    document.getElementById('aiSetupBox').style.display='none';
-    document.getElementById('aiChatBox').style.display='block';
-    document.getElementById('groqKey').value = key;
-  } else {
-    document.getElementById('aiSetupBox').style.display='block';
-    document.getElementById('aiChatBox').style.display='none';
-  }
-}
-function simpanKey(){
-  let k = document.getElementById('groqKey').value.trim();
-  if(!k.startsWith('gsk_')){ alert('Key-nya salah mas, harusnya depannya gsk_'); return; }
-  localStorage.setItem('groqKey', k);
-  cekKey();
-  alert('Key tersimpan! Gas chat ✅');
-}
-function hapusChat(){
-  if(confirm('Hapus chat + ganti key?')){ localStorage.removeItem('groqKey'); riwayatChat = riwayatChat.slice(0,1); document.getElementById('chatBox').innerHTML='<div class="msg msg-ai">Halo! Tanya apa aja...</div>'; cekKey(); }
-}
-function tambahPesan(teks, siapa){
-  let box = document.getElementById('chatBox');
-  let div = document.createElement('div');
-  div.className = 'msg ' + (siapa==='user' ? 'msg-user' : 'msg-ai');
-  div.innerText = teks;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-  return div;
-}
-function tanyaCepet(teks){ document.getElementById('chatInput').value = teks; kirimChat(); }
-function goSearch(teks){ pindah(document.querySelectorAll('.nav button')[1],'search',1); setTimeout(()=>{ document.getElementById('chatInput').value=teks; kirimChat(); },300); }
-function isiSearch(teks){ goSearch(teks); }
-async function kirimChat(){
-  let input = document.getElementById('chatInput');
-  let teks = input.value.trim();
-  if(!teks) return;
-  let key = localStorage.getItem('groqKey');
-  if(!key){ alert('Masukin API Key dulu mas'); cekKey(); return; }
-  tambahPesan(teks, 'user');
-  input.value = '';
-  riwayatChat.push({role:"user", content: teks});
-  let loading = tambahPesan('AIRR lagi mikir...', 'ai');
-  try{
-    let res = await fetch('https://api.groq.com/openai/v1/chat/completions',{
-      method:'POST',
-      headers:{ 'Authorization':'Bearer '+key, 'Content-Type':'application/json' },
-      body: JSON.stringify({ model: document.getElementById('aiModel').value, messages: riwayatChat, temperature: 0.7, max_tokens: 1000 })
-    });
-    let j = await res.json();
-    if(j.error) throw new Error(j.error.message);
-    let jawaban = j.choices[0].message.content;
-    loading.remove();
-    tambahPesan(jawaban, 'ai');
-    riwayatChat.push({role:"assistant", content: jawaban});
-  }catch(e){
-    loading.remove();
-    tambahPesan('Waduh error: '+e.message+'\nCek key-nya, mungkin salah / habis limit.', 'ai');
-  }
-}
-// ===== SAMPE SINI DOANG YANG DIGANTI =====
-
+function isiSearch(teks){document.getElementById('inputSearch').value=teks; cariGoogle();}
+function goSearch(teks){pindah(document.querySelectorAll('.nav button')[1],'search',1); document.getElementById('inputSearch').value=teks;}
+function cariGoogle(mode){let q=document.getElementById('inputSearch').value.trim(); if(!q){alert('Tulis kata kunci dulu mas');return;} if(mode==='gambar') window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q),'_blank'); else window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
 let fotoAsli=null;
 function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.result;}; r.readAsDataURL(f);}
 function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasHD'), ctx=c.getContext('2d'); c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value; ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`; ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctx.drawImage(fotoAsli,0,0,c.width,c.height); document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95); document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px`;}
 function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu mas');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
-function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; appl
+function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
+function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;}catch(e){box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;}}
+async function loadCuaca(){let box=document.getElementById('cuacaBox'); try{let res=await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001'); let j=await res.json(); let d=j.data[0].cuaca[0][0]; box.innerHTML=`<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;}catch(e){box.innerHTML=`🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;}}
+async function loadBerita(){let box=document.getElementById('beritaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss'); let j=await res.json(); box.innerHTML=j.items.slice(0,5).map(it=>`<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');}catch(e){box.innerHTML=`<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;}}
+function loadProfil(){let nama=localStorage.getItem('nama')||'Jarr'; let bio=localStorage.getItem('bio')||'Yogyakarta • Seneng ngoprek HTML modal AI😹'; let foto=localStorage.getItem('fotoProfil'); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; document.getElementById('editNama').value=nama; document.getElementById('editBio').value=bio; if(foto) document.getElementById('avatarPreview').src=foto;}
+function simpanProfil(){let nama=document.getElementById('editNama').value.trim()||'Jarr'; let bio=document.getElementById('editBio').value.trim()||'Yogyakarta'; localStorage.setItem('nama',nama); localStorage.setItem('bio',bio); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; alert('Profil tersimpan! ✅ '+nama);}
+function gantiFotoProfil(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{document.getElementById('avatarPreview').src=ev.target.result; localStorage.setItem('fotoProfil',ev.target.result);}; r.readAsDataURL(f);}
+function resetProfil(){localStorage.clear(); location.reload();}
+</script>
+</body>
+</html>
