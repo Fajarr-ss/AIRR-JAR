@@ -37,6 +37,383 @@ img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:
 .berita-item b{font-size:14px;line-height:1.4;display:block}
 .berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
 input[type=range]{width:100%;margin-top:8px}
+/* ===== NAV - SMOOTH + MELEYOT DOMINAN TAPI NGGAK OVER ===== */
+.nav-wrap{position:fixed;left:0;right:0;margin:0 auto;bottom:18px;z-index:10;width:min(430px,calc(100vw - 32px));max-width:calc(100vw - 32px);}
+.nav{position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;
+background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.16));
+backdrop-filter:blur(24px) saturate(180%);
+-webkit-backdrop-filter:blur(24px) saturate(180%);
+border:1px solid rgba(255,255,255,.35);
+border-radius:999px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
+
+overflow:hidden;
+
+width:100%;
+
+}
+
+.nav::before{
+
+content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;
+
+background:linear-gradient(180deg, rgba(255,255,255,.55), transparent);
+
+pointer-events:none;z-index:2;
+
+}
+
+.blok{
+
+position:absolute;top:8px;left:10px;width:68px;height:56px;
+
+background:linear-gradient(135deg,
+
+rgba(255,255,255,.62) 0%,
+
+rgba(195,202,215,.40) 38%,
+
+rgba(165,175,190,.34) 68%,
+
+rgba(255,255,255,.50) 100%);
+
+backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
+
+-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(1.15);
+
+border:1px solid rgba(255,255,255,.68);
+
+border-radius:999px;
+
+box-shadow:
+
+0 8px 22px rgba(0,0,0,.28),
+
+inset 0 1px 0 rgba(255,255,255,.95),
+
+inset 0 -3px 8px rgba(255,255,255,.28);
+
+/* Durasi dibikin 0.55s biar meleyotnya keliatan */
+
+transition:transform .55s cubic-bezier(.22,1,.36,1), width .55s cubic-bezier(.22,1,.36,1), border-radius .55s cubic-bezier(.22,1,.36,1);
+
+will-change:transform,width;
+
+z-index:0;
+
+pointer-events:none;
+
+transform-origin:center center;
+
+}
+
+.blok::before{
+
+content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;
+
+border-radius:999px;
+
+background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.12) 60%, transparent);
+
+pointer-events:none;
+
+}
+
+.blok::after{
+
+content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;
+
+border-radius:999px;
+
+background:linear-gradient(180deg, transparent, rgba(255,255,255,.48));
+
+filter:blur(1px);pointer-events:none;
+
+}
+
+.nav button{
+
+position:relative;z-index:1;flex:1;border:none;background:transparent;
+
+display:flex;flex-direction:column;align-items:center;gap:2px;
+
+padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);
+
+font-size:10px;font-weight:600;transition:color .35s ease;
+
+-webkit-tap-highlight-color:transparent;
+
+min-width:0;
+
+}
+
+.nav button .ikon{font-size:22px;line-height:1;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+
+.nav button.aktif{color:#111}
+
+.nav button.aktif .ikon{transform:scale(1.15) translateY(-1px)}
+
+.nav button:active{transform:scale(.94)}
+
+.hilang{display:none}
+
+.muncul{animation:muncul .45s cubic-bezier(.22,1,.36,1) both}
+
+@keyframes muncul{from{opacity:0;transform:translateY(10px) scale(.98);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div>
+
+
+
+<div class="konten">
+
+<div id="page-home">
+
+<h1>AIRR X Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG</p>
+
+<div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Treat Your Better.</p></div>
+
+<div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div>
+
+</div>
+
+<div id="page-search" class="hilang">
+
+<h1>Search </h1><p>connect Google</p>
+
+<div class="kartu"><h2>🔎 Pencarian Google</h2><input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter') cariGoogle()"><button class="btn" onclick="cariGoogle()">Cari di Google →</button><button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button><p style="margin-top:10px">Trending:</p><span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span><span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span><span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span><span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span></div>
+
+<div class="kartu"><h2>🌐 Mungkin u cari</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
+
+</div>
+
+<div id="page-tools" class="hilang">
+
+<h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
+
+<div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
+
+<div class="kartu"><h2>🎬 2. HD VIDEO - Jernihkan Video</h2><p>Pilih video, atur filter HD, terus play.</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"><button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button></div>
+
+</div>
+
+<div id="page-info" class="hilang">
+
+<h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p>
+
+<div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Loading data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div>
+
+<div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Loading cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div>
+
+<div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div>
+
+</div>
+
+<div id="page-profil" class="hilang">
+
+<h1>Profil 👤</h1><p>Ganti nama & foto, langsung kesimpan</p>
+
+<div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset</button></div></div>
+
+</div>
+
+</div>
+
+
+
+<div class="nav-wrap">
+
+<div class="nav" id="nav">
+
+<div class="blok" id="blok"></div>
+
+<button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+
+<button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
+
+<button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
+
+<button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
+
+<button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+let blok=document.getElementById('blok');
+
+
+
+// ===== GERAK BLOK - MELEYOT DOMINAN TAPI NGGAK OVER =====
+
+// scaleX 1.24 = molor kerasa, scaleY 0.86 = gepeng kerasa
+
+// Tapi masih di bawah batas over (1.45) jadi nggak pecah / nggak nonjol
+
+function pindah(btn,page,index){
+
+document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
+
+btn.classList.add('aktif');
+
+let targetX = btn.offsetLeft - 10;
+
+let targetW = btn.offsetWidth;
+
+
+
+// 1. FASE MELEYOT - pas lagi jalan, blok molor + gepeng
+
+blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
+
+blok.style.width = targetW + 'px';
+
+blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
+
+
+
+// 2. FASE BALIK BULAT - pas udah nyampe, balik pelan ke bentuk normal
+
+clearTimeout(blok._timer);
+
+blok._timer = setTimeout(()=>{
+
+blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
+
+blok.style.borderRadius = '999px';
+
+}, 280);
+
+
+
+document.querySelectorAll('.konten > div').forEach(d=>d.classList.add('hilang'));
+
+let t=document.getElementById('page-'+page); t.classList.remove('hilang'); t.classList.remove('muncul'); void t.offsetWidth; t.classList.add('muncul');
+
+if(page==='info') loadGempa(),loadCuaca(),loadBerita();
+
+if(navigator.vibrate) navigator.vibrate(5);
+
+}
+
+window.addEventListener('load',()=>{
+
+let b=document.querySelector('.nav button.aktif');
+
+blok.style.transition = 'none';
+
+blok.style.transform = `translateX(${b.offsetLeft-10}px)`;
+
+blok.style.width = b.offsetWidth + 'px';
+
+requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ blok.style.transition = ''; }); });
+
+loadProfil();
+
+});
+
+function isiSearch(teks){document.getElementById('inputSearch').value=teks; cariGoogle();}
+
+function goSearch(teks){pindah(document.querySelectorAll('.nav button')[1],'search',1); document.getElementById('inputSearch').value=teks;}
+
+function cariGoogle(mode){let q=document.getElementById('inputSearch').value.trim(); if(!q){alert('Tulis kata kunci dulu mas');return;} if(mode==='gambar') window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q),'_blank'); else window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+
+let fotoAsli=null;
+
+function loadFoto(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{fotoAsli=new Image(); fotoAsli.onload=()=>{document.getElementById('fotoPreview').src=ev.target.result; document.getElementById('fotoPreview').style.display='block'; prosesHD();}; fotoAsli.src=ev.target.result;}; r.readAsDataURL(f);}
+
+function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasHD'), ctx=c.getContext('2d'); c.width=fotoAsli.width*2; c.height=fotoAsli.height*2; let tajam=document.getElementById('tajam').value/100, cerah=document.getElementById('cerah').value; ctx.filter=`brightness(${cerah}%) contrast(${100+tajam*30}%) saturate(110%)`; ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctx.drawImage(fotoAsli,0,0,c.width,c.height); document.getElementById('fotoPreview').src=c.toDataURL('image/jpeg',0.95); document.getElementById('fotoStatus').innerText=`Status: HD Siap! ${c.width}x${c.height}px`;}
+
+function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu mas');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
+
+function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
+
+function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+
+async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;}catch(e){box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;}}
+
+async function loadCuaca(){let box=document.getElementById('cuacaBox'); try{let res=await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001'); let j=await res.json(); let d=j.data[0].cuaca[0][0]; box.innerHTML=`<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;}catch(e){box.innerHTML=`🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;}}
+
+async function loadBerita(){let box=document.getElementById('beritaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss'); let j=await res.json(); box.innerHTML=j.items.slice(0,5).map(it=>`<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');}catch(e){box.innerHTML=`<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;}}
+
+function loadProfil(){let nama=localStorage.getItem('nama')||'Jarr'; let bio=localStorage.getItem('bio')||'Yogyakarta • Seneng ngoprek HTML modal AI😹'; let foto=localStorage.getItem('fotoProfil'); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; document.getElementById('editNama').value=nama; document.getElementById('editBio').value=bio; if(foto) document.getElementById('avatarPreview').src=foto;}
+
+function simpanProfil(){let nama=document.getElementById('editNama').value.trim()||'Jarr'; let bio=document.getElementById('editBio').value.trim()||'Yogyakarta'; localStorage.setItem('nama',nama); localStorage.setItem('bio',bio); document.getElementById('namaProfil').innerText=nama; document.getElementById('namaHome').innerText=nama; document.getElementById('bioProfil').innerText=bio; alert('Profil tersimpan! ✅ '+nama);}
+
+function gantiFotoProfil(e){let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=(ev)=>{document.getElementById('avatarPreview').src=ev.target.result; localStorage.setItem('fotoProfil',ev.target.result);}; r.readAsDataURL(f);}
+
+function resetProfil(){localStorage.clear(); location.reload();}
+
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+tambahkan vitur donload vidio dan musik tiktok youtube instagram di bagian tools yang bisa lamgsung di donload, tidak mengubah lainnya
+
+Berikut adalah kode HTML lengkap dengan tambahan fitur Downloader Video & Musik (TikTok, YouTube, Instagram) di bagian Tools (kartu ke-3), tanpa mengubah tampilan, animasi liquid glass, maupun fitur lainnya yang sudah ada.
+
+Karena browser tidak bisa mengunduh langsung dari server TikTok/YouTube/IG tanpa backend khusus akibat kebijakan keamanan CORS, fitur ini menghubungkan langsung ke API publik Cobalt (cobalt.tools) agar link langsung diproses dan bisa diunduh dalam bentuk Video (MP4) atau Musik (MP3), lengkap dengan tombol cadangan jika server utama sedang sibuk.
+
+HTML
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRR - J</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
+html,body{overflow-x:hidden;max-width:100vw}
+body{background:#0a0a0a;color:#fff;min-height:100vh;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}
+.bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}
+.bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}
+@keyframes gerak{to{transform:translate(80px,60px) scale(1.2)}}
+@keyframes gerak2{to{transform:translate(-80px,-60px) scale(1.1)}}
+.konten{position:relative;z-index:1;padding:28px 20px 140px;text-align:center;overflow-x:hidden}
+.konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}
+.konten p{color:rgba(255,255,255,.7);margin-top:8px;font-size:14px}
+.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left}
+.kartu h2{font-size:18px;margin-bottom:6px}
+.kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}
+input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
+button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
+button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
+button.btn:active{transform:scale(.97)}
+.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer}
+img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:none;background:#000}
+.avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}
+.row{display:flex;gap:8px}
+.row .btn{flex:1}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#ff4444;font-size:11px;font-weight:800}
+.badgeHijau{background:#00c853}.badgeBiru{background:#2196f3}
+.berita-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.berita-item:last-child{border:none}
+.berita-item b{font-size:14px;line-height:1.4;display:block}
+.berita-item span{font-size:12px;color:rgba(255,255,255,.6)}
+input[type=range]{width:100%;margin-top:8px}
 
 /* ===== NAV - SMOOTH + MELEYOT DOMINAN TAPI NGGAK OVER ===== */
 .nav-wrap{
@@ -128,9 +505,22 @@ input[type=range]{width:100%;margin-top:8px}
     <div class="kartu"><h2>🌐 Mungkin u cari</h2><p><span class="chip" onclick="window.open('https://www.youtube.com/results?search_query='+document.getElementById('inputSearch').value||'viral','_blank')">▶️ YouTube</span><span class="chip" onclick="window.open('https://www.google.com/maps/search/'+document.getElementById('inputSearch').value,'_blank')">📍 Maps</span><span class="chip" onclick="window.open('https://translate.google.com/?sl=auto&tl=id&text='+document.getElementById('inputSearch').value,'_blank')">🌍 Translate</span></p></div>
   </div>
   <div id="page-tools" class="hilang">
-    <h1>Tools 🛠️</h1><p>HD Foto & HD Video - Gratis, tanpa upload ke server</p>
+    <h1>Tools 🛠️</h1><p>HD Foto, Video & Downloader - Gratis</p>
     <div class="kartu"><h2>📸 1. HD FOTO - Jernihkan Foto Buram</h2><p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value; prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value; prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" style="font-size:12px;margin-top:6px">Status: Durung ana foto</p><canvas id="canvasHD" style="display:none"></canvas></div>
     <div class="kartu"><h2>🎬 2. HD VIDEO - Jernihkan Video</h2><p>Pilih video, atur filter HD, terus play.</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras / HD <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value; applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value; applyVideoFilter()"><button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button></div>
+    <div class="kartu">
+      <h2>⬇️ 3. DOWNLOADER - TikTok, YT & IG</h2>
+      <p>Tempel link video/musik (tanpa watermark) lalu pilih format download.</p>
+      <div class="row" style="margin-top:6px">
+        <input type="text" id="dlUrl" placeholder="Tempel link TikTok / YouTube / IG..." style="margin-top:0">
+        <button class="btn btn2" onclick="pasteLink()" style="width:auto;margin-top:0;padding:0 14px">📋 Paste</button>
+      </div>
+      <div class="row">
+        <button class="btn" onclick="prosesDownload('video')">🎬 Download Video</button>
+        <button class="btn btn2" onclick="prosesDownload('audio')">🎵 Download Musik</button>
+      </div>
+      <div id="dlHasil" style="margin-top:12px"></div>
+    </div>
   </div>
   <div id="page-info" class="hilang">
     <h1>Info 📡</h1><p>Live dari BMKG & Berita Indonesia</p>
@@ -201,6 +591,77 @@ function prosesHD(){if(!fotoAsli) return; let c=document.getElementById('canvasH
 function downloadHD(){if(!fotoAsli){alert('Pilih foto dulu mas');return;} prosesHD(); let a=document.createElement('a'); a.download='foto-HD-'+Date.now()+'.jpg'; a.href=document.getElementById('canvasHD').toDataURL('image/jpeg',0.95); a.click();}
 function loadVideo(e){let f=e.target.files[0]; if(!f) return; let v=document.getElementById('videoPreview'); v.src=URL.createObjectURL(f); v.style.display='block'; applyVideoFilter(); v.play();}
 function applyVideoFilter(){let v=document.getElementById('videoPreview'); let kon=document.getElementById('vidFilter').value, sat=document.getElementById('satFilter').value; v.style.filter=`contrast(${kon}%) saturate(${sat}%) brightness(110%)`;}
+
+// ===== DOWNLOADER TIKTOK / YT / IG =====
+async function pasteLink(){
+  try{
+    let teks = await navigator.clipboard.readText();
+    document.getElementById('dlUrl').value = teks;
+  }catch(e){
+    alert('Izin clipboard ditolak browser, tempel manual ya mas.');
+  }
+}
+async function prosesDownload(mode){
+  let url = document.getElementById('dlUrl').value.trim();
+  let box = document.getElementById('dlHasil');
+  if(!url){alert('Tempel link video TikTok, YouTube, atau IG dulu mas!');return;}
+  
+  let platform = url.includes('tiktok') ? 'TikTok' : (url.includes('youtu') ? 'YouTube' : (url.includes('instagram') ? 'Instagram' : 'Media'));
+  box.innerHTML = `<p style="font-size:13px">⏳ Sedang memproses ${mode === 'audio' ? 'Musik (MP3)' : 'Video (MP4)'} dari <b>${platform}</b>...</p>`;
+
+  try{
+    // Menggunakan Cobalt API (mendukung TikTok tanpa watermark, YouTube, dan Instagram)
+    let res = await fetch('https://api.cobalt.tools/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        url: url,
+        downloadMode: mode === 'audio' ? 'audio' : 'auto',
+        audioFormat: 'mp3',
+        videoQuality: '1080',
+        tiktokFullAudio: true
+      })
+    });
+    let data = await res.json();
+
+    if(data.url){
+      let namaFile = `${platform}-${mode}-${Date.now()}.${mode === 'audio' ? 'mp3' : 'mp4'}`;
+      box.innerHTML = `
+        <span class="badge badgeHijau">✅ Siap Diunduh (${platform})</span>
+        <a href="${data.url}" download="${namaFile}" target="_blank" style="text-decoration:none">
+          <button class="btn" style="background:#00c853;color:#fff;margin-top:8px">⬇️ Simpan ${mode === 'audio' ? 'Musik (MP3)' : 'Video HD (MP4)'} Sekarang</button>
+        </a>
+        <p style="font-size:11px;margin-top:6px;opacity:.7">*Jika file terbuka di tab baru, klik titik 3 di pojok video/audio lalu pilih <b>Download</b>.</p>
+      `;
+    } else if(data.picker && data.picker.length > 0){
+      let listHtml = data.picker.map((item, i) => `
+        <a href="${item.url}" target="_blank" style="text-decoration:none">
+          <button class="btn btn2" style="margin-top:6px">⬇️ Download Slide/Media #${i+1}</button>
+        </a>
+      `).join('');
+      box.innerHTML = `<span class="badge badgeHijau">✅ Ditemukan ${data.picker.length} Media</span>` + listHtml;
+    } else {
+      throw new Error(data.error?.code || 'Gagal mengambil link langsung');
+    }
+  }catch(err){
+    // Fallback otomatis ke server alternatif jika API utama limit/CORS
+    let fallbackUrl = '';
+    if(platform === 'TikTok') fallbackUrl = 'https://ssstik.io/id';
+    else if(platform === 'YouTube') fallbackUrl = 'https://y2mate.nu/';
+    else if(platform === 'Instagram') fallbackUrl = 'https://snapinsta.app/';
+    else fallbackUrl = 'https://cobalt.tools/';
+
+    box.innerHTML = `
+      <span class="badge">⚠️ Server Sibuk / Terbatas</span>
+      <p style="font-size:12px;margin-top:6px">Link otomatis sedang penuh, klik tombol di bawah untuk langsung unduh via server cadangan:</p>
+      <button class="btn" onclick="navigator.clipboard.writeText('${url}'); window.open('${fallbackUrl}','_blank')">🚀 Buka Server Cadangan (Link Otomatis Tersalin)</button>
+    `;
+  }
+}
+
 async function loadGempa(){let box=document.getElementById('gempaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'); let j=await res.json(); let g=j.Infogempa.gempa; box.innerHTML=`<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;}catch(e){box.innerHTML=`<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;}}
 async function loadCuaca(){let box=document.getElementById('cuacaBox'); try{let res=await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001'); let j=await res.json(); let d=j.data[0].cuaca[0][0]; box.innerHTML=`<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;}catch(e){box.innerHTML=`🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;}}
 async function loadBerita(){let box=document.getElementById('beritaBox'); box.innerHTML='Loading...'; try{let res=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss'); let j=await res.json(); box.innerHTML=j.items.slice(0,5).map(it=>`<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');}catch(e){box.innerHTML=`<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;}}
