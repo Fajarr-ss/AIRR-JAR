@@ -1,49 +1,47 @@
-async function hapusBackground() {
-  const fileInput = document.getElementById('rmbgInput');
-  const statusEl = document.getElementById('rmbgStatus');
-  const btnEl = document.getElementById('btnHapusBg');
-
-  if (!fileInput.files || !fileInput.files[0]) {
-    toast('Pilih foto terlebih dahulu!');
-    return;
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
-  const formData = new FormData();
-  formData.append('image_file', fileInput.files[0]);
-  formData.append('size', 'auto');
-
-  btnEl.disabled = true;
-  btnEl.innerText = '⏳ Memproses...';
-  statusEl.innerText = 'Status: Mengirim foto lewat server Vercel...';
+  const apiKey = process.env.REMOVE_BG_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'REMOVE_BG_API_KEY belum diatur di Vercel.' });
+  }
 
   try {
-    const response = await fetch('/api/removebg', {
-      method: 'POST',
-      body: formData
-    });
+    const chunks = [];
+    for await (const chunk of req) {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    }
+    const rawBody = Buffer.concat(chunks);
 
-    if (!response.ok) {
-      let errMsg = `HTTP ${response.status}`;
-      try {
-        const errJson = await response.json();
-        errMsg = errJson.errors?.[0]?.title || errJson.error || errMsg;
-      } catch (_) {}
-      throw new Error(errMsg);
+    const contentType = req.headers['content-type'];
+    if (!contentType || !contentType.includes('multipart/form-data')) {
+      return res.status(400).json({ error: 'Content-Type harus multipart/form-data.' });
     }
 
-    const blob = await response.blob();
-    if (hasilRmbgUrl) URL.revokeObjectURL(hasilRmbgUrl);
-    hasilRmbgUrl = URL.createObjectURL(blob);
+    const upstreamRes = await fetch('https://api.remove.bg/v1.0/removebg', {
+      method: 'POST',
+      headers: {
+        'X-Api-Key': apiKey,
+        'Content-Type': contentType
+      },
+      body: rawBody
+    });
 
-    const hasilImg = document.getElementById('rmbgHasil');
-    hasilImg.src = hasilRmbgUrl;
-    hasilImg.style.display = 'block';
-    document.getElementById('btnDownloadRmbg').style.display = 'block';
-    statusEl.innerText = 'Status: Berhasil! Background terhapus ✅';
+    const arrayBuffer = await upstreamRes.arrayBuffer();
+    const outputBuffer = Buffer.from(arrayBuffer);
+
+    if (!upstreamRes.ok) {
+      res.status(upstreamRes.status);
+      res.setHeader('Content-Type', upstreamRes.headers.get('content-type') || 'application/json');
+      return res.send(outputBuffer);
+    }
+
+    res.status(200);
+    res.setHeader('Content-Type', upstreamRes.headers.get('content-type') || 'image/png');
+    return res.send(outputBuffer);
   } catch (err) {
-    statusEl.innerText = `Status: Gagal (${err.message})`;
-  } finally {
-    btnEl.disabled = false;
-    btnEl.innerText = '✨ Hapus Background Sekarang';
+    return res.status(500).json({ error: 'Gagal memproses ke Remove.bg', detail: err.message });
   }
 }
