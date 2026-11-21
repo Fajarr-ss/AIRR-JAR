@@ -42,6 +42,9 @@
       --accent-badge: #6366f1;
       --progress-bg: rgba(255, 255, 255, 0.12);
       --progress-fill: linear-gradient(90deg, #ec4899, #8b5cf6);
+      --track-bg: linear-gradient(180deg, #4b5563 0%, #6b7280 55%, #4b5563 100%);
+      --track-border: #111827;
+      --knob-bg: radial-gradient(circle at 35% 30%, #9ca3af 0%, #6b7280 65%, #4b5563 100%);
     }
 
     /* Shift Pagi / Siang (Fresh Cyan, Daylight Emerald) */
@@ -70,6 +73,9 @@
       --accent-badge: #0284c7;
       --progress-bg: rgba(15, 23, 42, 0.1);
       --progress-fill: linear-gradient(90deg, #38bdf8, #34d399);
+      --track-bg: linear-gradient(180deg, #e5e7eb 0%, #f3f4f6 55%, #d1d5db 100%);
+      --track-border: #1f2937;
+      --knob-bg: radial-gradient(circle at 35% 30%, #9ca3af 0%, #6b7280 65%, #4b5563 100%);
     }
 
     /* Shift Sore / Senja (Warm Sunset Amber, Magenta Coral) */
@@ -98,6 +104,9 @@
       --accent-badge: #ea580c;
       --progress-bg: rgba(255, 255, 255, 0.12);
       --progress-fill: linear-gradient(90deg, #ff8c00, #ec4899);
+      --track-bg: linear-gradient(180deg, #9a3412 0%, #c2410c 55%, #7c2d12 100%);
+      --track-border: #27100a;
+      --knob-bg: radial-gradient(circle at 35% 30%, #fdba74 0%, #ea580c 68%, #9a3412 100%);
     }
 
     html, body {
@@ -304,22 +313,116 @@
       transform: translateY(-1px);
     }
 
-    .shift-selector {
+    /* Capsule Toggle Switch (Cloud + Sun Knob Style) */
+    .shift-capsule-row {
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 10px;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
     }
 
-    .shift-chip {
+    .shift-capsule-track {
+      position: relative;
       flex: 1;
-      min-width: 75px;
-      text-align: center;
+      height: 56px;
+      border-radius: 999px;
+      background: var(--track-bg);
+      border: 2.5px solid var(--track-border);
+      box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.32), 0 4px 10px rgba(0, 0, 0, 0.22);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .shift-clouds-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .shift-cloud-svg {
+      position: absolute;
+      width: 56px;
+      height: 36px;
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    }
+
+    .cloud-left-top {
+      left: 14px;
+      top: 5px;
+      width: 58px;
+      height: 36px;
+    }
+
+    .cloud-left-bottom {
+      left: 18px;
+      bottom: 3px;
+      width: 56px;
+      height: 34px;
+    }
+
+    .cloud-right-mid {
+      left: 56px;
+      top: 12px;
+      width: 54px;
+      height: 32px;
+    }
+
+    .shift-capsule-track[data-pos="sore"] .cloud-left-top {
+      transform: translateX(6px);
+    }
+
+    .shift-capsule-track[data-pos="malam"] .shift-cloud-svg {
+      opacity: 0.45;
+      transform: translateX(-8px);
+    }
+
+    .shift-sun-knob {
+      position: relative;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--knob-bg);
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 3px rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
       justify-content: center;
-      padding: 9px 6px;
-      font-weight: 700;
-      border-radius: 14px;
+      transform: translateX(calc(100% + 92px));
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s ease;
+    }
+
+    .shift-capsule-track[data-pos="sore"] .shift-sun-knob {
+      transform: translateX(calc(50% + 46px));
+    }
+
+    .shift-capsule-track[data-pos="malam"] .shift-sun-knob {
+      transform: translateX(0px);
+    }
+
+    .shift-knob-svg {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .shift-capsule-track:active .shift-knob-svg {
+      transform: rotate(35deg) scale(0.95);
+    }
+
+    .shift-auto-btn {
+      padding: 12px 14px;
+      border-radius: 18px;
       font-size: 12px;
+      font-weight: 700;
+      margin: 0;
+      white-space: nowrap;
     }
 
     /* Progress Bar */
@@ -673,12 +776,37 @@
       <!-- Quick Shift Switcher Card -->
       <div class="kartu">
         <h2>🔄 Pemilih Mode Shift ('Ber-Shift')</h2>
-        <p style="margin-bottom:6px">Ganti nuansa tampilan secara instan atau biarkan Auto mengikuti waktu.</p>
-        <div class="shift-selector">
-          <div class="chip shift-chip" id="chipShiftPagi" onclick="setShiftMode('pagi')">☀️ Pagi</div>
-          <div class="chip shift-chip" id="chipShiftSore" onclick="setShiftMode('sore')">🌅 Sore</div>
-          <div class="chip shift-chip" id="chipShiftMalam" onclick="setShiftMode('malam')">🌙 Malam</div>
-          <div class="chip shift-chip" id="chipShiftAuto" onclick="setShiftMode('auto')">⏱️ Auto</div>
+        <p style="margin-bottom:4px">Klik kapsul awan-matahari untuk geser shift atau pilih Auto.</p>
+        <div class="shift-capsule-row">
+          <div class="shift-capsule-track" id="homeShiftTrack" data-pos="pagi" onclick="cycleShiftCapsule()" title="Klik untuk ganti shift">
+            <div class="shift-clouds-layer">
+              <svg class="shift-cloud-svg cloud-left-top" viewBox="0 0 80 50">
+                <path d="M22 40h38a11 11 0 0 0 1-22 15 15 0 0 0-29-4A12 12 0 0 0 22 40z" fill="#ffffff" stroke="#111827" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="shift-cloud-svg cloud-left-bottom" viewBox="0 0 80 50">
+                <path d="M20 40h40a10.5 10.5 0 0 0 0-21 14 14 0 0 0-27-3.5A11.5 11.5 0 0 0 20 40z" fill="#ffffff" stroke="#111827" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="shift-cloud-svg cloud-right-mid" viewBox="0 0 80 50">
+                <path d="M22 39h36a10 10 0 0 0 1-20 14 14 0 0 0-27-3A11 11 0 0 0 22 39z" fill="#f3f4f6" stroke="#111827" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="shift-sun-knob" id="homeShiftKnob">
+              <svg class="shift-knob-svg" viewBox="0 0 48 48">
+                <g stroke="#fffbeb" stroke-width="3.2" stroke-linecap="round">
+                  <line x1="24" y1="3" x2="24" y2="9"/>
+                  <line x1="24" y1="39" x2="24" y2="45"/>
+                  <line x1="3" y1="24" x2="9" y2="24"/>
+                  <line x1="39" y1="24" x2="45" y2="24"/>
+                  <line x1="9.1" y1="9.1" x2="13.4" y2="13.4"/>
+                  <line x1="34.6" y1="34.6" x2="38.9" y2="38.9"/>
+                  <line x1="38.9" y1="9.1" x2="34.6" y2="13.4"/>
+                  <line x1="13.4" y1="34.6" x2="9.1" y2="38.9"/>
+                </g>
+                <circle cx="24" cy="24" r="10.5" fill="#fef08a" stroke="#1f2937" stroke-width="2.2"/>
+              </svg>
+            </div>
+          </div>
+          <button type="button" class="btn btn2 shift-auto-btn" id="homeShiftAutoBtn" onclick="setShiftMode('auto')">⏱️ Auto</button>
         </div>
       </div>
 
@@ -876,12 +1004,37 @@
       <!-- Shift Switcher inside Profile -->
       <div class="kartu">
         <h2>🎨 Preferensi Shift Tampilan</h2>
-        <p>Pilihan shift tersimpan otomatis di sistem.</p>
-        <div class="shift-selector">
-          <div class="chip shift-chip" id="profShiftPagi" onclick="setShiftMode('pagi')">☀️ Pagi</div>
-          <div class="chip shift-chip" id="profShiftSore" onclick="setShiftMode('sore')">🌅 Sore</div>
-          <div class="chip shift-chip" id="profShiftMalam" onclick="setShiftMode('malam')">🌙 Malam</div>
-          <div class="chip shift-chip" id="profShiftAuto" onclick="setShiftMode('auto')">⏱️ Auto</div>
+        <p>Klik kapsul untuk geser shift atau pakai mode Auto.</p>
+        <div class="shift-capsule-row">
+          <div class="shift-capsule-track" id="profShiftTrack" data-pos="pagi" onclick="cycleShiftCapsule()" title="Klik untuk ganti shift">
+            <div class="shift-clouds-layer">
+              <svg class="shift-cloud-svg cloud-left-top" viewBox="0 0 80 50">
+                <path d="M22 40h38a11 11 0 0 0 1-22 15 15 0 0 0-29-4A12 12 0 0 0 22 40z" fill="#ffffff" stroke="#111827" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="shift-cloud-svg cloud-left-bottom" viewBox="0 0 80 50">
+                <path d="M20 40h40a10.5 10.5 0 0 0 0-21 14 14 0 0 0-27-3.5A11.5 11.5 0 0 0 20 40z" fill="#ffffff" stroke="#111827" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="shift-cloud-svg cloud-right-mid" viewBox="0 0 80 50">
+                <path d="M22 39h36a10 10 0 0 0 1-20 14 14 0 0 0-27-3A11 11 0 0 0 22 39z" fill="#f3f4f6" stroke="#111827" stroke-width="3.2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="shift-sun-knob" id="profShiftKnob">
+              <svg class="shift-knob-svg" viewBox="0 0 48 48">
+                <g stroke="#fffbeb" stroke-width="3.2" stroke-linecap="round">
+                  <line x1="24" y1="3" x2="24" y2="9"/>
+                  <line x1="24" y1="39" x2="24" y2="45"/>
+                  <line x1="3" y1="24" x2="9" y2="24"/>
+                  <line x1="39" y1="24" x2="45" y2="24"/>
+                  <line x1="9.1" y1="9.1" x2="13.4" y2="13.4"/>
+                  <line x1="34.6" y1="34.6" x2="38.9" y2="38.9"/>
+                  <line x1="38.9" y1="9.1" x2="34.6" y2="13.4"/>
+                  <line x1="13.4" y1="34.6" x2="9.1" y2="38.9"/>
+                </g>
+                <circle cx="24" cy="24" r="10.5" fill="#fef08a" stroke="#1f2937" stroke-width="2.2"/>
+              </svg>
+            </div>
+          </div>
+          <button type="button" class="btn btn2 shift-auto-btn" id="profShiftAutoBtn" onclick="setShiftMode('auto')">⏱️ Auto</button>
         </div>
       </div>
     </div>
@@ -971,6 +1124,14 @@
       );
     }
 
+    function cycleShiftCapsule() {
+      const order = ['pagi', 'sore', 'malam'];
+      const nowHours = new Date().getHours();
+      const current = currentShiftMode === 'auto' ? getAutoShift(nowHours) : currentShiftMode;
+      const next = order[(order.indexOf(current) + 1) % order.length];
+      setShiftMode(next);
+    }
+
     function calculateShiftProgress(hours, minutes, shiftType) {
       const totalMins = hours * 60 + minutes;
       let start = 0;
@@ -1005,20 +1166,18 @@
       document.body.classList.remove('shift-pagi', 'shift-sore', 'shift-malam');
       document.body.classList.add('shift-' + activeShift);
 
-      document.querySelectorAll('.shift-chip').forEach(el => el.classList.remove('active'));
-      if (currentShiftMode === 'pagi') {
-        document.getElementById('chipShiftPagi')?.classList.add('active');
-        document.getElementById('profShiftPagi')?.classList.add('active');
-      } else if (currentShiftMode === 'sore') {
-        document.getElementById('chipShiftSore')?.classList.add('active');
-        document.getElementById('profShiftSore')?.classList.add('active');
-      } else if (currentShiftMode === 'malam') {
-        document.getElementById('chipShiftMalam')?.classList.add('active');
-        document.getElementById('profShiftMalam')?.classList.add('active');
-      } else {
-        document.getElementById('chipShiftAuto')?.classList.add('active');
-        document.getElementById('profShiftAuto')?.classList.add('active');
-      }
+      ['homeShiftTrack', 'profShiftTrack'].forEach(id => {
+        const track = document.getElementById(id);
+        if (track) track.setAttribute('data-pos', activeShift);
+      });
+
+      ['homeShiftAutoBtn', 'profShiftAutoBtn'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.style.borderColor = currentShiftMode === 'auto' ? 'var(--text-main)' : 'var(--btn2-border)';
+          btn.style.background = currentShiftMode === 'auto' ? 'var(--chip-active)' : 'var(--btn2-bg)';
+        }
+      });
 
       const iconEl = document.getElementById('shiftIconHeader');
       const badgeEl = document.getElementById('badgeShiftAktif');
@@ -1628,3 +1787,9 @@
   </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Saved index.html successfully, size:", len(html_content))
