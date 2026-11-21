@@ -1342,17 +1342,22 @@
       if (hasilEl) hasilEl.innerHTML = '';
 
       try {
-        const res = await fetch('/api/tiktok', {
+        const res = await fetch('/api/tiwm', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url })
         });
 
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data.error || `HTTP ${res.status}`);
-        }
-
+        const rawRes = await res.text();
+let data;
+try {
+  data = JSON.parse(rawRes);
+} catch (_) {
+  throw new Error(`Respons server bukan JSON (HTTP ${res.status}): ${rawRes.slice(0, 120)}`);
+}
+       if (!res.ok) {
+  throw new Error(data.error || `HTTP ${res.status}`);
+}
         const videoLink = data.hdplay || data.play;
         const musicLink = data.music;
 
