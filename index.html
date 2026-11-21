@@ -1502,3 +1502,43 @@
   </script>
 </body>
 </html>
+<script>
+
+    async function hapusBackground() {
+      const fileInput = document.getElementById('rmbgInput');
+      const statusEl = document.getElementById('rmbgStatus');
+      const btnEl = document.getElementById('btnHapusBg');
+
+      if (!fileInput.files || !fileInput.files[0]) {
+        toast('Pilih foto terlebih dahulu!');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('image_file', fileInput.files[0]);
+      formData.append('size', 'auto');
+
+      btnEl.disabled = true;
+      btnEl.innerText = '⏳ Memproses...';
+      statusEl.innerText = 'Status: Mengirim foto lewat server Vercel...';
+
+      try {
+        // <-- UBAH FETCH-NYA DI SINI (di dalam blok try pada hapusBackground) -->
+        const response = await fetch('/api/removebg', {
+          method: 'POST',
+          body: formData
+        });
+
+        // ... lanjutan kode pengecekan response & tampilkan hasil ...
+      } catch (err) {
+        // ... penanganan error ...
+      } finally {
+        btnEl.disabled = false;
+        btnEl.innerText = '✨ Hapus Background Sekarang';
+      }
+    }
+
+    // ... sisa kode JS di bawahnya ...
+  </script>
+</body>
+</html>
