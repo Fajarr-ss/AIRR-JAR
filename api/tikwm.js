@@ -3,6 +3,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
+  const apiKey = process.env.TIKWM_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'TIKWM_API_KEY belum diatur di Vercel.' });
+  }
+
   try {
     let body = req.body;
     if (!body || typeof body === 'string') {
@@ -19,31 +24,32 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Link TikTok wajib diisi.' });
     }
 
+    // Sesuaikan URL & cara kirim key sesuai dokumentasi key TikWM kamu
     const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;
     const upstream = await fetch(apiUrl, {
       headers: {
-        'User-Agent': 'Mozilla/5.0'
+        'User-Agent': 'Mozilla/5.0',
+        'X-Api-Key': apiKey
       }
     });
 
+    const rawText = await upstream.text();
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (_) {
+      return res.status(502).json({
+        error: 'Respons upstream bukan JSON valid',
+        status: upstream.status,
+        preview: rawText.slice(0, 200)
+      });
+    }
+
     if (!upstream.ok) {
-      return res.status(upstream.status).json({ error: `Gagal menghubungi TikWM (HTTP ${upstream.status})` });
+      return res.status(upstream.status).json({ error: data.msg || data.error || `HTTP ${upstream.status}` });
     }
 
-    const json = await upstream.json();
-    if (json.code !== 0 || !json.data) {
-      return res.status(400).json({ error: json.msg || 'Data video TikTok tidak ditemukan.' });
-    }
-
-    const d = json.data;
-    return res.status(200).json({
-      title: d.title || 'Video TikTok',
-      cover: d.cover || '',
-      author: d.author?.nickname || d.author?.unique_id || 'Kreator TikTok',
-      play: d.play || '',
-      hdplay: d.hdplay || d.play || '',
-      music: d.music || ''
-    });
+    return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ error: 'Terjadi kesalahan server', detail: err.message });
   }
