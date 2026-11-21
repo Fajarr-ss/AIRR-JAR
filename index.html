@@ -351,6 +351,17 @@
       object-fit: contain;
     }
 
+    img.rmbg-hasil {
+      background-color: #1e293b;
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.08) 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+    }
+
     .avatar {
       width: 90px;
       height: 90px;
@@ -702,7 +713,7 @@
         </div>
         <button class="btn" onclick="cariGoogle()">Cari di Google →</button>
         <button class="btn btn2" onclick="cariGoogle('gambar')">🖼️ Cari Gambar di Google</button>
-        
+
         <p style="margin-top:14px; font-weight:600">Trending Search:</p>
         <p>
           <span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span>
@@ -724,29 +735,29 @@
     <!-- PAGE: TOOLS -->
     <div id="page-tools" class="hilang">
       <h1>Tools 🛠️</h1>
-      <p>HD Foto, HD Video & Link Saver - Tanpa upload ke server</p>
+      <p>HD Foto, HD Video, Remove BG & Link Saver</p>
 
       <!-- 1. HD Foto Engine -->
       <div class="kartu">
         <h2>📸 1. HD FOTO (Enhanced Sharpener)</h2>
         <p>Pilih foto buram / pecah, di-upscale 2x + filter penajaman nyata.</p>
         <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
-        
+
         <img id="fotoPreview" class="preview" alt="Preview Foto HD">
-        
+
         <div id="fotoControlWrap" style="display:none; margin-top:10px">
           <div class="row" style="margin-bottom:8px">
             <button class="btn btn2" style="font-size:12px; padding:8px" onclick="toggleBeforeAfter()" id="btnBeforeAfter">👁️ Tampil Asli (Before)</button>
           </div>
           <label style="font-size:12.5px">Ketajaman / Sharpness: <span id="tajamVal">70</span>%</label>
           <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
-          
+
           <label style="font-size:12.5px; margin-top:6px; display:block">Kecerahan / Brightness: <span id="cerahVal">100</span>%</label>
           <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
 
           <label style="font-size:12.5px; margin-top:6px; display:block">Kontras / Contrast: <span id="kontrasVal">100</span>%</label>
           <input type="range" id="kontrasFoto" min="80" max="150" value="100" oninput="document.getElementById('kontrasVal').innerText=this.value;prosesHD()">
-          
+
           <div class="row">
             <button class="btn" onclick="downloadHD('jpg')">⬇️ Download JPG HD</button>
             <button class="btn btn2" onclick="downloadHD('png')">⬇️ PNG HD</button>
@@ -763,11 +774,11 @@
         <p>Pilih video, atur kontras, saturasi & kecerahan secara realtime.</p>
         <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
         <video id="videoPreview" class="preview" controls playsinline></video>
-        
+
         <div id="videoControlsWrap" style="display:none; margin-top:10px">
           <label style="font-size:12.5px">Kontras HD: <span id="vidVal">130</span>%</label>
           <input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value;applyVideoFilter()">
-          
+
           <label style="font-size:12.5px; margin-top:6px; display:block">Saturasi Warna: <span id="satVal">120</span>%</label>
           <input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value;applyVideoFilter()">
 
@@ -796,13 +807,27 @@
 
         <div id="daftarDL" style="margin-top:12px; font-size:13px"></div>
       </div>
+
+      <!-- 4. Remove Background via Vercel Serverless (/api/removebg) -->
+      <div class="kartu">
+        <h2>✂️ 4. Hapus Background (Remove.bg)</h2>
+        <p>Diproses aman lewat serverless Vercel (<code>/api/removebg</code>).</p>
+        <input type="file" id="rmbgInput" accept="image/*" onchange="previewRmbg(event)">
+        <img id="rmbgOriginal" class="preview" alt="Foto Asli">
+
+        <button class="btn" id="btnHapusBg" onclick="hapusBackground()">✨ Hapus Background Sekarang</button>
+        <p id="rmbgStatus" style="font-size:12px; margin-top:8px; opacity:0.85">Status: Menunggu foto</p>
+
+        <img id="rmbgHasil" class="preview rmbg-hasil" alt="Hasil Tanpa Background">
+        <button class="btn btn2" id="btnDownloadRmbg" style="display:none" onclick="downloadRmbg()">⬇️ Download PNG Transparan</button>
+      </div>
     </div>
 
     <!-- PAGE: INFO -->
     <div id="page-info" class="hilang">
       <h1>Info 📡</h1>
       <p>Live dari BMKG & Berita Indonesia</p>
-      
+
       <div class="kartu">
         <h2>🌋 Gempa Terbaru BMKG</h2>
         <div id="gempaBox"><p style="opacity:0.7">Mengambil data BMKG...</p></div>
@@ -826,15 +851,15 @@
     <div id="page-profil" class="hilang">
       <h1>Profil 👤</h1>
       <p>Pengaturan akun & preferensi shift tersimpan</p>
-      
+
       <div class="kartu" style="text-align:center">
         <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12" alt="Avatar">
         <h2 id="namaProfil" style="margin-top:10px; justify-content:center">Jarr</h2>
         <p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p>
-        
+
         <input type="text" id="editNama" placeholder="Ganti nama...">
         <textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea>
-        
+
         <label style="display:block; text-align:left; font-size:12.5px; margin-top:8px">📸 Ganti Foto Profil</label>
         <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
 
@@ -891,6 +916,7 @@
     let fotoProcessedData = null;
     let isShowingBefore = false;
     let modalCallback = null;
+    let hasilRmbgUrl = '';
 
     /* =========================================================
        CUSTOM GLASS TOAST & MODAL SYSTEM (NO ALERT/CONFIRM)
@@ -926,7 +952,6 @@
        SHIFT SYSTEM ENGINE ('BER-SHIFT')
        ========================================================= */
     function getAutoShift(hours) {
-      // Pagi: 05:00 - 14:59 | Sore: 15:00 - 18:59 | Malam: 19:00 - 04:59
       if (hours >= 5 && hours < 15) return 'pagi';
       if (hours >= 15 && hours < 19) return 'sore';
       return 'malam';
@@ -936,141 +961,148 @@
       currentShiftMode = mode;
       localStorage.setItem('shiftMode', mode);
       applyShiftTheme();
-      showToast(`Shift diubah ke: ${mode.toUpperCase()}`, mode === 'pagi' ? '☀️' : mode === 'sore' ? '🌅' : mode === 'malam' ? '🌙' : '⏱️');
+      showToast(
+        `Shift diubah ke: ${mode.toUpperCase()}`,
+        mode === 'pagi' ? '☀️' : mode === 'sore' ? '🌅' : mode === 'malam' ? '🌙' : '⏱️'
+      );
     }
 
-    function calculateShiftProgress(hours, shiftType) {
-      let pct = 0;
+    function calculateShiftProgress(hours, minutes, shiftType) {
+      const totalMins = hours * 60 + minutes;
+      let start = 0;
+      let span = 24 * 60;
+
       if (shiftType === 'pagi') {
-        // 5:00 to 15:00 (10 hours)
-        pct = ((hours - 5) / 10) * 100;
-      } else if (shiftType === 'sore') {
-        // 15:00 to 19:00 (4 hours)
-        pct = ((hours - 15) / 4) * 100;
-      } else {
-        // 19:00 to 5:00 (10 hours)
-        let normalized = hours >= 19 ? hours - 19 : hours + 5;
-        pct = (normalized / 10) * 100;
+        // 05:00 - 15:00 (10 jam = 600 menit)
+        start = 5 * 60;
+        span = 10 * 60;
+        const rel = Math.max(0, Math.min(span, totalMins - start));
+        return Math.round((rel / span) * 100);
       }
-      return Math.min(100, Math.max(0, Math.round(pct)));
+
+      if (shiftType === 'sore') {
+        // 15:00 - 19:00 (4 jam = 240 menit)
+        start = 15 * 60;
+        span = 4 * 60;
+        const rel = Math.max(0, Math.min(span, totalMins - start));
+        return Math.round((rel / span) * 100);
+      }
+
+      // Malam: 19:00 - 05:00 (10 jam = 600 menit, melewati tengah malam)
+      span = 10 * 60;
+      const nightMins = totalMins >= 19 * 60 ? totalMins - 19 * 60 : totalMins + (24 * 60 - 19 * 60);
+      const rel = Math.max(0, Math.min(span, nightMins));
+      return Math.round((rel / span) * 100);
     }
 
     function applyShiftTheme() {
       const now = new Date();
-      const hours = now.getHours() + now.getMinutes() / 60;
-      let effectiveShift = currentShiftMode === 'auto' ? getAutoShift(hours) : currentShiftMode;
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const activeShift = currentShiftMode === 'auto' ? getAutoShift(hours) : currentShiftMode;
 
-      // Class manipulation
-      document.body.className = '';
-      document.body.classList.add('shift-' + effectiveShift);
+      document.body.classList.remove('shift-pagi', 'shift-sore', 'shift-malam');
+      document.body.classList.add('shift-' + activeShift);
 
-      // Pill Highlight Updates
       document.querySelectorAll('.shift-chip').forEach(el => el.classList.remove('active'));
-      const activePillId = currentShiftMode.charAt(0).toUpperCase() + currentShiftMode.slice(1);
-      document.getElementById('chipShift' + activePillId)?.classList.add('active');
-      document.getElementById('profShift' + activePillId)?.classList.add('active');
-
-      // Hero Elements Updates
-      const iconHeader = document.getElementById('shiftIconHeader');
-      const badgeShift = document.getElementById('badgeShiftAktif');
-      const greetingTime = document.getElementById('greetingTime');
-      const subGreeting = document.getElementById('subGreeting');
-
-      const hourInt = now.getHours();
-      let greetingText = 'Selamat Pagi';
-      if (hourInt >= 11 && hourInt < 15) greetingText = 'Selamat Siang';
-      else if (hourInt >= 15 && hourInt < 19) greetingText = 'Selamat Sore';
-      else if (hourInt >= 19 || hourInt < 5) greetingText = 'Selamat Malam';
-
-      if (greetingTime) greetingTime.innerText = greetingText;
-
-      if (effectiveShift === 'pagi') {
-        if (iconHeader) iconHeader.innerText = '☀️';
-        if (badgeShift) badgeShift.innerText = currentShiftMode === 'auto' ? '⏱️ Auto (Shift Pagi)' : '☀️ Shift Pagi';
-        if (subGreeting) subGreeting.innerText = 'Semangat menjalani aktivitas dan hari Anda! ✨';
-      } else if (effectiveShift === 'sore') {
-        if (iconHeader) iconHeader.innerText = '🌅';
-        if (badgeShift) badgeShift.innerText = currentShiftMode === 'auto' ? '⏱️ Auto (Shift Sore)' : '🌅 Shift Sore';
-        if (subGreeting) subGreeting.innerText = 'Waktu senja tiba. Nikmati momen santai sore Anda. ☕';
+      if (currentShiftMode === 'pagi') {
+        document.getElementById('chipShiftPagi')?.classList.add('active');
+        document.getElementById('profShiftPagi')?.classList.add('active');
+      } else if (currentShiftMode === 'sore') {
+        document.getElementById('chipShiftSore')?.classList.add('active');
+        document.getElementById('profShiftSore')?.classList.add('active');
+      } else if (currentShiftMode === 'malam') {
+        document.getElementById('chipShiftMalam')?.classList.add('active');
+        document.getElementById('profShiftMalam')?.classList.add('active');
       } else {
-        if (iconHeader) iconHeader.innerText = '🌙';
-        if (badgeShift) badgeShift.innerText = currentShiftMode === 'auto' ? '⏱️ Auto (Shift Malam)' : '🌙 Shift Malam';
-        if (subGreeting) subGreeting.innerText = 'Selamat beristirahat. Treat your better 🌙';
+        document.getElementById('chipShiftAuto')?.classList.add('active');
+        document.getElementById('profShiftAuto')?.classList.add('active');
       }
 
-      // Progress Bar Calculation
-      const progressPct = calculateShiftProgress(hours, effectiveShift);
-      const fillEl = document.getElementById('shiftProgressFill');
+      const iconEl = document.getElementById('shiftIconHeader');
+      const badgeEl = document.getElementById('badgeShiftAktif');
+      const greetEl = document.getElementById('greetingTime');
+      const subEl = document.getElementById('subGreeting');
+
+      if (activeShift === 'pagi') {
+        if (iconEl) iconEl.innerText = '☀️';
+        if (badgeEl) badgeEl.innerText = currentShiftMode === 'auto' ? 'Shift Pagi (Auto)' : 'Shift Pagi';
+        if (greetEl) greetEl.innerText = 'Selamat Pagi';
+        if (subEl) subEl.innerText = 'Semangat pagi, mulai hari dengan fokus & energi terbaik.';
+      } else if (activeShift === 'sore') {
+        if (iconEl) iconEl.innerText = '🌅';
+        if (badgeEl) badgeEl.innerText = currentShiftMode === 'auto' ? 'Shift Sore (Auto)' : 'Shift Sore';
+        if (greetEl) greetEl.innerText = 'Selamat Sore';
+        if (subEl) subEl.innerText = 'Nuansa senja hangat — rapikan target sebelum malam tiba.';
+      } else {
+        if (iconEl) iconEl.innerText = '🌙';
+        if (badgeEl) badgeEl.innerText = currentShiftMode === 'auto' ? 'Shift Malam (Auto)' : 'Shift Malam';
+        if (greetEl) greetEl.innerText = 'Selamat Malam';
+        if (subEl) subEl.innerText = 'Mode malam aktif — nyaman di mata buat ngoprek & santai.';
+      }
+
+      const pct = calculateShiftProgress(hours, minutes, activeShift);
       const pctText = document.getElementById('shiftProgressPercent');
-      if (fillEl) fillEl.style.width = progressPct + '%';
-      if (pctText) pctText.innerText = progressPct + '%';
+      const pctFill = document.getElementById('shiftProgressFill');
+      if (pctText) pctText.innerText = pct + '%';
+      if (pctFill) pctFill.style.width = pct + '%';
     }
 
     function updateClock() {
       const now = new Date();
-      const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
-      const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' });
-
+      const pad = n => String(n).padStart(2, '0');
       const clockEl = document.getElementById('liveClockDisplay');
       const dateEl = document.getElementById('liveDateDisplay');
-
-      if (clockEl) clockEl.innerText = `⏰ ${timeStr} WIB`;
-      if (dateEl) dateEl.innerText = dateStr;
-
+      if (clockEl) {
+        clockEl.innerText = `⏰ ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      }
+      if (dateEl) {
+        dateEl.innerText = now.toLocaleDateString('id-ID', {
+          weekday: 'short',
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        });
+      }
       if (currentShiftMode === 'auto') {
         applyShiftTheme();
       }
     }
 
     /* =========================================================
-       NAVIGATION SYSTEM WITH LIQUID GLASS PILLAR MORPHING
+       NAVIGATION & PAGE TRANSITIONS
        ========================================================= */
-    function recalculateBlok(btn) {
-      if (!btn) return;
+    function pindah(btn, page, index) {
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('aktif'));
+      btn.classList.add('aktif');
       let targetX = btn.offsetLeft - 10;
       let targetW = btn.offsetWidth;
-
-      blok.style.transform = `translateX(${targetX}px) scaleX(1.2) scaleY(0.88)`;
+      blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
       blok.style.width = targetW + 'px';
-      blok.style.borderRadius = '32% 68% 65% 35% / 60% 50% 50% 40%';
-
+      blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
       clearTimeout(blok._timer);
       blok._timer = setTimeout(() => {
         blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
         blok.style.borderRadius = '999px';
-      }, 260);
-    }
-
-    function pindah(btn, page, index) {
-      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('aktif'));
-      btn.classList.add('aktif');
-
-      recalculateBlok(btn);
+      }, 280);
 
       document.querySelectorAll('.konten > div').forEach(d => d.classList.add('hilang'));
-
-      let target = document.getElementById('page-' + page);
-      target.classList.remove('hilang');
-      target.classList.remove('muncul');
-      void target.offsetWidth;
-      target.classList.add('muncul');
+      let t = document.getElementById('page-' + page);
+      t.classList.remove('hilang');
+      t.classList.remove('muncul');
+      void t.offsetWidth;
+      t.classList.add('muncul');
 
       if (page === 'info') {
         loadGempa();
         loadCuaca();
         loadBerita();
       }
-
-      if (navigator.vibrate) navigator.vibrate(6);
+      if (navigator.vibrate) navigator.vibrate(5);
     }
 
-    window.addEventListener('resize', () => {
-      let activeBtn = document.querySelector('.nav button.aktif');
-      if (activeBtn) recalculateBlok(activeBtn);
-    });
-
     /* =========================================================
-       PENCARIAN GOOGLE & SEARCH HISTORY
+       GOOGLE SEARCH & HISTORY
        ========================================================= */
     function isiSearch(t) {
       document.getElementById('inputSearch').value = t;
@@ -1082,42 +1114,24 @@
       document.getElementById('inputSearch').value = t;
     }
 
-    function cariGoogle(mode) {
-      let q = document.getElementById('inputSearch').value.trim();
-      if (!q) {
-        showToast('Tulis kata kunci pencarian dulu mas!', '🔍');
-        return;
-      }
-
-      simpanRiwayatSearch(q);
-
-      if (mode === 'gambar') {
-        window.open('https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(q), '_blank');
-      } else {
-        window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
-      }
-    }
-
     function simpanRiwayatSearch(q) {
-      let h = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-      h = h.filter(x => x.toLowerCase() !== q.toLowerCase());
-      h.unshift(q);
-      localStorage.setItem('searchHistory', JSON.stringify(h.slice(0, 8)));
+      let arr = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+      arr = [q, ...arr.filter(item => item.toLowerCase() !== q.toLowerCase())].slice(0, 8);
+      localStorage.setItem('searchHistory', JSON.stringify(arr));
       renderRiwayatSearch();
     }
 
     function renderRiwayatSearch() {
-      let h = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-      let wrap = document.getElementById('historySearchWrap');
-      let list = document.getElementById('historySearchList');
-      if (h.length === 0) {
+      const arr = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+      const wrap = document.getElementById('historySearchWrap');
+      const list = document.getElementById('historySearchList');
+      if (!wrap || !list) return;
+      if (!arr.length) {
         wrap.style.display = 'none';
         return;
       }
       wrap.style.display = 'block';
-      list.innerHTML = h.map(item => `
-        <span class="chip" onclick="isiSearch('${item.replace(/'/g, "\\'")}')">🕒 ${item}</span>
-      `).join('');
+      list.innerHTML = arr.map(q => `<span class="chip" onclick="isiSearch(${JSON.stringify(q)})">🕒 ${q}</span>`).join('');
     }
 
     function hapusRiwayatSearch() {
@@ -1126,8 +1140,22 @@
       showToast('Riwayat pencarian dihapus', '🗑️');
     }
 
+    function cariGoogle(mode) {
+      let q = document.getElementById('inputSearch').value.trim();
+      if (!q) {
+        showToast('Tulis kata kunci dulu ya!', '🔎');
+        return;
+      }
+      simpanRiwayatSearch(q);
+      if (mode === 'gambar') {
+        window.open('https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(q), '_blank');
+      } else {
+        window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
+      }
+    }
+
     /* =========================================================
-       TOOLS: ENHANCED HD FOTO (UNSHARP MASK & UPSCALE)
+       HD FOTO ENGINE
        ========================================================= */
     function loadFoto(e) {
       let f = e.target.files[0];
@@ -1136,11 +1164,11 @@
       r.onload = (ev) => {
         fotoAsli = new Image();
         fotoAsli.onload = () => {
-          document.getElementById('fotoPreview').src = ev.target.result;
+          isShowingBefore = false;
+          document.getElementById('btnBeforeAfter').innerText = '👁️ Tampil Asli (Before)';
           document.getElementById('fotoPreview').style.display = 'block';
           document.getElementById('fotoControlWrap').style.display = 'block';
           prosesHD();
-          showToast('Foto dimuat! Menyalakan engine HD 2x...', '📸');
         };
         fotoAsli.src = ev.target.result;
       };
@@ -1151,8 +1179,6 @@
       if (!fotoAsli) return;
       let c = document.getElementById('canvasHD');
       let ctx = c.getContext('2d');
-
-      // 2x HD Upscale
       c.width = fotoAsli.width * 2;
       c.height = fotoAsli.height * 2;
 
@@ -1160,54 +1186,51 @@
       let cerah = document.getElementById('cerah').value;
       let kontras = document.getElementById('kontrasFoto').value;
 
-      // Filter sharpening algorithm
-      ctx.filter = `brightness(${cerah}%) contrast(${kontras}%) saturate(${100 + tajam * 25}%)`;
+      const sharpContrast = Number(kontras) + tajam * 25;
+      ctx.filter = `brightness(${cerah}%) contrast(${sharpContrast}%) saturate(108%)`;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(fotoAsli, 0, 0, c.width, c.height);
 
-      fotoProcessedData = c.toDataURL('image/jpeg', 0.96);
-
+      fotoProcessedData = c.toDataURL('image/jpeg', 0.95);
       if (!isShowingBefore) {
         document.getElementById('fotoPreview').src = fotoProcessedData;
       }
-
-      document.getElementById('fotoStatus').innerText = `Resolusi HD: ${c.width} x ${c.height} px (Asli: ${fotoAsli.width}x${fotoAsli.height})`;
+      document.getElementById('fotoStatus').innerText = `Status: HD Siap! ${c.width}x${c.height}px`;
     }
 
     function toggleBeforeAfter() {
-      if (!fotoAsli) return;
-      isShowingBefore = !isShowingBefore;
-      const btn = document.getElementById('btnBeforeAfter');
+      if (!fotoAsli || !fotoProcessedData) return;
       const img = document.getElementById('fotoPreview');
+      const btn = document.getElementById('btnBeforeAfter');
+      isShowingBefore = !isShowingBefore;
       if (isShowingBefore) {
         img.src = fotoAsli.src;
-        btn.innerText = '✨ Tampil HD (After)';
-        showToast('Menampilkan foto asli (Before)', '👁️');
+        btn.innerText = '✨ Tampil Hasil HD (After)';
       } else {
-        img.src = fotoProcessedData || fotoAsli.src;
+        img.src = fotoProcessedData;
         btn.innerText = '👁️ Tampil Asli (Before)';
-        showToast('Menampilkan hasil HD (After)', '✨');
       }
     }
 
     function downloadHD(format = 'jpg') {
       if (!fotoAsli) {
-        showToast('Pilih foto terlebih dahulu!', '⚠️');
+        showToast('Pilih foto dulu ya!', '📸');
         return;
       }
       prosesHD();
-      let c = document.getElementById('canvasHD');
+      const c = document.getElementById('canvasHD');
+      const mime = format === 'png' ? 'image/png' : 'image/jpeg';
+      const ext = format === 'png' ? 'png' : 'jpg';
       let a = document.createElement('a');
-      let mime = format === 'png' ? 'image/png' : 'image/jpeg';
-      a.download = `foto-HD-${Date.now()}.${format}`;
-      a.href = c.toDataURL(mime, 0.98);
+      a.download = `foto-HD-${Date.now()}.${ext}`;
+      a.href = c.toDataURL(mime, 0.95);
       a.click();
-      showToast(`Berhasil mendownload Foto HD (${format.toUpperCase()})! 📥`, '🎉');
+      showToast(`Foto ${ext.toUpperCase()} HD diunduh!`, '⬇️');
     }
 
     /* =========================================================
-       TOOLS: HD VIDEO FILTER ENGINE
+       HD VIDEO FILTER ENGINE
        ========================================================= */
     function loadVideo(e) {
       let f = e.target.files[0];
@@ -1217,36 +1240,35 @@
       v.style.display = 'block';
       document.getElementById('videoControlsWrap').style.display = 'block';
       applyVideoFilter();
-      v.play();
-      showToast('Video dimuat dan diputar! ▶️', '🎬');
+      v.play().catch(() => {});
     }
 
     function applyVideoFilter() {
       let v = document.getElementById('videoPreview');
       let kon = document.getElementById('vidFilter').value;
       let sat = document.getElementById('satFilter').value;
-      let brg = document.getElementById('brightFilter').value;
-      v.style.filter = `contrast(${kon}%) saturate(${sat}%) brightness(${brg}%)`;
+      let bri = document.getElementById('brightFilter').value;
+      v.style.filter = `contrast(${kon}%) saturate(${sat}%) brightness(${bri}%)`;
     }
 
     function resetVideoFilter() {
       document.getElementById('vidFilter').value = 130;
-      document.getElementById('satFilter').value = 120;
-      document.getElementById('brightFilter').value = 105;
       document.getElementById('vidVal').innerText = 130;
+      document.getElementById('satFilter').value = 120;
       document.getElementById('satVal').innerText = 120;
+      document.getElementById('brightFilter').value = 105;
       document.getElementById('brightVal').innerText = 105;
       applyVideoFilter();
-      showToast('Filter video dikembalikan ke standar HD', '🔄');
+      showToast('Filter video direset', '🔄');
     }
 
     /* =========================================================
-       TOOLS: LINK SAVER & DOWNLOADER MANAGER
+       LINK SAVER ENGINE
        ========================================================= */
     function bukaLinkDL() {
       let l = document.getElementById('linkDL').value.trim();
       if (!l) {
-        showToast('Tempel link TikTok / YouTube / IG dulu!', '⚠️');
+        showToast('Tempel link dulu ya!', '🔗');
         return;
       }
       window.open(l, '_blank');
@@ -1255,262 +1277,76 @@
     function copyLinkDL() {
       let l = document.getElementById('linkDL').value.trim();
       if (!l) {
-        showToast('Tempel link dulu!', '📋');
+        showToast('Tempel link dulu ya!', '📋');
         return;
       }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(l).then(() => {
-          showToast('Link tersalin ke clipboard! ✅', '📋');
-        }).catch(() => fallbackCopy(l));
-      } else {
-        fallbackCopy(l);
-      }
-    }
-
-    function fallbackCopy(text) {
-      let inp = document.createElement('input');
-      inp.value = text;
-      document.body.appendChild(inp);
-      inp.select();
-      document.execCommand('copy');
-      document.body.removeChild(inp);
-      showToast('Link tersalin ke clipboard! ✅', '📋');
+      navigator.clipboard.writeText(l).then(() => {
+        showToast('Link berhasil di-copy!', '✅');
+      });
     }
 
     function simpanLinkDL() {
       let l = document.getElementById('linkDL').value.trim();
       if (!l) {
-        showToast('Isi link terlebih dahulu!', '⚠️');
+        showToast('Tempel link dulu ya!', '💾');
         return;
       }
       let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
       arr.unshift({
-        id: Date.now(),
         link: l,
         tipe: document.getElementById('tipeDL').value,
         tgl: new Date().toLocaleString('id-ID')
       });
-      localStorage.setItem('daftarDL', JSON.stringify(arr.slice(0, 25)));
+      localStorage.setItem('daftarDL', JSON.stringify(arr.slice(0, 20)));
       document.getElementById('linkDL').value = '';
       renderDaftarDL();
-      showToast('Link berhasil disimpan! 💾', '✅');
+      showToast('Link tersimpan ke daftar!', '💾');
     }
 
-    function hapusItemDL(id) {
+    function hapusLinkDL(idx) {
       let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
-      arr = arr.filter(x => x.id !== id);
+      arr.splice(idx, 1);
       localStorage.setItem('daftarDL', JSON.stringify(arr));
       renderDaftarDL();
-      showToast('Link dihapus dari daftar', '🗑️');
     }
 
     function renderDaftarDL() {
       let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
-      let container = document.getElementById('daftarDL');
-      if (arr.length === 0) {
-        container.innerHTML = '<p style="opacity:0.65">Belum ada link tersimpan.</p>';
-        return;
-      }
-      container.innerHTML = arr.map(x => `
-        <div style="padding:8px 0; border-bottom:1px solid var(--card-border); display:flex; justify-content:space-between; align-items:center">
-          <div style="min-width:0; flex:1">
-            ${x.tipe === 'musik' ? '🎵' : '🎬'} 
-            <a href="${x.link}" target="_blank" style="color:var(--text-main); word-break:break-all; font-weight:600">${x.link.slice(0, 38)}...</a>
-            <div style="font-size:11px; opacity:0.6">${x.tgl}</div>
+      const el = document.getElementById('daftarDL');
+      if (!el) return;
+      el.innerHTML = arr.map((x, i) => `
+        <div style="padding:8px 0; border-bottom:1px solid var(--card-border); display:flex; justify-content:space-between; align-items:center; gap:8px">
+          <div style="min-width:0">
+            ${x.tipe === 'musik' ? '🎵' : '🎬'}
+            <a href="${x.link}" target="_blank" style="color:var(--text-main); word-break:break-all">${x.link.slice(0, 42)}${x.link.length > 42 ? '...' : ''}</a><br>
+            <span style="font-size:11px; opacity:0.65">${x.tgl}</span>
           </div>
-          <button onclick="hapusItemDL(${x.id})" style="background:none; border:none; color:#ef4444; font-size:16px; cursor:pointer; padding:4px 8px">✕</button>
+          <button class="btn btn2" style="width:auto; padding:6px 10px; font-size:11px; margin-top:0" onclick="hapusLinkDL(${i})">✕</button>
         </div>
-      `).join('');
+      `).join('') || '<p style="opacity:0.65">Belum ada link tersimpan.</p>';
     }
 
     /* =========================================================
-       LIVE BMKG & BERITA APIS & HOME SUMMARY WIDGET
+       REMOVE BACKGROUND VIA VERCEL SERVERLESS (/api/removebg)
        ========================================================= */
-    async function loadGempa() {
-      let box = document.getElementById('gempaBox');
-      box.innerHTML = '<p style="opacity:0.7">Mengambil data BMKG...</p>';
-      try {
-        let res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
-        let j = await res.json();
-        let g = j.Infogempa.gempa;
-        box.innerHTML = `
-          <span class="badge">M ${g.Magnitude}</span> 
-          <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br>
-          <b>${g.Wilayah}</b><br>
-          📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>
-          ⚠️ Potensi: ${g.Potensi}<br>
-          ${g.Shakemap ? `<a href="https://data.bmkg.go.id/DataMKG/TEWS/${g.Shakemap}" target="_blank" style="color:var(--text-main); font-size:12px; display:inline-block; margin-top:6px">🗺️ Lihat Peta Shakemap BMKG →</a>` : ''}
-        `;
-        updateHomeSummary(g, null);
-      } catch (e) {
-        box.innerHTML = `
-          <span class="badge">M 5.2</span> <span class="badge badgeBiru">BMKG Live</span><br><br>
-          <b>Gempa M 5.2 - DIY Yogyakarta (Mode Offline)</b><br>
-          📍 Kedalaman: 10 km • 8.40 LS, 110.10 BT<br>
-          ⚠️ Potensi: Tidak berpotensi tsunami
-        `;
-      }
+    function previewRmbg(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const img = document.getElementById('rmbgOriginal');
+      img.src = URL.createObjectURL(file);
+      img.style.display = 'block';
+      document.getElementById('rmbgHasil').style.display = 'none';
+      document.getElementById('btnDownloadRmbg').style.display = 'none';
+      document.getElementById('rmbgStatus').innerText = `Status: Siap memproses "${file.name}"`;
     }
-
-    async function loadCuaca() {
-      let box = document.getElementById('cuacaBox');
-      box.innerHTML = '<p style="opacity:0.7">Mengambil cuaca...</p>';
-      try {
-        let res = await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
-        let j = await res.json();
-        let d = j.data[0].cuaca[0][0];
-        box.innerHTML = `
-          <span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>
-          🌡️ Suhu: ${d.t}°C • 💧 Kelembapan: ${d.hu}%<br>
-          💨 Kecepatan Angin: ${d.ws} km/jam
-        `;
-        updateHomeSummary(null, d);
-      } catch (e) {
-        box.innerHTML = `
-          <span class="badge badgeHijau">Cerah Berawan</span> Yogyakarta<br><br>
-          🌡️ Suhu: 29°C • 💧 Kelembapan: 72%<br>
-          💨 Angin: 12 km/jam SE
-        `;
-      }
-    }
-
-    async function loadBerita() {
-      let box = document.getElementById('beritaBox');
-      box.innerHTML = '<p style="opacity:0.7">Mengambil berita...</p>';
-      try {
-        let res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
-        let j = await res.json();
-        box.innerHTML = j.items.slice(0, 5).map(it => `
-          <div class="berita-item">
-            <b>${it.title}</b>
-            <span>${new Date(it.pubDate).toLocaleString('id-ID')} • 
-            <a href="${it.link}" target="_blank" style="color:var(--text-main)">Baca Selengkapnya →</a></span>
-          </div>
-        `).join('');
-      } catch (e) {
-        box.innerHTML = `
-          <div class="berita-item">
-            <b>BMKG Himbau Waspada Perubahan Cuaca di DIY</b>
-            <span>Update Hari Ini</span>
-          </div>
-        `;
-      }
-    }
-
-    let summaryData = { gempa: null, cuaca: null };
-    function updateHomeSummary(gempaData, cuacaData) {
-      if (gempaData) summaryData.gempa = gempaData;
-      if (cuacaData) summaryData.cuaca = cuacaData;
-
-      const widget = document.getElementById('summaryWidget');
-      if (!widget) return;
-
-      let gText = summaryData.gempa 
-        ? `🌋 <b>Gempa:</b> M ${summaryData.gempa.Magnitude} - ${summaryData.gempa.Wilayah}` 
-        : '🌋 <b>Gempa BMKG:</b> M 5.2 - DIY Yogyakarta';
-
-      let cText = summaryData.cuaca 
-        ? `🌦️ <b>Cuaca Jogja:</b> ${summaryData.cuaca.cuaca} (${summaryData.cuaca.t}°C)` 
-        : '🌦️ <b>Cuaca Jogja:</b> Cerah Berawan (29°C)';
-
-      widget.innerHTML = `
-        <div style="padding:6px 0; border-bottom:1px solid var(--card-border)">${gText}</div>
-        <div style="padding:6px 0">${cText}</div>
-      `;
-    }
-
-    /* =========================================================
-       PROFIL SYSTEM & DATA MANAGEMENT
-       ========================================================= */
-    function loadProfil() {
-      let nama = localStorage.getItem('nama') || 'Jarr';
-      let bio = localStorage.getItem('bio') || 'Yogyakarta • Seneng ngoprek HTML modal AI😹';
-      let foto = localStorage.getItem('fotoProfil');
-
-      document.getElementById('namaProfil').innerText = nama;
-      document.getElementById('namaHome').innerText = nama;
-      document.getElementById('bioProfil').innerText = bio;
-      document.getElementById('editNama').value = nama;
-      document.getElementById('editBio').value = bio;
-
-      if (foto) {
-        document.getElementById('avatarPreview').src = foto;
-      }
-    }
-
-    function simpanProfil() {
-      let nama = document.getElementById('editNama').value.trim() || 'Jarr';
-      let bio = document.getElementById('editBio').value.trim() || 'Yogyakarta';
-
-      localStorage.setItem('nama', nama);
-      localStorage.setItem('bio', bio);
-
-      document.getElementById('namaProfil').innerText = nama;
-      document.getElementById('namaHome').innerText = nama;
-      document.getElementById('bioProfil').innerText = bio;
-
-      showToast(`Profil tersimpan! Halo ${nama} 👋`, '💾');
-    }
-
-    function gantiFotoProfil(e) {
-      let f = e.target.files[0];
-      if (!f) return;
-      let r = new FileReader();
-      r.onload = (ev) => {
-        document.getElementById('avatarPreview').src = ev.target.result;
-        localStorage.setItem('fotoProfil', ev.target.result);
-        showToast('Foto profil diperbarui! 📸', '✨');
-      };
-      r.readAsDataURL(f);
-    }
-
-    function konfirmasiResetProfil() {
-      showGlassModal(
-        'Reset Seluruh Data?',
-        'Semua preferensi shift, foto profil, riwayat pencarian, dan link tersimpan akan dihapus secara permanen.',
-        '⚠️',
-        () => {
-          localStorage.clear();
-          showToast('Data berhasil di-reset!', '🔄');
-          setTimeout(() => location.reload(), 800);
-        }
-      );
-    }
-
-    /* =========================================================
-       INITIALIZATION ON DOM LOAD
-       ========================================================= */
-    window.addEventListener('load', () => {
-      // Set initial navbar pillar indicator position
-      let activeBtn = document.querySelector('.nav button.aktif');
-      if (activeBtn) recalculateBlok(activeBtn);
-
-      // Load User Profil & Local Storage Arrays
-      loadProfil();
-      renderDaftarDL();
-      renderRiwayatSearch();
-
-      // Apply Initial Shift & Clock Timers
-      applyShiftTheme();
-      updateClock();
-      setInterval(updateClock, 1000);
-
-      // Initial Background Data Fetch for Summary Widget
-      loadGempa();
-      loadCuaca();
-    });
-  </script>
-</body>
-</html>
-<script>
 
     async function hapusBackground() {
       const fileInput = document.getElementById('rmbgInput');
       const statusEl = document.getElementById('rmbgStatus');
       const btnEl = document.getElementById('btnHapusBg');
 
-      if (!fileInput.files || !fileInput.files[0]) {
-        toast('Pilih foto terlebih dahulu!');
+      if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+        showToast('Pilih foto terlebih dahulu!', '✂️');
         return;
       }
 
@@ -1520,25 +1356,188 @@
 
       btnEl.disabled = true;
       btnEl.innerText = '⏳ Memproses...';
-      statusEl.innerText = 'Status: Mengirim foto lewat server Vercel...';
+      if (statusEl) statusEl.innerText = 'Status: Mengirim foto lewat server Vercel...';
 
       try {
-        // <-- UBAH FETCH-NYA DI SINI (di dalam blok try pada hapusBackground) -->
         const response = await fetch('/api/removebg', {
           method: 'POST',
           body: formData
         });
 
-        // ... lanjutan kode pengecekan response & tampilkan hasil ...
+        if (!response.ok) {
+          let errMsg = `HTTP ${response.status}`;
+          try {
+            const errJson = await response.json();
+            errMsg = errJson.errors?.[0]?.title || errJson.error || errMsg;
+          } catch (_) {}
+          throw new Error(errMsg);
+        }
+
+        const blob = await response.blob();
+        if (hasilRmbgUrl) URL.revokeObjectURL(hasilRmbgUrl);
+        hasilRmbgUrl = URL.createObjectURL(blob);
+
+        const hasilImg = document.getElementById('rmbgHasil');
+        if (hasilImg) {
+          hasilImg.src = hasilRmbgUrl;
+          hasilImg.style.display = 'block';
+        }
+
+        const dlBtn = document.getElementById('btnDownloadRmbg');
+        if (dlBtn) dlBtn.style.display = 'block';
+
+        if (statusEl) statusEl.innerText = 'Status: Berhasil! Background terhapus ✅';
+        showToast('Background berhasil dihapus!', '✨');
       } catch (err) {
-        // ... penanganan error ...
+        if (statusEl) statusEl.innerText = `Status: Gagal (${err.message})`;
+        showToast(`Gagal: ${err.message}`, '⚠️');
       } finally {
         btnEl.disabled = false;
         btnEl.innerText = '✨ Hapus Background Sekarang';
       }
     }
 
-    // ... sisa kode JS di bawahnya ...
+    function downloadRmbg() {
+      if (!hasilRmbgUrl) return;
+      const a = document.createElement('a');
+      a.href = hasilRmbgUrl;
+      a.download = 'no-bg-' + Date.now() + '.png';
+      a.click();
+      showToast('PNG transparan diunduh!', '⬇️');
+    }
+
+    /* =========================================================
+       LIVE BMKG & NEWS FEEDS
+       ========================================================= */
+    async function loadGempa() {
+      let box = document.getElementById('gempaBox');
+      let summary = document.getElementById('summaryWidget');
+      box.innerHTML = '<p style="opacity:0.7">Loading...</p>';
+      try {
+        let res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
+        let j = await res.json();
+        let g = j.Infogempa.gempa;
+        box.innerHTML = `
+          <span class="badge">M ${g.Magnitude}</span>
+          <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br>
+          <b>${g.Wilayah}</b><br>
+          📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>
+          ⚠️ Potensi: ${g.Potensi}
+        `;
+        if (summary) {
+          summary.innerHTML = `🌋 <b>Gempa Terbaru:</b> M ${g.Magnitude} — ${g.Wilayah} (${g.Jam})`;
+        }
+      } catch (e) {
+        box.innerHTML = `<b>Gempa 5.2 - Jogja (Fallback)</b><br>Koneksi BMKG gagal`;
+        if (summary) summary.innerHTML = `📡 Info BMKG sedang offline / gagal dimuat.`;
+      }
+    }
+
+    async function loadCuaca() {
+      let box = document.getElementById('cuacaBox');
+      try {
+        let res = await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
+        let j = await res.json();
+        let d = j.data[0].cuaca[0][0];
+        box.innerHTML = `
+          <span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>
+          🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>
+          💨 Angin: ${d.ws} km/jam
+        `;
+      } catch (e) {
+        box.innerHTML = `🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;
+      }
+    }
+
+    async function loadBerita() {
+      let box = document.getElementById('beritaBox');
+      box.innerHTML = '<p style="opacity:0.7">Loading...</p>';
+      try {
+        let res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
+        let j = await res.json();
+        box.innerHTML = j.items.slice(0, 5).map(it => `
+          <div class="berita-item">
+            <b>${it.title}</b>
+            <span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:var(--text-main)">Baca →</a></span>
+          </div>
+        `).join('');
+      } catch (e) {
+        box.innerHTML = `<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;
+      }
+    }
+
+    /* =========================================================
+       PROFILE & DATA MANAGEMENT
+       ========================================================= */
+    function loadProfil() {
+      let nama = localStorage.getItem('nama') || 'Jarr';
+      let bio = localStorage.getItem('bio') || 'Yogyakarta • Seneng ngoprek HTML modal AI😹';
+      let foto = localStorage.getItem('fotoProfil');
+      document.getElementById('namaProfil').innerText = nama;
+      document.getElementById('namaHome').innerText = nama;
+      document.getElementById('bioProfil').innerText = bio;
+      document.getElementById('editNama').value = nama;
+      document.getElementById('editBio').value = bio;
+      if (foto) document.getElementById('avatarPreview').src = foto;
+    }
+
+    function simpanProfil() {
+      let nama = document.getElementById('editNama').value.trim() || 'Jarr';
+      let bio = document.getElementById('editBio').value.trim() || 'Yogyakarta';
+      localStorage.setItem('nama', nama);
+      localStorage.setItem('bio', bio);
+      document.getElementById('namaProfil').innerText = nama;
+      document.getElementById('namaHome').innerText = nama;
+      document.getElementById('bioProfil').innerText = bio;
+      showToast('Profil tersimpan!', '✅');
+    }
+
+    function gantiFotoProfil(e) {
+      let f = e.target.files[0];
+      if (!f) return;
+      let r = new FileReader();
+      r.onload = (ev) => {
+        document.getElementById('avatarPreview').src = ev.target.result;
+        localStorage.setItem('fotoProfil', ev.target.result);
+        showToast('Foto profil diperbarui!', '📸');
+      };
+      r.readAsDataURL(f);
+    }
+
+    function konfirmasiResetProfil() {
+      showGlassModal(
+        'Reset Semua Data?',
+        'Ini akan menghapus profil, riwayat search, daftar link, dan pengaturan shift.',
+        '🗑️',
+        () => {
+          localStorage.clear();
+          location.reload();
+        }
+      );
+    }
+
+    /* =========================================================
+       INITIALIZATION ON LOAD
+       ========================================================= */
+    window.addEventListener('load', () => {
+      let b = document.querySelector('.nav button.aktif');
+      blok.style.transition = 'none';
+      blok.style.transform = `translateX(${b.offsetLeft - 10}px)`;
+      blok.style.width = b.offsetWidth + 'px';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          blok.style.transition = '';
+        });
+      });
+
+      loadProfil();
+      renderDaftarDL();
+      renderRiwayatSearch();
+      applyShiftTheme();
+      updateClock();
+      setInterval(updateClock, 1000);
+      loadGempa();
+    });
   </script>
 </body>
 </html>
