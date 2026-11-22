@@ -395,6 +395,12 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.6);
       overflow: hidden;
       width: 100%;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+
+    .nav.sliding {
+      cursor: grabbing;
     }
 
     .nav::before {
@@ -420,6 +426,10 @@
       transition: transform 0.55s cubic-bezier(.22,1,.36,1), width 0.55s cubic-bezier(.22,1,.36,1), border-radius 0.55s cubic-bezier(.22,1,.36,1);
       z-index: 0;
       pointer-events: none;
+    }
+
+    .blok.no-anim {
+      transition: none !important;
     }
 
     .blok::before {
@@ -719,49 +729,148 @@
   <div class="nav-wrap">
     <div class="nav" id="nav">
       <div class="blok" id="blok"></div>
-      <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
-      <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
-      <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
-      <button onclick="pindah(this,'mtk',3)"><span class="ikon">📐</span>MTK</button>
-      <button onclick="pindah(this,'info',4)"><span class="ikon">📡</span>Info</button>
-      <button onclick="pindah(this,'profil',5)"><span class="ikon">👤</span>Profil</button>
+      <button class="aktif" data-page="home" onclick="handleNavClick(this, 'home', 0)"><span class="ikon">🏠</span>Home</button>
+      <button data-page="search" onclick="handleNavClick(this, 'search', 1)"><span class="ikon">🔍</span>Search</button>
+      <button data-page="tools" onclick="handleNavClick(this, 'tools', 2)"><span class="ikon">🛠️</span>Tools</button>
+      <button data-page="mtk" onclick="handleNavClick(this, 'mtk', 3)"><span class="ikon">📐</span>MTK</button>
+      <button data-page="info" onclick="handleNavClick(this, 'info', 4)"><span class="ikon">📡</span>Info</button>
+      <button data-page="profil" onclick="handleNavClick(this, 'profil', 5)"><span class="ikon">👤</span>Profil</button>
     </div>
   </div>
 
   <script>
-    let blok = document.getElementById('blok');
+    const navEl = document.getElementById('nav');
+    const blok = document.getElementById('blok');
+    const navButtons = Array.from(document.querySelectorAll('.nav button'));
+
+    let isDragging = false;
+    let hasSlid = false;
+    let pointerStartX = 0;
+    let currentHoverBtn = navButtons[0];
 
     function pindah(btn, page, index) {
-      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('aktif'));
+      if (!btn) return;
+      navButtons.forEach(b => b.classList.remove('aktif'));
       btn.classList.add('aktif');
-      let targetX = btn.offsetLeft - 8, targetW = btn.offsetWidth;
+      currentHoverBtn = btn;
+
+      blok.classList.remove('no-anim');
+      let targetX = btn.offsetLeft - 8;
+      let targetW = btn.offsetWidth;
       blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
       blok.style.width = targetW + 'px';
       blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
+
       clearTimeout(blok._timer);
       blok._timer = setTimeout(() => {
         blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
         blok.style.borderRadius = '999px';
       }, 280);
+
       document.querySelectorAll('.konten > div').forEach(d => d.classList.add('hilang'));
       let t = document.getElementById('page-' + page);
-      t.classList.remove('hilang');
-      t.classList.remove('muncul');
-      void t.offsetWidth;
-      t.classList.add('muncul');
+      if (t) {
+        t.classList.remove('hilang');
+        t.classList.remove('muncul');
+        void t.offsetWidth;
+        t.classList.add('muncul');
+      }
       if (page === 'info') loadGempa(), loadCuaca(), loadBerita();
       if (navigator.vibrate) navigator.vibrate(5);
     }
 
+    function handleNavClick(btn, page, index) {
+      if (hasSlid) {
+        hasSlid = false;
+        return;
+      }
+      pindah(btn, page, index);
+    }
+
+    function getNearestButtonByX(clientX) {
+      let bestBtn = navButtons[0];
+      let bestDist = Infinity;
+      navButtons.forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const dist = Math.abs(clientX - center);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestBtn = btn;
+        }
+      });
+      return bestBtn;
+    }
+
+    function slideBlokToX(clientX) {
+      const navRect = navEl.getBoundingClientRect();
+      const blokW = currentHoverBtn ? currentHoverBtn.offsetWidth : 58;
+      const minX = 0;
+      const maxX = Math.max(0, navRect.width - 16 - blokW);
+      let rawX = clientX - navRect.left - 8 - blokW / 2;
+      let clampedX = Math.max(minX, Math.min(maxX, rawX));
+
+      blok.classList.add('no-anim');
+      blok.style.width = blokW + 'px';
+      blok.style.borderRadius = '36% 64% 62% 38% / 56% 44% 56% 44%';
+      blok.style.transform = `translateX(${clampedX}px) scaleX(1.08) scaleY(0.94)`;
+
+      const nearBtn = getNearestButtonByX(clientX);
+      if (nearBtn && nearBtn !== currentHoverBtn) {
+        currentHoverBtn = nearBtn;
+        navButtons.forEach(b => b.classList.remove('aktif'));
+        nearBtn.classList.add('aktif');
+        if (navigator.vibrate) navigator.vibrate(3);
+      }
+    }
+
+    navEl.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      hasSlid = false;
+      pointerStartX = e.clientX;
+      navEl.classList.add('sliding');
+      if (navEl.setPointerCapture) {
+        try { navEl.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+    });
+
+    navEl.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      if (Math.abs(e.clientX - pointerStartX) > 8) {
+        hasSlid = true;
+        slideBlokToX(e.clientX);
+      }
+    });
+
+    function finishSlide(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      navEl.classList.remove('sliding');
+      if (navEl.releasePointerCapture && e.pointerId !== undefined) {
+        try { navEl.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+
+      if (hasSlid) {
+        const targetBtn = getNearestButtonByX(e.clientX);
+        const idx = navButtons.indexOf(targetBtn);
+        const pageName = targetBtn.getAttribute('data-page');
+        pindah(targetBtn, pageName, idx);
+        setTimeout(() => { hasSlid = false; }, 60);
+      }
+    }
+
+    navEl.addEventListener('pointerup', finishSlide);
+    navEl.addEventListener('pointercancel', finishSlide);
+
     function updateBlokPos() {
       let b = document.querySelector('.nav button.aktif');
       if (!b) return;
-      blok.style.transition = 'none';
+      blok.classList.add('no-anim');
       blok.style.transform = `translateX(${b.offsetLeft - 8}px)`;
       blok.style.width = b.offsetWidth + 'px';
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          blok.style.transition = '';
+          blok.classList.remove('no-anim');
         });
       });
     }
