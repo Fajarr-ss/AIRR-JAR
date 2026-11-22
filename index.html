@@ -589,20 +589,26 @@
     <!-- PAGE TOOLS -->
     <div id="page-tools" class="hilang">
       <h1>Tools</h1>
-      <p>HD Foto, HD Video, TikTok DL &amp; iLoveAPI</p>
+      <p>HD Foto (iLoveAPI), HD Video, TikTok DL &amp; Hapus BG</p>
 
-      <!-- 1. HD FOTO -->
+      <!-- 1. HD FOTO (iLoveAPI + Canvas) -->
       <div class="kartu">
-        <h2>📸 1. HD FOTO</h2>
-        <p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p>
+        <h2>📸 1. HD FOTO (iLoveAPI)</h2>
+        <p>Upscale &amp; pertajam foto lewat <code>/api/iloveapi</code>, atau pakai HD lokal tanpa kuota.</p>
         <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
         <img id="fotoPreview" class="preview">
-        <label>Ketajaman <span id="tajamVal">70</span>%</label>
-        <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
-        <label>Kecerahan <span id="cerahVal">100</span>%</label>
-        <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
-        <button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button>
-        <p id="fotoStatus" style="font-size: 12px; margin-top: 6px">Status: Durung ana foto</p>
+        <button class="btn" id="btnHdIloveApi" onclick="prosesHDiLoveAPI()">✨ HD Foto (iLoveAPI)</button>
+        <a class="btn btn2" id="btnDownloadHdApi" style="display: none" download="foto-hd-iloveapi.png">⬇️ Download Hasil HD (iLoveAPI)</a>
+
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--card-border);">
+          <label>Ketajaman Lokal <span id="tajamVal">70</span>%</label>
+          <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
+          <label>Kecerahan Lokal <span id="cerahVal">100</span>%</label>
+          <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
+          <button class="btn btn2" onclick="prosesHD();downloadHD()">⚡ HD Lokal (2x + Download)</button>
+        </div>
+
+        <p id="fotoStatus" style="font-size: 12px; margin-top: 8px">Status: Durung ana foto</p>
         <canvas id="canvasHD" style="display: none"></canvas>
       </div>
 
@@ -1236,22 +1242,66 @@
       else window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
     }
 
+    /* === HD FOTO (ILOVEAPI + CANVAS LOKAL) === */
     let fotoAsli = null;
+    let fileFotoHD = null;
 
     function loadFoto(e) {
-      let f = e.target.files[0];
+      const f = e.target.files[0];
       if (!f) return;
-      let r = new FileReader();
+      fileFotoHD = f;
+      document.getElementById('btnDownloadHdApi').style.display = 'none';
+
+      const r = new FileReader();
       r.onload = (ev) => {
         fotoAsli = new Image();
         fotoAsli.onload = () => {
           document.getElementById('fotoPreview').src = ev.target.result;
           document.getElementById('fotoPreview').style.display = 'block';
-          prosesHD();
+          document.getElementById('fotoStatus').innerText = `Status: Siap (${f.name})`;
         };
         fotoAsli.src = ev.target.result;
       };
       r.readAsDataURL(f);
+    }
+
+    async function prosesHDiLoveAPI() {
+      const st = document.getElementById('fotoStatus');
+      const img = document.getElementById('fotoPreview');
+      const dl = document.getElementById('btnDownloadHdApi');
+      const btn = document.getElementById('btnHdIloveApi');
+
+      if (!fileFotoHD) {
+        alert('Pilih foto dulu mas');
+        return;
+      }
+
+      btn.disabled = true;
+      st.innerText = 'Status: Upscale HD lewat iLoveAPI...';
+
+      try {
+        const fd = new FormData();
+        fd.append('file', fileFotoHD);
+        fd.append('tool', 'upscaleimage');
+
+        const res = await fetch('/api/iloveapi', { method: 'POST', body: fd });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`HTTP ${res.status} - ${errText.slice(0, 140)}`);
+        }
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        img.src = url;
+        img.style.display = 'block';
+        dl.href = url;
+        dl.style.display = 'block';
+        st.innerText = 'Status: HD Selesai via iLoveAPI ✅';
+      } catch (e) {
+        st.innerText = 'Status: Gagal iLoveAPI (' + e.message + ')';
+      } finally {
+        btn.disabled = false;
+      }
     }
 
     function prosesHD() {
@@ -1265,7 +1315,7 @@
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(fotoAsli, 0, 0, c.width, c.height);
       document.getElementById('fotoPreview').src = c.toDataURL('image/jpeg', 0.95);
-      document.getElementById('fotoStatus').innerText = `Status: HD Siap! ${c.width}x${c.height}px`;
+      document.getElementById('fotoStatus').innerText = `Status: HD Lokal Siap! ${c.width}x${c.height}px`;
     }
 
     function downloadHD() {
