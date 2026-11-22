@@ -465,15 +465,13 @@
 
       <!-- 3. Save Link Video & Musik + Tombol Download -->
       <div class="kartu">
-        <h2>🔗 3. Save Link Video &amp; Musik</h2>
-        <p>Tempel link TikTok / YouTube / IG, atau ambil &amp; download video/musik.</p>
-        <input type="text" id="linkDL" placeholder="Tempel link TikTok / YouTube / IG di sini...">
+        <h2>🔗 3. Donload Link Video &amp; Musik</h2>
+        <p>Tempel link TikTok, atau ambil &amp; download video/musik.</p>
+        <input type="text" id="linkDL" placeholder="Tempel link TikTok...">
         <select id="tipeDL">
           <option value="video">🎬 Video</option>
           <option value="musik">🎵 Musik / Lagu</option>
         </select>
-
-        <button class="btn" onclick="downloadLinkDL()">⬇️ Download</button>
         <button class="btn btn2" onclick="ambilTikWM()">⚡ Ambil Video &amp; Musik TikTok (TikWM)</button>
 
         <div class="row">
@@ -491,7 +489,7 @@
       <!-- 4. Hapus Background -->
       <div class="kartu">
         <h2>✂️ 4. Hapus Background (Remove.bg)</h2>
-        <p>Diproses aman lewat serverless Vercel (<code>/api/removebg</code>).</p>
+        <p>Diproses lewat vercel (<code>/api/removebg</code>).</p>
         <input type="file" id="bgInput" accept="image/*" onchange="previewBgInput(event)">
         <img id="bgPreview" class="preview">
         <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">✂️ Hapus Background</button>
