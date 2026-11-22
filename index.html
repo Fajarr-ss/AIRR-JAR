@@ -18,9 +18,59 @@
     }
 
     body {
-      background: #0a0a0a;
-      color: #fff;
+      --bg-base: #0a0a0a;
+      --text-main: #fff;
+      --text-muted: rgba(255, 255, 255, 0.72);
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --input-bg: rgba(255, 255, 255, 0.12);
+      --glow-1: #ff5e8a;
+      --glow-2: #3a7bff;
+      --glow-3: #a855f7;
+
+      background: var(--bg-base);
+      color: var(--text-main);
       min-height: 100vh;
+      transition: background 0.6s ease, color 0.4s ease;
+    }
+
+    /* Mode Pagi: terang */
+    body.mode-pagi {
+      --bg-base: #e6f2ff;
+      --text-main: #0f172a;
+      --text-muted: rgba(15, 23, 42, 0.72);
+      --card-bg: rgba(255, 255, 255, 0.65);
+      --card-border: rgba(15, 23, 42, 0.12);
+      --input-bg: rgba(255, 255, 255, 0.75);
+      --glow-1: #7dd3fc;
+      --glow-2: #fde68a;
+      --glow-3: #bae6fd;
+    }
+
+    /* Mode Siang: oranye */
+    body.mode-siang {
+      --bg-base: #7c2d12;
+      --text-main: #fff7ed;
+      --text-muted: rgba(255, 247, 237, 0.82);
+      --card-bg: rgba(255, 237, 213, 0.16);
+      --card-border: rgba(255, 237, 213, 0.28);
+      --input-bg: rgba(255, 237, 213, 0.18);
+      --glow-1: #fb923c;
+      --glow-2: #f97316;
+      --glow-3: #facc15;
+    }
+
+    /* Mode Malam: gelap */
+    body.mode-malam {
+      --bg-base: #0a0a0a;
+      --text-main: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.72);
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --input-bg: rgba(255, 255, 255, 0.12);
+      --glow-1: #3b0764;
+      --glow-2: #1d4ed8;
+      --glow-3: #6d28d9;
     }
 
     .bg {
@@ -35,33 +85,36 @@
       position: absolute;
       width: 420px;
       height: 420px;
-      background: radial-gradient(circle, #ff5e8a, transparent 70%);
+      background: radial-gradient(circle, var(--glow-1), transparent 70%);
       top: -80px;
       left: -80px;
       filter: blur(40px);
       animation: gerak 8s ease-in-out infinite alternate;
+      transition: background 0.6s ease;
     }
 
     .bg2 {
       position: absolute;
       width: 420px;
       height: 420px;
-      background: radial-gradient(circle, #3a7bff, transparent 70%);
+      background: radial-gradient(circle, var(--glow-2), transparent 70%);
       bottom: 80px;
       right: -80px;
       filter: blur(40px);
       animation: gerak2 9s ease-in-out infinite alternate;
+      transition: background 0.6s ease;
     }
 
     .bg3 {
       position: absolute;
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, #a855f7, transparent 70%);
+      background: radial-gradient(circle, var(--glow-3), transparent 70%);
       top: 40%;
       left: 30%;
       filter: blur(50px);
       animation: gerak 10s ease-in-out infinite alternate;
+      transition: background 0.6s ease;
     }
 
     @keyframes gerak {
@@ -85,8 +138,8 @@
       letter-spacing: -1px;
     }
 
-    .konten p {
-      color: rgba(255, 255, 255, 0.7);
+    .konten > div > p {
+      color: var(--text-muted);
       margin-top: 8px;
       font-size: 14px;
     }
@@ -94,12 +147,13 @@
     .kartu {
       margin: 16px auto;
       max-width: 430px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       backdrop-filter: blur(20px);
       border-radius: 28px;
       padding: 20px;
       text-align: left;
+      transition: background 0.4s ease, border-color 0.4s ease;
     }
 
     .kartu h2 {
@@ -110,21 +164,20 @@
     .kartu p {
       font-size: 14px;
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--text-muted);
     }
 
     input[type=text],
     input[type=number],
-    input[type=time],
     input[type=file],
     textarea,
     select {
       width: 100%;
       padding: 13px 14px;
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
+      border: 1px solid var(--card-border);
+      background: var(--input-bg);
+      color: var(--text-main);
       font-size: 15px;
       outline: none;
       margin-top: 8px;
@@ -137,7 +190,7 @@
 
     input::placeholder,
     textarea::placeholder {
-      color: rgba(255, 255, 255, 0.55);
+      color: var(--text-muted);
     }
 
     button.btn,
@@ -147,8 +200,8 @@
       padding: 13px;
       border: none;
       border-radius: 16px;
-      background: #fff;
-      color: #111;
+      background: var(--text-main);
+      color: var(--bg-base);
       font-weight: 800;
       font-size: 15px;
       text-align: center;
@@ -159,9 +212,9 @@
 
     button.btn2,
     a.btn2 {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: var(--input-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
     }
 
     button.btn:active,
@@ -172,28 +225,28 @@
     .chip {
       display: inline-block;
       padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
       border-radius: 999px;
       font-size: 12px;
       margin: 4px 3px;
       cursor: pointer;
-      color: #fff;
+      color: var(--text-main);
     }
 
     .shift-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
       margin-top: 10px;
     }
 
     .shift-btn {
-      padding: 10px 6px;
+      padding: 10px 4px;
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
+      border: 1px solid var(--card-border);
+      background: var(--input-bg);
+      color: var(--text-main);
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
@@ -201,17 +254,9 @@
     }
 
     .shift-btn.aktif {
-      background: #fff;
-      color: #111;
-      border-color: #fff;
-    }
-
-    .shift-panel {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: var(--text-main);
+      color: var(--bg-base);
+      border-color: var(--text-main);
     }
 
     img.preview,
@@ -228,7 +273,7 @@
       height: 90px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #fff;
+      border: 3px solid var(--text-main);
       background: #333;
     }
 
@@ -238,7 +283,6 @@
       flex-wrap: wrap;
     }
 
-    .row > div,
     .row .btn {
       flex: 1;
       min-width: 95px;
@@ -264,7 +308,7 @@
 
     .berita-item {
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid var(--card-border);
     }
 
     .berita-item:last-child {
@@ -279,7 +323,7 @@
 
     .berita-item span {
       font-size: 12px;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--text-muted);
     }
 
     input[type=range] {
@@ -291,8 +335,8 @@
       margin-top: 14px;
       padding: 14px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
     }
 
     .hasil-mtk .baris-hasil {
@@ -300,7 +344,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 6px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid var(--card-border);
       font-size: 14px;
     }
 
@@ -310,7 +354,7 @@
 
     .hasil-mtk b {
       font-size: 16px;
-      color: #6ee7b7;
+      color: #10b981;
     }
 
     .nav-wrap {
@@ -398,7 +442,7 @@
       gap: 2px;
       padding: 8px 0 6px;
       cursor: pointer;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--text-muted);
       font-size: 9.5px;
       font-weight: 600;
       transition: color 0.35s;
@@ -463,47 +507,22 @@
         <div style="font-size: 42px">🥷</div>
         <h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2>
         <p>Treat Your Better.</p>
-        <div style="margin-top: 10px;">
-          <span class="badge badgeHijau" id="badgeShiftHome">Shift Aktif: -</span>
-          <p id="infoShiftHome" style="font-size: 12px; margin-top: 6px; color: rgba(255,255,255,0.78);"></p>
-        </div>
       </div>
 
-      <!-- FITUR SHIFT PAGI / SORE / MALAM -->
+      <!-- SHIFT PAGI / SIANG / MALAM / AUTO -->
       <div class="kartu">
         <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
-          <h2 style="margin:0;">🕒 Shift Pagi / Sore / Malam</h2>
-          <span class="badge badgeBiru" id="deteksiShiftBadge">Otomatis: -</span>
+          <h2 style="margin:0;">🕒 Shift</h2>
+          <span class="badge badgeBiru" id="statusShiftBadge">Mode: Auto</span>
         </div>
+        <p id="ketShift" style="font-size:12px; margin-top:4px;">Pagi terang, Siang oranye, Malam gelap, Auto ikut jam HP.</p>
 
         <div class="shift-grid">
-          <button class="shift-btn" id="btn-shift-pagi" onclick="pilihShift('pagi')">🌅 Pagi</button>
-          <button class="shift-btn" id="btn-shift-sore" onclick="pilihShift('sore')">🌇 Sore</button>
-          <button class="shift-btn" id="btn-shift-malam" onclick="pilihShift('malam')">🌙 Malam</button>
+          <button class="shift-btn" id="btn-shift-pagi" onclick="setModeShift('pagi')">Pagi</button>
+          <button class="shift-btn" id="btn-shift-siang" onclick="setModeShift('siang')">Siang</button>
+          <button class="shift-btn" id="btn-shift-malam" onclick="setModeShift('malam')">Malam</button>
+          <button class="shift-btn" id="btn-shift-auto" onclick="setModeShift('auto')">Auto</button>
         </div>
-
-        <div class="shift-panel">
-          <div class="row">
-            <div>
-              <label style="font-size:12px; color:rgba(255,255,255,0.75);">Jam Mulai</label>
-              <input type="time" id="shiftMulai">
-            </div>
-            <div>
-              <label style="font-size:12px; color:rgba(255,255,255,0.75);">Jam Selesai</label>
-              <input type="time" id="shiftSelesai">
-            </div>
-          </div>
-
-          <div style="margin-top:10px;">
-            <label style="font-size:12px; color:rgba(255,255,255,0.75);">Catatan / Tugas Shift</label>
-            <textarea id="shiftCatatan" rows="2" placeholder="Tulis catatan shift pagi, sore, atau malam..."></textarea>
-          </div>
-
-          <button class="btn" onclick="simpanShift()">💾 Simpan Shift</button>
-          <button class="btn btn2" onclick="aktifkanShiftIni()">✅ Jadikan Shift Aktif</button>
-        </div>
-
-        <div id="rekapShiftBox" style="margin-top:12px; font-size:13px;"></div>
       </div>
 
       <div class="kartu">
@@ -585,7 +604,7 @@
         </div>
         <button class="btn btn2" onclick="simpanLinkDL()">💾 Simpan ke Daftar</button>
 
-        <p id="linkStatus" style="font-size: 12px; margin-top: 8px; color: rgba(255,255,255,.8)"></p>
+        <p id="linkStatus" style="font-size: 12px; margin-top: 8px; color: var(--text-muted)"></p>
         <div id="hasilTikWM"></div>
         <div id="daftarDL" style="margin-top: 10px; font-size: 13px"></div>
         <p style="font-size: 12px; margin-top: 8px">Tips: Di TikTok pencet Bagikan &gt; Salin Tautan, di YouTube pencet Bagikan &gt; Download / Save, di IG pencet ••• &gt; Save.</p>
@@ -599,7 +618,7 @@
         <img id="bgPreview" class="preview">
         <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">✂️ Hapus Background</button>
         <a class="btn btn2" id="btnDownloadBg" style="display: none" download="no-bg.png">⬇️ Download Hasil</a>
-        <p id="bgStatus" style="font-size: 12px; margin-top: 8px; color: rgba(255,255,255,.8)">Status: Belum ada foto</p>
+        <p id="bgStatus" style="font-size: 12px; margin-top: 8px; color: var(--text-muted)">Status: Belum ada foto</p>
       </div>
     </div>
 
@@ -632,7 +651,7 @@
         <div id="inputMTKBox" style="margin-top: 8px;"></div>
 
         <div class="hasil-mtk" id="hasilMTKBox">
-          <p style="font-size: 13px; color: rgba(255,255,255,0.65);">Isi angka di atas buat lihat hasil...</p>
+          <p style="font-size: 13px; color: var(--text-muted);">Isi angka di atas buat lihat hasil...</p>
         </div>
 
         <button class="btn btn2" onclick="resetMTK()">Reset Angka</button>
@@ -732,85 +751,58 @@
       });
     }
 
-    /* ==================== FITUR SHIFT PAGI / SORE / MALAM ==================== */
-    const defaultShift = {
-      pagi: { label: 'Pagi', ikon: '🌅', mulai: '07:00', selesai: '15:00', catatan: '' },
-      sore: { label: 'Sore', ikon: '🌇', mulai: '15:00', selesai: '23:00', catatan: '' },
-      malam: { label: 'Malam', ikon: '🌙', mulai: '23:00', selesai: '07:00', catatan: '' }
-    };
+    /* ==================== SHIFT PAGI / SIANG / MALAM / AUTO ==================== */
+    let modeShift = localStorage.getItem('shiftMode') || 'auto';
 
-    let dataShift = JSON.parse(localStorage.getItem('airr_shift_data') || 'null') || JSON.parse(JSON.stringify(defaultShift));
-    let shiftDipilih = deteksiShiftOtomatis();
-    let shiftAktif = localStorage.getItem('airr_shift_aktif') || shiftDipilih;
-
-    function deteksiShiftOtomatis() {
-      const jam = new Date().getHours();
-      if (jam >= 5 && jam < 14) return 'pagi';
-      if (jam >= 14 && jam < 18) return 'sore';
+    function getShiftDariJamHP() {
+      const now = new Date();
+      const jam = now.getHours();
+      if (jam >= 5 && jam < 12) return 'pagi';
+      if (jam >= 12 && jam < 18) return 'siang';
       return 'malam';
     }
 
-    function pilihShift(key) {
-      shiftDipilih = key;
-      ['pagi', 'sore', 'malam'].forEach(k => {
-        const el = document.getElementById('btn-shift-' + k);
-        if (el) el.classList.toggle('aktif', k === key);
+    function terapkanLatarShift() {
+      const efektif = modeShift === 'auto' ? getShiftDariJamHP() : modeShift;
+      document.body.classList.remove('mode-pagi', 'mode-siang', 'mode-malam');
+      document.body.classList.add('mode-' + efektif);
+
+      ['pagi', 'siang', 'malam', 'auto'].forEach(m => {
+        const el = document.getElementById('btn-shift-' + m);
+        if (el) el.classList.toggle('aktif', m === modeShift);
       });
-      const item = dataShift[key];
-      document.getElementById('shiftMulai').value = item.mulai;
-      document.getElementById('shiftSelesai').value = item.selesai;
-      document.getElementById('shiftCatatan').value = item.catatan;
+
+      const now = new Date();
+      const jamMenit = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+      const labelEfektif = efektif.charAt(0).toUpperCase() + efektif.slice(1);
+
+      document.getElementById('statusShiftBadge').innerText =
+        modeShift === 'auto' ? `Auto (${labelEfektif})` : `Manual (${labelEfektif})`;
+
+      document.getElementById('ketShift').innerText =
+        modeShift === 'auto'
+          ? `Jam HP ${jamMenit} → latar otomatis ${labelEfektif}.`
+          : `Latar disetel ke ${labelEfektif}.`;
     }
 
-    function simpanShift() {
-      dataShift[shiftDipilih] = {
-        ...dataShift[shiftDipilih],
-        mulai: document.getElementById('shiftMulai').value || '00:00',
-        selesai: document.getElementById('shiftSelesai').value || '00:00',
-        catatan: document.getElementById('shiftCatatan').value.trim()
-      };
-      localStorage.setItem('airr_shift_data', JSON.stringify(dataShift));
-      renderShift();
-      alert(`Shift ${dataShift[shiftDipilih].label} tersimpan ✅`);
+    function setModeShift(mode) {
+      modeShift = mode;
+      localStorage.setItem('shiftMode', mode);
+      terapkanLatarShift();
     }
 
-    function aktifkanShiftIni() {
-      shiftAktif = shiftDipilih;
-      localStorage.setItem('airr_shift_aktif', shiftAktif);
-      renderShift();
-      alert(`Shift aktif: ${dataShift[shiftAktif].label} ✅`);
-    }
-
-    function renderShift() {
-      const autoKey = deteksiShiftOtomatis();
-      document.getElementById('deteksiShiftBadge').innerText = `Otomatis: ${dataShift[autoKey].label}`;
-
-      const aktifObj = dataShift[shiftAktif];
-      document.getElementById('badgeShiftHome').innerText = `Shift Aktif: ${aktifObj.ikon} ${aktifObj.label} (${aktifObj.mulai} - ${aktifObj.selesai})`;
-      document.getElementById('infoShiftHome').innerText = aktifObj.catatan || 'Belum ada catatan pada shift aktif.';
-
-      document.getElementById('rekapShiftBox').innerHTML = ['pagi', 'sore', 'malam'].map(k => {
-        const s = dataShift[k];
-        const isAktif = k === shiftAktif;
-        return `
-          <div style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.12);">
-            <b>${s.ikon} Shift ${s.label}</b> (${s.mulai} - ${s.selesai})
-            ${isAktif ? '<span class="badge badgeHijau" style="margin-left:6px;">AKTIF</span>' : ''}
-            <br>
-            <span style="color:rgba(255,255,255,0.7); font-size:12px;">${s.catatan || 'Belum ada catatan'}</span>
-          </div>
-        `;
-      }).join('');
-    }
-    /* ====================================================================== */
+    // Cek otomatis tiap menit kalau sedang mode Auto
+    setInterval(() => {
+      if (modeShift === 'auto') terapkanLatarShift();
+    }, 60000);
+    /* ========================================================================= */
 
     window.addEventListener('load', () => {
       updateBlokPos();
       loadProfil();
       renderDaftarDL();
       renderInputMTK();
-      pilihShift(shiftDipilih);
-      renderShift();
+      terapkanLatarShift();
     });
 
     window.addEventListener('resize', updateBlokPos);
@@ -870,7 +862,7 @@
 
       box.innerHTML = fields.map(f => `
         <div style="margin-top: 10px;">
-          <label style="font-size: 13px; color: rgba(255,255,255,0.85);">${f.label}</label>
+          <label style="font-size: 13px; color: var(--text-muted);">${f.label}</label>
           <input type="number" step="any" id="mtk_${f.id}" placeholder="Masukkan ${f.label}..." oninput="hitungMTK()">
         </div>
       `).join('');
@@ -999,7 +991,7 @@
       }
 
       if (hasil.length === 0) {
-        hasilBox.innerHTML = `<p style="font-size: 13px; color: rgba(255,255,255,0.65);">Jangan ngawur kalau ngasih angka😡</p>`;
+        hasilBox.innerHTML = `<p style="font-size: 13px; color: var(--text-muted);">Jangan ngawur kalau ngasih angka😡</p>`;
       } else {
         hasilBox.innerHTML = hasil.map(item => `
           <div class="baris-hasil">
@@ -1144,7 +1136,7 @@
         if (musUrl) btns += `<a class="btn btn2" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">🎵 Download Musik</a>`;
 
         box.innerHTML = `
-          <div style="margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)">
+          <div style="margin-top:10px;padding:12px;border-radius:16px;background:var(--input-bg);border:1px solid var(--card-border)">
             <b>${judul}</b><br>
             <span style="font-size:12px;opacity:.75">@${String(author).replace(/^@/, '')}</span>
             ${btns}
@@ -1194,13 +1186,13 @@
     function renderDaftarDL() {
       let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
       document.getElementById('daftarDL').innerHTML = arr.map((x, i) => `
-        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.12)">
-          ${x.tipe === 'musik' ? '🎵' : '🎬'} <a href="${x.link}" target="_blank" style="color:#fff;word-break:break-all">${x.link.slice(0, 45)}...</a><br>
-          <span style="font-size:11px;color:rgba(255,255,255,.6)">${x.tgl}</span><br>
+        <div style="padding:8px 0;border-bottom:1px solid var(--card-border)">
+          ${x.tipe === 'musik' ? '🎵' : '🎬'} <a href="${x.link}" target="_blank" style="color:var(--text-main);word-break:break-all">${x.link.slice(0, 45)}...</a><br>
+          <span style="font-size:11px;color:var(--text-muted)">${x.tgl}</span><br>
           <span class="chip" onclick="downloadLinkDL('${x.link.replace(/'/g, "\\'")}')">⬇️ Download</span>
           <span class="chip" onclick="hapusLinkDL(${i})">🗑️ Hapus</span>
         </div>
-      `).join('') || '<p style="color:rgba(255,255,255,.6)">Belum ada link tersimpan.</p>';
+      `).join('') || '<p style="color:var(--text-muted)">Belum ada link tersimpan.</p>';
     }
 
     let fileBg = null;
@@ -1268,7 +1260,7 @@
       try {
         let res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
         let j = await res.json();
-        box.innerHTML = j.items.slice(0, 5).map(it => `<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');
+        box.innerHTML = j.items.slice(0, 5).map(it => `<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:var(--text-main)">Baca →</a></span></div>`).join('');
       } catch (e) {
         box.innerHTML = `<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;
       }
