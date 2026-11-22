@@ -10,6 +10,9 @@
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      outline: none;
     }
 
     html, body {
@@ -34,7 +37,6 @@
       transition: background 0.6s ease, color 0.4s ease;
     }
 
-    /* Mode Pagi: terang */
     body.mode-pagi {
       --bg-base: #e6f2ff;
       --text-main: #0f172a;
@@ -47,7 +49,6 @@
       --glow-3: #bae6fd;
     }
 
-    /* Mode Siang: oranye */
     body.mode-siang {
       --bg-base: #7c2d12;
       --text-main: #fff7ed;
@@ -60,7 +61,6 @@
       --glow-3: #facc15;
     }
 
-    /* Mode Malam: gelap */
     body.mode-malam {
       --bg-base: #0a0a0a;
       --text-main: #ffffff;
@@ -71,6 +71,19 @@
       --glow-1: #3b0764;
       --glow-2: #1d4ed8;
       --glow-3: #6d28d9;
+    }
+
+    button, a, .chip, .shift-btn {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    button:focus,
+    button:focus-visible,
+    a:focus,
+    a:focus-visible {
+      outline: none;
+      box-shadow: none;
     }
 
     .bg {
@@ -751,7 +764,6 @@
       });
     }
 
-    /* ==================== SHIFT PAGI / SIANG / MALAM / AUTO ==================== */
     let modeShift = localStorage.getItem('shiftMode') || 'auto';
 
     function getShiftDariJamHP() {
@@ -791,11 +803,9 @@
       terapkanLatarShift();
     }
 
-    // Cek otomatis tiap menit kalau sedang mode Auto
     setInterval(() => {
       if (modeShift === 'auto') terapkanLatarShift();
     }, 60000);
-    /* ========================================================================= */
 
     window.addEventListener('load', () => {
       updateBlokPos();
@@ -807,52 +817,18 @@
 
     window.addEventListener('resize', updateBlokPos);
 
-    /* ==================== KALKULATOR MTK ==================== */
     const konfigurasiBangun = {
-      kubus: [
-        { id: 's', label: 'Panjang Sisi / Rusuk (s)' }
-      ],
-      balok: [
-        { id: 'p', label: 'Panjang (p)' },
-        { id: 'l', label: 'Lebar (l)' },
-        { id: 't', label: 'Tinggi (t)' }
-      ],
-      tabung: [
-        { id: 'r', label: 'Jari-jari Alas (r)' },
-        { id: 't', label: 'Tinggi Tabung (t)' }
-      ],
-      bola: [
-        { id: 'r', label: 'Jari-jari Bola (r)' }
-      ],
-      kerucut: [
-        { id: 'r', label: 'Jari-jari Alas (r)' },
-        { id: 't', label: 'Tinggi Kerucut (t)' }
-      ],
-      limas4: [
-        { id: 's', label: 'Sisi Alas Persegi (s)' },
-        { id: 't', label: 'Tinggi Limas (t)' }
-      ],
-      prisma3: [
-        { id: 'a', label: 'Alas Segitiga (a)' },
-        { id: 'ts', label: 'Tinggi Segitiga Alas (ts)' },
-        { id: 'tp', label: 'Tinggi Prisma (tp)' }
-      ],
-      persegi: [
-        { id: 's', label: 'Panjang Sisi (s)' }
-      ],
-      persegipanjang: [
-        { id: 'p', label: 'Panjang (p)' },
-        { id: 'l', label: 'Lebar (l)' }
-      ],
-      lingkaran: [
-        { id: 'r', label: 'Jari-jari (r)' }
-      ],
-      segitiga: [
-        { id: 'a', label: 'Alas (a)' },
-        { id: 't', label: 'Tinggi (t)' },
-        { id: 'b', label: 'Sisi Miring Kiri (opsional)' },
-        { id: 'c', label: 'Sisi Miring Kanan (opsional)' }
-      ]
+      kubus: [{ id: 's', label: 'Panjang Sisi / Rusuk (s)' }],
+      balok: [{ id: 'p', label: 'Panjang (p)' }, { id: 'l', label: 'Lebar (l)' }, { id: 't', label: 'Tinggi (t)' }],
+      tabung: [{ id: 'r', label: 'Jari-jari Alas (r)' }, { id: 't', label: 'Tinggi Tabung (t)' }],
+      bola: [{ id: 'r', label: 'Jari-jari Bola (r)' }],
+      kerucut: [{ id: 'r', label: 'Jari-jari Alas (r)' }, { id: 't', label: 'Tinggi Kerucut (t)' }],
+      limas4: [{ id: 's', label: 'Sisi Alas Persegi (s)' }, { id: 't', label: 'Tinggi Limas (t)' }],
+      prisma3: [{ id: 'a', label: 'Alas Segitiga (a)' }, { id: 'ts', label: 'Tinggi Segitiga Alas (ts)' }, { id: 'tp', label: 'Tinggi Prisma (tp)' }],
+      persegi: [{ id: 's', label: 'Panjang Sisi (s)' }],
+      persegipanjang: [{ id: 'p', label: 'Panjang (p)' }, { id: 'l', label: 'Lebar (l)' }],
+      lingkaran: [{ id: 'r', label: 'Jari-jari (r)' }],
+      segitiga: [{ id: 'a', label: 'Alas (a)' }, { id: 't', label: 'Tinggi (t)' }, { id: 'b', label: 'Sisi Miring Kiri (opsional)' }, { id: 'c', label: 'Sisi Miring Kanan (opsional)' }]
     };
 
     function renderInputMTK() {
@@ -1006,7 +982,6 @@
       document.querySelectorAll('#inputMTKBox input').forEach(inp => inp.value = '');
       hitungMTK();
     }
-    /* ======================================================= */
 
     function isiSearch(t) {
       document.getElementById('inputSearch').value = t;
