@@ -532,23 +532,23 @@
       <p>Kalkulator Bangun Ruang &amp; Bangun Datar</p>
 
       <div class="kartu">
-        <h2>🧊 Pilih Bangun</h2>
+        <h2>Pilih Bangun</h2>
         <p>Masukin angka ukurannya, hasil luas &amp; keliling langsung muncul otomatis.</p>
         <select id="pilihBangun" onchange="renderInputMTK()">
           <optgroup label="Bangun Ruang (3D)">
-            <option value="kubus">🧊 Kubus</option>
-            <option value="balok">📦 Balok</option>
-            <option value="tabung">🥫 Tabung</option>
-            <option value="bola">⚽ Bola</option>
-            <option value="kerucut">🎉 Kerucut</option>
-            <option value="limas4">🔺 Limas Segi Empat</option>
-            <option value="prisma3">⛺ Prisma Segitiga</option>
+            <option value="kubus">Kubus</option>
+            <option value="balok">Balok</option>
+            <option value="tabung">Tabung</option>
+            <option value="bola">Bola</option>
+            <option value="kerucut">Kerucut</option>
+            <option value="limas4">Limas Segi Empat</option>
+            <option value="prisma3">Prisma Segitiga</option>
           </optgroup>
           <optgroup label="Bangun Datar (2D)">
-            <option value="persegi">⬛ Persegi</option>
-            <option value="persegipanjang">▭ Persegi Panjang</option>
-            <option value="lingkaran">⚪ Lingkaran</option>
-            <option value="segitiga">📐 Segitiga</option>
+            <option value="persegi">Persegi</option>
+            <option value="persegipanjang">Persegi Panjang</option>
+            <option value="lingkaran">Lingkaran</option>
+            <option value="segitiga">Segitiga</option>
           </optgroup>
         </select>
 
@@ -558,13 +558,13 @@
           <p style="font-size: 13px; color: rgba(255,255,255,0.65);">Isi angka di atas buat lihat hasil...</p>
         </div>
 
-        <button class="btn btn2" onclick="resetMTK()">🔄 Reset Angka</button>
+        <button class="btn btn2" onclick="resetMTK()">Reset Angka</button>
       </div>
     </div>
 
     <!-- PAGE INFO -->
     <div id="page-info" class="hilang">
-      <h1>Info 📡</h1>
+      <h1>Info</h1>
       <p>Live dari BMKG &amp; Berita Indonesia</p>
       <div class="kartu">
         <h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2>
@@ -593,10 +593,10 @@
         <p id="bioProfil">No bio yet</p>
         <input type="text" id="editNama" placeholder="Ganti nama...">
         <textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea>
-        <label style="font-size: 13px">📸 Ganti Foto Profil</label>
+        <label style="font-size: 13px">Ganti Foto Profil</label>
         <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
         <div class="row">
-          <button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button>
+          <button class="btn" onclick="simpanProfil()">Simpan Profil</button>
           <button class="btn btn2" onclick="resetProfil()">Reset</button>
         </div>
       </div>
@@ -849,7 +849,7 @@
       }
 
       if (hasil.length === 0) {
-        hasilBox.innerHTML = `<p style="font-size: 13px; color: rgba(255,255,255,0.65);">Masukkan angka positif di atas, hasil langsung muncul di sini ✨</p>`;
+        hasilBox.innerHTML = `<p style="font-size: 13px; color: rgba(255,255,255,0.65);">Jangan ngawur kalau ngasih angka😡</p>`;
       } else {
         hasilBox.innerHTML = hasil.map(item => `
           <div class="baris-hasil">
@@ -1125,8 +1125,8 @@
     }
 
     function loadProfil() {
-      let nama = localStorage.getItem('nama') || 'Jarr';
-      let bio = localStorage.getItem('bio') || 'Yogyakarta • Seneng ngoprek HTML modal AI😹';
+      let nama = localStorage.getItem('nama') || 'No name';
+      let bio = localStorage.getItem('bio') || 'No bio yet';
       let foto = localStorage.getItem('fotoProfil');
       document.getElementById('namaProfil').innerText = nama;
       document.getElementById('namaHome').innerText = nama;
@@ -1137,8 +1137,8 @@
     }
 
     function simpanProfil() {
-      let nama = document.getElementById('editNama').value.trim() || 'Jarr';
-      let bio = document.getElementById('editBio').value.trim() || 'Yogyakarta';
+      let nama = document.getElementById('editNama').value.trim() || 'No name';
+      let bio = document.getElementById('editBio').value.trim() || 'No bio yet';
       localStorage.setItem('nama', nama);
       localStorage.setItem('bio', bio);
       document.getElementById('namaProfil').innerText = nama;
