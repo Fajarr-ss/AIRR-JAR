@@ -414,22 +414,24 @@
     }
 
     .blok {
+      --shine-shift: 0px;
       position: absolute;
       top: 7px;
       left: 8px;
       width: 58px;
       height: 54px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(195, 202, 215, 0.40) 38%, rgba(165, 175, 190, 0.34) 68%, rgba(255, 255, 255, 0.50) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.68);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.66) 0%, rgba(205, 212, 226, 0.42) 38%, rgba(165, 178, 198, 0.34) 68%, rgba(255, 255, 255, 0.54) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 999px;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -3px 8px rgba(255, 255, 255, 0.28);
-      transition: transform 0.55s cubic-bezier(.22,1,.36,1), width 0.55s cubic-bezier(.22,1,.36,1), border-radius 0.55s cubic-bezier(.22,1,.36,1);
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.28),
+        0 0 16px rgba(255, 255, 255, 0.14),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.96),
+        inset 0 -4px 10px rgba(255, 255, 255, 0.32);
+      will-change: transform, width, border-radius;
+      transform-origin: center center;
       z-index: 0;
       pointer-events: none;
-    }
-
-    .blok.no-anim {
-      transition: none !important;
     }
 
     .blok::before {
@@ -440,7 +442,9 @@
       right: 10px;
       height: 18px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.12) 60%, transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.14) 60%, transparent);
+      transform: translateX(var(--shine-shift));
+      transition: transform 0.16s ease-out;
     }
 
     .blok::after {
@@ -451,8 +455,10 @@
       right: 14px;
       height: 10px;
       border-radius: 999px;
-      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.48));
+      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.52));
       filter: blur(1px);
+      transform: translateX(calc(var(--shine-shift) * -0.5));
+      transition: transform 0.16s ease-out;
     }
 
     .nav button {
@@ -470,14 +476,14 @@
       color: var(--text-muted);
       font-size: 9.5px;
       font-weight: 600;
-      transition: color 0.35s;
+      transition: color 0.25s ease;
       min-width: 0;
     }
 
     .nav button .ikon {
       font-size: 20px;
       line-height: 1;
-      transition: transform 0.55s cubic-bezier(.22,1,.36,1);
+      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
     }
 
     .nav button.aktif {
@@ -485,11 +491,11 @@
     }
 
     .nav button.aktif .ikon {
-      transform: scale(1.15) translateY(-1px);
+      transform: scale(1.16) translateY(-1px);
     }
 
-    .nav button:active {
-      transform: scale(0.94);
+    .nav button:active .ikon {
+      transform: scale(0.92);
     }
 
     .hilang {
@@ -743,32 +749,75 @@
     const blok = document.getElementById('blok');
     const navButtons = Array.from(document.querySelectorAll('.nav button'));
 
+    // Fisika pegas (spring) untuk gelembung liquid glass
+    const spring = {
+      x: 0,
+      vx: 0,
+      targetX: 0,
+      w: 58,
+      vw: 0,
+      targetW: 58,
+      stiffness: 0.16,
+      damping: 0.74
+    };
+
     let isDragging = false;
     let hasSlid = false;
     let pointerStartX = 0;
+    let lastPointerX = 0;
+    let lastMoveTime = 0;
+    let dragVelocity = 0;
     let currentHoverBtn = navButtons[0];
+    let activePage = 'home';
 
-    function pindah(btn, page, index) {
-      if (!btn) return;
-      navButtons.forEach(b => b.classList.remove('aktif'));
-      btn.classList.add('aktif');
-      currentHoverBtn = btn;
+    function getBtnTarget(btn) {
+      return {
+        x: btn ? (btn.offsetLeft - 8) : 0,
+        w: btn ? btn.offsetWidth : 58
+      };
+    }
 
-      blok.classList.remove('no-anim');
-      let targetX = btn.offsetLeft - 8;
-      let targetW = btn.offsetWidth;
-      blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
-      blok.style.width = targetW + 'px';
-      blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
+    function stepSpring() {
+      // Saat di-drag, gelembung mengikuti pointer lebih responsif
+      const k = isDragging ? 0.34 : spring.stiffness;
+      const d = isDragging ? 0.66 : spring.damping;
 
-      clearTimeout(blok._timer);
-      blok._timer = setTimeout(() => {
-        blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
-        blok.style.borderRadius = '999px';
-      }, 280);
+      const ax = (spring.targetX - spring.x) * k;
+      spring.vx = (spring.vx + ax) * d;
+      spring.x += spring.vx;
 
+      const aw = (spring.targetW - spring.w) * k;
+      spring.vw = (spring.vw + aw) * d;
+      spring.w += spring.vw;
+
+      // Hitung peregangan (stretch) berdasarkan kecepatan gerak
+      const speed = Math.abs(spring.vx);
+      const stretchX = Math.min(1.22, 1 + speed * 0.012);
+      const squashY = Math.max(0.86, 1 - speed * 0.0075);
+
+      // Radius organik lentur saat bergerak
+      const dir = spring.vx >= 0 ? 1 : -1;
+      const morph = Math.min(14, speed * 0.45);
+      const rTopLeft = dir > 0 ? (28 - morph * 0.4) : (28 + morph * 0.6);
+      const rTopRight = dir > 0 ? (28 + morph * 0.6) : (28 - morph * 0.4);
+      const rBotLeft = dir > 0 ? (28 - morph * 0.3) : (28 + morph * 0.5);
+      const rBotRight = dir > 0 ? (28 + morph * 0.5) : (28 - morph * 0.3);
+
+      blok.style.width = `${Math.max(36, spring.w)}px`;
+      blok.style.transform = `translate3d(${spring.x}px, 0, 0) scale(${stretchX.toFixed(3)}, ${squashY.toFixed(3)})`;
+      blok.style.borderRadius = `${rTopLeft.toFixed(1)}% ${rTopRight.toFixed(1)}% ${rBotRight.toFixed(1)}% ${rBotLeft.toFixed(1)}% / 55% 45% 55% 45%`;
+
+      const shineOffset = Math.max(-10, Math.min(10, spring.vx * 0.35));
+      blok.style.setProperty('--shine-shift', `${shineOffset.toFixed(1)}px`);
+
+      requestAnimationFrame(stepSpring);
+    }
+
+    function showPage(page) {
+      if (page === activePage) return;
+      activePage = page;
       document.querySelectorAll('.konten > div').forEach(d => d.classList.add('hilang'));
-      let t = document.getElementById('page-' + page);
+      const t = document.getElementById('page-' + page);
       if (t) {
         t.classList.remove('hilang');
         t.classList.remove('muncul');
@@ -776,6 +825,21 @@
         t.classList.add('muncul');
       }
       if (page === 'info') loadGempa(), loadCuaca(), loadBerita();
+    }
+
+    function pindah(btn, page, index) {
+      if (!btn) return;
+      navButtons.forEach(b => b.classList.remove('aktif'));
+      btn.classList.add('aktif');
+      currentHoverBtn = btn;
+
+      const tgt = getBtnTarget(btn);
+      spring.targetX = tgt.x;
+      spring.targetW = tgt.w;
+      // Dorongan momentum kecil saat klik agar terasa hidup
+      spring.vx += (tgt.x - spring.x) * 0.08;
+
+      showPage(page);
       if (navigator.vibrate) navigator.vibrate(5);
     }
 
@@ -803,23 +867,23 @@
     }
 
     function slideBlokToX(clientX) {
+      const nearBtn = getNearestButtonByX(clientX);
+      const blokW = nearBtn ? nearBtn.offsetWidth : spring.targetW;
       const navRect = navEl.getBoundingClientRect();
-      const blokW = currentHoverBtn ? currentHoverBtn.offsetWidth : 58;
       const minX = 0;
       const maxX = Math.max(0, navRect.width - 16 - blokW);
+
       let rawX = clientX - navRect.left - 8 - blokW / 2;
       let clampedX = Math.max(minX, Math.min(maxX, rawX));
 
-      blok.classList.add('no-anim');
-      blok.style.width = blokW + 'px';
-      blok.style.borderRadius = '36% 64% 62% 38% / 56% 44% 56% 44%';
-      blok.style.transform = `translateX(${clampedX}px) scaleX(1.08) scaleY(0.94)`;
+      spring.targetX = clampedX;
+      spring.targetW = blokW;
 
-      const nearBtn = getNearestButtonByX(clientX);
       if (nearBtn && nearBtn !== currentHoverBtn) {
         currentHoverBtn = nearBtn;
         navButtons.forEach(b => b.classList.remove('aktif'));
         nearBtn.classList.add('aktif');
+        showPage(nearBtn.getAttribute('data-page'));
         if (navigator.vibrate) navigator.vibrate(3);
       }
     }
@@ -828,6 +892,9 @@
       isDragging = true;
       hasSlid = false;
       pointerStartX = e.clientX;
+      lastPointerX = e.clientX;
+      lastMoveTime = performance.now();
+      dragVelocity = 0;
       navEl.classList.add('sliding');
       if (navEl.setPointerCapture) {
         try { navEl.setPointerCapture(e.pointerId); } catch (_) {}
@@ -836,7 +903,13 @@
 
     navEl.addEventListener('pointermove', (e) => {
       if (!isDragging) return;
-      if (Math.abs(e.clientX - pointerStartX) > 8) {
+      const now = performance.now();
+      const dt = Math.max(8, now - lastMoveTime);
+      dragVelocity = ((e.clientX - lastPointerX) / dt) * 16;
+      lastPointerX = e.clientX;
+      lastMoveTime = now;
+
+      if (Math.abs(e.clientX - pointerStartX) > 6) {
         hasSlid = true;
         slideBlokToX(e.clientX);
       }
@@ -851,10 +924,23 @@
       }
 
       if (hasSlid) {
-        const targetBtn = getNearestButtonByX(e.clientX);
+        // Tambahkan sedikit momentum pelepasan (flick) ke arah geseran
+        const flickX = e.clientX + dragVelocity * 2.2;
+        const targetBtn = getNearestButtonByX(flickX);
         const idx = navButtons.indexOf(targetBtn);
         const pageName = targetBtn.getAttribute('data-page');
-        pindah(targetBtn, pageName, idx);
+
+        navButtons.forEach(b => b.classList.remove('aktif'));
+        targetBtn.classList.add('aktif');
+        currentHoverBtn = targetBtn;
+
+        const tgt = getBtnTarget(targetBtn);
+        spring.targetX = tgt.x;
+        spring.targetW = tgt.w;
+        spring.vx += dragVelocity * 0.65;
+
+        showPage(pageName);
+        if (navigator.vibrate) navigator.vibrate(5);
         setTimeout(() => { hasSlid = false; }, 60);
       }
     }
@@ -862,17 +948,16 @@
     navEl.addEventListener('pointerup', finishSlide);
     navEl.addEventListener('pointercancel', finishSlide);
 
-    function updateBlokPos() {
-      let b = document.querySelector('.nav button.aktif');
+    function syncBlokInstant() {
+      const b = document.querySelector('.nav button.aktif') || navButtons[0];
       if (!b) return;
-      blok.classList.add('no-anim');
-      blok.style.transform = `translateX(${b.offsetLeft - 8}px)`;
-      blok.style.width = b.offsetWidth + 'px';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          blok.classList.remove('no-anim');
-        });
-      });
+      const tgt = getBtnTarget(b);
+      spring.x = tgt.x;
+      spring.targetX = tgt.x;
+      spring.vx = 0;
+      spring.w = tgt.w;
+      spring.targetW = tgt.w;
+      spring.vw = 0;
     }
 
     let modeShift = localStorage.getItem('shiftMode') || 'auto';
@@ -919,14 +1004,21 @@
     }, 60000);
 
     window.addEventListener('load', () => {
-      updateBlokPos();
+      syncBlokInstant();
+      requestAnimationFrame(stepSpring);
       loadProfil();
       renderDaftarDL();
       renderInputMTK();
       terapkanLatarShift();
     });
 
-    window.addEventListener('resize', updateBlokPos);
+    window.addEventListener('resize', () => {
+      const b = document.querySelector('.nav button.aktif') || navButtons[0];
+      if (!b) return;
+      const tgt = getBtnTarget(b);
+      spring.targetX = tgt.x;
+      spring.targetW = tgt.w;
+    });
 
     const konfigurasiBangun = {
       kubus: [{ id: 's', label: 'Panjang Sisi / Rusuk (s)' }],
