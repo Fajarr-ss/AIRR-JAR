@@ -1,177 +1,1317 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><title>AIRR - J</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}html,body{overflow-x:hidden;max-width:100vw}body{background:#0a0a0a;color:#fff;min-height:100vh;transition:background .55s cubic-bezier(.22,1,.36,1),color .45s ease}.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}.bg1{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#ff5e8a,transparent 70%);top:-80px;left:-80px;filter:blur(40px);animation:gerak 8s ease-in-out infinite alternate}.bg2{position:absolute;width:420px;height:420px;background:radial-gradient(circle,#3a7bff,transparent 70%);bottom:80px;right:-80px;filter:blur(40px);animation:gerak2 9s ease-in-out infinite alternate}.bg3{position:absolute;width:300px;height:300px;background:radial-gradient(circle,#a855f7,transparent 70%);top:40%;left:30%;filter:blur(50px);animation:gerak 10s ease-in-out infinite alternate}@keyframes gerak{to{transform:translate(80px,60px) scale(1.2)}}@keyframes gerak2{to{transform:translate(-80px,-60px) scale(1.1)}}.konten{position:relative;z-index:1;padding:24px 20px 140px;text-align:center}.konten h1{font-size:32px;font-weight:800;letter-spacing:-1px}.konten p{color:rgba(255,255,255,.72);margin-top:8px;font-size:14px}.kartu{margin:16px auto;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:28px;padding:20px;text-align:left;transition:background .45s ease,border-color .45s ease}.kartu h2{font-size:18px;margin-bottom:6px}.kartu p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.85)}input[type=text],input[type=file],textarea,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;margin-top:8px}select option{background:#181a1f;color:#fff}input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}button.btn{width:100%;padding:13px;border:none;border-radius:16px;background:#fff;color:#111;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}button.btn2{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}button.btn:active{transform:scale(.97)}.chip{display:inline-block;padding:8px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:12px;margin:4px 3px;cursor:pointer;color:#fff;transition:transform .2s ease,background .3s ease}.chip:active{transform:scale(.95)}img.preview,video.preview{width:100%;border-radius:18px;margin-top:10px;display:none;background:#000}.avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}.row{display:flex;gap:8px;flex-wrap:wrap}.row .btn{flex:1;min-width:95px}.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#ff4444;color:#fff;font-size:11px;font-weight:800}.badgeHijau{background:#00c853}.badgeBiru{background:#2196f3}.berita-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12)}.berita-item:last-child{border:none}.berita-item b{font-size:14px;line-height:1.4;display:block}.berita-item span{font-size:12px;color:rgba(255,255,255,.6)}.status-msg{font-size:12px;margin-top:8px;color:rgba(255,255,255,.78)}input[type=range]{width:100%;margin-top:8px}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIRR - J</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+    }
 
-/* Day / Night Shift Toggle */
-.shift-bar{display:flex;justify-content:center;margin-bottom:14px}
-.toggle{position:relative;width:146px;height:62px;border:2px solid rgba(255,255,255,.22);border-radius:999px;background:#23262b;cursor:pointer;padding:0;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.42),inset 0 2px 8px rgba(0,0,0,.4);transition:background .55s cubic-bezier(.22,1,.36,1),border-color .55s ease}
-.night-decor{position:absolute;inset:0;pointer-events:none;transition:opacity .4s ease,transform .55s cubic-bezier(.22,1,.36,1)}
-.star{position:absolute;color:#ffe866;font-size:12px;filter:drop-shadow(0 0 4px rgba(255,232,102,.5))}
-.s1{top:11px;left:64px}.s2{top:13px;left:90px;font-size:10px}.s3{top:31px;left:77px;font-size:11px}
-.moon-arc{position:absolute;right:15px;bottom:9px;width:24px;height:14px;border-bottom:4px solid #ffe866;border-radius:0 0 24px 24px;transform:rotate(-16deg);opacity:.9}
-.day-decor{position:absolute;inset:0;pointer-events:none;opacity:0;transform:translateX(-14px);transition:opacity .45s ease,transform .55s cubic-bezier(.22,1,.36,1)}
-.cloud{position:absolute;background:#fff;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.08)}
-.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
-.c1{width:38px;height:14px;top:14px;left:15px}.c1::before{width:18px;height:18px;top:-8px;left:5px}.c1::after{width:13px;height:13px;top:-5px;left:18px}
-.c2{width:33px;height:13px;top:33px;left:29px}.c2::before{width:15px;height:15px;top:-6px;left:5px}.c2::after{width:11px;height:11px;top:-4px;left:16px}
-.knob{position:absolute;top:4px;left:4px;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#d9dde3);box-shadow:0 6px 14px rgba(0,0,0,.35),inset 0 1px 2px rgba(255,255,255,.9);display:grid;place-items:center;transition:transform .6s cubic-bezier(.34,1.35,.64,1),background .5s ease}
-.sun{width:22px;height:22px;border-radius:50%;background:#ffd426;opacity:0;transform:scale(.4) rotate(-60deg);box-shadow:0 0 0 3px rgba(255,212,38,.25);transition:opacity .35s ease,transform .55s cubic-bezier(.22,1,.36,1)}
-.toggle.day{background:#eef2f7;border-color:rgba(0,0,0,.15)}
-.toggle.day .night-decor{opacity:0;transform:translateX(14px)}
-.toggle.day .day-decor{opacity:1;transform:translateX(0)}
-.toggle.day .knob{transform:translateX(84px);background:radial-gradient(circle at 35% 30%,#c8cdd4,#9aa2ad)}
-.toggle.day .sun{opacity:1;transform:scale(1) rotate(0deg)}
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
 
-/* Light Theme (Siang) */
-body.light-mode{background:#dce6f5;color:#111827}
-body.light-mode .bg1{background:radial-gradient(circle,#ff9eb8,transparent 70%);opacity:.65}
-body.light-mode .bg2{background:radial-gradient(circle,#7fb2ff,transparent 70%);opacity:.65}
-body.light-mode .bg3{background:radial-gradient(circle,#d8b4fe,transparent 70%);opacity:.65}
-body.light-mode .konten p{color:rgba(17,24,39,.72)}
-body.light-mode .kartu{background:rgba(255,255,255,.68);border-color:rgba(255,255,255,.85);box-shadow:0 12px 30px rgba(15,23,42,.08)}
-body.light-mode .kartu p{color:rgba(17,24,39,.85)}
-body.light-mode input[type=text],body.light-mode input[type=file],body.light-mode textarea,body.light-mode select{background:rgba(255,255,255,.78);border-color:rgba(17,24,39,.16);color:#111827}
-body.light-mode select option{background:#fff;color:#111827}
-body.light-mode input::placeholder,body.light-mode textarea::placeholder{color:rgba(17,24,39,.5)}
-body.light-mode button.btn{background:#111827;color:#fff}
-body.light-mode button.btn2{background:rgba(17,24,39,.08);color:#111827;border-color:rgba(17,24,39,.16)}
-body.light-mode .chip{background:rgba(17,24,39,.08);border-color:rgba(17,24,39,.15);color:#111827}
-body.light-mode .berita-item{border-bottom-color:rgba(17,24,39,.1)}
-body.light-mode .berita-item span{color:rgba(17,24,39,.62)}
-body.light-mode .status-msg{color:rgba(17,24,39,.75)}
-body.light-mode .nav{background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,255,255,.55) 50%,rgba(255,255,255,.75));border-color:rgba(255,255,255,.9)}
-body.light-mode .nav button{color:rgba(17,24,39,.68)}
-body.light-mode .nav button.aktif{color:#111827}
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      transition: background 0.55s cubic-bezier(.22,1,.36,1), color 0.45s ease;
+    }
 
-.nav-wrap{position:fixed;left:0;right:0;margin:0 auto;bottom:18px;z-index:10;width:min(430px,calc(100vw - 32px))}.nav{position:relative;display:flex;justify-content:space-between;align-items:center;padding:10px;background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,.08) 40%,rgba(255,255,255,.16));backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.35);border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.6);overflow:hidden;width:100%}.nav::before{content:"";position:absolute;inset:1px 1px 55% 1px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.55),transparent);pointer-events:none;z-index:2}.blok{position:absolute;top:8px;left:10px;width:68px;height:56px;background:linear-gradient(135deg,rgba(255,255,255,.62) 0%,rgba(195,202,215,.40) 38%,rgba(165,175,190,.34) 68%,rgba(255,255,255,.50) 100%);border:1px solid rgba(255,255,255,.68);border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -3px 8px rgba(255,255,255,.28);transition:transform .55s cubic-bezier(.22,1,.36,1),width .55s cubic-bezier(.22,1,.36,1),border-radius .55s cubic-bezier(.22,1,.36,1);z-index:0;pointer-events:none}.blok::before{content:"";position:absolute;top:3px;left:10px;right:10px;height:18px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.12) 60%,transparent)}.blok::after{content:"";position:absolute;bottom:4px;left:14px;right:14px;height:10px;border-radius:999px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.48));filter:blur(1px)}.nav button{position:relative;z-index:1;flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;cursor:pointer;color:rgba(255,255,255,.78);font-size:10px;font-weight:600;transition:color .35s;min-width:0}.nav button .ikon{font-size:22px;line-height:1;transition:transform .55s cubic-bezier(.22,1,.36,1)}.nav button.aktif{color:#111}.nav button.aktif .ikon{transform:scale(1.15) translateY(-1px)}.nav button:active{transform:scale(.94)}.hilang{display:none}.muncul{animation:muncul .45s cubic-bezier(.22,1,.36,1) both}@keyframes muncul{from{opacity:0;transform:translateY(10px) scale(.98);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}</style></head><body><div class="bg"><div class="bg1"></div><div class="bg2"></div><div class="bg3"></div></div><div class="konten">
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-<div class="shift-bar">
-  <button class="toggle" id="dayNightToggle" aria-label="Ganti mode siang atau malam" aria-pressed="false" onclick="toggleDayNight()">
-    <span class="night-decor">
-      <span class="star s1">✦</span>
-      <span class="star s2">✦</span>
-      <span class="star s3">✦</span>
-      <span class="moon-arc"></span>
-    </span>
-    <span class="day-decor">
-      <span class="cloud c1"></span>
-      <span class="cloud c2"></span>
-    </span>
-    <span class="knob">
-      <span class="sun"></span>
-    </span>
-  </button>
-</div>
+    .bg1 {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #ff5e8a, transparent 70%);
+      top: -80px;
+      left: -80px;
+      filter: blur(40px);
+      animation: gerak 8s ease-in-out infinite alternate;
+    }
 
-<div id="page-home"><h1>AIRR X Liquid Glass</h1><p>Search Google • Tools HD • Info BMKG</p><div class="kartu"><div style="font-size:42px">✨</div><h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2><p>Treat Your Better.</p></div><div class="kartu"><h2>⚡ Cepet Akses</h2><p><span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span><span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span><span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span></p></div></div>
+    .bg2 {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #3a7bff, transparent 70%);
+      bottom: 80px;
+      right: -80px;
+      filter: blur(40px);
+      animation: gerak2 9s ease-in-out infinite alternate;
+    }
 
-<div id="page-search" class="hilang"><h1>Search</h1><p>connect Google</p><div class="kartu"><h2>🔎 Pencarian Google</h2><input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter')cariGoogle()"><button class="btn" onclick="cariGoogle()">Cari di Google →</button><button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button><p id="searchStatus" class="status-msg"></p><p style="margin-top:10px">Trending:</p><span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span><span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span><span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span><span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span></div></div>
+    .bg3 {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #a855f7, transparent 70%);
+      top: 40%;
+      left: 30%;
+      filter: blur(50px);
+      animation: gerak 10s ease-in-out infinite alternate;
+    }
 
-<div id="page-tools" class="hilang"><h1>Tools 🛠️</h1><p>HD Foto &amp; Filter Video - Lokal, tanpa upload ke server</p><div class="kartu"><h2>📸 1. HD FOTO</h2><p>Pilih foto, upscale 2x + atur kontras &amp; kecerahan langsung di browser.</p><input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)"><img id="fotoPreview" class="preview"><label>Ketajaman / Kontras <span id="tajamVal">70</span>%</label><input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()"><label>Kecerahan <span id="cerahVal">100</span>%</label><input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()"><button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button><p id="fotoStatus" class="status-msg">Status: Belum ada foto</p><canvas id="canvasHD" style="display:none"></canvas></div><div class="kartu"><h2>🎬 2. FILTER VIDEO</h2><p>Pilih video dan atur kontras/saturasi saat diputar (preview saja).</p><input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)"><video id="videoPreview" class="preview" controls playsinline></video><label>Kontras <span id="vidVal">130</span>%</label><input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value;applyVideoFilter()"><label>Saturasi <span id="satVal">120</span>%</label><input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value;applyVideoFilter()"><p class="status-msg">Catatan: Filter diterapkan pada tampilan pemutar video, bukan membakar filter ke file unduhan.</p></div><div class="kartu"><h2>🔗 3. Download &amp; Save Video / Musik</h2><p>Tempel link TikTok / YouTube / IG, lalu klik Download (link otomatis ter-copy).</p><input type="text" id="linkDL" placeholder="Tempel link https://... di sini"><select id="tipeDL"><option value="video">🎬 Video (No Watermark)</option><option value="musik">🎵 Musik / MP3</option></select><button class="btn" onclick="downloadLinkDL()">⬇️ Download Sekarang</button><div class="row"><button class="btn btn2" onclick="bukaLinkDL()">▶️ Buka Asli</button><button class="btn btn2" onclick="copyLinkDL()">📋 Copy Link</button><button class="btn btn2" onclick="simpanLinkDL()">💾 Simpan</button></div><p id="linkStatus" class="status-msg"></p><div id="daftarDL" style="margin-top:10px;font-size:13px"></div></div></div>
+    @keyframes gerak {
+      to { transform: translate(80px, 60px) scale(1.2); }
+    }
 
-<div id="page-info" class="hilang"><h1>Info 📡</h1><p>Live dari BMKG &amp; Berita Indonesia</p><div class="kartu"><h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2><div id="gempaBox"><p>Loading data BMKG...</p></div><button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button></div><div class="kartu"><h2>🌦️ Cuaca Jogja Hari Ini</h2><div id="cuacaBox"><p>Loading cuaca...</p></div><button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button></div><div class="kartu"><h2>📰 Berita Terbaru Indonesia</h2><div id="beritaBox"><p>Loading berita...</p></div><button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button></div></div>
+    @keyframes gerak2 {
+      to { transform: translate(-80px, -60px) scale(1.1); }
+    }
 
-<div id="page-profil" class="hilang"><h1>Profil 👤</h1><p>Ganti nama &amp; foto, tersimpan di perangkat</p><div class="kartu" style="text-align:center"><img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12" alt="Foto Profil"><h2 id="namaProfil" style="margin-top:10px">Jarr</h2><p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p><input type="text" id="editNama" placeholder="Ganti nama..."><textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea><label style="font-size:13px;display:block;margin-top:8px">📸 Ganti Foto Profil</label><input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)"><div class="row"><button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button><button class="btn btn2" onclick="resetProfil()">Reset Profil</button></div><p id="profilStatus" class="status-msg"></p></div></div>
+    .konten {
+      position: relative;
+      z-index: 1;
+      padding: 24px 20px 140px;
+      text-align: center;
+    }
 
-</div><div class="nav-wrap"><div class="nav" id="nav"><div class="blok" id="blok"></div><button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button><button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button><button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button><button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button><button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button></div></div><script>
-const blok=document.getElementById('blok');
-let infoLoaded=false;
+    .konten h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
 
-function applyDayNight(isDay){
-  const btn=document.getElementById('dayNightToggle');
-  btn.classList.toggle('day',isDay);
-  btn.setAttribute('aria-pressed',String(isDay));
-  document.body.classList.toggle('light-mode',isDay);
-}
+    .konten p {
+      color: rgba(255, 255, 255, 0.72);
+      margin-top: 8px;
+      font-size: 14px;
+    }
 
-function toggleDayNight(){
-  const nextDay=!document.body.classList.contains('light-mode');
-  applyDayNight(nextDay);
-  try{localStorage.setItem('temaSiang',nextDay?'1':'0');}catch(_){}
-  if(navigator.vibrate)navigator.vibrate(8);
-}
+    .kartu {
+      margin: 16px auto;
+      max-width: 430px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 20px;
+      text-align: left;
+      transition: background 0.45s ease, border-color 0.45s ease;
+    }
 
-function pindah(btn,page,index){
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('aktif'));
-  btn.classList.add('aktif');
-  const targetX=btn.offsetLeft-10,targetW=btn.offsetWidth;
-  blok.style.transform=`translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
-  blok.style.width=targetW+'px';
-  blok.style.borderRadius='30% 70% 68% 32% / 62% 48% 52% 38%';
-  clearTimeout(blok._timer);
-  blok._timer=setTimeout(()=>{
-    blok.style.transform=`translateX(${targetX}px) scaleX(1) scaleY(1)`;
-    blok.style.borderRadius='999px';
-  },280);
-  document.querySelectorAll('.konten > div').forEach(d=>{
-    if(!d.classList.contains('shift-bar'))d.classList.add('hilang');
-  });
-  const t=document.getElementById('page-'+page);
-  t.classList.remove('hilang');
-  t.classList.remove('muncul');
-  void t.offsetWidth;
-  t.classList.add('muncul');
-  if(page==='info'&&!infoLoaded){
-    infoLoaded=true;
-    loadGempa();loadCuaca();loadBerita();
-  }
-  if(navigator.vibrate)navigator.vibrate(5);
-}
+    .kartu h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
 
-window.addEventListener('load',()=>{
-  const savedDay=localStorage.getItem('temaSiang')==='1';
-  applyDayNight(savedDay);
-  const b=document.querySelector('.nav button.aktif');
-  blok.style.transition='none';
-  blok.style.transform=`translateX(${b.offsetLeft-10}px)`;
-  blok.style.width=b.offsetWidth+'px';
-  requestAnimationFrame(()=>{requestAnimationFrame(()=>{blok.style.transition='';});});
-  loadProfil();renderDaftarDL();
-});
+    .kartu p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
 
-function isiSearch(t){
-  document.getElementById('inputSearch').value=t;
-  cariGoogle();
-}
+    input[type=text],
+    input[type=file],
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      margin-top: 8px;
+    }
 
-function goSearch(t){
-  document.getElementById('inputSearch').value=t;
-  pindah(document.querySelectorAll('.nav button')[1],'search',1);
-}
+    select option {
+      background: #181a1f;
+      color: #fff;
+    }
 
-function cariGoogle(mode){
-  const q=document.getElementById('inputSearch').value.trim();
-  const st=document.getElementById('searchStatus');
-  if(!q){st.innerText='Tulis kata kunci dulu.';return;}
-  st.innerText='';
-  const url=mode==='gambar'
-    ?'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q)
-    :'https://www.google.com/search?q='+encodeURIComponent(q);
-  window.open(url,'_blank','noopener,noreferrer');
-}
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+    }
 
-let fotoAsli=null;
-function loadFoto(e){
-  const f=e.target.files[0];
-  if(!f)return;
-  const r=new FileReader();
-  r.onload=(ev)=>{
-    const img=new Image();
-    img.onload=()=>{
-      fotoAsli=img;
-      document.getElementById('fotoPreview').style.display='block';
+    button.btn,
+    a.btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 16px;
+      background: #fff;
+      color: #111;
+      font-weight: 800;
+      font-size: 15px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button.btn2,
+    a.btn2 {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    button.btn:active,
+    a.btn:active {
+      transform: scale(0.97);
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      font-size: 12px;
+      margin: 4px 3px;
+      cursor: pointer;
+      color: #fff;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .chip:active {
+      transform: scale(0.95);
+    }
+
+    img.preview,
+    video.preview {
+      width: 100%;
+      border-radius: 18px;
+      margin-top: 10px;
+      display: none;
+      background: #000;
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      background: #333;
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .row .btn {
+      flex: 1;
+      min-width: 95px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ff4444;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .badgeHijau {
+      background: #00c853;
+    }
+
+    .badgeBiru {
+      background: #2196f3;
+    }
+
+    .berita-item {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .berita-item:last-child {
+      border: none;
+    }
+
+    .berita-item b {
+      font-size: 14px;
+      line-height: 1.4;
+      display: block;
+    }
+
+    .berita-item span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .status-msg {
+      font-size: 12px;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    input[type=range] {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    /* Day / Night Shift Toggle */
+    .shift-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .toggle {
+      position: relative;
+      width: 146px;
+      height: 62px;
+      border: 2px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: #23262b;
+      cursor: pointer;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42), inset 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: background 0.55s cubic-bezier(.22,1,.36,1), border-color 0.55s ease;
+    }
+
+    .night-decor {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
+    }
+
+    .star {
+      position: absolute;
+      color: #ffe866;
+      font-size: 12px;
+      filter: drop-shadow(0 0 4px rgba(255, 232, 102, 0.5));
+    }
+
+    .s1 { top: 11px; left: 64px; }
+    .s2 { top: 13px; left: 90px; font-size: 10px; }
+    .s3 { top: 31px; left: 77px; font-size: 11px; }
+
+    .moon-arc {
+      position: absolute;
+      right: 15px;
+      bottom: 9px;
+      width: 24px;
+      height: 14px;
+      border-bottom: 4px solid #ffe866;
+      border-radius: 0 0 24px 24px;
+      transform: rotate(-16deg);
+      opacity: 0.9;
+    }
+
+    .day-decor {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity 0.45s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
+    }
+
+    .cloud {
+      position: absolute;
+      background: #fff;
+      border-radius: 999px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .c1 { width: 38px; height: 14px; top: 14px; left: 15px; }
+    .c1::before { width: 18px; height: 18px; top: -8px; left: 5px; }
+    .c1::after { width: 13px; height: 13px; top: -5px; left: 18px; }
+
+    .c2 { width: 33px; height: 13px; top: 33px; left: 29px; }
+    .c2::before { width: 15px; height: 15px; top: -6px; left: 5px; }
+    .c2::after { width: 11px; height: 11px; top: -4px; left: 16px; }
+
+    .knob {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff, #d9dde3);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      display: grid;
+      place-items: center;
+      transition: transform 0.6s cubic-bezier(.34,1.35,.64,1), background 0.5s ease;
+    }
+
+    .sun {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffd426;
+      opacity: 0;
+      transform: scale(0.4) rotate(-60deg);
+      box-shadow: 0 0 0 3px rgba(255, 212, 38, 0.25);
+      transition: opacity 0.35s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
+    }
+
+    .toggle.day {
+      background: #eef2f7;
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .toggle.day .night-decor {
+      opacity: 0;
+      transform: translateX(14px);
+    }
+
+    .toggle.day .day-decor {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .toggle.day .knob {
+      transform: translateX(84px);
+      background: radial-gradient(circle at 35% 30%, #c8cdd4, #9aa2ad);
+    }
+
+    .toggle.day .sun {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    /* Light Theme (Siang) */
+    body.light-mode {
+      background: #dce6f5;
+      color: #111827;
+    }
+
+    body.light-mode .bg1 {
+      background: radial-gradient(circle, #ff9eb8, transparent 70%);
+      opacity: 0.65;
+    }
+
+    body.light-mode .bg2 {
+      background: radial-gradient(circle, #7fb2ff, transparent 70%);
+      opacity: 0.65;
+    }
+
+    body.light-mode .bg3 {
+      background: radial-gradient(circle, #d8b4fe, transparent 70%);
+      opacity: 0.65;
+    }
+
+    body.light-mode .konten p {
+      color: rgba(17, 24, 39, 0.72);
+    }
+
+    body.light-mode .kartu {
+      background: rgba(255, 255, 255, 0.68);
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    body.light-mode .kartu p {
+      color: rgba(17, 24, 39, 0.85);
+    }
+
+    body.light-mode input[type=text],
+    body.light-mode input[type=file],
+    body.light-mode textarea,
+    body.light-mode select {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(17, 24, 39, 0.16);
+      color: #111827;
+    }
+
+    body.light-mode select option {
+      background: #fff;
+      color: #111827;
+    }
+
+    body.light-mode input::placeholder,
+    body.light-mode textarea::placeholder {
+      color: rgba(17, 24, 39, 0.5);
+    }
+
+    body.light-mode button.btn,
+    body.light-mode a.btn {
+      background: #111827;
+      color: #fff;
+    }
+
+    body.light-mode button.btn2,
+    body.light-mode a.btn2 {
+      background: rgba(17, 24, 39, 0.08);
+      color: #111827;
+      border-color: rgba(17, 24, 39, 0.16);
+    }
+
+    body.light-mode .chip {
+      background: rgba(17, 24, 39, 0.08);
+      border-color: rgba(17, 24, 39, 0.15);
+      color: #111827;
+    }
+
+    body.light-mode .berita-item {
+      border-bottom-color: rgba(17, 24, 39, 0.1);
+    }
+
+    body.light-mode .berita-item span {
+      color: rgba(17, 24, 39, 0.62);
+    }
+
+    body.light-mode .status-msg {
+      color: rgba(17, 24, 39, 0.75);
+    }
+
+    body.light-mode .nav {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.75));
+      border-color: rgba(255, 255, 255, 0.9);
+    }
+
+    body.light-mode .nav button {
+      color: rgba(17, 24, 39, 0.68);
+    }
+
+    body.light-mode .nav button.aktif {
+      color: #111827;
+    }
+
+    /* Bottom Liquid Glass Navigation */
+    .nav-wrap {
+      position: fixed;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      bottom: 18px;
+      z-index: 10;
+      width: min(430px, calc(100vw - 32px));
+    }
+
+    .nav {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.16));
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .nav::before {
+      content: "";
+      position: absolute;
+      inset: 1px 1px 55% 1px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .blok {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      width: 68px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(195, 202, 215, 0.40) 38%, rgba(165, 175, 190, 0.34) 68%, rgba(255, 255, 255, 0.50) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 999px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -3px 8px rgba(255, 255, 255, 0.28);
+      transition: transform 0.55s cubic-bezier(.22,1,.36,1), width 0.55s cubic-bezier(.22,1,.36,1), border-radius 0.55s cubic-bezier(.22,1,.36,1);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .blok::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 10px;
+      right: 10px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.12) 60%, transparent);
+    }
+
+    .blok::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 14px;
+      right: 14px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.48));
+      filter: blur(1px);
+    }
+
+    .nav button {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      border: none;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 8px 0 6px;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 10px;
+      font-weight: 600;
+      transition: color 0.35s;
+      min-width: 0;
+    }
+
+    .nav button .ikon {
+      font-size: 22px;
+      line-height: 1;
+      transition: transform 0.55s cubic-bezier(.22,1,.36,1);
+    }
+
+    .nav button.aktif {
+      color: #111;
+    }
+
+    .nav button.aktif .ikon {
+      transform: scale(1.15) translateY(-1px);
+    }
+
+    .nav button:active {
+      transform: scale(0.94);
+    }
+
+    .hilang {
+      display: none;
+    }
+
+    .muncul {
+      animation: muncul 0.45s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    @keyframes muncul {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+        filter: blur(3px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="bg3"></div>
+  </div>
+
+  <div class="konten">
+
+    <!-- Shift Day/Night Switch -->
+    <div class="shift-bar">
+      <button class="toggle" id="dayNightToggle" aria-label="Ganti mode siang atau malam" aria-pressed="false" onclick="toggleDayNight()">
+        <span class="night-decor">
+          <span class="star s1">✦</span>
+          <span class="star s2">✦</span>
+          <span class="star s3">✦</span>
+          <span class="moon-arc"></span>
+        </span>
+        <span class="day-decor">
+          <span class="cloud c1"></span>
+          <span class="cloud c2"></span>
+        </span>
+        <span class="knob">
+          <span class="sun"></span>
+        </span>
+      </button>
+    </div>
+
+    <!-- PAGE 1: HOME -->
+    <div id="page-home">
+      <h1>AIRR X Liquid Glass</h1>
+      <p>Search Google • Tools HD • Info BMKG</p>
+
+      <div class="kartu">
+        <div style="font-size: 42px">✨</div>
+        <h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2>
+        <p>Treat Your Better.</p>
+      </div>
+
+      <div class="kartu">
+        <h2>⚡ Cepet Akses</h2>
+        <p>
+          <span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span>
+          <span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- PAGE 2: SEARCH -->
+    <div id="page-search" class="hilang">
+      <h1>Search</h1>
+      <p>connect Google</p>
+
+      <div class="kartu">
+        <h2>🔎 Pencarian Google</h2>
+        <input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter')cariGoogle()">
+        <button class="btn" onclick="cariGoogle()">Cari di Google →</button>
+        <button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button>
+        <p id="searchStatus" class="status-msg"></p>
+        <p style="margin-top: 10px">Trending:</p>
+        <span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span>
+        <span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span>
+        <span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span>
+        <span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span>
+      </div>
+    </div>
+
+    <!-- PAGE 3: TOOLS -->
+    <div id="page-tools" class="hilang">
+      <h1>Tools 🛠️</h1>
+      <p>HD Foto, Filter Video &amp; Downloader TikTok</p>
+
+      <!-- Tool 1: HD Foto -->
+      <div class="kartu">
+        <h2>📸 1. HD FOTO</h2>
+        <p>Pilih foto, upscale 2x + atur kontras &amp; kecerahan langsung di browser.</p>
+        <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
+        <img id="fotoPreview" class="preview" alt="Preview Foto HD">
+        <label>Ketajaman / Kontras <span id="tajamVal">70</span>%</label>
+        <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
+        <label>Kecerahan <span id="cerahVal">100</span>%</label>
+        <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
+        <button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button>
+        <p id="fotoStatus" class="status-msg">Status: Belum ada foto</p>
+        <canvas id="canvasHD" style="display: none"></canvas>
+      </div>
+
+      <!-- Tool 2: Filter Video -->
+      <div class="kartu">
+        <h2>🎬 2. FILTER VIDEO</h2>
+        <p>Pilih video dan atur kontras/saturasi saat diputar (preview saja).</p>
+        <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
+        <video id="videoPreview" class="preview" controls playsinline></video>
+        <label>Kontras <span id="vidVal">130</span>%</label>
+        <input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value;applyVideoFilter()">
+        <label>Saturasi <span id="satVal">120</span>%</label>
+        <input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value;applyVideoFilter()">
+        <p class="status-msg">Catatan: Filter diterapkan pada tampilan pemutar video, bukan membakar filter ke file unduhan.</p>
+      </div>
+
+      <!-- Tool 3: TikTok Downloader & Save Link -->
+      <div class="kartu">
+        <h2>🔗 3. TikTok &amp; Media Downloader</h2>
+        <p>Tempel link TikTok untuk ambil video tanpa watermark &amp; musik MP3, atau simpan daftarnya.</p>
+        <input type="text" id="linkDL" placeholder="Tempel link https://vt.tiktok.com/... di sini">
+        <select id="tipeDL">
+          <option value="video">🎬 Video (No Watermark)</option>
+          <option value="musik">🎵 Musik / MP3</option>
+        </select>
+
+        <button class="btn" onclick="ambilTikWM()">⚡ Ambil Video &amp; Musik TikTok (TikWM)</button>
+
+        <div class="row">
+          <button class="btn btn2" onclick="bukaLinkDL()">▶️ Buka Link</button>
+          <button class="btn btn2" onclick="copyLinkDL()">📋 Copy Link</button>
+          <button class="btn btn2" onclick="simpanLinkDL()">💾 Simpan</button>
+        </div>
+
+        <p id="linkStatus" class="status-msg"></p>
+        <div id="hasilTikWM"></div>
+        <div id="daftarDL" style="margin-top: 12px; font-size: 13px"></div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: INFO -->
+    <div id="page-info" class="hilang">
+      <h1>Info 📡</h1>
+      <p>Live dari BMKG &amp; Berita Indonesia</p>
+
+      <div class="kartu">
+        <h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2>
+        <div id="gempaBox"><p>Loading data BMKG...</p></div>
+        <button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button>
+      </div>
+
+      <div class="kartu">
+        <h2>🌦️ Cuaca Jogja Hari Ini</h2>
+        <div id="cuacaBox"><p>Loading cuaca...</p></div>
+        <button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button>
+      </div>
+
+      <div class="kartu">
+        <h2>📰 Berita Terbaru Indonesia</h2>
+        <div id="beritaBox"><p>Loading berita...</p></div>
+        <button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button>
+      </div>
+    </div>
+
+    <!-- PAGE 5: PROFIL -->
+    <div id="page-profil" class="hilang">
+      <h1>Profil 👤</h1>
+      <p>Ganti nama &amp; foto, tersimpan di perangkat</p>
+
+      <div class="kartu" style="text-align: center">
+        <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12" alt="Foto Profil">
+        <h2 id="namaProfil" style="margin-top: 10px">Jarr</h2>
+        <p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p>
+        <input type="text" id="editNama" placeholder="Ganti nama...">
+        <textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea>
+        <label style="font-size: 13px; display: block; margin-top: 8px">📸 Ganti Foto Profil</label>
+        <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
+        <div class="row">
+          <button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button>
+          <button class="btn btn2" onclick="resetProfil()">Reset Profil</button>
+        </div>
+        <p id="profilStatus" class="status-msg"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM NAVIGATION -->
+  <div class="nav-wrap">
+    <div class="nav" id="nav">
+      <div class="blok" id="blok"></div>
+      <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
+      <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
+      <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
+      <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
+      <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
+    </div>
+  </div>
+
+  <script>
+    const blok = document.getElementById('blok');
+    let infoLoaded = false;
+
+    function applyDayNight(isDay) {
+      const btn = document.getElementById('dayNightToggle');
+      btn.classList.toggle('day', isDay);
+      btn.setAttribute('aria-pressed', String(isDay));
+      document.body.classList.toggle('light-mode', isDay);
+    }
+
+    function toggleDayNight() {
+      const nextDay = !document.body.classList.contains('light-mode');
+      applyDayNight(nextDay);
+      try {
+        localStorage.setItem('temaSiang', nextDay ? '1' : '0');
+      } catch (_) {}
+      if (navigator.vibrate) navigator.vibrate(8);
+    }
+
+    function pindah(btn, page, index) {
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('aktif'));
+      btn.classList.add('aktif');
+
+      const targetX = btn.offsetLeft - 10;
+      const targetW = btn.offsetWidth;
+      blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
+      blok.style.width = targetW + 'px';
+      blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
+
+      clearTimeout(blok._timer);
+      blok._timer = setTimeout(() => {
+        blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
+        blok.style.borderRadius = '999px';
+      }, 280);
+
+      document.querySelectorAll('.konten > div').forEach(d => {
+        if (!d.classList.contains('shift-bar')) d.classList.add('hilang');
+      });
+
+      const t = document.getElementById('page-' + page);
+      t.classList.remove('hilang');
+      t.classList.remove('muncul');
+      void t.offsetWidth;
+      t.classList.add('muncul');
+
+      if (page === 'info' && !infoLoaded) {
+        infoLoaded = true;
+        loadGempa();
+        loadCuaca();
+        loadBerita();
+      }
+      if (navigator.vibrate) navigator.vibrate(5);
+    }
+
+    window.addEventListener('load', () => {
+      const savedDay = localStorage.getItem('temaSiang') === '1';
+      applyDayNight(savedDay);
+
+      const b = document.querySelector('.nav button.aktif');
+      blok.style.transition = 'none';
+      blok.style.transform = `translateX(${b.offsetLeft - 10}px)`;
+      blok.style.width = b.offsetWidth + 'px';
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          blok.style.transition = '';
+        });
+      });
+
+      loadProfil();
+      renderDaftarDL();
+    });
+
+    function isiSearch(t) {
+      document.getElementById('inputSearch').value = t;
+      cariGoogle();
+    }
+
+    function goSearch(t) {
+      document.getElementById('inputSearch').value = t;
+      pindah(document.querySelectorAll('.nav button')[1], 'search', 1);
+    }
+
+    function cariGoogle(mode) {
+      const q = document.getElementById('inputSearch').value.trim();
+      const st = document.getElementById('searchStatus');
+      if (!q) {
+        st.innerText = 'Tulis kata kunci dulu.';
+        return;
+      }
+      st.innerText = '';
+      const url = mode === 'gambar'
+        ? 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(q)
+        : 'https://www.google.com/search?q=' + encodeURIComponent(q);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    let fotoAsli = null;
+
+    function loadFoto(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          fotoAsli = img;
+          document.getElementById('fotoPreview').style.display = 'block';
+          prosesHD();
+        };
+        img.src = ev.target.result;
+      };
+      r.readAsDataURL(f);
+    }
+
+    function prosesHD() {
+      if (!fotoAsli) return;
+      const c = document.getElementById('canvasHD');
+      const ctx = c.getContext('2d');
+      c.width = fotoAsli.width * 2;
+      c.height = fotoAsli.height * 2;
+      const tajam = document.getElementById('tajam').value / 100;
+      const cerah = document.getElementById('cerah').value;
+      ctx.filter = `brightness(${cerah}%) contrast(${100 + tajam * 30}%) saturate(110%)`;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(fotoAsli, 0, 0, c.width, c.height);
+      document.getElementById('fotoPreview').src = c.toDataURL('image/jpeg', 0.95);
+      document.getElementById('fotoStatus').innerText = `Status: Siap (${c.width}x${c.height}px)`;
+    }
+
+    function downloadHD() {
+      if (!fotoAsli) {
+        document.getElementById('fotoStatus').innerText = 'Pilih foto terlebih dahulu.';
+        return;
+      }
       prosesHD();
-    };
-    img.src=ev.target.result;
-  };
-  r.readAsDataURL(f);
-}
+      const a = document.createElement('a');
+      a.download = 'foto-2x-' + Date.now() + '.jpg';
+      a.href = document.getElementById('canvasHD').toDataURL('image/jpeg', 0.95);
+      a.click();
+    }
 
-function prosesHD(){
-  if(!fotoAsli)return;
-  const c=document.getElementById('canvasHD'),ctx=c.getContext('2d');
-  c.width=fotoAsli.width*2;
-  c.height=fotoAsli.height*2;
-  const tajam=document.
+    let currentVideoUrl = null;
+
+    function loadVideo(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      if (currentVideoUrl) URL.revokeObjectURL(currentVideoUrl);
+      currentVideoUrl = URL.createObjectURL(f);
+      const v = document.getElementById('videoPreview');
+      v.src = currentVideoUrl;
+      v.style.display = 'block';
+      applyVideoFilter();
+      v.play().catch(() => {});
+    }
+
+    function applyVideoFilter() {
+      const v = document.getElementById('videoPreview');
+      const kon = document.getElementById('vidFilter').value;
+      const sat = document.getElementById('satFilter').value;
+      v.style.filter = `contrast(${kon}%) saturate(${sat}%) brightness(110%)`;
+    }
+
+    function isValidHttpUrl(str) {
+      try {
+        const u = new URL(str);
+        return u.protocol === 'http:' || u.protocol === 'https:';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    async function ambilTikWM(customUrl) {
+      const linkInput = document.getElementById('linkDL');
+      const statusEl = document.getElementById('linkStatus');
+      const hasilBox = document.getElementById('hasilTikWM');
+      const url = (customUrl || linkInput.value).trim();
+
+      if (!isValidHttpUrl(url)) {
+        statusEl.innerText = 'Masukkan link TikTok yang valid (http:// atau https://).';
+        return;
+      }
+
+      statusEl.innerText = 'Mengambil video & musik...';
+      hasilBox.innerHTML = '';
+
+      try {
+        const res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url));
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const json = await res.json();
+
+        const d = json?.data || json?.result || json;
+        if (!d || typeof d !== 'object') {
+          throw new Error('Data kosong');
+        }
+
+        const judul = d.title || d.desc || 'Video TikTok';
+        const rawAuthor = typeof d.author === 'object'
+          ? (d.author?.nickname || d.author?.unique_id)
+          : d.author;
+        const author = rawAuthor || 'Kreator TikTok';
+        const cover = d.cover || d.origin_cover || '';
+
+        const videoUrl = d.hdplay || d.play || d.wmplay || d.video_url || d.video || '';
+        const musikUrl = d.music || d.music_info?.play || d.audio_url || d.audio || '';
+
+        if (!videoUrl && !musikUrl) {
+          statusEl.innerText = 'Terhubung, tapi link video/musik tidak ditemukan.';
+          return;
+        }
+
+        statusEl.innerText = 'Status: Berhasil diambil ✅';
+
+        const card = document.createElement('div');
+        card.style.cssText = 'margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)';
+
+        if (cover) {
+          const img = document.createElement('img');
+          img.src = cover;
+          img.alt = judul;
+          img.style.cssText = 'width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:8px';
+          card.appendChild(img);
+        }
+
+        const titleEl = document.createElement('div');
+        titleEl.style.cssText = 'font-weight:700;font-size:14px;line-height:1.4';
+        titleEl.textContent = judul;
+
+        const authorEl = document.createElement('div');
+        authorEl.style.cssText = 'font-size:12px;opacity:.75;margin:4px 0 10px';
+        authorEl.textContent = '@' + String(author).replace(/^@/, '');
+
+        const btnWrap = document.createElement('div');
+        btnWrap.className = 'row';
+
+        if (videoUrl) {
+          const btnVid = document.createElement('a');
+          btnVid.href = videoUrl;
+          btnVid.download = 'tiktok-video.mp4';
+          btnVid.target = '_blank';
+          btnVid.rel = 'noopener noreferrer';
+          btnVid.className = 'btn';
+          btnVid.style.cssText = 'margin-top:0;padding:10px 12px;font-size:13px';
+          btnVid.textContent = '⬇️ Download Video';
+          btnWrap.appendChild(btnVid);
+        }
+
+        if (musikUrl) {
+          const btnMus = document.createElement('a');
+          btnMus.href = musikUrl;
+          btnMus.download = 'tiktok-musik.mp3';
+          btnMus.target = '_blank';
+          btnMus.rel = 'noopener noreferrer';
+          btnMus.className = 'btn btn2';
+          btnMus.style.cssText = 'margin-top:0;padding:10px 12px;font-size:13px';
+          btnMus.textContent = '🎵 Download Musik';
+          btnWrap.appendChild(btnMus);
+        }
+
+        card.append(titleEl, authorEl, btnWrap);
+        hasilBox.appendChild(card);
+      } catch (_) {
+        statusEl.innerText = 'Gagal mengambil langsung dari API. Membuka SnapTik...';
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).catch(() => {});
+        }
+        window.open('https://snaptik.app/', '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function bukaLinkDL() {
+      const l = document.getElementById('linkDL').value.trim();
+      const st = document.getElementById('linkStatus');
+      if (!isValidHttpUrl(l)) {
+        st.innerText = 'Masukkan link valid diawali http:// atau https://';
+        return;
+      }
+      st.innerText = '';
+      window.open(l, '_blank', 'noopener,noreferrer');
+    }
+
+    function copyLinkDL() {
+      const l = document.getElementById('linkDL').value.trim();
+      const st = document.getElementById('linkStatus');
+      if (!l) {
+        st.innerText = 'Tempel link dulu.';
+        return;
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(l).then(() => {
+          st.innerText = 'Link disalin.';
+        });
+      }
+    }
+
+    function simpanLinkDL() {
+      const l = document.getElementById('linkDL').value.trim();
+      const st = document.getElementById('linkStatus');
+      if (!isValidHttpUrl(l)) {
+        st.innerText = 'Masukkan link valid diawali http:// atau https://';
+        return;
+      }
+      const arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
+      arr.unshift({
+        link: l,
+        tipe: document.getElementById('tipeDL').value,
+        tgl: new Date().toLocaleString('id-ID')
+      });
+      localStorage.setItem('daftarDL', JSON.stringify(arr.slice(0, 20)));
+      document.getElementById('linkDL').value = '';
+      st.innerText = 'Tersimpan ke daftar.';
+      renderDaftarDL();
+    }
+
+    function hapusLinkDL(index) {
+      const arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
+      arr.splice(index, 1);
+      localStorage.setItem('daftarDL', JSON.stringify(arr));
+      renderDaftarDL();
+    }
+
+    function renderDaftarDL() {
+      const arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
+      const box = document.getElementById('daftarDL');
+      box.innerHTML = '';
+
+      if (!arr.length) {
+        box.innerHTML = '<p style="opacity:.65">Belum ada link tersimpan.</p>';
+        return;
+      }
+
+      arr.forEach((x, idx) => {
+        if (!isValidHttpUrl(x.link)) return;
+
+        const div = document.createElement('div');
+        div.style.cssText = 'padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12)';
+
+        const icon = document.createTextNode(x.tipe === 'musik' ? '🎵 ' : '🎬 ');
+        const a = document.createElement('a');
+        a.href = x.link;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.style.cssText = 'color:inherit;word-break:break-all';
+        a.textContent = x.link.slice(0, 42) + (x.link.length > 42 ? '...' : '');
+
+        const meta = document.createElement('div');
+        meta.style.cssText = 'font-size:11px;opacity:.65;margin-top:3px';
+        meta.textContent = x.tgl;
+
+        const btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display:flex;gap:6px;margin-top:6px';
+
+        const btnDl = document.createElement('button');
+        btnDl.className = 'chip';
+        btnDl.style.margin = '0';
+        btnDl.textContent = '⬇️ Download';
+        btnDl.onclick = () => ambilTikWM(x.link);
+
+        const btnDel = document.createElement('button');
+        btnDel.className = 'chip';
+        btnDel.style.margin = '0';
+        btnDel.textContent = '🗑️ Hapus';
+        btnDel.onclick = () => hapusLinkDL(idx);
+
+        btnRow.append(btnDl, btnDel);
+        div.append(icon, a, meta, btnRow);
+        box.appendChild(div);
+      });
+    }
+
+    async function loadGempa() {
+      const box = document.getElementById('gempaBox');
+      box.innerHTML = 'Loading...';
+      try {
+        const res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const j = await res.json();
+        const g = j.Infogempa.gempa;
+        box.innerHTML = `
+          <span class="badge">M ${g.Magnitude}</span>
+          <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br>
+          <b>${g.Wilayah}</b><br>
+          📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>
+          ⚠️ Potensi: ${g.Potensi}
+        `;
+      } catch (_) {
+        box.innerHTML = '<b>Data BMKG gagal dimuat</b><br><span style="font-size:12px;opacity:.7">Periksa koneksi jaringan atau coba muat ulang.</span>';
+      }
+    }
+
+    async function loadCuaca() {
+      const box = document.getElementById('cuacaBox');
+      box.innerHTML = 'Loading...';
+      try {
+        const res = await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const j = await res.json();
+        const slots = j?.data?.[0]?.cuaca?.[0];
+        const d = Array.isArray(slots) ? slots[0] : null;
+        if (!d) throw new Error('Format kosong');
+        box.innerHTML = `
+          <span class="badge badgeHijau">${d.cuaca || '-'}</span> ${d.local_datetime || ''}<br><br>
+          🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>
+          💨 Angin: ${d.ws} km/jam
+        `;
+      } catch (_) {
+        box.innerHTML = '<b>Data cuaca BMKG gagal dimuat</b><br><span style="font-size:12px;opacity:.7">Periksa koneksi jaringan atau coba muat ulang.</span>';
+      }
+    }
+
+    async function loadBerita() {
+      const box = document.getElementById('beritaBox');
+      box.innerHTML = 'Loading...';
+      try {
+        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const j = await res.json();
+        if (!Array.isArray(j.items) || !j.items.length) throw new Error('Kosong');
+
+        box.innerHTML = '';
+        j.items.slice(0, 5).forEach(it => {
+          const item = document.createElement('div');
+          item.className = 'berita-item';
+
+          const b = document.createElement('b');
+          b.textContent = it.title;
+
+          const span = document.createElement('span');
+          const tgl = new Date(it.pubDate).toLocaleString('id-ID');
+          span.textContent = tgl + ' • ';
+
+          if (isValidHttpUrl(it.link)) {
+            const a = document.createElement('a');
+            a.href = it.link;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.style.color = 'inherit';
+            a.textContent = 'Baca →';
+            span.appendChild(a);
+          }
+
+          item.append(b, span);
+          box.appendChild(item);
+        });
+      } catch (_) {
+        box.innerHTML = '<div class="berita-item"><b>Berita gagal dimuat</b><span>Coba muat ulang beberapa saat lagi.</span></div>';
+      }
+    }
+
+    function loadProfil() {
+      const nama = localStorage.getItem('nama') || 'Jarr';
+      const bio = localStorage.getItem('bio') || 'Yogyakarta • Seneng ngoprek HTML modal AI😹';
+      const foto = localStorage.getItem('fotoProfil');
+
+      document.getElementById('namaProfil').innerText = nama;
+      document.getElementById('namaHome').innerText = nama;
+      document.getElementById('bioProfil').innerText = bio;
+      document.getElementById('editNama').value = nama;
+      document.getElementById('editBio').value = bio;
+      if (foto) document.getElementById('avatarPreview').src = foto;
+    }
+
+    function simpanProfil() {
+      const nama = document.getElementById('editNama').value.trim() || 'Jarr';
+      const bio = document.getElementById('editBio').value.trim() || 'Yogyakarta';
+      localStorage.setItem('nama', nama);
+      localStorage.setItem('bio', bio);
+      loadProfil();
+      document.getElementById('profilStatus').innerText = 'Profil tersimpan.';
+    }
+
+    function gantiFotoProfil(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = (ev) => {
+        try {
+          localStorage.setItem('fotoProfil', ev.target.result);
+          document.getElementById('avatarPreview').src = ev.target.result;
+          document.getElementById('profilStatus').innerText = 'Foto profil diperbarui.';
+        } catch (_) {
+          document.getElementById('profilStatus').innerText = 'Ukuran foto terlalu besar untuk penyimpanan lokal.';
+        }
+      };
+      r.readAsDataURL(f);
+    }
+
+    function resetProfil() {
+      localStorage.removeItem('nama');
+      localStorage.removeItem('bio');
+      localStorage.removeItem('fotoProfil');
+      document.getElementById('avatarPreview').src = 'https://i.pravatar.cc/200?img=12';
+      loadProfil();
+      document.getElementById('profilStatus').innerText = 'Profil direset ke bawaan.';
+    }
+  </script>
+
+</body>
+</html>
