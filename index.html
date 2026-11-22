@@ -415,19 +415,20 @@
 
     .blok {
       --shine-shift: 0px;
+      --shine-y: 0px;
       position: absolute;
       top: 7px;
       left: 8px;
       width: 58px;
       height: 54px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.66) 0%, rgba(205, 212, 226, 0.42) 38%, rgba(165, 178, 198, 0.34) 68%, rgba(255, 255, 255, 0.54) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.68) 0%, rgba(205, 212, 226, 0.44) 38%, rgba(165, 178, 198, 0.36) 68%, rgba(255, 255, 255, 0.56) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.74);
       border-radius: 999px;
       box-shadow:
         0 10px 24px rgba(0, 0, 0, 0.28),
-        0 0 16px rgba(255, 255, 255, 0.14),
+        0 0 18px rgba(255, 255, 255, 0.16),
         inset 0 1.5px 1px rgba(255, 255, 255, 0.96),
-        inset 0 -4px 10px rgba(255, 255, 255, 0.32);
+        inset 0 -4px 10px rgba(255, 255, 255, 0.34);
       will-change: transform, width, border-radius;
       transform-origin: center center;
       z-index: 0;
@@ -443,8 +444,8 @@
       height: 18px;
       border-radius: 999px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.14) 60%, transparent);
-      transform: translateX(var(--shine-shift));
-      transition: transform 0.16s ease-out;
+      transform: translate3d(var(--shine-shift), var(--shine-y), 0);
+      transition: transform 0.14s ease-out;
     }
 
     .blok::after {
@@ -457,8 +458,8 @@
       border-radius: 999px;
       background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.52));
       filter: blur(1px);
-      transform: translateX(calc(var(--shine-shift) * -0.5));
-      transition: transform 0.16s ease-out;
+      transform: translate3d(calc(var(--shine-shift) * -0.5), calc(var(--shine-y) * -0.5), 0);
+      transition: transform 0.14s ease-out;
     }
 
     .nav button {
@@ -749,16 +750,19 @@
     const blok = document.getElementById('blok');
     const navButtons = Array.from(document.querySelectorAll('.nav button'));
 
-    // Fisika pegas (spring) untuk gelembung liquid glass
+    // Fisika pegas (spring) untuk gelembung liquid glass (X, Y lengket scroll, dan Width)
     const spring = {
       x: 0,
       vx: 0,
       targetX: 0,
+      y: 0,
+      vy: 0,
+      targetY: 0,
       w: 58,
       vw: 0,
       targetW: 58,
       stiffness: 0.16,
-      damping: 0.74
+      damping: 0.75
     };
 
     let isDragging = false;
@@ -770,6 +774,23 @@
     let currentHoverBtn = navButtons[0];
     let activePage = 'home';
 
+    let lastScrollY = window.scrollY || 0;
+    let scrollVelocity = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY || 0;
+      const deltaY = currentY - lastScrollY;
+      lastScrollY = currentY;
+
+      // Batasi kecepatan scroll agar ayunan lengketnya tetap halus & natural
+      const clampedDelta = Math.max(-36, Math.min(36, deltaY));
+      scrollVelocity = scrollVelocity * 0.65 + clampedDelta * 0.35;
+
+      // Efek lengket: saat layar digeser ke bawah (+deltaY), gelembung sedikit tertarik ke atas (-y) lalu membal, dan sebaliknya
+      spring.targetY = Math.max(-4.5, Math.min(4.5, -clampedDelta * 0.14));
+      spring.vy += -clampedDelta * 0.08;
+    }, { passive: true });
+
     function getBtnTarget(btn) {
       return {
         x: btn ? (btn.offsetLeft - 8) : 0,
@@ -778,37 +799,51 @@
     }
 
     function stepSpring() {
-      // Saat di-drag, gelembung mengikuti pointer lebih responsif
       const k = isDragging ? 0.34 : spring.stiffness;
       const d = isDragging ? 0.66 : spring.damping;
+
+      // Peluruhan targetY saat scroll berhenti agar gelembung kembali lengket di tengah bar
+      spring.targetY *= 0.82;
+      scrollVelocity *= 0.84;
 
       const ax = (spring.targetX - spring.x) * k;
       spring.vx = (spring.vx + ax) * d;
       spring.x += spring.vx;
 
+      const ay = (spring.targetY - spring.y) * 0.22;
+      spring.vy = (spring.vy + ay) * 0.72;
+      spring.y += spring.vy;
+
       const aw = (spring.targetW - spring.w) * k;
       spring.vw = (spring.vw + aw) * d;
       spring.w += spring.vw;
 
-      // Hitung peregangan (stretch) berdasarkan kecepatan gerak
-      const speed = Math.abs(spring.vx);
-      const stretchX = Math.min(1.22, 1 + speed * 0.012);
-      const squashY = Math.max(0.86, 1 - speed * 0.0075);
+      // Gabungan kecepatan geser horizontal & scroll vertikal untuk peregangan mulus
+      const speedX = Math.abs(spring.vx);
+      const speedY = Math.abs(spring.vy) + Math.abs(scrollVelocity) * 0.22;
 
-      // Radius organik lentur saat bergerak
-      const dir = spring.vx >= 0 ? 1 : -1;
-      const morph = Math.min(14, speed * 0.45);
-      const rTopLeft = dir > 0 ? (28 - morph * 0.4) : (28 + morph * 0.6);
-      const rTopRight = dir > 0 ? (28 + morph * 0.6) : (28 - morph * 0.4);
-      const rBotLeft = dir > 0 ? (28 - morph * 0.3) : (28 + morph * 0.5);
-      const rBotRight = dir > 0 ? (28 + morph * 0.5) : (28 - morph * 0.3);
+      const stretchX = Math.min(1.22, Math.max(0.95, 1 + speedX * 0.012 - speedY * 0.004));
+      const squashY = Math.min(1.08, Math.max(0.86, 1 - speedX * 0.0075 + speedY * 0.005));
+
+      // Lekukan organik mengalir mengikuti arah geser X dan scroll Y
+      const dirX = spring.vx >= 0 ? 1 : -1;
+      const dirY = (spring.vy + scrollVelocity * 0.15) >= 0 ? 1 : -1;
+      const morphX = Math.min(14, speedX * 0.45);
+      const morphY = Math.min(9, speedY * 0.55);
+
+      const rTopLeft = Math.max(18, Math.min(42, 28 + (dirX > 0 ? -morphX * 0.4 : morphX * 0.6) + (dirY > 0 ? morphY * 0.35 : -morphY * 0.25)));
+      const rTopRight = Math.max(18, Math.min(42, 28 + (dirX > 0 ? morphX * 0.6 : -morphX * 0.4) + (dirY > 0 ? -morphY * 0.25 : morphY * 0.35)));
+      const rBotRight = Math.max(18, Math.min(42, 28 + (dirX > 0 ? morphX * 0.5 : -morphX * 0.3) + (dirY > 0 ? -morphY * 0.35 : morphY * 0.25)));
+      const rBotLeft = Math.max(18, Math.min(42, 28 + (dirX > 0 ? -morphX * 0.3 : morphX * 0.5) + (dirY > 0 ? morphY * 0.25 : -morphY * 0.35)));
 
       blok.style.width = `${Math.max(36, spring.w)}px`;
-      blok.style.transform = `translate3d(${spring.x}px, 0, 0) scale(${stretchX.toFixed(3)}, ${squashY.toFixed(3)})`;
+      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, ${spring.y.toFixed(2)}px, 0) scale(${stretchX.toFixed(3)}, ${squashY.toFixed(3)})`;
       blok.style.borderRadius = `${rTopLeft.toFixed(1)}% ${rTopRight.toFixed(1)}% ${rBotRight.toFixed(1)}% ${rBotLeft.toFixed(1)}% / 55% 45% 55% 45%`;
 
-      const shineOffset = Math.max(-10, Math.min(10, spring.vx * 0.35));
-      blok.style.setProperty('--shine-shift', `${shineOffset.toFixed(1)}px`);
+      const shineX = Math.max(-10, Math.min(10, spring.vx * 0.35));
+      const shineY = Math.max(-3.5, Math.min(3.5, (spring.vy + scrollVelocity * 0.12) * 0.35));
+      blok.style.setProperty('--shine-shift', `${shineX.toFixed(1)}px`);
+      blok.style.setProperty('--shine-y', `${shineY.toFixed(1)}px`);
 
       requestAnimationFrame(stepSpring);
     }
@@ -836,7 +871,6 @@
       const tgt = getBtnTarget(btn);
       spring.targetX = tgt.x;
       spring.targetW = tgt.w;
-      // Dorongan momentum kecil saat klik agar terasa hidup
       spring.vx += (tgt.x - spring.x) * 0.08;
 
       showPage(page);
@@ -924,7 +958,6 @@
       }
 
       if (hasSlid) {
-        // Tambahkan sedikit momentum pelepasan (flick) ke arah geseran
         const flickX = e.clientX + dragVelocity * 2.2;
         const targetBtn = getNearestButtonByX(flickX);
         const idx = navButtons.indexOf(targetBtn);
@@ -955,6 +988,9 @@
       spring.x = tgt.x;
       spring.targetX = tgt.x;
       spring.vx = 0;
+      spring.y = 0;
+      spring.targetY = 0;
+      spring.vy = 0;
       spring.w = tgt.w;
       spring.targetW = tgt.w;
       spring.vw = 0;
