@@ -24,6 +24,7 @@ function parseMultipart(rawBody, contentType) {
   let fileName = 'image.png';
   let mimeType = 'image/png';
   let tool = 'removebackgroundimage';
+  let multiplier = 2;
 
   let pos = 0;
   while (pos < rawBody.length) {
@@ -57,10 +58,13 @@ function parseMultipart(rawBody, contentType) {
       if (ALLOWED_TOOLS.includes(val)) {
         tool = val;
       }
+    } else if (fieldName === 'multiplier') {
+      const num = parseInt(bodyPart.toString('utf8').trim(), 10);
+      if ([2, 4].includes(num)) multiplier = num;
     }
   }
 
-  return { fileBuffer, fileName, mimeType, tool };
+  return { fileBuffer, fileName, mimeType, tool, multiplier };
 }
 
 export default async function handler(req, res) {
@@ -84,7 +88,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'File gambar tidak terbaca' });
     }
 
-    const { fileBuffer, fileName, mimeType, tool } = parsed;
+    const { fileBuffer, fileName, mimeType, tool, multiplier } = parsed;
 
     // 1. Auth
     const authRes = await fetch('https://api.ilovepdf.com/v1/auth', {
@@ -100,13 +104,13 @@ export default async function handler(req, res) {
       return res.status(502).json({
         error: 'Auth iLoveAPI gagal',
         step: 'auth',
-        detail: authData.error || authText.slice(0, 200),
+        detail: authData.error || authText.slice(0, 500),
       });
     }
 
     const token = authData.token;
 
-    // 2. Start task sesuai tool (removebackgroundimage / upscaleimage)
+    // 2. Start task
     const startRes = await fetch(`https://api.ilovepdf.com/v1/start/${tool}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -118,7 +122,7 @@ export default async function handler(req, res) {
       return res.status(502).json({
         error: `Start task (${tool}) gagal`,
         step: 'start',
-        detail: startData.error || startText.slice(0, 200),
+        detail: startData.error || startText.slice(0, 500),
       });
     }
 
@@ -142,22 +146,28 @@ export default async function handler(req, res) {
       return res.status(502).json({
         error: 'Upload ke iLoveAPI gagal',
         step: 'upload',
-        detail: uploadData.error || uploadText.slice(0, 200),
+        detail: uploadData.error || uploadText.slice(0, 500),
       });
     }
 
     // 4. Process
+    const processBody = {
+      task,
+      tool,
+      files: [{ server_filename: uploadData.server_filename, filename: fileName }],
+    };
+
+    if (tool === 'upscaleimage') {
+      processBody.multiplier = multiplier;
+    }
+
     const processRes = await fetch(`https://${server}/v1/process`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        task,
-        tool,
-        files: [{ server_filename: uploadData.server_filename, filename: fileName }],
-      }),
+      body: JSON.stringify(processBody),
     });
 
     if (!processRes.ok) {
@@ -165,7 +175,7 @@ export default async function handler(req, res) {
       return res.status(502).json({
         error: `Proses (${tool}) gagal`,
         step: 'process',
-        detail: pErr.slice(0, 200),
+        detail: pErr.slice(0, 500),
       });
     }
 
@@ -179,7 +189,7 @@ export default async function handler(req, res) {
       return res.status(502).json({
         error: 'Download hasil gagal',
         step: 'download',
-        detail: dErr.slice(0, 200),
+        detail: dErr.slice(0, 500),
       });
     }
 
