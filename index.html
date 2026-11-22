@@ -114,6 +114,7 @@
     }
 
     input[type=text],
+    input[type=number],
     input[type=file],
     textarea,
     select {
@@ -251,6 +252,32 @@
       margin-top: 8px;
     }
 
+    .hasil-mtk {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .hasil-mtk .baris-hasil {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+    }
+
+    .hasil-mtk .baris-hasil:last-child {
+      border-bottom: none;
+    }
+
+    .hasil-mtk b {
+      font-size: 16px;
+      color: #6ee7b7;
+    }
+
     .nav-wrap {
       position: fixed;
       left: 0;
@@ -258,7 +285,7 @@
       margin: 0 auto;
       bottom: 18px;
       z-index: 10;
-      width: min(430px, calc(100vw - 32px));
+      width: min(450px, calc(100vw - 24px));
     }
 
     .nav {
@@ -266,7 +293,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px;
+      padding: 8px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.16));
       backdrop-filter: blur(24px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.35);
@@ -288,10 +315,10 @@
 
     .blok {
       position: absolute;
-      top: 8px;
-      left: 10px;
-      width: 68px;
-      height: 56px;
+      top: 7px;
+      left: 8px;
+      width: 58px;
+      height: 54px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(195, 202, 215, 0.40) 38%, rgba(165, 175, 190, 0.34) 68%, rgba(255, 255, 255, 0.50) 100%);
       border: 1px solid rgba(255, 255, 255, 0.68);
       border-radius: 999px;
@@ -337,14 +364,14 @@
       padding: 8px 0 6px;
       cursor: pointer;
       color: rgba(255, 255, 255, 0.78);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 600;
       transition: color 0.35s;
       min-width: 0;
     }
 
     .nav button .ikon {
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1;
       transition: transform 0.55s cubic-bezier(.22,1,.36,1);
     }
@@ -408,7 +435,8 @@
           <span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span>
           <span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span>
           <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span>
-          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">📡 Info BMKG</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'mtk',3)">📐 Hitung MTK</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'info',4)">📡 Info BMKG</span>
         </p>
       </div>
     </div>
@@ -498,6 +526,42 @@
       </div>
     </div>
 
+    <!-- PAGE MTK -->
+    <div id="page-mtk" class="hilang">
+      <h1>MTK 📐</h1>
+      <p>Kalkulator Bangun Ruang &amp; Bangun Datar</p>
+
+      <div class="kartu">
+        <h2>🧊 Pilih Bangun</h2>
+        <p>Masukin angka ukurannya, hasil luas &amp; keliling langsung muncul otomatis.</p>
+        <select id="pilihBangun" onchange="renderInputMTK()">
+          <optgroup label="Bangun Ruang (3D)">
+            <option value="kubus">🧊 Kubus</option>
+            <option value="balok">📦 Balok</option>
+            <option value="tabung">🥫 Tabung</option>
+            <option value="bola">⚽ Bola</option>
+            <option value="kerucut">🎉 Kerucut</option>
+            <option value="limas4">🔺 Limas Segi Empat</option>
+            <option value="prisma3">⛺ Prisma Segitiga</option>
+          </optgroup>
+          <optgroup label="Bangun Datar (2D)">
+            <option value="persegi">⬛ Persegi</option>
+            <option value="persegipanjang">▭ Persegi Panjang</option>
+            <option value="lingkaran">⚪ Lingkaran</option>
+            <option value="segitiga">📐 Segitiga</option>
+          </optgroup>
+        </select>
+
+        <div id="inputMTKBox" style="margin-top: 8px;"></div>
+
+        <div class="hasil-mtk" id="hasilMTKBox">
+          <p style="font-size: 13px; color: rgba(255,255,255,0.65);">Isi angka di atas buat lihat hasil...</p>
+        </div>
+
+        <button class="btn btn2" onclick="resetMTK()">🔄 Reset Angka</button>
+      </div>
+    </div>
+
     <!-- PAGE INFO -->
     <div id="page-info" class="hilang">
       <h1>Info 📡</h1>
@@ -547,8 +611,9 @@
       <button class="aktif" onclick="pindah(this,'home',0)"><span class="ikon">🏠</span>Home</button>
       <button onclick="pindah(this,'search',1)"><span class="ikon">🔍</span>Search</button>
       <button onclick="pindah(this,'tools',2)"><span class="ikon">🛠️</span>Tools</button>
-      <button onclick="pindah(this,'info',3)"><span class="ikon">📡</span>Info</button>
-      <button onclick="pindah(this,'profil',4)"><span class="ikon">👤</span>Profil</button>
+      <button onclick="pindah(this,'mtk',3)"><span class="ikon">📐</span>MTK</button>
+      <button onclick="pindah(this,'info',4)"><span class="ikon">📡</span>Info</button>
+      <button onclick="pindah(this,'profil',5)"><span class="ikon">👤</span>Profil</button>
     </div>
   </div>
 
@@ -558,7 +623,7 @@
     function pindah(btn, page, index) {
       document.querySelectorAll('.nav button').forEach(b => b.classList.remove('aktif'));
       btn.classList.add('aktif');
-      let targetX = btn.offsetLeft - 10, targetW = btn.offsetWidth;
+      let targetX = btn.offsetLeft - 8, targetW = btn.offsetWidth;
       blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
       blok.style.width = targetW + 'px';
       blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
@@ -577,19 +642,229 @@
       if (navigator.vibrate) navigator.vibrate(5);
     }
 
-    window.addEventListener('load', () => {
+    function updateBlokPos() {
       let b = document.querySelector('.nav button.aktif');
+      if (!b) return;
       blok.style.transition = 'none';
-      blok.style.transform = `translateX(${b.offsetLeft - 10}px)`;
+      blok.style.transform = `translateX(${b.offsetLeft - 8}px)`;
       blok.style.width = b.offsetWidth + 'px';
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           blok.style.transition = '';
         });
       });
+    }
+
+    window.addEventListener('load', () => {
+      updateBlokPos();
       loadProfil();
       renderDaftarDL();
+      renderInputMTK();
     });
+
+    window.addEventListener('resize', updateBlokPos);
+
+    /* ==================== KALKULATOR MTK ==================== */
+    const konfigurasiBangun = {
+      kubus: [
+        { id: 's', label: 'Panjang Sisi / Rusuk (s)' }
+      ],
+      balok: [
+        { id: 'p', label: 'Panjang (p)' },
+        { id: 'l', label: 'Lebar (l)' },
+        { id: 't', label: 'Tinggi (t)' }
+      ],
+      tabung: [
+        { id: 'r', label: 'Jari-jari Alas (r)' },
+        { id: 't', label: 'Tinggi Tabung (t)' }
+      ],
+      bola: [
+        { id: 'r', label: 'Jari-jari Bola (r)' }
+      ],
+      kerucut: [
+        { id: 'r', label: 'Jari-jari Alas (r)' },
+        { id: 't', label: 'Tinggi Kerucut (t)' }
+      ],
+      limas4: [
+        { id: 's', label: 'Sisi Alas Persegi (s)' },
+        { id: 't', label: 'Tinggi Limas (t)' }
+      ],
+      prisma3: [
+        { id: 'a', label: 'Alas Segitiga (a)' },
+        { id: 'ts', label: 'Tinggi Segitiga Alas (ts)' },
+        { id: 'tp', label: 'Tinggi Prisma (tp)' }
+      ],
+      persegi: [
+        { id: 's', label: 'Panjang Sisi (s)' }
+      ],
+      persegipanjang: [
+        { id: 'p', label: 'Panjang (p)' },
+        { id: 'l', label: 'Lebar (l)' }
+      ],
+      lingkaran: [
+        { id: 'r', label: 'Jari-jari (r)' }
+      ],
+      segitiga: [
+        { id: 'a', label: 'Alas (a)' },
+        { id: 't', label: 'Tinggi (t)' },
+        { id: 'b', label: 'Sisi Miring Kiri (opsional)' },
+        { id: 'c', label: 'Sisi Miring Kanan (opsional)' }
+      ]
+    };
+
+    function renderInputMTK() {
+      const jenis = document.getElementById('pilihBangun').value;
+      const fields = konfigurasiBangun[jenis] || [];
+      const box = document.getElementById('inputMTKBox');
+
+      box.innerHTML = fields.map(f => `
+        <div style="margin-top: 10px;">
+          <label style="font-size: 13px; color: rgba(255,255,255,0.85);">${f.label}</label>
+          <input type="number" step="any" id="mtk_${f.id}" placeholder="Masukkan ${f.label}..." oninput="hitungMTK()">
+        </div>
+      `).join('');
+
+      hitungMTK();
+    }
+
+    function fmtNum(n) {
+      if (isNaN(n) || !isFinite(n)) return '-';
+      return Number.isInteger(n) ? n.toLocaleString('id-ID') : parseFloat(n.toFixed(2)).toLocaleString('id-ID');
+    }
+
+    function hitungMTK() {
+      const jenis = document.getElementById('pilihBangun').value;
+      const hasilBox = document.getElementById('hasilMTKBox');
+      const val = (id) => parseFloat(document.getElementById('mtk_' + id)?.value);
+
+      let hasil = [];
+
+      if (jenis === 'kubus') {
+        const s = val('s');
+        if (s > 0) {
+          hasil = [
+            { nama: 'Luas Permukaan (6 × s²)', nilai: fmtNum(6 * s * s) },
+            { nama: 'Keliling Rusuk (12 × s)', nilai: fmtNum(12 * s) },
+            { nama: 'Volume (s³)', nilai: fmtNum(s * s * s) }
+          ];
+        }
+      } else if (jenis === 'balok') {
+        const p = val('p'), l = val('l'), t = val('t');
+        if (p > 0 && l > 0 && t > 0) {
+          hasil = [
+            { nama: 'Luas Permukaan', nilai: fmtNum(2 * (p * l + p * t + l * t)) },
+            { nama: 'Keliling Rusuk (4(p+l+t))', nilai: fmtNum(4 * (p + l + t)) },
+            { nama: 'Volume (p × l × t)', nilai: fmtNum(p * l * t) }
+          ];
+        }
+      } else if (jenis === 'tabung') {
+        const r = val('r'), t = val('t');
+        if (r > 0 && t > 0) {
+          hasil = [
+            { nama: 'Luas Permukaan (2πr(r+t))', nilai: fmtNum(2 * Math.PI * r * (r + t)) },
+            { nama: 'Keliling Alas (2πr)', nilai: fmtNum(2 * Math.PI * r) },
+            { nama: 'Volume (πr²t)', nilai: fmtNum(Math.PI * r * r * t) }
+          ];
+        }
+      } else if (jenis === 'bola') {
+        const r = val('r');
+        if (r > 0) {
+          hasil = [
+            { nama: 'Luas Permukaan (4πr²)', nilai: fmtNum(4 * Math.PI * r * r) },
+            { nama: 'Keliling Lingkaran Tengah (2πr)', nilai: fmtNum(2 * Math.PI * r) },
+            { nama: 'Volume (4/3 × πr³)', nilai: fmtNum((4 / 3) * Math.PI * r * r * r) }
+          ];
+        }
+      } else if (jenis === 'kerucut') {
+        const r = val('r'), t = val('t');
+        if (r > 0 && t > 0) {
+          const s = Math.sqrt(r * r + t * t);
+          hasil = [
+            { nama: 'Garis Pelukis (s)', nilai: fmtNum(s) },
+            { nama: 'Luas Permukaan (πr(r+s))', nilai: fmtNum(Math.PI * r * (r + s)) },
+            { nama: 'Keliling Alas (2πr)', nilai: fmtNum(2 * Math.PI * r) },
+            { nama: 'Volume (1/3 × πr²t)', nilai: fmtNum((1 / 3) * Math.PI * r * r * t) }
+          ];
+        }
+      } else if (jenis === 'limas4') {
+        const s = val('s'), t = val('t');
+        if (s > 0 && t > 0) {
+          const tSegitiga = Math.sqrt((s / 2) * (s / 2) + t * t);
+          const luasPermukaan = (s * s) + 4 * (0.5 * s * tSegitiga);
+          const rusukMiring = Math.sqrt((s * Math.sqrt(2) / 2) ** 2 + t * t);
+          hasil = [
+            { nama: 'Luas Permukaan', nilai: fmtNum(luasPermukaan) },
+            { nama: 'Keliling Alas (4 × s)', nilai: fmtNum(4 * s) },
+            { nama: 'Total Panjang Rusuk', nilai: fmtNum(4 * s + 4 * rusukMiring) },
+            { nama: 'Volume (1/3 × s² × t)', nilai: fmtNum((1 / 3) * s * s * t) }
+          ];
+        }
+      } else if (jenis === 'prisma3') {
+        const a = val('a'), ts = val('ts'), tp = val('tp');
+        if (a > 0 && ts > 0 && tp > 0) {
+          const luasAlas = 0.5 * a * ts;
+          // Asumsi segitiga sama kaki untuk keliling alas
+          const sisiMiring = Math.sqrt((a / 2) ** 2 + ts * ts);
+          const kelilingAlas = a + 2 * sisiMiring;
+          hasil = [
+            { nama: 'Luas Permukaan', nilai: fmtNum(2 * luasAlas + kelilingAlas * tp) },
+            { nama: 'Keliling Alas (est. sama kaki)', nilai: fmtNum(kelilingAlas) },
+            { nama: 'Volume (Luas Alas × tp)', nilai: fmtNum(luasAlas * tp) }
+          ];
+        }
+      } else if (jenis === 'persegi') {
+        const s = val('s');
+        if (s > 0) {
+          hasil = [
+            { nama: 'Luas (s × s)', nilai: fmtNum(s * s) },
+            { nama: 'Keliling (4 × s)', nilai: fmtNum(4 * s) }
+          ];
+        }
+      } else if (jenis === 'persegipanjang') {
+        const p = val('p'), l = val('l');
+        if (p > 0 && l > 0) {
+          hasil = [
+            { nama: 'Luas (p × l)', nilai: fmtNum(p * l) },
+            { nama: 'Keliling (2(p + l))', nilai: fmtNum(2 * (p + l)) }
+          ];
+        }
+      } else if (jenis === 'lingkaran') {
+        const r = val('r');
+        if (r > 0) {
+          hasil = [
+            { nama: 'Luas (π × r²)', nilai: fmtNum(Math.PI * r * r) },
+            { nama: 'Keliling (2 × π × r)', nilai: fmtNum(2 * Math.PI * r) }
+          ];
+        }
+      } else if (jenis === 'segitiga') {
+        const a = val('a'), t = val('t'), b = val('b'), c = val('c');
+        if (a > 0 && t > 0) {
+          hasil.push({ nama: 'Luas (½ × a × t)', nilai: fmtNum(0.5 * a * t) });
+          if (b > 0 && c > 0) {
+            hasil.push({ nama: 'Keliling (a + b + c)', nilai: fmtNum(a + b + c) });
+          } else {
+            hasil.push({ nama: 'Keliling', nilai: 'Isi sisi b & c' });
+          }
+        }
+      }
+
+      if (hasil.length === 0) {
+        hasilBox.innerHTML = `<p style="font-size: 13px; color: rgba(255,255,255,0.65);">Masukkan angka positif di atas, hasil langsung muncul di sini ✨</p>`;
+      } else {
+        hasilBox.innerHTML = hasil.map(item => `
+          <div class="baris-hasil">
+            <span>${item.nama}</span>
+            <b>${item.nilai}</b>
+          </div>
+        `).join('');
+      }
+    }
+
+    function resetMTK() {
+      document.querySelectorAll('#inputMTKBox input').forEach(inp => inp.value = '');
+      hitungMTK();
+    }
+    /* ======================================================= */
 
     function isiSearch(t) {
       document.getElementById('inputSearch').value = t;
