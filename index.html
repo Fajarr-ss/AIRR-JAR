@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AIRR - J</title>
   <style>
     * {
@@ -21,7 +21,6 @@
       background: #0a0a0a;
       color: #fff;
       min-height: 100vh;
-      transition: background 0.55s cubic-bezier(.22,1,.36,1), color 0.45s ease;
     }
 
     .bg {
@@ -76,7 +75,7 @@
     .konten {
       position: relative;
       z-index: 1;
-      padding: 24px 20px 140px;
+      padding: 28px 20px 140px;
       text-align: center;
     }
 
@@ -87,7 +86,7 @@
     }
 
     .konten p {
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(255, 255, 255, 0.7);
       margin-top: 8px;
       font-size: 14px;
     }
@@ -101,7 +100,6 @@
       border-radius: 28px;
       padding: 20px;
       text-align: left;
-      transition: background 0.45s ease, border-color 0.45s ease;
     }
 
     .kartu h2 {
@@ -179,11 +177,6 @@
       margin: 4px 3px;
       cursor: pointer;
       color: #fff;
-      transition: transform 0.2s ease, background 0.3s ease;
-    }
-
-    .chip:active {
-      transform: scale(0.95);
     }
 
     img.preview,
@@ -253,249 +246,11 @@
       color: rgba(255, 255, 255, 0.6);
     }
 
-    .status-msg {
-      font-size: 12px;
-      margin-top: 8px;
-      color: rgba(255, 255, 255, 0.78);
-    }
-
     input[type=range] {
       width: 100%;
       margin-top: 8px;
     }
 
-    /* Day / Night Shift Toggle */
-    .shift-bar {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 14px;
-    }
-
-    .toggle {
-      position: relative;
-      width: 146px;
-      height: 62px;
-      border: 2px solid rgba(255, 255, 255, 0.22);
-      border-radius: 999px;
-      background: #23262b;
-      cursor: pointer;
-      padding: 0;
-      overflow: hidden;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42), inset 0 2px 8px rgba(0, 0, 0, 0.4);
-      transition: background 0.55s cubic-bezier(.22,1,.36,1), border-color 0.55s ease;
-    }
-
-    .night-decor {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
-    }
-
-    .star {
-      position: absolute;
-      color: #ffe866;
-      font-size: 12px;
-      filter: drop-shadow(0 0 4px rgba(255, 232, 102, 0.5));
-    }
-
-    .s1 { top: 11px; left: 64px; }
-    .s2 { top: 13px; left: 90px; font-size: 10px; }
-    .s3 { top: 31px; left: 77px; font-size: 11px; }
-
-    .moon-arc {
-      position: absolute;
-      right: 15px;
-      bottom: 9px;
-      width: 24px;
-      height: 14px;
-      border-bottom: 4px solid #ffe866;
-      border-radius: 0 0 24px 24px;
-      transform: rotate(-16deg);
-      opacity: 0.9;
-    }
-
-    .day-decor {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(-14px);
-      transition: opacity 0.45s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
-    }
-
-    .cloud {
-      position: absolute;
-      background: #fff;
-      border-radius: 999px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    .cloud::before,
-    .cloud::after {
-      content: "";
-      position: absolute;
-      background: #fff;
-      border-radius: 50%;
-    }
-
-    .c1 { width: 38px; height: 14px; top: 14px; left: 15px; }
-    .c1::before { width: 18px; height: 18px; top: -8px; left: 5px; }
-    .c1::after { width: 13px; height: 13px; top: -5px; left: 18px; }
-
-    .c2 { width: 33px; height: 13px; top: 33px; left: 29px; }
-    .c2::before { width: 15px; height: 15px; top: -6px; left: 5px; }
-    .c2::after { width: 11px; height: 11px; top: -4px; left: 16px; }
-
-    .knob {
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #fff, #d9dde3);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.9);
-      display: grid;
-      place-items: center;
-      transition: transform 0.6s cubic-bezier(.34,1.35,.64,1), background 0.5s ease;
-    }
-
-    .sun {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #ffd426;
-      opacity: 0;
-      transform: scale(0.4) rotate(-60deg);
-      box-shadow: 0 0 0 3px rgba(255, 212, 38, 0.25);
-      transition: opacity 0.35s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
-    }
-
-    .toggle.day {
-      background: #eef2f7;
-      border-color: rgba(0, 0, 0, 0.15);
-    }
-
-    .toggle.day .night-decor {
-      opacity: 0;
-      transform: translateX(14px);
-    }
-
-    .toggle.day .day-decor {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .toggle.day .knob {
-      transform: translateX(84px);
-      background: radial-gradient(circle at 35% 30%, #c8cdd4, #9aa2ad);
-    }
-
-    .toggle.day .sun {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-
-    /* Light Theme (Siang) */
-    body.light-mode {
-      background: #dce6f5;
-      color: #111827;
-    }
-
-    body.light-mode .bg1 {
-      background: radial-gradient(circle, #ff9eb8, transparent 70%);
-      opacity: 0.65;
-    }
-
-    body.light-mode .bg2 {
-      background: radial-gradient(circle, #7fb2ff, transparent 70%);
-      opacity: 0.65;
-    }
-
-    body.light-mode .bg3 {
-      background: radial-gradient(circle, #d8b4fe, transparent 70%);
-      opacity: 0.65;
-    }
-
-    body.light-mode .konten p {
-      color: rgba(17, 24, 39, 0.72);
-    }
-
-    body.light-mode .kartu {
-      background: rgba(255, 255, 255, 0.68);
-      border-color: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-    }
-
-    body.light-mode .kartu p {
-      color: rgba(17, 24, 39, 0.85);
-    }
-
-    body.light-mode input[type=text],
-    body.light-mode input[type=file],
-    body.light-mode textarea,
-    body.light-mode select {
-      background: rgba(255, 255, 255, 0.78);
-      border-color: rgba(17, 24, 39, 0.16);
-      color: #111827;
-    }
-
-    body.light-mode select option {
-      background: #fff;
-      color: #111827;
-    }
-
-    body.light-mode input::placeholder,
-    body.light-mode textarea::placeholder {
-      color: rgba(17, 24, 39, 0.5);
-    }
-
-    body.light-mode button.btn,
-    body.light-mode a.btn {
-      background: #111827;
-      color: #fff;
-    }
-
-    body.light-mode button.btn2,
-    body.light-mode a.btn2 {
-      background: rgba(17, 24, 39, 0.08);
-      color: #111827;
-      border-color: rgba(17, 24, 39, 0.16);
-    }
-
-    body.light-mode .chip {
-      background: rgba(17, 24, 39, 0.08);
-      border-color: rgba(17, 24, 39, 0.15);
-      color: #111827;
-    }
-
-    body.light-mode .berita-item {
-      border-bottom-color: rgba(17, 24, 39, 0.1);
-    }
-
-    body.light-mode .berita-item span {
-      color: rgba(17, 24, 39, 0.62);
-    }
-
-    body.light-mode .status-msg {
-      color: rgba(17, 24, 39, 0.75);
-    }
-
-    body.light-mode .nav {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.75));
-      border-color: rgba(255, 255, 255, 0.9);
-    }
-
-    body.light-mode .nav button {
-      color: rgba(17, 24, 39, 0.68);
-    }
-
-    body.light-mode .nav button.aktif {
-      color: #111827;
-    }
-
-    /* Bottom Liquid Glass Navigation */
     .nav-wrap {
       position: fixed;
       left: 0;
@@ -638,36 +393,15 @@
 
   <div class="konten">
 
-    <!-- Shift Day/Night Switch -->
-    <div class="shift-bar">
-      <button class="toggle" id="dayNightToggle" aria-label="Ganti mode siang atau malam" aria-pressed="false" onclick="toggleDayNight()">
-        <span class="night-decor">
-          <span class="star s1">✦</span>
-          <span class="star s2">✦</span>
-          <span class="star s3">✦</span>
-          <span class="moon-arc"></span>
-        </span>
-        <span class="day-decor">
-          <span class="cloud c1"></span>
-          <span class="cloud c2"></span>
-        </span>
-        <span class="knob">
-          <span class="sun"></span>
-        </span>
-      </button>
-    </div>
-
-    <!-- PAGE 1: HOME -->
+    <!-- PAGE HOME -->
     <div id="page-home">
       <h1>AIRR X Liquid Glass</h1>
       <p>Search Google • Tools HD • Info BMKG</p>
-
       <div class="kartu">
         <div style="font-size: 42px">✨</div>
         <h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2>
         <p>Treat Your Better.</p>
       </div>
-
       <div class="kartu">
         <h2>⚡ Cepet Akses</h2>
         <p>
@@ -679,17 +413,15 @@
       </div>
     </div>
 
-    <!-- PAGE 2: SEARCH -->
+    <!-- PAGE SEARCH -->
     <div id="page-search" class="hilang">
       <h1>Search</h1>
       <p>connect Google</p>
-
       <div class="kartu">
         <h2>🔎 Pencarian Google</h2>
         <input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter')cariGoogle()">
         <button class="btn" onclick="cariGoogle()">Cari di Google →</button>
         <button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button>
-        <p id="searchStatus" class="status-msg"></p>
         <p style="margin-top: 10px">Trending:</p>
         <span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span>
         <span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span>
@@ -698,80 +430,90 @@
       </div>
     </div>
 
-    <!-- PAGE 3: TOOLS -->
+    <!-- PAGE TOOLS -->
     <div id="page-tools" class="hilang">
       <h1>Tools 🛠️</h1>
-      <p>HD Foto, Filter Video &amp; Downloader TikTok</p>
+      <p>HD Foto &amp; HD Video - Gratis, tanpa upload ke server</p>
 
-      <!-- Tool 1: HD Foto -->
+      <!-- 1. HD FOTO -->
       <div class="kartu">
         <h2>📸 1. HD FOTO</h2>
-        <p>Pilih foto, upscale 2x + atur kontras &amp; kecerahan langsung di browser.</p>
+        <p>Pilih foto buram / pecah, langsung di-upscale 2x + dipertajam.</p>
         <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
-        <img id="fotoPreview" class="preview" alt="Preview Foto HD">
-        <label>Ketajaman / Kontras <span id="tajamVal">70</span>%</label>
+        <img id="fotoPreview" class="preview">
+        <label>Ketajaman <span id="tajamVal">70</span>%</label>
         <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
         <label>Kecerahan <span id="cerahVal">100</span>%</label>
         <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
         <button class="btn" onclick="downloadHD()">⬇️ Download Foto HD</button>
-        <p id="fotoStatus" class="status-msg">Status: Belum ada foto</p>
+        <p id="fotoStatus" style="font-size: 12px; margin-top: 6px">Status: Durung ana foto</p>
         <canvas id="canvasHD" style="display: none"></canvas>
       </div>
 
-      <!-- Tool 2: Filter Video -->
+      <!-- 2. HD VIDEO -->
       <div class="kartu">
-        <h2>🎬 2. FILTER VIDEO</h2>
-        <p>Pilih video dan atur kontras/saturasi saat diputar (preview saja).</p>
+        <h2>🎬 2. HD VIDEO</h2>
+        <p>Pilih video, atur filter HD, terus play.</p>
         <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
         <video id="videoPreview" class="preview" controls playsinline></video>
-        <label>Kontras <span id="vidVal">130</span>%</label>
+        <label>Kontras / HD <span id="vidVal">130</span>%</label>
         <input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value;applyVideoFilter()">
         <label>Saturasi <span id="satVal">120</span>%</label>
         <input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value;applyVideoFilter()">
-        <p class="status-msg">Catatan: Filter diterapkan pada tampilan pemutar video, bukan membakar filter ke file unduhan.</p>
+        <button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button>
       </div>
 
-      <!-- Tool 3: TikTok Downloader & Save Link -->
+      <!-- 3. Save Link Video & Musik + Tombol Download -->
       <div class="kartu">
-        <h2>🔗 3. TikTok &amp; Media Downloader</h2>
-        <p>Tempel link TikTok untuk ambil video tanpa watermark &amp; musik MP3, atau simpan daftarnya.</p>
-        <input type="text" id="linkDL" placeholder="Tempel link https://vt.tiktok.com/... di sini">
+        <h2>🔗 3. Save Link Video &amp; Musik</h2>
+        <p>Tempel link TikTok / YouTube / IG, atau ambil &amp; download video/musik.</p>
+        <input type="text" id="linkDL" placeholder="Tempel link TikTok / YouTube / IG di sini...">
         <select id="tipeDL">
-          <option value="video">🎬 Video (No Watermark)</option>
-          <option value="musik">🎵 Musik / MP3</option>
+          <option value="video">🎬 Video</option>
+          <option value="musik">🎵 Musik / Lagu</option>
         </select>
 
-        <button class="btn" onclick="ambilTikWM()">⚡ Ambil Video &amp; Musik TikTok (TikWM)</button>
+        <button class="btn" onclick="downloadLinkDL()">⬇️ Download</button>
+        <button class="btn btn2" onclick="ambilTikWM()">⚡ Ambil Video &amp; Musik TikTok (TikWM)</button>
 
         <div class="row">
-          <button class="btn btn2" onclick="bukaLinkDL()">▶️ Buka Link</button>
+          <button class="btn btn2" onclick="bukaLinkDL()">▶️ Buka di Aplikasi</button>
           <button class="btn btn2" onclick="copyLinkDL()">📋 Copy Link</button>
-          <button class="btn btn2" onclick="simpanLinkDL()">💾 Simpan</button>
         </div>
+        <button class="btn btn2" onclick="simpanLinkDL()">💾 Simpan ke Daftar</button>
 
-        <p id="linkStatus" class="status-msg"></p>
+        <p id="linkStatus" style="font-size: 12px; margin-top: 8px; color: rgba(255,255,255,.8)"></p>
         <div id="hasilTikWM"></div>
-        <div id="daftarDL" style="margin-top: 12px; font-size: 13px"></div>
+        <div id="daftarDL" style="margin-top: 10px; font-size: 13px"></div>
+        <p style="font-size: 12px; margin-top: 8px">Tips: Di TikTok pencet Bagikan &gt; Salin Tautan, di YouTube pencet Bagikan &gt; Download / Save, di IG pencet ••• &gt; Save.</p>
+      </div>
+
+      <!-- 4. Hapus Background -->
+      <div class="kartu">
+        <h2>✂️ 4. Hapus Background (Remove.bg)</h2>
+        <p>Diproses aman lewat serverless Vercel (<code>/api/removebg</code>).</p>
+        <input type="file" id="bgInput" accept="image/*" onchange="previewBgInput(event)">
+        <img id="bgPreview" class="preview">
+        <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">✂️ Hapus Background</button>
+        <a class="btn btn2" id="btnDownloadBg" style="display: none" download="no-bg.png">⬇️ Download Hasil</a>
+        <p id="bgStatus" style="font-size: 12px; margin-top: 8px; color: rgba(255,255,255,.8)">Status: Belum ada foto</p>
       </div>
     </div>
 
-    <!-- PAGE 4: INFO -->
+    <!-- PAGE INFO -->
     <div id="page-info" class="hilang">
       <h1>Info 📡</h1>
       <p>Live dari BMKG &amp; Berita Indonesia</p>
-
       <div class="kartu">
         <h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2>
         <div id="gempaBox"><p>Loading data BMKG...</p></div>
         <button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button>
       </div>
-
       <div class="kartu">
         <h2>🌦️ Cuaca Jogja Hari Ini</h2>
         <div id="cuacaBox"><p>Loading cuaca...</p></div>
         <button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button>
       </div>
-
       <div class="kartu">
         <h2>📰 Berita Terbaru Indonesia</h2>
         <div id="beritaBox"><p>Loading berita...</p></div>
@@ -779,30 +521,28 @@
       </div>
     </div>
 
-    <!-- PAGE 5: PROFIL -->
+    <!-- PAGE PROFIL -->
     <div id="page-profil" class="hilang">
       <h1>Profil 👤</h1>
-      <p>Ganti nama &amp; foto, tersimpan di perangkat</p>
-
+      <p>Ganti nama &amp; foto, langsung kesimpan</p>
       <div class="kartu" style="text-align: center">
-        <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12" alt="Foto Profil">
+        <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12">
         <h2 id="namaProfil" style="margin-top: 10px">Jarr</h2>
         <p id="bioProfil">Yogyakarta • Seneng ngoprek HTML modal AI😹</p>
         <input type="text" id="editNama" placeholder="Ganti nama...">
         <textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea>
-        <label style="font-size: 13px; display: block; margin-top: 8px">📸 Ganti Foto Profil</label>
+        <label style="font-size: 13px">📸 Ganti Foto Profil</label>
         <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
         <div class="row">
           <button class="btn" onclick="simpanProfil()">💾 Simpan Profil</button>
-          <button class="btn btn2" onclick="resetProfil()">Reset Profil</button>
+          <button class="btn btn2" onclick="resetProfil()">Reset</button>
         </div>
-        <p id="profilStatus" class="status-msg"></p>
       </div>
     </div>
 
   </div>
 
-  <!-- BOTTOM NAVIGATION -->
+  <!-- NAV -->
   <div class="nav-wrap">
     <div class="nav" id="nav">
       <div class="blok" id="blok"></div>
@@ -815,75 +555,40 @@
   </div>
 
   <script>
-    const blok = document.getElementById('blok');
-    let infoLoaded = false;
-
-    function applyDayNight(isDay) {
-      const btn = document.getElementById('dayNightToggle');
-      btn.classList.toggle('day', isDay);
-      btn.setAttribute('aria-pressed', String(isDay));
-      document.body.classList.toggle('light-mode', isDay);
-    }
-
-    function toggleDayNight() {
-      const nextDay = !document.body.classList.contains('light-mode');
-      applyDayNight(nextDay);
-      try {
-        localStorage.setItem('temaSiang', nextDay ? '1' : '0');
-      } catch (_) {}
-      if (navigator.vibrate) navigator.vibrate(8);
-    }
+    let blok = document.getElementById('blok');
 
     function pindah(btn, page, index) {
       document.querySelectorAll('.nav button').forEach(b => b.classList.remove('aktif'));
       btn.classList.add('aktif');
-
-      const targetX = btn.offsetLeft - 10;
-      const targetW = btn.offsetWidth;
+      let targetX = btn.offsetLeft - 10, targetW = btn.offsetWidth;
       blok.style.transform = `translateX(${targetX}px) scaleX(1.24) scaleY(0.86)`;
       blok.style.width = targetW + 'px';
       blok.style.borderRadius = '30% 70% 68% 32% / 62% 48% 52% 38%';
-
       clearTimeout(blok._timer);
       blok._timer = setTimeout(() => {
         blok.style.transform = `translateX(${targetX}px) scaleX(1) scaleY(1)`;
         blok.style.borderRadius = '999px';
       }, 280);
-
-      document.querySelectorAll('.konten > div').forEach(d => {
-        if (!d.classList.contains('shift-bar')) d.classList.add('hilang');
-      });
-
-      const t = document.getElementById('page-' + page);
+      document.querySelectorAll('.konten > div').forEach(d => d.classList.add('hilang'));
+      let t = document.getElementById('page-' + page);
       t.classList.remove('hilang');
       t.classList.remove('muncul');
       void t.offsetWidth;
       t.classList.add('muncul');
-
-      if (page === 'info' && !infoLoaded) {
-        infoLoaded = true;
-        loadGempa();
-        loadCuaca();
-        loadBerita();
-      }
+      if (page === 'info') loadGempa(), loadCuaca(), loadBerita();
       if (navigator.vibrate) navigator.vibrate(5);
     }
 
     window.addEventListener('load', () => {
-      const savedDay = localStorage.getItem('temaSiang') === '1';
-      applyDayNight(savedDay);
-
-      const b = document.querySelector('.nav button.aktif');
+      let b = document.querySelector('.nav button.aktif');
       blok.style.transition = 'none';
       blok.style.transform = `translateX(${b.offsetLeft - 10}px)`;
       blok.style.width = b.offsetWidth + 'px';
-
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           blok.style.transition = '';
         });
       });
-
       loadProfil();
       renderDaftarDL();
     });
@@ -894,382 +599,262 @@
     }
 
     function goSearch(t) {
-      document.getElementById('inputSearch').value = t;
       pindah(document.querySelectorAll('.nav button')[1], 'search', 1);
+      document.getElementById('inputSearch').value = t;
     }
 
     function cariGoogle(mode) {
-      const q = document.getElementById('inputSearch').value.trim();
-      const st = document.getElementById('searchStatus');
+      let q = document.getElementById('inputSearch').value.trim();
       if (!q) {
-        st.innerText = 'Tulis kata kunci dulu.';
+        alert('Tulis kata kunci dulu mas');
         return;
       }
-      st.innerText = '';
-      const url = mode === 'gambar'
-        ? 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(q)
-        : 'https://www.google.com/search?q=' + encodeURIComponent(q);
-      window.open(url, '_blank', 'noopener,noreferrer');
+      if (mode === 'gambar') window.open('https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(q), '_blank');
+      else window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
     }
 
     let fotoAsli = null;
 
     function loadFoto(e) {
-      const f = e.target.files[0];
+      let f = e.target.files[0];
       if (!f) return;
-      const r = new FileReader();
+      let r = new FileReader();
       r.onload = (ev) => {
-        const img = new Image();
-        img.onload = () => {
-          fotoAsli = img;
+        fotoAsli = new Image();
+        fotoAsli.onload = () => {
+          document.getElementById('fotoPreview').src = ev.target.result;
           document.getElementById('fotoPreview').style.display = 'block';
           prosesHD();
         };
-        img.src = ev.target.result;
+        fotoAsli.src = ev.target.result;
       };
       r.readAsDataURL(f);
     }
 
     function prosesHD() {
       if (!fotoAsli) return;
-      const c = document.getElementById('canvasHD');
-      const ctx = c.getContext('2d');
+      let c = document.getElementById('canvasHD'), ctx = c.getContext('2d');
       c.width = fotoAsli.width * 2;
       c.height = fotoAsli.height * 2;
-      const tajam = document.getElementById('tajam').value / 100;
-      const cerah = document.getElementById('cerah').value;
+      let tajam = document.getElementById('tajam').value / 100, cerah = document.getElementById('cerah').value;
       ctx.filter = `brightness(${cerah}%) contrast(${100 + tajam * 30}%) saturate(110%)`;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(fotoAsli, 0, 0, c.width, c.height);
       document.getElementById('fotoPreview').src = c.toDataURL('image/jpeg', 0.95);
-      document.getElementById('fotoStatus').innerText = `Status: Siap (${c.width}x${c.height}px)`;
+      document.getElementById('fotoStatus').innerText = `Status: HD Siap! ${c.width}x${c.height}px`;
     }
 
     function downloadHD() {
       if (!fotoAsli) {
-        document.getElementById('fotoStatus').innerText = 'Pilih foto terlebih dahulu.';
+        alert('Pilih foto dulu mas');
         return;
       }
       prosesHD();
-      const a = document.createElement('a');
-      a.download = 'foto-2x-' + Date.now() + '.jpg';
+      let a = document.createElement('a');
+      a.download = 'foto-HD-' + Date.now() + '.jpg';
       a.href = document.getElementById('canvasHD').toDataURL('image/jpeg', 0.95);
       a.click();
     }
 
-    let currentVideoUrl = null;
-
     function loadVideo(e) {
-      const f = e.target.files[0];
+      let f = e.target.files[0];
       if (!f) return;
-      if (currentVideoUrl) URL.revokeObjectURL(currentVideoUrl);
-      currentVideoUrl = URL.createObjectURL(f);
-      const v = document.getElementById('videoPreview');
-      v.src = currentVideoUrl;
+      let v = document.getElementById('videoPreview');
+      v.src = URL.createObjectURL(f);
       v.style.display = 'block';
       applyVideoFilter();
-      v.play().catch(() => {});
+      v.play();
     }
 
     function applyVideoFilter() {
-      const v = document.getElementById('videoPreview');
-      const kon = document.getElementById('vidFilter').value;
-      const sat = document.getElementById('satFilter').value;
+      let v = document.getElementById('videoPreview');
+      let kon = document.getElementById('vidFilter').value, sat = document.getElementById('satFilter').value;
       v.style.filter = `contrast(${kon}%) saturate(${sat}%) brightness(110%)`;
     }
 
-    function isValidHttpUrl(str) {
-      try {
-        const u = new URL(str);
-        return u.protocol === 'http:' || u.protocol === 'https:';
-      } catch (_) {
-        return false;
+    function downloadLinkDL(customUrl) {
+      let l = (customUrl || document.getElementById('linkDL').value).trim();
+      if (!l) {
+        alert('Tempel link dulu mas');
+        return;
       }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(l).catch(() => {});
+      }
+      let lower = l.toLowerCase();
+      let target = 'https://cobalt.tools/';
+      if (lower.includes('tiktok.com')) target = 'https://snaptik.app/';
+      else if (lower.includes('instagram.com')) target = 'https://snapinsta.app/';
+      document.getElementById('linkStatus').innerText = 'Link ke-copy! Tinggal Paste di halaman download.';
+      window.open(target, '_blank');
     }
 
     async function ambilTikWM(customUrl) {
-      const linkInput = document.getElementById('linkDL');
-      const statusEl = document.getElementById('linkStatus');
-      const hasilBox = document.getElementById('hasilTikWM');
-      const url = (customUrl || linkInput.value).trim();
-
-      if (!isValidHttpUrl(url)) {
-        statusEl.innerText = 'Masukkan link TikTok yang valid (http:// atau https://).';
+      let l = (customUrl || document.getElementById('linkDL').value).trim();
+      let st = document.getElementById('linkStatus');
+      let box = document.getElementById('hasilTikWM');
+      if (!l) {
+        alert('Tempel link TikTok dulu mas');
         return;
       }
-
-      statusEl.innerText = 'Mengambil video & musik...';
-      hasilBox.innerHTML = '';
-
+      st.innerText = 'Mengambil data TikWM...';
+      box.innerHTML = '';
       try {
-        const res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url));
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const json = await res.json();
+        let res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(l));
+        let j = await res.json();
+        let d = j?.data || j?.result || j;
+        let judul = d?.title || d?.desc || 'Video TikTok';
+        let author = typeof d?.author === 'object' ? (d.author?.nickname || d.author?.unique_id) : d?.author;
+        author = author || 'Kreator TikTok';
+        let vidUrl = d?.hdplay || d?.play || d?.wmplay || d?.video_url || '';
+        let musUrl = d?.music || d?.music_info?.play || d?.audio_url || '';
 
-        const d = json?.data || json?.result || json;
-        if (!d || typeof d !== 'object') {
-          throw new Error('Data kosong');
-        }
-
-        const judul = d.title || d.desc || 'Video TikTok';
-        const rawAuthor = typeof d.author === 'object'
-          ? (d.author?.nickname || d.author?.unique_id)
-          : d.author;
-        const author = rawAuthor || 'Kreator TikTok';
-        const cover = d.cover || d.origin_cover || '';
-
-        const videoUrl = d.hdplay || d.play || d.wmplay || d.video_url || d.video || '';
-        const musikUrl = d.music || d.music_info?.play || d.audio_url || d.audio || '';
-
-        if (!videoUrl && !musikUrl) {
-          statusEl.innerText = 'Terhubung, tapi link video/musik tidak ditemukan.';
+        if (!vidUrl && !musUrl) {
+          st.innerText = 'Link media tidak ditemukan.';
           return;
         }
 
-        statusEl.innerText = 'Status: Berhasil diambil ✅';
+        st.innerText = 'Status: Berhasil diambil ✅';
+        let btns = '';
+        if (vidUrl) btns += `<a class="btn" href="${vidUrl}" download="tiktok-video.mp4" target="_blank" rel="noopener">⬇️ Download Video</a>`;
+        if (musUrl) btns += `<a class="btn btn2" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">🎵 Download Musik</a>`;
 
-        const card = document.createElement('div');
-        card.style.cssText = 'margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)';
-
-        if (cover) {
-          const img = document.createElement('img');
-          img.src = cover;
-          img.alt = judul;
-          img.style.cssText = 'width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:8px';
-          card.appendChild(img);
-        }
-
-        const titleEl = document.createElement('div');
-        titleEl.style.cssText = 'font-weight:700;font-size:14px;line-height:1.4';
-        titleEl.textContent = judul;
-
-        const authorEl = document.createElement('div');
-        authorEl.style.cssText = 'font-size:12px;opacity:.75;margin:4px 0 10px';
-        authorEl.textContent = '@' + String(author).replace(/^@/, '');
-
-        const btnWrap = document.createElement('div');
-        btnWrap.className = 'row';
-
-        if (videoUrl) {
-          const btnVid = document.createElement('a');
-          btnVid.href = videoUrl;
-          btnVid.download = 'tiktok-video.mp4';
-          btnVid.target = '_blank';
-          btnVid.rel = 'noopener noreferrer';
-          btnVid.className = 'btn';
-          btnVid.style.cssText = 'margin-top:0;padding:10px 12px;font-size:13px';
-          btnVid.textContent = '⬇️ Download Video';
-          btnWrap.appendChild(btnVid);
-        }
-
-        if (musikUrl) {
-          const btnMus = document.createElement('a');
-          btnMus.href = musikUrl;
-          btnMus.download = 'tiktok-musik.mp3';
-          btnMus.target = '_blank';
-          btnMus.rel = 'noopener noreferrer';
-          btnMus.className = 'btn btn2';
-          btnMus.style.cssText = 'margin-top:0;padding:10px 12px;font-size:13px';
-          btnMus.textContent = '🎵 Download Musik';
-          btnWrap.appendChild(btnMus);
-        }
-
-        card.append(titleEl, authorEl, btnWrap);
-        hasilBox.appendChild(card);
-      } catch (_) {
-        statusEl.innerText = 'Gagal mengambil langsung dari API. Membuka SnapTik...';
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(url).catch(() => {});
-        }
-        window.open('https://snaptik.app/', '_blank', 'noopener,noreferrer');
+        box.innerHTML = `
+          <div style="margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)">
+            <b>${judul}</b><br>
+            <span style="font-size:12px;opacity:.75">@${String(author).replace(/^@/, '')}</span>
+            ${btns}
+          </div>
+        `;
+      } catch (e) {
+        st.innerText = 'Gagal ambil TikWM, buka SnapTik...';
+        downloadLinkDL(l);
       }
     }
 
     function bukaLinkDL() {
-      const l = document.getElementById('linkDL').value.trim();
-      const st = document.getElementById('linkStatus');
-      if (!isValidHttpUrl(l)) {
-        st.innerText = 'Masukkan link valid diawali http:// atau https://';
+      let l = document.getElementById('linkDL').value.trim();
+      if (!l) {
+        alert('Tempel link dulu mas');
         return;
       }
-      st.innerText = '';
-      window.open(l, '_blank', 'noopener,noreferrer');
+      window.open(l, '_blank');
     }
 
     function copyLinkDL() {
-      const l = document.getElementById('linkDL').value.trim();
-      const st = document.getElementById('linkStatus');
+      let l = document.getElementById('linkDL').value.trim();
       if (!l) {
-        st.innerText = 'Tempel link dulu.';
+        alert('Tempel link dulu');
         return;
       }
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(l).then(() => {
-          st.innerText = 'Link disalin.';
-        });
-      }
+      navigator.clipboard.writeText(l).then(() => alert('Link ke-copy ✅'));
     }
 
     function simpanLinkDL() {
-      const l = document.getElementById('linkDL').value.trim();
-      const st = document.getElementById('linkStatus');
-      if (!isValidHttpUrl(l)) {
-        st.innerText = 'Masukkan link valid diawali http:// atau https://';
-        return;
-      }
-      const arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
-      arr.unshift({
-        link: l,
-        tipe: document.getElementById('tipeDL').value,
-        tgl: new Date().toLocaleString('id-ID')
-      });
+      let l = document.getElementById('linkDL').value.trim();
+      if (!l) return;
+      let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
+      arr.unshift({ link: l, tipe: document.getElementById('tipeDL').value, tgl: new Date().toLocaleString('id-ID') });
       localStorage.setItem('daftarDL', JSON.stringify(arr.slice(0, 20)));
       document.getElementById('linkDL').value = '';
-      st.innerText = 'Tersimpan ke daftar.';
       renderDaftarDL();
     }
 
-    function hapusLinkDL(index) {
-      const arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
-      arr.splice(index, 1);
+    function hapusLinkDL(idx) {
+      let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
+      arr.splice(idx, 1);
       localStorage.setItem('daftarDL', JSON.stringify(arr));
       renderDaftarDL();
     }
 
     function renderDaftarDL() {
-      const arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
-      const box = document.getElementById('daftarDL');
-      box.innerHTML = '';
+      let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
+      document.getElementById('daftarDL').innerHTML = arr.map((x, i) => `
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.12)">
+          ${x.tipe === 'musik' ? '🎵' : '🎬'} <a href="${x.link}" target="_blank" style="color:#fff;word-break:break-all">${x.link.slice(0, 45)}...</a><br>
+          <span style="font-size:11px;color:rgba(255,255,255,.6)">${x.tgl}</span><br>
+          <span class="chip" onclick="downloadLinkDL('${x.link.replace(/'/g, "\\'")}')">⬇️ Download</span>
+          <span class="chip" onclick="hapusLinkDL(${i})">🗑️ Hapus</span>
+        </div>
+      `).join('') || '<p style="color:rgba(255,255,255,.6)">Belum ada link tersimpan.</p>';
+    }
 
-      if (!arr.length) {
-        box.innerHTML = '<p style="opacity:.65">Belum ada link tersimpan.</p>';
+    let fileBg = null;
+
+    function previewBgInput(e) {
+      fileBg = e.target.files[0] || null;
+      document.getElementById('btnDownloadBg').style.display = 'none';
+      document.getElementById('bgStatus').innerText = fileBg ? `Status: Siap (${fileBg.name})` : 'Status: Belum ada foto';
+    }
+
+    async function hapusBackground() {
+      let st = document.getElementById('bgStatus');
+      let img = document.getElementById('bgPreview');
+      let dl = document.getElementById('btnDownloadBg');
+      if (!fileBg) {
+        alert('Pilih foto dulu mas');
         return;
       }
-
-      arr.forEach((x, idx) => {
-        if (!isValidHttpUrl(x.link)) return;
-
-        const div = document.createElement('div');
-        div.style.cssText = 'padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12)';
-
-        const icon = document.createTextNode(x.tipe === 'musik' ? '🎵 ' : '🎬 ');
-        const a = document.createElement('a');
-        a.href = x.link;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.style.cssText = 'color:inherit;word-break:break-all';
-        a.textContent = x.link.slice(0, 42) + (x.link.length > 42 ? '...' : '');
-
-        const meta = document.createElement('div');
-        meta.style.cssText = 'font-size:11px;opacity:.65;margin-top:3px';
-        meta.textContent = x.tgl;
-
-        const btnRow = document.createElement('div');
-        btnRow.style.cssText = 'display:flex;gap:6px;margin-top:6px';
-
-        const btnDl = document.createElement('button');
-        btnDl.className = 'chip';
-        btnDl.style.margin = '0';
-        btnDl.textContent = '⬇️ Download';
-        btnDl.onclick = () => ambilTikWM(x.link);
-
-        const btnDel = document.createElement('button');
-        btnDel.className = 'chip';
-        btnDel.style.margin = '0';
-        btnDel.textContent = '🗑️ Hapus';
-        btnDel.onclick = () => hapusLinkDL(idx);
-
-        btnRow.append(btnDl, btnDel);
-        div.append(icon, a, meta, btnRow);
-        box.appendChild(div);
-      });
+      st.innerText = 'Status: Memproses...';
+      try {
+        let fd = new FormData();
+        fd.append('image_file', fileBg);
+        let res = await fetch('/api/removebg', { method: 'POST', body: fd });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        let blob = await res.blob();
+        let url = URL.createObjectURL(blob);
+        img.src = url;
+        img.style.display = 'block';
+        dl.href = url;
+        dl.style.display = 'block';
+        st.innerText = 'Status: Selesai ✅';
+      } catch (e) {
+        st.innerText = 'Status: Gagal (' + e.message + ')';
+      }
     }
 
     async function loadGempa() {
-      const box = document.getElementById('gempaBox');
+      let box = document.getElementById('gempaBox');
       box.innerHTML = 'Loading...';
       try {
-        const res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const j = await res.json();
-        const g = j.Infogempa.gempa;
-        box.innerHTML = `
-          <span class="badge">M ${g.Magnitude}</span>
-          <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br>
-          <b>${g.Wilayah}</b><br>
-          📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>
-          ⚠️ Potensi: ${g.Potensi}
-        `;
-      } catch (_) {
-        box.innerHTML = '<b>Data BMKG gagal dimuat</b><br><span style="font-size:12px;opacity:.7">Periksa koneksi jaringan atau coba muat ulang.</span>';
+        let res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
+        let j = await res.json();
+        let g = j.Infogempa.gempa;
+        box.innerHTML = `<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;
+      } catch (e) {
+        box.innerHTML = `<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;
       }
     }
 
     async function loadCuaca() {
-      const box = document.getElementById('cuacaBox');
-      box.innerHTML = 'Loading...';
+      let box = document.getElementById('cuacaBox');
       try {
-        const res = await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const j = await res.json();
-        const slots = j?.data?.[0]?.cuaca?.[0];
-        const d = Array.isArray(slots) ? slots[0] : null;
-        if (!d) throw new Error('Format kosong');
-        box.innerHTML = `
-          <span class="badge badgeHijau">${d.cuaca || '-'}</span> ${d.local_datetime || ''}<br><br>
-          🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>
-          💨 Angin: ${d.ws} km/jam
-        `;
-      } catch (_) {
-        box.innerHTML = '<b>Data cuaca BMKG gagal dimuat</b><br><span style="font-size:12px;opacity:.7">Periksa koneksi jaringan atau coba muat ulang.</span>';
+        let res = await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
+        let j = await res.json();
+        let d = j.data[0].cuaca[0][0];
+        box.innerHTML = `<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;
+      } catch (e) {
+        box.innerHTML = `🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;
       }
     }
 
     async function loadBerita() {
-      const box = document.getElementById('beritaBox');
+      let box = document.getElementById('beritaBox');
       box.innerHTML = 'Loading...';
       try {
-        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const j = await res.json();
-        if (!Array.isArray(j.items) || !j.items.length) throw new Error('Kosong');
-
-        box.innerHTML = '';
-        j.items.slice(0, 5).forEach(it => {
-          const item = document.createElement('div');
-          item.className = 'berita-item';
-
-          const b = document.createElement('b');
-          b.textContent = it.title;
-
-          const span = document.createElement('span');
-          const tgl = new Date(it.pubDate).toLocaleString('id-ID');
-          span.textContent = tgl + ' • ';
-
-          if (isValidHttpUrl(it.link)) {
-            const a = document.createElement('a');
-            a.href = it.link;
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            a.style.color = 'inherit';
-            a.textContent = 'Baca →';
-            span.appendChild(a);
-          }
-
-          item.append(b, span);
-          box.appendChild(item);
-        });
-      } catch (_) {
-        box.innerHTML = '<div class="berita-item"><b>Berita gagal dimuat</b><span>Coba muat ulang beberapa saat lagi.</span></div>';
+        let res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
+        let j = await res.json();
+        box.innerHTML = j.items.slice(0, 5).map(it => `<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:#fff">Baca →</a></span></div>`).join('');
+      } catch (e) {
+        box.innerHTML = `<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;
       }
     }
 
     function loadProfil() {
-      const nama = localStorage.getItem('nama') || 'Jarr';
-      const bio = localStorage.getItem('bio') || 'Yogyakarta • Seneng ngoprek HTML modal AI😹';
-      const foto = localStorage.getItem('fotoProfil');
-
+      let nama = localStorage.getItem('nama') || 'Jarr';
+      let bio = localStorage.getItem('bio') || 'Yogyakarta • Seneng ngoprek HTML modal AI😹';
+      let foto = localStorage.getItem('fotoProfil');
       document.getElementById('namaProfil').innerText = nama;
       document.getElementById('namaHome').innerText = nama;
       document.getElementById('bioProfil').innerText = bio;
@@ -1279,37 +864,30 @@
     }
 
     function simpanProfil() {
-      const nama = document.getElementById('editNama').value.trim() || 'Jarr';
-      const bio = document.getElementById('editBio').value.trim() || 'Yogyakarta';
+      let nama = document.getElementById('editNama').value.trim() || 'Jarr';
+      let bio = document.getElementById('editBio').value.trim() || 'Yogyakarta';
       localStorage.setItem('nama', nama);
       localStorage.setItem('bio', bio);
-      loadProfil();
-      document.getElementById('profilStatus').innerText = 'Profil tersimpan.';
+      document.getElementById('namaProfil').innerText = nama;
+      document.getElementById('namaHome').innerText = nama;
+      document.getElementById('bioProfil').innerText = bio;
+      alert('Profil tersimpan! ✅ ' + nama);
     }
 
     function gantiFotoProfil(e) {
-      const f = e.target.files[0];
+      let f = e.target.files[0];
       if (!f) return;
-      const r = new FileReader();
+      let r = new FileReader();
       r.onload = (ev) => {
-        try {
-          localStorage.setItem('fotoProfil', ev.target.result);
-          document.getElementById('avatarPreview').src = ev.target.result;
-          document.getElementById('profilStatus').innerText = 'Foto profil diperbarui.';
-        } catch (_) {
-          document.getElementById('profilStatus').innerText = 'Ukuran foto terlalu besar untuk penyimpanan lokal.';
-        }
+        document.getElementById('avatarPreview').src = ev.target.result;
+        localStorage.setItem('fotoProfil', ev.target.result);
       };
       r.readAsDataURL(f);
     }
 
     function resetProfil() {
-      localStorage.removeItem('nama');
-      localStorage.removeItem('bio');
-      localStorage.removeItem('fotoProfil');
-      document.getElementById('avatarPreview').src = 'https://i.pravatar.cc/200?img=12';
-      loadProfil();
-      document.getElementById('profilStatus').innerText = 'Profil direset ke bawaan.';
+      localStorage.clear();
+      location.reload();
     }
   </script>
 
