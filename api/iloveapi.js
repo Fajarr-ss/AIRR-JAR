@@ -183,4 +183,8 @@ export default async function handler(req, res) {
       error: err?.message || 'Internal Server Error',
     });
   }
+  const allowedTools = ['removebackgroundimage', 'upscaleimage'];
+if (!allowedTools.includes(tool)) {
+  tool = 'removebackgroundimage';
+}
 }
