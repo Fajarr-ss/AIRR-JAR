@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#090a0f">
   <title>AIRR J</title>
-  <link rel="manifest" href='data:application/manifest+json,{"name":"AIRR J","short_name":"AIRR J","start_url":".","display":"standalone","background_color":"#0a0a0a","theme_color":"#0a0a0a"}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"AIRR J","short_name":"AIRR J","start_url":".","display":"standalone","background_color":"#090a0f","theme_color":"#090a0f"}'>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
       -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
       outline: none;
@@ -23,56 +23,60 @@
     }
 
     body {
-      --bg-base: #0a0a0a;
-      --text-main: #fff;
-      --text-muted: rgba(255, 255, 255, 0.72);
-      --card-bg: rgba(255, 255, 255, 0.08);
-      --card-border: rgba(255, 255, 255, 0.16);
-      --input-bg: rgba(255, 255, 255, 0.12);
-      --glow-1: #ff5e8a;
-      --glow-2: #3a7bff;
-      --glow-3: #a855f7;
+      --bg-base: #090a0f;
+      --text-main: #f8fafc;
+      --text-muted: rgba(248, 250, 252, 0.64);
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.13);
+      --input-bg: rgba(255, 255, 255, 0.09);
+      --accent: #0a84ff;
+      --glow-1: rgba(10, 132, 255, 0.28);
+      --glow-2: rgba(94, 92, 230, 0.22);
+      --glow-3: rgba(48, 209, 88, 0.14);
 
       background: var(--bg-base);
       color: var(--text-main);
       min-height: 100vh;
-      transition: background 0.6s ease, color 0.4s ease;
+      transition: background 0.45s ease, color 0.3s ease;
     }
 
     body.mode-pagi {
-      --bg-base: #e6f2ff;
+      --bg-base: #eef4fb;
       --text-main: #0f172a;
-      --text-muted: rgba(15, 23, 42, 0.72);
-      --card-bg: rgba(255, 255, 255, 0.65);
-      --card-border: rgba(15, 23, 42, 0.12);
-      --input-bg: rgba(255, 255, 255, 0.75);
-      --glow-1: #7dd3fc;
-      --glow-2: #fde68a;
-      --glow-3: #bae6fd;
+      --text-muted: rgba(15, 23, 42, 0.62);
+      --card-bg: rgba(255, 255, 255, 0.72);
+      --card-border: rgba(15, 23, 42, 0.09);
+      --input-bg: rgba(15, 23, 42, 0.05);
+      --accent: #007aff;
+      --glow-1: rgba(0, 122, 255, 0.18);
+      --glow-2: rgba(255, 204, 0, 0.22);
+      --glow-3: rgba(52, 199, 89, 0.14);
     }
 
     body.mode-siang {
-      --bg-base: #7c2d12;
-      --text-main: #fff7ed;
-      --text-muted: rgba(255, 247, 237, 0.82);
-      --card-bg: rgba(255, 237, 213, 0.16);
-      --card-border: rgba(255, 237, 213, 0.28);
-      --input-bg: rgba(255, 237, 213, 0.18);
-      --glow-1: #fb923c;
-      --glow-2: #f97316;
-      --glow-3: #facc15;
+      --bg-base: #1c130e;
+      --text-main: #fff8f2;
+      --text-muted: rgba(255, 248, 242, 0.68);
+      --card-bg: rgba(255, 242, 230, 0.08);
+      --card-border: rgba(255, 242, 230, 0.15);
+      --input-bg: rgba(255, 242, 230, 0.11);
+      --accent: #ff9f0a;
+      --glow-1: rgba(255, 159, 10, 0.26);
+      --glow-2: rgba(255, 105, 97, 0.18);
+      --glow-3: rgba(255, 214, 10, 0.14);
     }
 
     body.mode-malam {
-      --bg-base: #0a0a0a;
-      --text-main: #ffffff;
-      --text-muted: rgba(255, 255, 255, 0.72);
-      --card-bg: rgba(255, 255, 255, 0.08);
-      --card-border: rgba(255, 255, 255, 0.16);
-      --input-bg: rgba(255, 255, 255, 0.12);
-      --glow-1: #3b0764;
-      --glow-2: #1d4ed8;
-      --glow-3: #6d28d9;
+      --bg-base: #090a0f;
+      --text-main: #f8fafc;
+      --text-muted: rgba(248, 250, 252, 0.64);
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.13);
+      --input-bg: rgba(255, 255, 255, 0.09);
+      --accent: #5e5ce6;
+      --glow-1: rgba(94, 92, 230, 0.26);
+      --glow-2: rgba(10, 132, 255, 0.2);
+      --glow-3: rgba(191, 90, 242, 0.14);
     }
 
     button, a, .chip, .shift-btn {
@@ -88,98 +92,84 @@
       box-shadow: none;
     }
 
+    /* Ambient iOS light field tanpa blur berat agar tetap smooth */
     .bg {
       position: fixed;
       inset: 0;
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 10%, var(--glow-1), transparent 46%),
+        radial-gradient(circle at 88% 24%, var(--glow-2), transparent 48%),
+        radial-gradient(circle at 50% 85%, var(--glow-3), transparent 52%);
+      transition: background 0.5s ease;
     }
 
-    .bg1 {
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, var(--glow-1), transparent 70%);
-      top: -80px;
-      left: -80px;
-      filter: blur(40px);
-      animation: gerak 8s ease-in-out infinite alternate;
-      transition: background 0.6s ease;
-    }
-
-    .bg2 {
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, var(--glow-2), transparent 70%);
-      bottom: 80px;
-      right: -80px;
-      filter: blur(40px);
-      animation: gerak2 9s ease-in-out infinite alternate;
-      transition: background 0.6s ease;
-    }
-
-    .bg3 {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, var(--glow-3), transparent 70%);
-      top: 40%;
-      left: 30%;
-      filter: blur(50px);
-      animation: gerak 10s ease-in-out infinite alternate;
-      transition: background 0.6s ease;
-    }
-
-    @keyframes gerak {
-      to { transform: translate(80px, 60px) scale(1.2); }
-    }
-
-    @keyframes gerak2 {
-      to { transform: translate(-80px, -60px) scale(1.1); }
+    .bg1, .bg2, .bg3 {
+      display: none;
     }
 
     .konten {
       position: relative;
       z-index: 1;
-      padding: 28px 20px 140px;
-      text-align: center;
+      padding: 32px 18px 128px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: left;
+      margin-bottom: 18px;
+      padding: 0 4px;
     }
 
     .konten h1 {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -1px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
     }
 
-    .konten > div > p {
+    .konten .page-header p {
       color: var(--text-muted);
-      margin-top: 8px;
-      font-size: 14px;
+      margin-top: 4px;
+      font-size: 13.5px;
+      font-weight: 500;
     }
 
     .kartu {
-      margin: 16px auto;
-      max-width: 430px;
+      margin: 12px 0;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(20px);
-      border-radius: 28px;
-      padding: 20px;
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-radius: 24px;
+      padding: 18px;
       text-align: left;
-      transition: background 0.4s ease, border-color 0.4s ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .kartu h2 {
-      font-size: 18px;
-      margin-bottom: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 4px;
     }
 
     .kartu p {
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 13.5px;
+      line-height: 1.5;
       color: var(--text-muted);
+    }
+
+    .kartu code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 7px;
+      background: var(--input-bg);
     }
 
     input[type=text],
@@ -188,19 +178,27 @@
     textarea,
     select {
       width: 100%;
-      padding: 13px 14px;
-      border-radius: 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
       border: 1px solid var(--card-border);
       background: var(--input-bg);
       color: var(--text-main);
-      font-size: 15px;
+      font-size: 14.5px;
       outline: none;
       margin-top: 8px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    input[type=text]:focus,
+    input[type=number]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
     }
 
     select option {
-      background: #181a1f;
-      color: #fff;
+      background: #14161d;
+      color: #f8fafc;
     }
 
     input::placeholder,
@@ -212,17 +210,19 @@
     a.btn {
       display: block;
       width: 100%;
-      padding: 13px;
+      padding: 12px 16px;
       border: none;
-      border-radius: 16px;
+      border-radius: 15px;
       background: var(--text-main);
       color: var(--bg-base);
-      font-weight: 800;
-      font-size: 15px;
+      font-weight: 600;
+      font-size: 14.5px;
+      letter-spacing: -0.01em;
       text-align: center;
       text-decoration: none;
       cursor: pointer;
       margin-top: 10px;
+      transition: transform 0.14s ease, opacity 0.2s ease;
     }
 
     button.btn2,
@@ -230,66 +230,86 @@
       background: var(--input-bg);
       color: var(--text-main);
       border: 1px solid var(--card-border);
+      font-weight: 500;
     }
 
     button.btn:active,
     a.btn:active {
-      transform: scale(0.97);
+      transform: scale(0.975);
+      opacity: 0.9;
+    }
+
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
     }
 
     .chip {
-      display: inline-block;
-      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
       background: var(--input-bg);
       border: 1px solid var(--card-border);
       border-radius: 999px;
-      font-size: 12px;
-      margin: 4px 3px;
+      font-size: 12.5px;
+      font-weight: 500;
       cursor: pointer;
       color: var(--text-main);
+      transition: transform 0.14s ease, background 0.2s ease;
+    }
+
+    .chip:active {
+      transform: scale(0.95);
     }
 
     .shift-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      margin-top: 10px;
+      margin-top: 12px;
+      padding: 4px;
+      border-radius: 16px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
     }
 
     .shift-btn {
-      padding: 10px 4px;
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
-      background: var(--input-bg);
-      color: var(--text-main);
-      font-size: 12px;
-      font-weight: 700;
+      padding: 8px 4px;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 600;
       cursor: pointer;
-      transition: 0.25s;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     .shift-btn.aktif {
       background: var(--text-main);
       color: var(--bg-base);
-      border-color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
     }
 
     img.preview,
     video.preview {
       width: 100%;
-      border-radius: 18px;
+      border-radius: 16px;
       margin-top: 10px;
       display: none;
-      background: #000;
+      background: #090a0f;
+      border: 1px solid var(--card-border);
     }
 
     .avatar {
-      width: 90px;
-      height: 90px;
+      width: 84px;
+      height: 84px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--text-main);
-      background: #333;
+      border: 2px solid var(--card-border);
+      background: var(--input-bg);
     }
 
     .row {
@@ -305,51 +325,70 @@
 
     .badge {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 3px 9px;
       border-radius: 999px;
-      background: #ff4444;
-      color: #fff;
+      background: rgba(255, 69, 58, 0.18);
+      border: 1px solid rgba(255, 69, 58, 0.35);
+      color: #ff6961;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 600;
     }
 
     .badgeHijau {
-      background: #00c853;
+      background: rgba(48, 209, 88, 0.18);
+      border-color: rgba(48, 209, 88, 0.35);
+      color: #30d158;
     }
 
     .badgeBiru {
-      background: #2196f3;
+      background: rgba(10, 132, 255, 0.18);
+      border-color: rgba(10, 132, 255, 0.35);
+      color: #409cff;
     }
 
     .berita-item {
-      padding: 12px 0;
+      padding: 11px 0;
       border-bottom: 1px solid var(--card-border);
     }
 
     .berita-item:last-child {
       border: none;
+      padding-bottom: 2px;
     }
 
     .berita-item b {
-      font-size: 14px;
+      font-size: 13.5px;
+      font-weight: 600;
       line-height: 1.4;
       display: block;
     }
 
     .berita-item span {
-      font-size: 12px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 3px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 12.5px;
+      font-weight: 500;
       color: var(--text-muted);
     }
 
     input[type=range] {
       width: 100%;
-      margin-top: 8px;
+      margin-top: 6px;
+      accent-color: var(--accent);
+      cursor: pointer;
     }
 
     .hasil-mtk {
       margin-top: 14px;
-      padding: 14px;
-      border-radius: 18px;
+      padding: 12px 14px;
+      border-radius: 16px;
       background: var(--input-bg);
       border: 1px solid var(--card-border);
     }
@@ -358,9 +397,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 0;
+      padding: 7px 0;
       border-bottom: 1px solid var(--card-border);
-      font-size: 14px;
+      font-size: 13.5px;
+      gap: 10px;
     }
 
     .hasil-mtk .baris-hasil:last-child {
@@ -368,18 +408,21 @@
     }
 
     .hasil-mtk b {
-      font-size: 16px;
-      color: #10b981;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #30d158;
+      text-align: right;
     }
 
+    /* iOS 26 Liquid Pill Dock */
     .nav-wrap {
       position: fixed;
       left: 0;
       right: 0;
       margin: 0 auto;
-      bottom: 18px;
+      bottom: 16px;
       z-index: 10;
-      width: min(450px, calc(100vw - 24px));
+      width: min(432px, calc(100vw - 24px));
     }
 
     .nav {
@@ -387,16 +430,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.16));
-      backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 6px;
+      background: rgba(22, 24, 32, 0.72);
+      backdrop-filter: blur(22px) saturate(170%);
+      -webkit-backdrop-filter: blur(22px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 999px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.25);
       overflow: hidden;
       width: 100%;
       touch-action: pan-y;
       cursor: grab;
+    }
+
+    body.mode-pagi .nav {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(15, 23, 42, 0.1);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
     .nav.sliding {
@@ -406,9 +456,9 @@
     .nav::before {
       content: "";
       position: absolute;
-      inset: 1px 1px 55% 1px;
+      inset: 0 0 55% 0;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent);
       pointer-events: none;
       z-index: 2;
     }
@@ -417,49 +467,29 @@
       --shine-shift: 0px;
       --shine-y: 0px;
       position: absolute;
-      top: 7px;
+      top: 6px;
       left: 8px;
       width: 58px;
-      height: 54px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.68) 0%, rgba(205, 212, 226, 0.44) 38%, rgba(165, 178, 198, 0.36) 68%, rgba(255, 255, 255, 0.56) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.74);
+      height: 48px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.18));
+      border: 1px solid rgba(255, 255, 255, 0.45);
       border-radius: 999px;
-      box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.28),
-        0 0 18px rgba(255, 255, 255, 0.16),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.96),
-        inset 0 -4px 10px rgba(255, 255, 255, 0.34);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.65);
       will-change: transform, width, border-radius;
       transform-origin: center center;
       z-index: 0;
       pointer-events: none;
     }
 
-    .blok::before {
-      content: "";
-      position: absolute;
-      top: 3px;
-      left: 10px;
-      right: 10px;
-      height: 18px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.14) 60%, transparent);
-      transform: translate3d(var(--shine-shift), var(--shine-y), 0);
-      transition: transform 0.14s ease-out;
+    body.mode-pagi .blok {
+      background: #ffffff;
+      border-color: rgba(15, 23, 42, 0.08);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
     }
 
+    .blok::before,
     .blok::after {
-      content: "";
-      position: absolute;
-      bottom: 4px;
-      left: 14px;
-      right: 14px;
-      height: 10px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.52));
-      filter: blur(1px);
-      transform: translate3d(calc(var(--shine-shift) * -0.5), calc(var(--shine-y) * -0.5), 0);
-      transition: transform 0.14s ease-out;
+      display: none;
     }
 
     .nav button {
@@ -472,27 +502,49 @@
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      padding: 8px 0 6px;
+      padding: 7px 0 6px;
       cursor: pointer;
-      color: var(--text-muted);
-      font-size: 9.5px;
+      color: rgba(248, 250, 252, 0.62);
+      font-size: 10px;
       font-weight: 600;
-      transition: color 0.25s ease;
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
       min-width: 0;
     }
 
+    body.mode-pagi .nav button {
+      color: rgba(15, 23, 42, 0.56);
+    }
+
     .nav button .ikon {
-      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20px;
       line-height: 1;
-      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .nav button .ikon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.85;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .nav button.aktif {
-      color: #111;
+      color: #ffffff;
+    }
+
+    body.mode-pagi .nav button.aktif {
+      color: #0f172a;
     }
 
     .nav button.aktif .ikon {
-      transform: scale(1.16) translateY(-1px);
+      transform: scale(1.1) translateY(-1px);
     }
 
     .nav button:active .ikon {
@@ -504,19 +556,17 @@
     }
 
     .muncul {
-      animation: muncul 0.45s cubic-bezier(.22,1,.36,1) both;
+      animation: muncul 0.28s cubic-bezier(.22,1,.36,1) both;
     }
 
     @keyframes muncul {
       from {
         opacity: 0;
-        transform: translateY(10px) scale(0.98);
-        filter: blur(3px);
+        transform: translateY(6px);
       }
       to {
         opacity: 1;
         transform: none;
-        filter: blur(0);
       }
     }
   </style>
@@ -533,21 +583,24 @@
 
     <!-- PAGE HOME -->
     <div id="page-home">
-      <h1>AIRR X Liquid Glass</h1>
-      <p>MULTITASKING</p>
+      <div class="page-header">
+        <h1>AIRR</h1>
+        <p>iOS 26 Workspace · Treat Your Better</p>
+      </div>
+
       <div class="kartu">
-        <div style="font-size: 42px">🥷</div>
-        <h2>Selamat Datang, <span id="namaHome">Jarr</span> 👋</h2>
-        <p>Treat Your Better.</p>
+        <span class="badge badgeBiru">Workspace</span>
+        <h2 style="margin-top: 8px;">Selamat Datang, <span id="namaHome">Jarr</span></h2>
+        <p>Akses cepat alat harian, kalkulator, pencarian, dan info terkini.</p>
       </div>
 
       <!-- SHIFT PAGI / SIANG / MALAM / AUTO -->
       <div class="kartu">
         <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
-          <h2 style="margin:0;">🕒 Shift</h2>
+          <h2 style="margin:0;">Appearance Shift</h2>
           <span class="badge badgeBiru" id="statusShiftBadge">Mode: Auto</span>
         </div>
-        <p id="ketShift" style="font-size:12px; margin-top:4px;">Pagi terang, Siang oranye, Malam gelap, Auto ikut jam HP.</p>
+        <p id="ketShift" style="font-size:12px; margin-top:4px;">Pagi terang, Siang hangat, Malam gelap, Auto ikut jam HP.</p>
 
         <div class="shift-grid">
           <button class="shift-btn" id="btn-shift-pagi" onclick="setModeShift('pagi')">Pagi</button>
@@ -558,116 +611,125 @@
       </div>
 
       <div class="kartu">
-        <h2>⚡ Cepet Akses</h2>
-        <p>
-          <span class="chip" onclick="goSearch('cuaca Jogja hari ini')">🌦️ Cuaca Jogja</span>
-          <span class="chip" onclick="goSearch('gempa terbaru BMKG')">🌋 Gempa BMKG</span>
-          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">🛠️ HD Foto</span>
-          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'mtk',3)">📐 Hitung MTK</span>
-          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'info',4)">📡 Info BMKG</span>
-        </p>
+        <h2>Akses Cepat</h2>
+        <p>Pintasan fitur yang paling sering dipakai.</p>
+        <div class="chip-group">
+          <span class="chip" onclick="goSearch('cuaca Jogja hari ini')">Cuaca Jogja</span>
+          <span class="chip" onclick="goSearch('gempa terbaru BMKG')">Gempa BMKG</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">HD Foto</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'mtk',3)">Hitung MTK</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'info',4)">Info BMKG</span>
+        </div>
       </div>
     </div>
 
     <!-- PAGE SEARCH -->
     <div id="page-search" class="hilang">
-      <h1>Search</h1>
-      <p>connect Google</p>
+      <div class="page-header">
+        <h1>Search</h1>
+        <p>Pencarian langsung ke Google</p>
+      </div>
       <div class="kartu">
-        <h2>🔎 Pencarian Google</h2>
-        <input type="text" id="inputSearch" placeholder="Tulis apa saja... misal: harga CB150R" onkeydown="if(event.key==='Enter')cariGoogle()">
-        <button class="btn" onclick="cariGoogle()">Cari di Google →</button>
+        <h2>Pencarian Google</h2>
+        <input type="text" id="inputSearch" placeholder="Tulis kata kunci... misal: harga CB150R" onkeydown="if(event.key==='Enter')cariGoogle()">
+        <button class="btn" onclick="cariGoogle()">Cari di Google</button>
         <button class="btn btn2" onclick="cariGoogle('gambar')">Cari Gambar di Google</button>
-        <p style="margin-top: 10px">Trending:</p>
-        <span class="chip" onclick="isiSearch('BMKG gempa hari ini')">🌋 Gempa BMKG</span>
-        <span class="chip" onclick="isiSearch('jadwal bola malam ini')">⚽ Jadwal Bola</span>
-        <span class="chip" onclick="isiSearch('harga motor bekas Jogja')">🏍️ Motor Bekas</span>
-        <span class="chip" onclick="isiSearch('cara HD foto buram')">📸 HD Foto</span>
+        <p style="margin-top: 14px; font-weight: 500;">Trending</p>
+        <div class="chip-group">
+          <span class="chip" onclick="isiSearch('BMKG gempa hari ini')">Gempa BMKG</span>
+          <span class="chip" onclick="isiSearch('jadwal bola malam ini')">Jadwal Bola</span>
+          <span class="chip" onclick="isiSearch('harga motor bekas Jogja')">Motor Bekas</span>
+          <span class="chip" onclick="isiSearch('cara HD foto buram')">HD Foto</span>
+        </div>
       </div>
     </div>
 
     <!-- PAGE TOOLS -->
     <div id="page-tools" class="hilang">
-      <h1>Tools</h1>
-      <p>HD Foto (iLoveAPI), HD Video, TikTok DL &amp; Hapus BG</p>
+      <div class="page-header">
+        <h1>Tools</h1>
+        <p>HD Foto, HD Video, TikTok Downloader &amp; Hapus BG</p>
+      </div>
 
       <!-- 1. HD FOTO (iLoveAPI + Canvas) -->
       <div class="kartu">
-        <h2>📸 1. HD FOTO (iLoveAPI)</h2>
-        <p>Upscale &amp; pertajam foto lewat <code>/api/iloveapi</code>, atau pakai HD lokal tanpa kuota.</p>
+        <h2>1. HD Foto (iLoveAPI)</h2>
+        <p>Upscale lewat <code>/api/iloveapi</code> atau proses lokal tanpa kuota.</p>
         <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
         <img id="fotoPreview" class="preview">
-        <button class="btn" id="btnHdIloveApi" onclick="prosesHDiLoveAPI()">✨ HD Foto (iLoveAPI)</button>
-        <a class="btn btn2" id="btnDownloadHdApi" style="display: none" download="foto-hd-iloveapi.png">⬇️ Download Hasil HD (iLoveAPI)</a>
+        <button class="btn" id="btnHdIloveApi" onclick="prosesHDiLoveAPI()">HD Foto (iLoveAPI)</button>
+        <a class="btn btn2" id="btnDownloadHdApi" style="display: none" download="foto-hd-iloveapi.png">Download Hasil HD (iLoveAPI)</a>
 
-        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--card-border);">
-          <label>Ketajaman Lokal <span id="tajamVal">70</span>%</label>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--card-border);">
+          <label>Ketajaman Lokal · <span id="tajamVal">70</span>%</label>
           <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
-          <label>Kecerahan Lokal <span id="cerahVal">100</span>%</label>
+          <label>Kecerahan Lokal · <span id="cerahVal">100</span>%</label>
           <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
-          <button class="btn btn2" onclick="prosesHD();downloadHD()">⚡ HD Lokal (2x + Download)</button>
+          <button class="btn btn2" onclick="prosesHD();downloadHD()">HD Lokal (2x + Download)</button>
         </div>
 
-        <p id="fotoStatus" style="font-size: 12px; margin-top: 8px">Status: Durung ana foto</p>
+        <p id="fotoStatus" style="font-size: 12px; margin-top: 10px">Status: Belum ada foto</p>
         <canvas id="canvasHD" style="display: none"></canvas>
       </div>
 
       <!-- 2. HD VIDEO -->
       <div class="kartu">
-        <h2>🎬 2. HD VIDEO</h2>
-        <p>Pilih video, atur filter HD, terus play.</p>
+        <h2>2. HD Video</h2>
+        <p>Pilih video, atur kontras dan saturasi, lalu putar langsung.</p>
         <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
         <video id="videoPreview" class="preview" controls playsinline></video>
-        <label>Kontras / HD <span id="vidVal">130</span>%</label>
+        <label>Kontras / HD · <span id="vidVal">130</span>%</label>
         <input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value;applyVideoFilter()">
-        <label>Saturasi <span id="satVal">120</span>%</label>
+        <label>Saturasi · <span id="satVal">120</span>%</label>
         <input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value;applyVideoFilter()">
-        <button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">✅ Video Sudah HD</button>
+        <button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">Video Sudah HD</button>
       </div>
 
-      <!-- 3. Save Link Video & Musik + Tombol Download (TIDAK DIUBAH) -->
+      <!-- 3. Save Link Video & Musik + Tombol Download -->
       <div class="kartu">
-        <h2>🔗 3. Donload Link Video &amp; Musik</h2>
-        <p>Tempel link TikTok, atau ambil &amp; download video/musik.</p>
+        <h2>3. Download Link Video &amp; Musik</h2>
+        <p>Tempel link TikTok, lalu ambil atau simpan tautan.</p>
         <input type="text" id="linkDL" placeholder="Tempel link TikTok...">
         <select id="tipeDL">
-          <option value="video">🎬 Video</option>
-          <option value="musik">🎵 Musik / Lagu</option>
+          <option value="video">Video</option>
+          <option value="musik">Musik / Lagu</option>
         </select>
-        <button class="btn btn2" onclick="ambilTikWM()">⚡ Ambil Video &amp; Musik TikTok (TikWM)</button>
+        <button class="btn btn2" onclick="ambilTikWM()">Ambil Video &amp; Musik TikTok (TikWM)</button>
 
         <div class="row">
-          <button class="btn btn2" onclick="bukaLinkDL()">▶️ Buka di Aplikasi</button>
-          <button class="btn btn2" onclick="copyLinkDL()">📋 Copy Link</button>
+          <button class="btn btn2" onclick="bukaLinkDL()">Buka Link</button>
+          <button class="btn btn2" onclick="copyLinkDL()">Copy Link</button>
         </div>
-        <button class="btn btn2" onclick="simpanLinkDL()">💾 Simpan ke Daftar</button>
+        <button class="btn btn2" onclick="simpanLinkDL()">Simpan ke Daftar</button>
 
-        <p id="linkStatus" style="font-size: 12px; margin-top: 8px; color: var(--text-muted)"></p>
+        <p id="linkStatus" style="font-size: 12px; margin-top: 10px; color: var(--text-muted)"></p>
         <div id="hasilTikWM"></div>
         <div id="daftarDL" style="margin-top: 10px; font-size: 13px"></div>
-        <p style="font-size: 12px; margin-top: 8px">Tips: Di TikTok pencet Bagikan &gt; Salin Tautan, di YouTube pencet Bagikan &gt; Download / Save, di IG pencet ••• &gt; Save.</p>
+        <p style="font-size: 12px; margin-top: 10px">Tips: Di TikTok ketuk Bagikan &gt; Salin Tautan, di YouTube ketuk Bagikan &gt; Simpan, di IG ketuk ••• &gt; Simpan.</p>
       </div>
 
       <!-- 4. Hapus Background (iLoveAPI) -->
       <div class="kartu">
-        <h2>✂️ 4. Hapus Background (iLoveAPI)</h2>
-        <p>Diproses lewat endpoint Vercel (<code>/api/iloveapi</code>) menggunakan <b>iLoveAPI Image REST API</b>.</p>
+        <h2>4. Hapus Background</h2>
+        <p>Diproses lewat endpoint <code>/api/iloveapi</code> menggunakan iLoveAPI Image REST API.</p>
         <input type="file" id="bgInput" accept="image/jpeg,image/png,image/webp" onchange="previewBgInput(event)">
         <img id="bgPreview" class="preview">
-        <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">✂️ Hapus Background (iLoveAPI)</button>
-        <a class="btn btn2" id="btnDownloadBg" style="display: none" download="no-bg-iloveapi.png">⬇️ Download Hasil</a>
-        <p id="bgStatus" style="font-size: 12px; margin-top: 8px; color: var(--text-muted)">Status: Belum ada foto</p>
+        <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">Hapus Background (iLoveAPI)</button>
+        <a class="btn btn2" id="btnDownloadBg" style="display: none" download="no-bg-iloveapi.png">Download Hasil</a>
+        <p id="bgStatus" style="font-size: 12px; margin-top: 10px; color: var(--text-muted)">Status: Belum ada foto</p>
       </div>
     </div>
 
     <!-- PAGE MTK -->
     <div id="page-mtk" class="hilang">
-      <h1>MTK 📐</h1>
-      <p>Kalkulator Bangun Ruang &amp; Bangun Datar</p>
+      <div class="page-header">
+        <h1>MTK</h1>
+        <p>Kalkulator Bangun Ruang &amp; Bangun Datar</p>
+      </div>
 
       <div class="kartu">
         <h2>Pilih Bangun</h2>
-        <p>Masukin angka ukurannya, hasil luas &amp; keliling langsung muncul otomatis.</p>
+        <p>Masukkan ukuran, hasil luas, keliling, atau volume tampil otomatis.</p>
         <select id="pilihBangun" onchange="renderInputMTK()">
           <optgroup label="Bangun Ruang (3D)">
             <option value="kubus">Kubus</option>
@@ -686,7 +748,7 @@
           </optgroup>
         </select>
 
-        <div id="inputMTKBox" style="margin-top: 8px;"></div>
+        <div id="inputMTKBox" style="margin-top: 6px;"></div>
 
         <div class="hasil-mtk" id="hasilMTKBox">
           <p style="font-size: 13px; color: var(--text-muted);">Isi angka di atas buat lihat hasil...</p>
@@ -698,37 +760,43 @@
 
     <!-- PAGE INFO -->
     <div id="page-info" class="hilang">
-      <h1>Info</h1>
-      <p>Live dari BMKG &amp; Berita Indonesia</p>
-      <div class="kartu">
-        <h2>🌋 Gempa Terbaru - BMKG (LIVE API)</h2>
-        <div id="gempaBox"><p>Loading data BMKG...</p></div>
-        <button class="btn btn2" onclick="loadGempa()">🔄 Refresh Gempa</button>
+      <div class="page-header">
+        <h1>Info</h1>
+        <p>Data BMKG &amp; Berita Terkini</p>
       </div>
       <div class="kartu">
-        <h2>🌦️ Cuaca Jogja Hari Ini</h2>
-        <div id="cuacaBox"><p>Loading cuaca...</p></div>
-        <button class="btn btn2" onclick="loadCuaca()">🔄 Refresh Cuaca</button>
+        <h2>Gempa Terbaru · BMKG</h2>
+        <div id="gempaBox" style="margin-top: 8px;"><p>Memuat data BMKG...</p></div>
+        <button class="btn btn2" onclick="loadGempa()">Refresh Gempa</button>
       </div>
       <div class="kartu">
-        <h2>📰 Berita Terbaru Indonesia</h2>
-        <div id="beritaBox"><p>Loading berita...</p></div>
-        <button class="btn btn2" onclick="loadBerita()">🔄 Refresh Berita</button>
+        <h2>Cuaca Jogja Hari Ini</h2>
+        <div id="cuacaBox" style="margin-top: 8px;"><p>Memuat cuaca...</p></div>
+        <button class="btn btn2" onclick="loadCuaca()">Refresh Cuaca</button>
+      </div>
+      <div class="kartu">
+        <h2>Berita Terbaru Indonesia</h2>
+        <div id="beritaBox" style="margin-top: 8px;"><p>Memuat berita...</p></div>
+        <button class="btn btn2" onclick="loadBerita()">Refresh Berita</button>
       </div>
     </div>
 
     <!-- PAGE PROFIL -->
     <div id="page-profil" class="hilang">
-      <h1>Profil</h1>
-      <p>Ganti nama &amp; foto, langsung kesimpan</p>
+      <div class="page-header">
+        <h1>Profil</h1>
+        <p>Pengaturan identitas &amp; foto lokal</p>
+      </div>
       <div class="kartu" style="text-align: center">
         <img id="avatarPreview" class="avatar" src="https://i.pravatar.cc/200?img=12">
         <h2 id="namaProfil" style="margin-top: 10px">Jarr</h2>
         <p id="bioProfil">No bio yet</p>
-        <input type="text" id="editNama" placeholder="Ganti nama...">
-        <textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea>
-        <label style="font-size: 13px">Ganti Foto Profil</label>
-        <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
+        <div style="text-align: left; margin-top: 12px;">
+          <input type="text" id="editNama" placeholder="Ganti nama...">
+          <textarea id="editBio" rows="2" placeholder="Ganti bio..."></textarea>
+          <label>Ganti Foto Profil</label>
+          <input type="file" id="fotoProfilInput" accept="image/*" onchange="gantiFotoProfil(event)">
+        </div>
         <div class="row">
           <button class="btn" onclick="simpanProfil()">Simpan Profil</button>
           <button class="btn btn2" onclick="resetProfil()">Reset</button>
@@ -742,12 +810,24 @@
   <div class="nav-wrap">
     <div class="nav" id="nav">
       <div class="blok" id="blok"></div>
-      <button class="aktif" data-page="home" onclick="handleNavClick(this, 'home', 0)"><span class="ikon">🏠</span>Home</button>
-      <button data-page="search" onclick="handleNavClick(this, 'search', 1)"><span class="ikon">🔍</span>Search</button>
-      <button data-page="tools" onclick="handleNavClick(this, 'tools', 2)"><span class="ikon">🛠️</span>Tools</button>
-      <button data-page="mtk" onclick="handleNavClick(this, 'mtk', 3)"><span class="ikon">📐</span>MTK</button>
-      <button data-page="info" onclick="handleNavClick(this, 'info', 4)"><span class="ikon">📡</span>Info</button>
-      <button data-page="profil" onclick="handleNavClick(this, 'profil', 5)"><span class="ikon">👤</span>Profil</button>
+      <button class="aktif" data-page="home" onclick="handleNavClick(this, 'home', 0)">
+        <span class="ikon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/></svg></span>Home
+      </button>
+      <button data-page="search" onclick="handleNavClick(this, 'search', 1)">
+        <span class="ikon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>Search
+      </button>
+      <button data-page="tools" onclick="handleNavClick(this, 'tools', 2)">
+        <span class="ikon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>Tools
+      </button>
+      <button data-page="mtk" onclick="handleNavClick(this, 'mtk', 3)">
+        <span class="ikon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2"/></svg></span>MTK
+      </button>
+      <button data-page="info" onclick="handleNavClick(this, 'info', 4)">
+        <span class="ikon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span>Info
+      </button>
+      <button data-page="profil" onclick="handleNavClick(this, 'profil', 5)">
+        <span class="ikon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6"/></svg></span>Profil
+      </button>
     </div>
   </div>
 
@@ -1025,7 +1105,7 @@
 
       document.getElementById('ketShift').innerText =
         modeShift === 'auto'
-          ? `Jam HP ${jamMenit} → latar otomatis ${labelEfektif}.`
+          ? `Jam HP ${jamMenit} -> latar otomatis ${labelEfektif}.`
           : `Latar disetel ke ${labelEfektif}.`;
     }
 
@@ -1076,8 +1156,8 @@
       const box = document.getElementById('inputMTKBox');
 
       box.innerHTML = fields.map(f => `
-        <div style="margin-top: 10px;">
-          <label style="font-size: 13px; color: var(--text-muted);">${f.label}</label>
+        <div style="margin-top: 8px;">
+          <label>${f.label}</label>
           <input type="number" step="any" id="mtk_${f.id}" placeholder="Masukkan ${f.label}..." oninput="hitungMTK()">
         </div>
       `).join('');
@@ -1101,9 +1181,9 @@
         const s = val('s');
         if (s > 0) {
           hasil = [
-            { nama: 'Luas Permukaan (6 × s²)', nilai: fmtNum(6 * s * s) },
-            { nama: 'Keliling Rusuk (12 × s)', nilai: fmtNum(12 * s) },
-            { nama: 'Volume (s³)', nilai: fmtNum(s * s * s) }
+            { nama: 'Luas Permukaan (6 x s^2)', nilai: fmtNum(6 * s * s) },
+            { nama: 'Keliling Rusuk (12 x s)', nilai: fmtNum(12 * s) },
+            { nama: 'Volume (s^3)', nilai: fmtNum(s * s * s) }
           ];
         }
       } else if (jenis === 'balok') {
@@ -1112,25 +1192,25 @@
           hasil = [
             { nama: 'Luas Permukaan', nilai: fmtNum(2 * (p * l + p * t + l * t)) },
             { nama: 'Keliling Rusuk (4(p+l+t))', nilai: fmtNum(4 * (p + l + t)) },
-            { nama: 'Volume (p × l × t)', nilai: fmtNum(p * l * t) }
+            { nama: 'Volume (p x l x t)', nilai: fmtNum(p * l * t) }
           ];
         }
       } else if (jenis === 'tabung') {
         const r = val('r'), t = val('t');
         if (r > 0 && t > 0) {
           hasil = [
-            { nama: 'Luas Permukaan (2πr(r+t))', nilai: fmtNum(2 * Math.PI * r * (r + t)) },
-            { nama: 'Keliling Alas (2πr)', nilai: fmtNum(2 * Math.PI * r) },
-            { nama: 'Volume (πr²t)', nilai: fmtNum(Math.PI * r * r * t) }
+            { nama: 'Luas Permukaan (2pi.r(r+t))', nilai: fmtNum(2 * Math.PI * r * (r + t)) },
+            { nama: 'Keliling Alas (2pi.r)', nilai: fmtNum(2 * Math.PI * r) },
+            { nama: 'Volume (pi.r^2.t)', nilai: fmtNum(Math.PI * r * r * t) }
           ];
         }
       } else if (jenis === 'bola') {
         const r = val('r');
         if (r > 0) {
           hasil = [
-            { nama: 'Luas Permukaan (4πr²)', nilai: fmtNum(4 * Math.PI * r * r) },
-            { nama: 'Keliling Lingkaran Tengah (2πr)', nilai: fmtNum(2 * Math.PI * r) },
-            { nama: 'Volume (4/3 × πr³)', nilai: fmtNum((4 / 3) * Math.PI * r * r * r) }
+            { nama: 'Luas Permukaan (4pi.r^2)', nilai: fmtNum(4 * Math.PI * r * r) },
+            { nama: 'Keliling Lingkaran Tengah (2pi.r)', nilai: fmtNum(2 * Math.PI * r) },
+            { nama: 'Volume (4/3 x pi.r^3)', nilai: fmtNum((4 / 3) * Math.PI * r * r * r) }
           ];
         }
       } else if (jenis === 'kerucut') {
@@ -1139,9 +1219,9 @@
           const s = Math.sqrt(r * r + t * t);
           hasil = [
             { nama: 'Garis Pelukis (s)', nilai: fmtNum(s) },
-            { nama: 'Luas Permukaan (πr(r+s))', nilai: fmtNum(Math.PI * r * (r + s)) },
-            { nama: 'Keliling Alas (2πr)', nilai: fmtNum(2 * Math.PI * r) },
-            { nama: 'Volume (1/3 × πr²t)', nilai: fmtNum((1 / 3) * Math.PI * r * r * t) }
+            { nama: 'Luas Permukaan (pi.r(r+s))', nilai: fmtNum(Math.PI * r * (r + s)) },
+            { nama: 'Keliling Alas (2pi.r)', nilai: fmtNum(2 * Math.PI * r) },
+            { nama: 'Volume (1/3 x pi.r^2.t)', nilai: fmtNum((1 / 3) * Math.PI * r * r * t) }
           ];
         }
       } else if (jenis === 'limas4') {
@@ -1152,9 +1232,9 @@
           const rusukMiring = Math.sqrt((s * Math.sqrt(2) / 2) ** 2 + t * t);
           hasil = [
             { nama: 'Luas Permukaan', nilai: fmtNum(luasPermukaan) },
-            { nama: 'Keliling Alas (4 × s)', nilai: fmtNum(4 * s) },
+            { nama: 'Keliling Alas (4 x s)', nilai: fmtNum(4 * s) },
             { nama: 'Total Panjang Rusuk', nilai: fmtNum(4 * s + 4 * rusukMiring) },
-            { nama: 'Volume (1/3 × s² × t)', nilai: fmtNum((1 / 3) * s * s * t) }
+            { nama: 'Volume (1/3 x s^2 x t)', nilai: fmtNum((1 / 3) * s * s * t) }
           ];
         }
       } else if (jenis === 'prisma3') {
@@ -1166,22 +1246,22 @@
           hasil = [
             { nama: 'Luas Permukaan', nilai: fmtNum(2 * luasAlas + kelilingAlas * tp) },
             { nama: 'Keliling Alas (est. sama kaki)', nilai: fmtNum(kelilingAlas) },
-            { nama: 'Volume (Luas Alas × tp)', nilai: fmtNum(luasAlas * tp) }
+            { nama: 'Volume (Luas Alas x tp)', nilai: fmtNum(luasAlas * tp) }
           ];
         }
       } else if (jenis === 'persegi') {
         const s = val('s');
         if (s > 0) {
           hasil = [
-            { nama: 'Luas (s × s)', nilai: fmtNum(s * s) },
-            { nama: 'Keliling (4 × s)', nilai: fmtNum(4 * s) }
+            { nama: 'Luas (s x s)', nilai: fmtNum(s * s) },
+            { nama: 'Keliling (4 x s)', nilai: fmtNum(4 * s) }
           ];
         }
       } else if (jenis === 'persegipanjang') {
         const p = val('p'), l = val('l');
         if (p > 0 && l > 0) {
           hasil = [
-            { nama: 'Luas (p × l)', nilai: fmtNum(p * l) },
+            { nama: 'Luas (p x l)', nilai: fmtNum(p * l) },
             { nama: 'Keliling (2(p + l))', nilai: fmtNum(2 * (p + l)) }
           ];
         }
@@ -1189,14 +1269,14 @@
         const r = val('r');
         if (r > 0) {
           hasil = [
-            { nama: 'Luas (π × r²)', nilai: fmtNum(Math.PI * r * r) },
-            { nama: 'Keliling (2 × π × r)', nilai: fmtNum(2 * Math.PI * r) }
+            { nama: 'Luas (pi x r^2)', nilai: fmtNum(Math.PI * r * r) },
+            { nama: 'Keliling (2 x pi x r)', nilai: fmtNum(2 * Math.PI * r) }
           ];
         }
       } else if (jenis === 'segitiga') {
         const a = val('a'), t = val('t'), b = val('b'), c = val('c');
         if (a > 0 && t > 0) {
-          hasil.push({ nama: 'Luas (½ × a × t)', nilai: fmtNum(0.5 * a * t) });
+          hasil.push({ nama: 'Luas (1/2 x a x t)', nilai: fmtNum(0.5 * a * t) });
           if (b > 0 && c > 0) {
             hasil.push({ nama: 'Keliling (a + b + c)', nilai: fmtNum(a + b + c) });
           } else {
@@ -1206,7 +1286,7 @@
       }
 
       if (hasil.length === 0) {
-        hasilBox.innerHTML = `<p style="font-size: 13px; color: var(--text-muted);">Jangan ngawur kalau ngasih angka😡</p>`;
+        hasilBox.innerHTML = `<p style="font-size: 13px; color: var(--text-muted);">Jangan ngawur kalau ngasih angka</p>`;
       } else {
         hasilBox.innerHTML = hasil.map(item => `
           <div class="baris-hasil">
@@ -1296,7 +1376,7 @@
         img.style.display = 'block';
         dl.href = url;
         dl.style.display = 'block';
-        st.innerText = 'Status: HD Selesai via iLoveAPI ✅';
+        st.innerText = 'Status: HD Selesai via iLoveAPI';
       } catch (e) {
         st.innerText = 'Status: Gagal iLoveAPI (' + e.message + ')';
       } finally {
@@ -1346,7 +1426,7 @@
       v.style.filter = `contrast(${kon}%) saturate(${sat}%) brightness(110%)`;
     }
 
-    /* === TIKTOK DOWNLOADER (TIDAK DIUBAH) === */
+    /* === TIKTOK DOWNLOADER === */
     function downloadLinkDL(customUrl) {
       let l = (customUrl || document.getElementById('linkDL').value).trim();
       if (!l) {
@@ -1389,10 +1469,10 @@
           return;
         }
 
-        st.innerText = 'Status: Berhasil diambil ✅';
+        st.innerText = 'Status: Berhasil diambil';
         let btns = '';
-        if (vidUrl) btns += `<a class="btn" href="${vidUrl}" download="tiktok-video.mp4" target="_blank" rel="noopener">⬇️ Download Video</a>`;
-        if (musUrl) btns += `<a class="btn btn2" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">🎵 Download Musik</a>`;
+        if (vidUrl) btns += `<a class="btn" href="${vidUrl}" download="tiktok-video.mp4" target="_blank" rel="noopener">Download Video</a>`;
+        if (musUrl) btns += `<a class="btn btn2" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">Download Musik</a>`;
 
         box.innerHTML = `
           <div style="margin-top:10px;padding:12px;border-radius:16px;background:var(--input-bg);border:1px solid var(--card-border)">
@@ -1422,7 +1502,7 @@
         alert('Tempel link dulu');
         return;
       }
-      navigator.clipboard.writeText(l).then(() => alert('Link ke-copy ✅'));
+      navigator.clipboard.writeText(l).then(() => alert('Link ke-copy'));
     }
 
     function simpanLinkDL() {
@@ -1446,10 +1526,13 @@
       let arr = JSON.parse(localStorage.getItem('daftarDL') || '[]');
       document.getElementById('daftarDL').innerHTML = arr.map((x, i) => `
         <div style="padding:8px 0;border-bottom:1px solid var(--card-border)">
-          ${x.tipe === 'musik' ? '🎵' : '🎬'} <a href="${x.link}" target="_blank" style="color:var(--text-main);word-break:break-all">${x.link.slice(0, 45)}...</a><br>
-          <span style="font-size:11px;color:var(--text-muted)">${x.tgl}</span><br>
-          <span class="chip" onclick="downloadLinkDL('${x.link.replace(/'/g, "\\'")}')">⬇️ Download</span>
-          <span class="chip" onclick="hapusLinkDL(${i})">🗑️ Hapus</span>
+          <span class="badge badgeBiru" style="margin-right:4px">${x.tipe === 'musik' ? 'Musik' : 'Video'}</span>
+          <a href="${x.link}" target="_blank" style="color:var(--text-main);word-break:break-all">${x.link.slice(0, 45)}...</a><br>
+          <span style="font-size:11px;color:var(--text-muted)">${x.tgl}</span>
+          <div class="chip-group" style="margin-top:6px">
+            <span class="chip" onclick="downloadLinkDL('${x.link.replace(/'/g, "\\'")}')">Download</span>
+            <span class="chip" onclick="hapusLinkDL(${i})">Hapus</span>
+          </div>
         </div>
       `).join('') || '<p style="color:var(--text-muted)">Belum ada link tersimpan.</p>';
     }
@@ -1509,7 +1592,7 @@
         img.style.display = 'block';
         dl.href = url;
         dl.style.display = 'block';
-        st.innerText = 'Status: Selesai via iLoveAPI ✅';
+        st.innerText = 'Status: Selesai via iLoveAPI';
       } catch (e) {
         st.innerText = 'Status: Gagal (' + e.message + ')';
       } finally {
@@ -1519,14 +1602,14 @@
 
     async function loadGempa() {
       let box = document.getElementById('gempaBox');
-      box.innerHTML = 'Loading...';
+      box.innerHTML = 'Memuat...';
       try {
         let res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
         let j = await res.json();
         let g = j.Infogempa.gempa;
-        box.innerHTML = `<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br>📍 Kedalaman: ${g.Kedalaman} • ${g.Lintang}, ${g.Bujur}<br>⚠️ Potensi: ${g.Potensi}`;
+        box.innerHTML = `<span class="badge">M ${g.Magnitude}</span> <span class="badge badgeBiru">${g.Tanggal} ${g.Jam}</span><br><br><b>${g.Wilayah}</b><br><span style="font-size:12.5px;color:var(--text-muted)">Kedalaman: ${g.Kedalaman} · ${g.Lintang}, ${g.Bujur}<br>Potensi: ${g.Potensi}</span>`;
       } catch (e) {
-        box.innerHTML = `<b>Gempa 5.2 - Jogja (Contoh offline)</b><br>Koneksi BMKG gagal`;
+        box.innerHTML = `<b>Gempa 5.2 - Jogja (Contoh offline)</b><br><span style="font-size:12.5px;color:var(--text-muted)">Koneksi BMKG gagal</span>`;
       }
     }
 
@@ -1536,19 +1619,19 @@
         let res = await fetch('https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=34.71.01.1001');
         let j = await res.json();
         let d = j.data[0].cuaca[0][0];
-        box.innerHTML = `<span class="badge badgeHijau">${d.cuaca}</span> ${d.local_datetime}<br><br>🌡️ Suhu: ${d.t}°C • 💧 ${d.hu}%<br>💨 Angin: ${d.ws} km/jam`;
+        box.innerHTML = `<span class="badge badgeHijau">${d.cuaca}</span> <span style="font-size:12px;color:var(--text-muted)">${d.local_datetime}</span><br><br><b>Suhu ${d.t}°C</b> · <span style="font-size:12.5px;color:var(--text-muted)">Kelembapan ${d.hu}% · Angin ${d.ws} km/jam</span>`;
       } catch (e) {
-        box.innerHTML = `🌤️ <b>Jogja: Cerah Berawan</b><br>🌡️ 29°C • 💧 72%`;
+        box.innerHTML = `<b>Jogja: Cerah Berawan</b><br><span style="font-size:12.5px;color:var(--text-muted)">Suhu 29°C · Kelembapan 72%</span>`;
       }
     }
 
     async function loadBerita() {
       let box = document.getElementById('beritaBox');
-      box.innerHTML = 'Loading...';
+      box.innerHTML = 'Memuat...';
       try {
         let res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.cnnindonesia.com/rss');
         let j = await res.json();
-        box.innerHTML = j.items.slice(0, 5).map(it => `<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} • <a href="${it.link}" target="_blank" style="color:var(--text-main)">Baca →</a></span></div>`).join('');
+        box.innerHTML = j.items.slice(0, 5).map(it => `<div class="berita-item"><b>${it.title}</b><span>${new Date(it.pubDate).toLocaleString('id-ID')} · <a href="${it.link}" target="_blank" style="color:var(--text-main);text-decoration:none;font-weight:500">Baca</a></span></div>`).join('');
       } catch (e) {
         box.innerHTML = `<div class="berita-item"><b>BMKG: Waspada Hujan Lebat di DIY</b><span>Hari ini</span></div>`;
       }
@@ -1574,7 +1657,7 @@
       document.getElementById('namaProfil').innerText = nama;
       document.getElementById('namaHome').innerText = nama;
       document.getElementById('bioProfil').innerText = bio;
-      alert('Profil tersimpan! ✅ ' + nama);
+      alert('Profil tersimpan! ' + nama);
     }
 
     function gantiFotoProfil(e) {
