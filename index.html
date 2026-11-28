@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#090a0f">
+  <meta name="theme-color" content="#07080d">
   <title>AIRR J</title>
-  <link rel="manifest" href='data:application/manifest+json,{"name":"AIRR J","short_name":"AIRR J","start_url":".","display":"standalone","background_color":"#090a0f","theme_color":"#090a0f"}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"AIRR J","short_name":"AIRR J","start_url":".","display":"standalone","background_color":"#07080d","theme_color":"#07080d"}'>
   <style>
     * {
       margin: 0;
@@ -23,60 +23,64 @@
     }
 
     body {
-      --bg-base: #090a0f;
+      --bg-base: #07080d;
       --text-main: #f8fafc;
-      --text-muted: rgba(248, 250, 252, 0.64);
-      --card-bg: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.13);
-      --input-bg: rgba(255, 255, 255, 0.09);
+      --text-muted: rgba(248, 250, 252, 0.62);
+      --card-bg: rgba(255, 255, 255, 0.055);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-highlight: rgba(255, 255, 255, 0.16);
+      --input-bg: rgba(255, 255, 255, 0.08);
       --accent: #0a84ff;
-      --glow-1: rgba(10, 132, 255, 0.28);
-      --glow-2: rgba(94, 92, 230, 0.22);
-      --glow-3: rgba(48, 209, 88, 0.14);
+      --glow-1: rgba(10, 132, 255, 0.24);
+      --glow-2: rgba(100, 210, 255, 0.14);
+      --glow-3: rgba(94, 92, 230, 0.18);
 
       background: var(--bg-base);
       color: var(--text-main);
       min-height: 100vh;
-      transition: background 0.45s ease, color 0.3s ease;
+      transition: background 0.4s ease, color 0.3s ease;
     }
 
     body.mode-pagi {
-      --bg-base: #eef4fb;
-      --text-main: #0f172a;
-      --text-muted: rgba(15, 23, 42, 0.62);
-      --card-bg: rgba(255, 255, 255, 0.72);
-      --card-border: rgba(15, 23, 42, 0.09);
-      --input-bg: rgba(15, 23, 42, 0.05);
+      --bg-base: #f2f5fa;
+      --text-main: #0b0f17;
+      --text-muted: rgba(11, 15, 23, 0.58);
+      --card-bg: rgba(255, 255, 255, 0.68);
+      --card-border: rgba(11, 15, 23, 0.08);
+      --card-highlight: rgba(255, 255, 255, 0.92);
+      --input-bg: rgba(11, 15, 23, 0.045);
       --accent: #007aff;
-      --glow-1: rgba(0, 122, 255, 0.18);
-      --glow-2: rgba(255, 204, 0, 0.22);
-      --glow-3: rgba(52, 199, 89, 0.14);
-    }
-
-    body.mode-siang {
-      --bg-base: #1c130e;
-      --text-main: #fff8f2;
-      --text-muted: rgba(255, 248, 242, 0.68);
-      --card-bg: rgba(255, 242, 230, 0.08);
-      --card-border: rgba(255, 242, 230, 0.15);
-      --input-bg: rgba(255, 242, 230, 0.11);
-      --accent: #ff9f0a;
-      --glow-1: rgba(255, 159, 10, 0.26);
-      --glow-2: rgba(255, 105, 97, 0.18);
+      --glow-1: rgba(0, 122, 255, 0.15);
+      --glow-2: rgba(90, 200, 250, 0.16);
       --glow-3: rgba(255, 214, 10, 0.14);
     }
 
+    body.mode-siang {
+      --bg-base: #17100c;
+      --text-main: #fff9f4;
+      --text-muted: rgba(255, 249, 244, 0.64);
+      --card-bg: rgba(255, 244, 234, 0.065);
+      --card-border: rgba(255, 244, 234, 0.13);
+      --card-highlight: rgba(255, 244, 234, 0.18);
+      --input-bg: rgba(255, 244, 234, 0.09);
+      --accent: #ff9f0a;
+      --glow-1: rgba(255, 159, 10, 0.22);
+      --glow-2: rgba(255, 122, 89, 0.14);
+      --glow-3: rgba(255, 214, 10, 0.1);
+    }
+
     body.mode-malam {
-      --bg-base: #090a0f;
+      --bg-base: #07080d;
       --text-main: #f8fafc;
-      --text-muted: rgba(248, 250, 252, 0.64);
-      --card-bg: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.13);
-      --input-bg: rgba(255, 255, 255, 0.09);
+      --text-muted: rgba(248, 250, 252, 0.62);
+      --card-bg: rgba(255, 255, 255, 0.055);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-highlight: rgba(255, 255, 255, 0.16);
+      --input-bg: rgba(255, 255, 255, 0.08);
       --accent: #5e5ce6;
-      --glow-1: rgba(94, 92, 230, 0.26);
-      --glow-2: rgba(10, 132, 255, 0.2);
-      --glow-3: rgba(191, 90, 242, 0.14);
+      --glow-1: rgba(94, 92, 230, 0.22);
+      --glow-2: rgba(10, 132, 255, 0.16);
+      --glow-3: rgba(191, 90, 242, 0.12);
     }
 
     button, a, .chip, .shift-btn {
@@ -92,7 +96,6 @@
       box-shadow: none;
     }
 
-    /* Ambient iOS light field tanpa blur berat agar tetap smooth */
     .bg {
       position: fixed;
       inset: 0;
@@ -100,10 +103,10 @@
       overflow: hidden;
       pointer-events: none;
       background:
-        radial-gradient(circle at 12% 10%, var(--glow-1), transparent 46%),
-        radial-gradient(circle at 88% 24%, var(--glow-2), transparent 48%),
-        radial-gradient(circle at 50% 85%, var(--glow-3), transparent 52%);
-      transition: background 0.5s ease;
+        radial-gradient(circle at 15% 8%, var(--glow-1), transparent 45%),
+        radial-gradient(circle at 86% 22%, var(--glow-2), transparent 46%),
+        radial-gradient(circle at 50% 82%, var(--glow-3), transparent 52%);
+      transition: background 0.45s ease;
     }
 
     .bg1, .bg2, .bg3 {
@@ -113,8 +116,8 @@
     .konten {
       position: relative;
       z-index: 1;
-      padding: 32px 18px 128px;
-      max-width: 440px;
+      padding: 36px 18px 124px;
+      max-width: 432px;
       margin: 0 auto;
     }
 
@@ -125,15 +128,15 @@
     }
 
     .konten h1 {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.15;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
     }
 
     .konten .page-header p {
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 5px;
       font-size: 13.5px;
       font-weight: 500;
     }
@@ -142,13 +145,13 @@
       margin: 12px 0;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(18px) saturate(150%);
-      -webkit-backdrop-filter: blur(18px) saturate(150%);
-      border-radius: 24px;
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-radius: 26px;
       padding: 18px;
       text-align: left;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
-      transition: background 0.3s ease, border-color 0.3s ease;
+      box-shadow: inset 0 1px 0 var(--card-highlight);
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     .kartu h2 {
@@ -179,7 +182,7 @@
     select {
       width: 100%;
       padding: 12px 14px;
-      border-radius: 14px;
+      border-radius: 15px;
       border: 1px solid var(--card-border);
       background: var(--input-bg);
       color: var(--text-main);
@@ -197,7 +200,7 @@
     }
 
     select option {
-      background: #14161d;
+      background: #12141c;
       color: #f8fafc;
     }
 
@@ -210,9 +213,9 @@
     a.btn {
       display: block;
       width: 100%;
-      padding: 12px 16px;
+      padding: 12.5px 16px;
       border: none;
-      border-radius: 15px;
+      border-radius: 999px;
       background: var(--text-main);
       color: var(--bg-base);
       font-weight: 600;
@@ -249,7 +252,7 @@
     .chip {
       display: inline-flex;
       align-items: center;
-      padding: 7px 12px;
+      padding: 7px 13px;
       background: var(--input-bg);
       border: 1px solid var(--card-border);
       border-radius: 999px;
@@ -267,17 +270,17 @@
     .shift-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      gap: 4px;
       margin-top: 12px;
       padding: 4px;
-      border-radius: 16px;
+      border-radius: 999px;
       background: var(--input-bg);
       border: 1px solid var(--card-border);
     }
 
     .shift-btn {
       padding: 8px 4px;
-      border-radius: 12px;
+      border-radius: 999px;
       border: none;
       background: transparent;
       color: var(--text-muted);
@@ -290,22 +293,22 @@
     .shift-btn.aktif {
       background: var(--text-main);
       color: var(--bg-base);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
     }
 
     img.preview,
     video.preview {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 18px;
       margin-top: 10px;
       display: none;
-      background: #090a0f;
+      background: #07080d;
       border: 1px solid var(--card-border);
     }
 
     .avatar {
-      width: 84px;
-      height: 84px;
+      width: 86px;
+      height: 86px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--card-border);
@@ -325,24 +328,24 @@
 
     .badge {
       display: inline-block;
-      padding: 3px 9px;
+      padding: 3px 10px;
       border-radius: 999px;
-      background: rgba(255, 69, 58, 0.18);
-      border: 1px solid rgba(255, 69, 58, 0.35);
+      background: rgba(255, 69, 58, 0.16);
+      border: 1px solid rgba(255, 69, 58, 0.32);
       color: #ff6961;
       font-size: 11px;
       font-weight: 600;
     }
 
     .badgeHijau {
-      background: rgba(48, 209, 88, 0.18);
-      border-color: rgba(48, 209, 88, 0.35);
+      background: rgba(48, 209, 88, 0.16);
+      border-color: rgba(48, 209, 88, 0.32);
       color: #30d158;
     }
 
     .badgeBiru {
-      background: rgba(10, 132, 255, 0.18);
-      border-color: rgba(10, 132, 255, 0.35);
+      background: rgba(10, 132, 255, 0.16);
+      border-color: rgba(10, 132, 255, 0.32);
       color: #409cff;
     }
 
@@ -378,43 +381,7 @@
       color: var(--text-muted);
     }
 
-    input[type=range] {
-      width: 100%;
-      margin-top: 6px;
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
-
-    .hasil-mtk {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-    }
-
-    .hasil-mtk .baris-hasil {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 7px 0;
-      border-bottom: 1px solid var(--card-border);
-      font-size: 13.5px;
-      gap: 10px;
-    }
-
-    .hasil-mtk .baris-hasil:last-child {
-      border-bottom: none;
-    }
-
-    .hasil-mtk b {
-      font-size: 14.5px;
-      font-weight: 600;
-      color: #30d158;
-      text-align: right;
-    }
-
-    /* iOS 26 Liquid Pill Dock */
+    /* iOS 26 Liquid Glass Pill Dock */
     .nav-wrap {
       position: fixed;
       left: 0;
@@ -422,7 +389,7 @@
       margin: 0 auto;
       bottom: 16px;
       z-index: 10;
-      width: min(432px, calc(100vw - 24px));
+      width: min(396px, calc(100vw - 28px));
     }
 
     .nav {
@@ -431,12 +398,12 @@
       justify-content: space-between;
       align-items: center;
       padding: 6px;
-      background: rgba(22, 24, 32, 0.72);
-      backdrop-filter: blur(22px) saturate(170%);
-      -webkit-backdrop-filter: blur(22px) saturate(170%);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(18, 20, 28, 0.68);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 999px;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.28);
       overflow: hidden;
       width: 100%;
       touch-action: pan-y;
@@ -444,9 +411,9 @@
     }
 
     body.mode-pagi .nav {
-      background: rgba(255, 255, 255, 0.78);
-      border-color: rgba(15, 23, 42, 0.1);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.76);
+      border-color: rgba(11, 15, 23, 0.09);
+      box-shadow: 0 14px 32px rgba(11, 15, 23, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
     }
 
     .nav.sliding {
@@ -458,7 +425,7 @@
       position: absolute;
       inset: 0 0 55% 0;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent);
       pointer-events: none;
       z-index: 2;
     }
@@ -469,12 +436,12 @@
       position: absolute;
       top: 6px;
       left: 8px;
-      width: 58px;
+      width: 64px;
       height: 48px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.18));
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16));
+      border: 1px solid rgba(255, 255, 255, 0.46);
       border-radius: 999px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.7);
       will-change: transform, width, border-radius;
       transform-origin: center center;
       z-index: 0;
@@ -483,8 +450,8 @@
 
     body.mode-pagi .blok {
       background: #ffffff;
-      border-color: rgba(15, 23, 42, 0.08);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+      border-color: rgba(11, 15, 23, 0.07);
+      box-shadow: 0 4px 12px rgba(11, 15, 23, 0.1);
     }
 
     .blok::before,
@@ -513,7 +480,7 @@
     }
 
     body.mode-pagi .nav button {
-      color: rgba(15, 23, 42, 0.56);
+      color: rgba(11, 15, 23, 0.55);
     }
 
     .nav button .ikon {
@@ -540,7 +507,7 @@
     }
 
     body.mode-pagi .nav button.aktif {
-      color: #0f172a;
+      color: #0b0f17;
     }
 
     .nav button.aktif .ikon {
@@ -556,13 +523,13 @@
     }
 
     .muncul {
-      animation: muncul 0.28s cubic-bezier(.22,1,.36,1) both;
+      animation: muncul 0.25s cubic-bezier(.22,1,.36,1) both;
     }
 
     @keyframes muncul {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(5px);
       }
       to {
         opacity: 1;
@@ -585,13 +552,13 @@
     <div id="page-home">
       <div class="page-header">
         <h1>AIRR</h1>
-        <p>iOS 26 Workspace · Treat Your Better</p>
+        <p>iOS 26 · Treat Your Better</p>
       </div>
 
       <div class="kartu">
         <span class="badge badgeBiru">Workspace</span>
         <h2 style="margin-top: 8px;">Selamat Datang, <span id="namaHome">Jarr</span></h2>
-        <p>Akses cepat alat harian, kalkulator, pencarian, dan info terkini.</p>
+        <p>Ruang kerja ringan untuk pencarian, media, dan informasi harian.</p>
       </div>
 
       <!-- SHIFT PAGI / SIANG / MALAM / AUTO -->
@@ -612,13 +579,12 @@
 
       <div class="kartu">
         <h2>Akses Cepat</h2>
-        <p>Pintasan fitur yang paling sering dipakai.</p>
+        <p>Pintasan fitur utama.</p>
         <div class="chip-group">
           <span class="chip" onclick="goSearch('cuaca Jogja hari ini')">Cuaca Jogja</span>
           <span class="chip" onclick="goSearch('gempa terbaru BMKG')">Gempa BMKG</span>
           <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[2],'tools',2)">HD Foto</span>
-          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'mtk',3)">Hitung MTK</span>
-          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[4],'info',4)">Info BMKG</span>
+          <span class="chip" onclick="pindah(document.querySelectorAll('.nav button')[3],'info',3)">Info BMKG</span>
         </div>
       </div>
     </div>
@@ -648,53 +614,30 @@
     <div id="page-tools" class="hilang">
       <div class="page-header">
         <h1>Tools</h1>
-        <p>HD Foto, HD Video, TikTok Downloader &amp; Hapus BG</p>
+        <p>HD Foto, Downloader &amp; Hapus BG</p>
       </div>
 
-      <!-- 1. HD FOTO (iLoveAPI + Canvas) -->
+      <!-- 1. HD FOTO (iLoveAPI) -->
       <div class="kartu">
         <h2>1. HD Foto (iLoveAPI)</h2>
-        <p>Upscale lewat <code>/api/iloveapi</code> atau proses lokal tanpa kuota.</p>
+        <p>Upscale dan pertajam foto lewat endpoint <code>/api/iloveapi</code>.</p>
         <input type="file" id="fotoInput" accept="image/*" onchange="loadFoto(event)">
         <img id="fotoPreview" class="preview">
         <button class="btn" id="btnHdIloveApi" onclick="prosesHDiLoveAPI()">HD Foto (iLoveAPI)</button>
-        <a class="btn btn2" id="btnDownloadHdApi" style="display: none" download="foto-hd-iloveapi.png">Download Hasil HD (iLoveAPI)</a>
-
-        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--card-border);">
-          <label>Ketajaman Lokal · <span id="tajamVal">70</span>%</label>
-          <input type="range" id="tajam" min="0" max="100" value="70" oninput="document.getElementById('tajamVal').innerText=this.value;prosesHD()">
-          <label>Kecerahan Lokal · <span id="cerahVal">100</span>%</label>
-          <input type="range" id="cerah" min="50" max="150" value="100" oninput="document.getElementById('cerahVal').innerText=this.value;prosesHD()">
-          <button class="btn btn2" onclick="prosesHD();downloadHD()">HD Lokal (2x + Download)</button>
-        </div>
-
+        <a class="btn btn2" id="btnDownloadHdApi" style="display: none" download="foto-hd-iloveapi.png">Download Hasil HD</a>
         <p id="fotoStatus" style="font-size: 12px; margin-top: 10px">Status: Belum ada foto</p>
-        <canvas id="canvasHD" style="display: none"></canvas>
       </div>
 
-      <!-- 2. HD VIDEO -->
+      <!-- 2. Save Link Video & Musik + Tombol Download -->
       <div class="kartu">
-        <h2>2. HD Video</h2>
-        <p>Pilih video, atur kontras dan saturasi, lalu putar langsung.</p>
-        <input type="file" id="videoInput" accept="video/*" onchange="loadVideo(event)">
-        <video id="videoPreview" class="preview" controls playsinline></video>
-        <label>Kontras / HD · <span id="vidVal">130</span>%</label>
-        <input type="range" id="vidFilter" min="100" max="200" value="130" oninput="document.getElementById('vidVal').innerText=this.value;applyVideoFilter()">
-        <label>Saturasi · <span id="satVal">120</span>%</label>
-        <input type="range" id="satFilter" min="80" max="200" value="120" oninput="document.getElementById('satVal').innerText=this.value;applyVideoFilter()">
-        <button class="btn" onclick="alert('Video sudah jadi. Buat download, pencet titik 3 di video > Download (di chrome HP).')">Video Sudah HD</button>
-      </div>
-
-      <!-- 3. Save Link Video & Musik + Tombol Download -->
-      <div class="kartu">
-        <h2>3. Download Link Video &amp; Musik</h2>
-        <p>Tempel link TikTok, lalu ambil atau simpan tautan.</p>
+        <h2>2. Download Video &amp; Musik</h2>
+        <p>Tempel link TikTok lalu ambil file video atau musiknya.</p>
         <input type="text" id="linkDL" placeholder="Tempel link TikTok...">
         <select id="tipeDL">
           <option value="video">Video</option>
           <option value="musik">Musik / Lagu</option>
         </select>
-        <button class="btn btn2" onclick="ambilTikWM()">Ambil Video &amp; Musik TikTok (TikWM)</button>
+        <button class="btn" onclick="ambilTikWM()">Download</button>
 
         <div class="row">
           <button class="btn btn2" onclick="bukaLinkDL()">Buka Link</button>
@@ -708,53 +651,15 @@
         <p style="font-size: 12px; margin-top: 10px">Tips: Di TikTok ketuk Bagikan &gt; Salin Tautan, di YouTube ketuk Bagikan &gt; Simpan, di IG ketuk ••• &gt; Simpan.</p>
       </div>
 
-      <!-- 4. Hapus Background (iLoveAPI) -->
+      <!-- 3. Hapus Background (iLoveAPI) -->
       <div class="kartu">
-        <h2>4. Hapus Background</h2>
+        <h2>3. Hapus Background</h2>
         <p>Diproses lewat endpoint <code>/api/iloveapi</code> menggunakan iLoveAPI Image REST API.</p>
         <input type="file" id="bgInput" accept="image/jpeg,image/png,image/webp" onchange="previewBgInput(event)">
         <img id="bgPreview" class="preview">
-        <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">Hapus Background (iLoveAPI)</button>
+        <button class="btn" id="btnRemoveBg" onclick="hapusBackground()">Hapus Background</button>
         <a class="btn btn2" id="btnDownloadBg" style="display: none" download="no-bg-iloveapi.png">Download Hasil</a>
         <p id="bgStatus" style="font-size: 12px; margin-top: 10px; color: var(--text-muted)">Status: Belum ada foto</p>
-      </div>
-    </div>
-
-    <!-- PAGE MTK -->
-    <div id="page-mtk" class="hilang">
-      <div class="page-header">
-        <h1>MTK</h1>
-        <p>Kalkulator Bangun Ruang &amp; Bangun Datar</p>
-      </div>
-
-      <div class="kartu">
-        <h2>Pilih Bangun</h2>
-        <p>Masukkan ukuran, hasil luas, keliling, atau volume tampil otomatis.</p>
-        <select id="pilihBangun" onchange="renderInputMTK()">
-          <optgroup label="Bangun Ruang (3D)">
-            <option value="kubus">Kubus</option>
-            <option value="balok">Balok</option>
-            <option value="tabung">Tabung</option>
-            <option value="bola">Bola</option>
-            <option value="kerucut">Kerucut</option>
-            <option value="limas4">Limas Segi Empat</option>
-            <option value="prisma3">Prisma Segitiga</option>
-          </optgroup>
-          <optgroup label="Bangun Datar (2D)">
-            <option value="persegi">Persegi</option>
-            <option value="persegipanjang">Persegi Panjang</option>
-            <option value="lingkaran">Lingkaran</option>
-            <option value="segitiga">Segitiga</option>
-          </optgroup>
-        </select>
-
-        <div id="inputMTKBox" style="margin-top: 6px;"></div>
-
-        <div class="hasil-mtk" id="hasilMTKBox">
-          <p style="font-size: 13px; color: var(--text-muted);">Isi angka di atas buat lihat hasil...</p>
-        </div>
-
-        <button class="btn btn2" onclick="resetMTK()">Reset Angka</button>
       </div>
     </div>
 
@@ -819,13 +724,10 @@
       <button data-page="tools" onclick="handleNavClick(this, 'tools', 2)">
         <span class="ikon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>Tools
       </button>
-      <button data-page="mtk" onclick="handleNavClick(this, 'mtk', 3)">
-        <span class="ikon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2"/></svg></span>MTK
-      </button>
-      <button data-page="info" onclick="handleNavClick(this, 'info', 4)">
+      <button data-page="info" onclick="handleNavClick(this, 'info', 3)">
         <span class="ikon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span>Info
       </button>
-      <button data-page="profil" onclick="handleNavClick(this, 'profil', 5)">
+      <button data-page="profil" onclick="handleNavClick(this, 'profil', 4)">
         <span class="ikon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6"/></svg></span>Profil
       </button>
     </div>
@@ -843,9 +745,9 @@
       y: 0,
       vy: 0,
       targetY: 0,
-      w: 58,
+      w: 64,
       vw: 0,
-      targetW: 58,
+      targetW: 64,
       stiffness: 0.16,
       damping: 0.75
     };
@@ -877,7 +779,7 @@
     function getBtnTarget(btn) {
       return {
         x: btn ? (btn.offsetLeft - 8) : 0,
-        w: btn ? btn.offsetWidth : 58
+        w: btn ? btn.offsetWidth : 64
       };
     }
 
@@ -1124,7 +1026,6 @@
       requestAnimationFrame(stepSpring);
       loadProfil();
       renderDaftarDL();
-      renderInputMTK();
       terapkanLatarShift();
     });
 
@@ -1135,172 +1036,6 @@
       spring.targetX = tgt.x;
       spring.targetW = tgt.w;
     });
-
-    const konfigurasiBangun = {
-      kubus: [{ id: 's', label: 'Panjang Sisi / Rusuk (s)' }],
-      balok: [{ id: 'p', label: 'Panjang (p)' }, { id: 'l', label: 'Lebar (l)' }, { id: 't', label: 'Tinggi (t)' }],
-      tabung: [{ id: 'r', label: 'Jari-jari Alas (r)' }, { id: 't', label: 'Tinggi Tabung (t)' }],
-      bola: [{ id: 'r', label: 'Jari-jari Bola (r)' }],
-      kerucut: [{ id: 'r', label: 'Jari-jari Alas (r)' }, { id: 't', label: 'Tinggi Kerucut (t)' }],
-      limas4: [{ id: 's', label: 'Sisi Alas Persegi (s)' }, { id: 't', label: 'Tinggi Limas (t)' }],
-      prisma3: [{ id: 'a', label: 'Alas Segitiga (a)' }, { id: 'ts', label: 'Tinggi Segitiga Alas (ts)' }, { id: 'tp', label: 'Tinggi Prisma (tp)' }],
-      persegi: [{ id: 's', label: 'Panjang Sisi (s)' }],
-      persegipanjang: [{ id: 'p', label: 'Panjang (p)' }, { id: 'l', label: 'Lebar (l)' }],
-      lingkaran: [{ id: 'r', label: 'Jari-jari (r)' }],
-      segitiga: [{ id: 'a', label: 'Alas (a)' }, { id: 't', label: 'Tinggi (t)' }, { id: 'b', label: 'Sisi Miring Kiri (opsional)' }, { id: 'c', label: 'Sisi Miring Kanan (opsional)' }]
-    };
-
-    function renderInputMTK() {
-      const jenis = document.getElementById('pilihBangun').value;
-      const fields = konfigurasiBangun[jenis] || [];
-      const box = document.getElementById('inputMTKBox');
-
-      box.innerHTML = fields.map(f => `
-        <div style="margin-top: 8px;">
-          <label>${f.label}</label>
-          <input type="number" step="any" id="mtk_${f.id}" placeholder="Masukkan ${f.label}..." oninput="hitungMTK()">
-        </div>
-      `).join('');
-
-      hitungMTK();
-    }
-
-    function fmtNum(n) {
-      if (isNaN(n) || !isFinite(n)) return '-';
-      return Number.isInteger(n) ? n.toLocaleString('id-ID') : parseFloat(n.toFixed(2)).toLocaleString('id-ID');
-    }
-
-    function hitungMTK() {
-      const jenis = document.getElementById('pilihBangun').value;
-      const hasilBox = document.getElementById('hasilMTKBox');
-      const val = (id) => parseFloat(document.getElementById('mtk_' + id)?.value);
-
-      let hasil = [];
-
-      if (jenis === 'kubus') {
-        const s = val('s');
-        if (s > 0) {
-          hasil = [
-            { nama: 'Luas Permukaan (6 x s^2)', nilai: fmtNum(6 * s * s) },
-            { nama: 'Keliling Rusuk (12 x s)', nilai: fmtNum(12 * s) },
-            { nama: 'Volume (s^3)', nilai: fmtNum(s * s * s) }
-          ];
-        }
-      } else if (jenis === 'balok') {
-        const p = val('p'), l = val('l'), t = val('t');
-        if (p > 0 && l > 0 && t > 0) {
-          hasil = [
-            { nama: 'Luas Permukaan', nilai: fmtNum(2 * (p * l + p * t + l * t)) },
-            { nama: 'Keliling Rusuk (4(p+l+t))', nilai: fmtNum(4 * (p + l + t)) },
-            { nama: 'Volume (p x l x t)', nilai: fmtNum(p * l * t) }
-          ];
-        }
-      } else if (jenis === 'tabung') {
-        const r = val('r'), t = val('t');
-        if (r > 0 && t > 0) {
-          hasil = [
-            { nama: 'Luas Permukaan (2pi.r(r+t))', nilai: fmtNum(2 * Math.PI * r * (r + t)) },
-            { nama: 'Keliling Alas (2pi.r)', nilai: fmtNum(2 * Math.PI * r) },
-            { nama: 'Volume (pi.r^2.t)', nilai: fmtNum(Math.PI * r * r * t) }
-          ];
-        }
-      } else if (jenis === 'bola') {
-        const r = val('r');
-        if (r > 0) {
-          hasil = [
-            { nama: 'Luas Permukaan (4pi.r^2)', nilai: fmtNum(4 * Math.PI * r * r) },
-            { nama: 'Keliling Lingkaran Tengah (2pi.r)', nilai: fmtNum(2 * Math.PI * r) },
-            { nama: 'Volume (4/3 x pi.r^3)', nilai: fmtNum((4 / 3) * Math.PI * r * r * r) }
-          ];
-        }
-      } else if (jenis === 'kerucut') {
-        const r = val('r'), t = val('t');
-        if (r > 0 && t > 0) {
-          const s = Math.sqrt(r * r + t * t);
-          hasil = [
-            { nama: 'Garis Pelukis (s)', nilai: fmtNum(s) },
-            { nama: 'Luas Permukaan (pi.r(r+s))', nilai: fmtNum(Math.PI * r * (r + s)) },
-            { nama: 'Keliling Alas (2pi.r)', nilai: fmtNum(2 * Math.PI * r) },
-            { nama: 'Volume (1/3 x pi.r^2.t)', nilai: fmtNum((1 / 3) * Math.PI * r * r * t) }
-          ];
-        }
-      } else if (jenis === 'limas4') {
-        const s = val('s'), t = val('t');
-        if (s > 0 && t > 0) {
-          const tSegitiga = Math.sqrt((s / 2) * (s / 2) + t * t);
-          const luasPermukaan = (s * s) + 4 * (0.5 * s * tSegitiga);
-          const rusukMiring = Math.sqrt((s * Math.sqrt(2) / 2) ** 2 + t * t);
-          hasil = [
-            { nama: 'Luas Permukaan', nilai: fmtNum(luasPermukaan) },
-            { nama: 'Keliling Alas (4 x s)', nilai: fmtNum(4 * s) },
-            { nama: 'Total Panjang Rusuk', nilai: fmtNum(4 * s + 4 * rusukMiring) },
-            { nama: 'Volume (1/3 x s^2 x t)', nilai: fmtNum((1 / 3) * s * s * t) }
-          ];
-        }
-      } else if (jenis === 'prisma3') {
-        const a = val('a'), ts = val('ts'), tp = val('tp');
-        if (a > 0 && ts > 0 && tp > 0) {
-          const luasAlas = 0.5 * a * ts;
-          const sisiMiring = Math.sqrt((a / 2) ** 2 + ts * ts);
-          const kelilingAlas = a + 2 * sisiMiring;
-          hasil = [
-            { nama: 'Luas Permukaan', nilai: fmtNum(2 * luasAlas + kelilingAlas * tp) },
-            { nama: 'Keliling Alas (est. sama kaki)', nilai: fmtNum(kelilingAlas) },
-            { nama: 'Volume (Luas Alas x tp)', nilai: fmtNum(luasAlas * tp) }
-          ];
-        }
-      } else if (jenis === 'persegi') {
-        const s = val('s');
-        if (s > 0) {
-          hasil = [
-            { nama: 'Luas (s x s)', nilai: fmtNum(s * s) },
-            { nama: 'Keliling (4 x s)', nilai: fmtNum(4 * s) }
-          ];
-        }
-      } else if (jenis === 'persegipanjang') {
-        const p = val('p'), l = val('l');
-        if (p > 0 && l > 0) {
-          hasil = [
-            { nama: 'Luas (p x l)', nilai: fmtNum(p * l) },
-            { nama: 'Keliling (2(p + l))', nilai: fmtNum(2 * (p + l)) }
-          ];
-        }
-      } else if (jenis === 'lingkaran') {
-        const r = val('r');
-        if (r > 0) {
-          hasil = [
-            { nama: 'Luas (pi x r^2)', nilai: fmtNum(Math.PI * r * r) },
-            { nama: 'Keliling (2 x pi x r)', nilai: fmtNum(2 * Math.PI * r) }
-          ];
-        }
-      } else if (jenis === 'segitiga') {
-        const a = val('a'), t = val('t'), b = val('b'), c = val('c');
-        if (a > 0 && t > 0) {
-          hasil.push({ nama: 'Luas (1/2 x a x t)', nilai: fmtNum(0.5 * a * t) });
-          if (b > 0 && c > 0) {
-            hasil.push({ nama: 'Keliling (a + b + c)', nilai: fmtNum(a + b + c) });
-          } else {
-            hasil.push({ nama: 'Keliling', nilai: 'Isi sisi b & c' });
-          }
-        }
-      }
-
-      if (hasil.length === 0) {
-        hasilBox.innerHTML = `<p style="font-size: 13px; color: var(--text-muted);">Jangan ngawur kalau ngasih angka</p>`;
-      } else {
-        hasilBox.innerHTML = hasil.map(item => `
-          <div class="baris-hasil">
-            <span>${item.nama}</span>
-            <b>${item.nilai}</b>
-          </div>
-        `).join('');
-      }
-    }
-
-    function resetMTK() {
-      document.querySelectorAll('#inputMTKBox input').forEach(inp => inp.value = '');
-      hitungMTK();
-    }
 
     function isiSearch(t) {
       document.getElementById('inputSearch').value = t;
@@ -1322,7 +1057,7 @@
       else window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
     }
 
-    /* === HD FOTO (ILOVEAPI + CANVAS LOKAL) === */
+    /* === HD FOTO (ILOVEAPI) === */
     let fotoAsli = null;
     let fileFotoHD = null;
 
@@ -1384,49 +1119,7 @@
       }
     }
 
-    function prosesHD() {
-      if (!fotoAsli) return;
-      let c = document.getElementById('canvasHD'), ctx = c.getContext('2d');
-      c.width = fotoAsli.width * 2;
-      c.height = fotoAsli.height * 2;
-      let tajam = document.getElementById('tajam').value / 100, cerah = document.getElementById('cerah').value;
-      ctx.filter = `brightness(${cerah}%) contrast(${100 + tajam * 30}%) saturate(110%)`;
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(fotoAsli, 0, 0, c.width, c.height);
-      document.getElementById('fotoPreview').src = c.toDataURL('image/jpeg', 0.95);
-      document.getElementById('fotoStatus').innerText = `Status: HD Lokal Siap! ${c.width}x${c.height}px`;
-    }
-
-    function downloadHD() {
-      if (!fotoAsli) {
-        alert('Pilih foto dulu mas');
-        return;
-      }
-      prosesHD();
-      let a = document.createElement('a');
-      a.download = 'foto-HD-' + Date.now() + '.jpg';
-      a.href = document.getElementById('canvasHD').toDataURL('image/jpeg', 0.95);
-      a.click();
-    }
-
-    function loadVideo(e) {
-      let f = e.target.files[0];
-      if (!f) return;
-      let v = document.getElementById('videoPreview');
-      v.src = URL.createObjectURL(f);
-      v.style.display = 'block';
-      applyVideoFilter();
-      v.play();
-    }
-
-    function applyVideoFilter() {
-      let v = document.getElementById('videoPreview');
-      let kon = document.getElementById('vidFilter').value, sat = document.getElementById('satFilter').value;
-      v.style.filter = `contrast(${kon}%) saturate(${sat}%) brightness(110%)`;
-    }
-
-    /* === TIKTOK DOWNLOADER === */
+    /* === DOWNLOADER === */
     function downloadLinkDL(customUrl) {
       let l = (customUrl || document.getElementById('linkDL').value).trim();
       if (!l) {
@@ -1446,6 +1139,7 @@
 
     async function ambilTikWM(customUrl) {
       let l = (customUrl || document.getElementById('linkDL').value).trim();
+      let tipe = document.getElementById('tipeDL') ? document.getElementById('tipeDL').value : 'video';
       let st = document.getElementById('linkStatus');
       let box = document.getElementById('hasilTikWM');
       if (!l) {
@@ -1458,7 +1152,7 @@
         let res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(l));
         let j = await res.json();
         let d = j?.data || j?.result || j;
-        let judul = d?.title || d?.desc || 'Video TikTok';
+        let judul = d?.title || d?.desc || 'Media TikTok';
         let author = typeof d?.author === 'object' ? (d.author?.nickname || d.author?.unique_id) : d?.author;
         author = author || 'Kreator TikTok';
         let vidUrl = d?.hdplay || d?.play || d?.wmplay || d?.video_url || '';
@@ -1471,8 +1165,13 @@
 
         st.innerText = 'Status: Berhasil diambil';
         let btns = '';
-        if (vidUrl) btns += `<a class="btn" href="${vidUrl}" download="tiktok-video.mp4" target="_blank" rel="noopener">Download Video</a>`;
-        if (musUrl) btns += `<a class="btn btn2" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">Download Musik</a>`;
+        if (tipe === 'musik') {
+          if (musUrl) btns += `<a class="btn" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">Download</a>`;
+          if (vidUrl) btns += `<a class="btn btn2" href="${vidUrl}" download="tiktok-video.mp4" target="_blank" rel="noopener">Download Video</a>`;
+        } else {
+          if (vidUrl) btns += `<a class="btn" href="${vidUrl}" download="tiktok-video.mp4" target="_blank" rel="noopener">Download</a>`;
+          if (musUrl) btns += `<a class="btn btn2" href="${musUrl}" download="tiktok-musik.mp3" target="_blank" rel="noopener">Download Musik</a>`;
+        }
 
         box.innerHTML = `
           <div style="margin-top:10px;padding:12px;border-radius:16px;background:var(--input-bg);border:1px solid var(--card-border)">
