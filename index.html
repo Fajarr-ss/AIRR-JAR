@@ -116,7 +116,7 @@
     .konten {
       position: relative;
       z-index: 1;
-      padding: 36px 18px 124px;
+      padding: 36px 18px 128px;
       max-width: 432px;
       margin: 0 auto;
     }
@@ -381,15 +381,15 @@
       color: var(--text-muted);
     }
 
-    /* iOS 26 Liquid Glass Pill Dock */
+    /* iOS 26 Liquid Glass Tab Bar seperti video referensi */
     .nav-wrap {
       position: fixed;
       left: 0;
       right: 0;
       margin: 0 auto;
-      bottom: 16px;
+      bottom: 18px;
       z-index: 10;
-      width: min(396px, calc(100vw - 28px));
+      width: min(404px, calc(100vw - 24px));
     }
 
     .nav {
@@ -397,23 +397,28 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px;
-      background: rgba(18, 20, 28, 0.68);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 5px;
+      background: rgba(236, 240, 248, 0.84);
+      backdrop-filter: blur(24px) saturate(185%);
+      -webkit-backdrop-filter: blur(24px) saturate(185%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       border-radius: 999px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.42),
+        0 2px 8px rgba(0, 0, 0, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95);
       overflow: hidden;
       width: 100%;
       touch-action: pan-y;
       cursor: grab;
     }
 
-    body.mode-pagi .nav {
-      background: rgba(255, 255, 255, 0.76);
-      border-color: rgba(11, 15, 23, 0.09);
-      box-shadow: 0 14px 32px rgba(11, 15, 23, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    body:not(.mode-pagi) .nav {
+      background: rgba(28, 31, 42, 0.78);
+      border-color: rgba(255, 255, 255, 0.24);
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.52),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
     }
 
     .nav.sliding {
@@ -423,38 +428,61 @@
     .nav::before {
       content: "";
       position: absolute;
-      inset: 0 0 55% 0;
+      inset: 0 0 58% 0;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent);
       pointer-events: none;
       z-index: 2;
     }
 
+    /* Lens kaca bening meluncur dengan specular rim khas iOS 26 */
     .blok {
       --shine-shift: 0px;
       --shine-y: 0px;
       position: absolute;
-      top: 6px;
+      top: 4px;
       left: 8px;
-      width: 64px;
-      height: 48px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16));
-      border: 1px solid rgba(255, 255, 255, 0.46);
+      width: 68px;
+      height: 54px;
+      background:
+        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.12) 62%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.36), rgba(180, 210, 255, 0.14) 55%, rgba(255, 255, 255, 0.28));
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
       border-radius: 999px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.18),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+        inset 0 -3px 8px rgba(255, 255, 255, 0.45);
       will-change: transform, width, border-radius;
       transform-origin: center center;
-      z-index: 0;
+      z-index: 3;
       pointer-events: none;
     }
 
-    body.mode-pagi .blok {
-      background: #ffffff;
-      border-color: rgba(11, 15, 23, 0.07);
-      box-shadow: 0 4px 12px rgba(11, 15, 23, 0.1);
+    body:not(.mode-pagi) .blok {
+      background:
+        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.05) 62%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(120, 170, 255, 0.08) 55%, rgba(255, 255, 255, 0.16));
+      border-color: rgba(255, 255, 255, 0.56);
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.32),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.65),
+        inset 0 -2px 6px rgba(255, 255, 255, 0.2);
     }
 
-    .blok::before,
+    .blok::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 10px;
+      right: 10px;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), transparent);
+      transform: translate3d(var(--shine-shift), var(--shine-y), 0);
+      pointer-events: none;
+    }
+
     .blok::after {
       display: none;
     }
@@ -469,32 +497,32 @@
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      padding: 7px 0 6px;
+      padding: 8px 0 7px;
       cursor: pointer;
-      color: rgba(248, 250, 252, 0.62);
+      color: rgba(15, 23, 42, 0.72);
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: -0.01em;
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, font-weight 0.2s ease;
       min-width: 0;
     }
 
-    body.mode-pagi .nav button {
-      color: rgba(11, 15, 23, 0.55);
+    body:not(.mode-pagi) .nav button {
+      color: rgba(248, 250, 252, 0.66);
     }
 
     .nav button .ikon {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 20px;
+      height: 21px;
       line-height: 1;
       transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
     }
 
     .nav button .ikon svg {
-      width: 18px;
-      height: 18px;
+      width: 19px;
+      height: 19px;
       stroke: currentColor;
       fill: none;
       stroke-width: 1.85;
@@ -503,15 +531,16 @@
     }
 
     .nav button.aktif {
-      color: #ffffff;
+      color: #0a84ff;
+      font-weight: 600;
     }
 
-    body.mode-pagi .nav button.aktif {
-      color: #0b0f17;
+    body:not(.mode-pagi) .nav button.aktif {
+      color: #409cff;
     }
 
     .nav button.aktif .ikon {
-      transform: scale(1.1) translateY(-1px);
+      transform: scale(1.08) translateY(-1px);
     }
 
     .nav button:active .ikon {
@@ -745,9 +774,9 @@
       y: 0,
       vy: 0,
       targetY: 0,
-      w: 64,
+      w: 68,
       vw: 0,
-      targetW: 64,
+      targetW: 68,
       stiffness: 0.16,
       damping: 0.75
     };
@@ -779,7 +808,7 @@
     function getBtnTarget(btn) {
       return {
         x: btn ? (btn.offsetLeft - 8) : 0,
-        w: btn ? btn.offsetWidth : 64
+        w: btn ? btn.offsetWidth : 68
       };
     }
 
