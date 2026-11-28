@@ -24,63 +24,64 @@
 
     body {
       --bg-base: #07080d;
-      --text-main: #f8fafc;
-      --text-muted: rgba(248, 250, 252, 0.62);
-      --card-bg: rgba(255, 255, 255, 0.055);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --card-highlight: rgba(255, 255, 255, 0.16);
-      --input-bg: rgba(255, 255, 255, 0.08);
+      --text-main: #eef2f8;
+      --text-muted: rgba(238, 242, 248, 0.58);
+      --card-bg: rgba(255, 255, 255, 0.048);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --card-highlight: rgba(255, 255, 255, 0.12);
+      --input-bg: rgba(255, 255, 255, 0.07);
       --accent: #0a84ff;
-      --glow-1: rgba(10, 132, 255, 0.24);
-      --glow-2: rgba(100, 210, 255, 0.14);
-      --glow-3: rgba(94, 92, 230, 0.18);
+      --glow-1: rgba(10, 132, 255, 0.2);
+      --glow-2: rgba(100, 210, 255, 0.11);
+      --glow-3: rgba(94, 92, 230, 0.15);
 
       background: var(--bg-base);
       color: var(--text-main);
       min-height: 100vh;
-      transition: background 0.4s ease, color 0.3s ease;
+      transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
     }
 
+    /* Mode Pagi lebih kalem & nyaman di mata (tidak silau) */
     body.mode-pagi {
-      --bg-base: #f2f5fa;
-      --text-main: #0b0f17;
-      --text-muted: rgba(11, 15, 23, 0.58);
-      --card-bg: rgba(255, 255, 255, 0.68);
-      --card-border: rgba(11, 15, 23, 0.08);
-      --card-highlight: rgba(255, 255, 255, 0.92);
-      --input-bg: rgba(11, 15, 23, 0.045);
-      --accent: #007aff;
-      --glow-1: rgba(0, 122, 255, 0.15);
-      --glow-2: rgba(90, 200, 250, 0.16);
-      --glow-3: rgba(255, 214, 10, 0.14);
+      --bg-base: #e2e7f0;
+      --text-main: #141b29;
+      --text-muted: rgba(20, 27, 41, 0.6);
+      --card-bg: rgba(255, 255, 255, 0.54);
+      --card-border: rgba(20, 27, 41, 0.08);
+      --card-highlight: rgba(255, 255, 255, 0.72);
+      --input-bg: rgba(20, 27, 41, 0.055);
+      --accent: #006ee6;
+      --glow-1: rgba(0, 110, 230, 0.12);
+      --glow-2: rgba(70, 175, 235, 0.12);
+      --glow-3: rgba(130, 145, 220, 0.12);
     }
 
     body.mode-siang {
-      --bg-base: #17100c;
-      --text-main: #fff9f4;
-      --text-muted: rgba(255, 249, 244, 0.64);
-      --card-bg: rgba(255, 244, 234, 0.065);
-      --card-border: rgba(255, 244, 234, 0.13);
-      --card-highlight: rgba(255, 244, 234, 0.18);
-      --input-bg: rgba(255, 244, 234, 0.09);
-      --accent: #ff9f0a;
-      --glow-1: rgba(255, 159, 10, 0.22);
-      --glow-2: rgba(255, 122, 89, 0.14);
-      --glow-3: rgba(255, 214, 10, 0.1);
+      --bg-base: #150f0b;
+      --text-main: #f5ede6;
+      --text-muted: rgba(245, 237, 230, 0.6);
+      --card-bg: rgba(255, 244, 234, 0.055);
+      --card-border: rgba(255, 244, 234, 0.11);
+      --card-highlight: rgba(255, 244, 234, 0.14);
+      --input-bg: rgba(255, 244, 234, 0.075);
+      --accent: #f59500;
+      --glow-1: rgba(245, 149, 0, 0.18);
+      --glow-2: rgba(235, 110, 78, 0.12);
+      --glow-3: rgba(240, 195, 20, 0.08);
     }
 
     body.mode-malam {
       --bg-base: #07080d;
-      --text-main: #f8fafc;
-      --text-muted: rgba(248, 250, 252, 0.62);
-      --card-bg: rgba(255, 255, 255, 0.055);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --card-highlight: rgba(255, 255, 255, 0.16);
-      --input-bg: rgba(255, 255, 255, 0.08);
+      --text-main: #eef2f8;
+      --text-muted: rgba(238, 242, 248, 0.58);
+      --card-bg: rgba(255, 255, 255, 0.048);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --card-highlight: rgba(255, 255, 255, 0.12);
+      --input-bg: rgba(255, 255, 255, 0.07);
       --accent: #5e5ce6;
-      --glow-1: rgba(94, 92, 230, 0.22);
-      --glow-2: rgba(10, 132, 255, 0.16);
-      --glow-3: rgba(191, 90, 242, 0.12);
+      --glow-1: rgba(94, 92, 230, 0.2);
+      --glow-2: rgba(10, 132, 255, 0.13);
+      --glow-3: rgba(191, 90, 242, 0.1);
     }
 
     button, a, .chip, .shift-btn {
@@ -103,10 +104,16 @@
       overflow: hidden;
       pointer-events: none;
       background:
-        radial-gradient(circle at 15% 8%, var(--glow-1), transparent 45%),
-        radial-gradient(circle at 86% 22%, var(--glow-2), transparent 46%),
-        radial-gradient(circle at 50% 82%, var(--glow-3), transparent 52%);
-      transition: background 0.45s ease;
+        radial-gradient(circle at 18% 10%, var(--glow-1), transparent 48%),
+        radial-gradient(circle at 84% 24%, var(--glow-2), transparent 48%),
+        radial-gradient(circle at 50% 82%, var(--glow-3), transparent 54%);
+      animation: ambientFloat 14s ease-in-out infinite alternate;
+      transition: background 0.55s ease;
+    }
+
+    @keyframes ambientFloat {
+      0% { transform: scale(1) translate3d(0, 0, 0); }
+      100% { transform: scale(1.06) translate3d(-1.5%, 1.5%, 0); }
     }
 
     .bg1, .bg2, .bg3 {
@@ -145,13 +152,17 @@
       margin: 12px 0;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      backdrop-filter: blur(22px) saturate(165%);
+      -webkit-backdrop-filter: blur(22px) saturate(165%);
       border-radius: 26px;
       padding: 18px;
       text-align: left;
       box-shadow: inset 0 1px 0 var(--card-highlight);
-      transition: background 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .kartu:active {
+      transform: scale(0.992);
     }
 
     .kartu h2 {
@@ -189,7 +200,7 @@
       font-size: 14.5px;
       outline: none;
       margin-top: 8px;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
     }
 
     input[type=text]:focus,
@@ -197,6 +208,7 @@
     textarea:focus,
     select:focus {
       border-color: var(--accent);
+      transform: translateY(-1px);
     }
 
     select option {
@@ -225,7 +237,7 @@
       text-decoration: none;
       cursor: pointer;
       margin-top: 10px;
-      transition: transform 0.14s ease, opacity 0.2s ease;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
     }
 
     button.btn2,
@@ -238,8 +250,8 @@
 
     button.btn:active,
     a.btn:active {
-      transform: scale(0.975);
-      opacity: 0.9;
+      transform: scale(0.96);
+      opacity: 0.88;
     }
 
     .chip-group {
@@ -260,11 +272,11 @@
       font-weight: 500;
       cursor: pointer;
       color: var(--text-main);
-      transition: transform 0.14s ease, background 0.2s ease;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
     }
 
     .chip:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
     }
 
     .shift-grid {
@@ -287,13 +299,17 @@
       font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
+      transition: background 0.28s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .shift-btn:active {
+      transform: scale(0.93);
     }
 
     .shift-btn.aktif {
       background: var(--text-main);
       color: var(--bg-base);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
     }
 
     img.preview,
@@ -313,6 +329,11 @@
       object-fit: cover;
       border: 2px solid var(--card-border);
       background: var(--input-bg);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .avatar:active {
+      transform: scale(0.94);
     }
 
     .row {
@@ -330,23 +351,23 @@
       display: inline-block;
       padding: 3px 10px;
       border-radius: 999px;
-      background: rgba(255, 69, 58, 0.16);
-      border: 1px solid rgba(255, 69, 58, 0.32);
+      background: rgba(255, 69, 58, 0.15);
+      border: 1px solid rgba(255, 69, 58, 0.28);
       color: #ff6961;
       font-size: 11px;
       font-weight: 600;
     }
 
     .badgeHijau {
-      background: rgba(48, 209, 88, 0.16);
-      border-color: rgba(48, 209, 88, 0.32);
-      color: #30d158;
+      background: rgba(48, 209, 88, 0.15);
+      border-color: rgba(48, 209, 88, 0.28);
+      color: #28bd4e;
     }
 
     .badgeBiru {
-      background: rgba(10, 132, 255, 0.16);
-      border-color: rgba(10, 132, 255, 0.32);
-      color: #409cff;
+      background: rgba(10, 132, 255, 0.15);
+      border-color: rgba(10, 132, 255, 0.28);
+      color: #2f8ef7;
     }
 
     .berita-item {
@@ -381,7 +402,7 @@
       color: var(--text-muted);
     }
 
-    /* iOS 26 Liquid Glass Tab Bar lebih tinggi & proporsional */
+    /* iOS 26 Liquid Glass Tab Bar — Soft Frosted & Silky Smooth */
     .nav-wrap {
       position: fixed;
       left: 0;
@@ -399,42 +420,45 @@
       align-items: center;
       padding: 5px;
       min-height: 68px;
-      background: rgba(236, 240, 248, 0.86);
-      backdrop-filter: blur(24px) saturate(185%);
-      -webkit-backdrop-filter: blur(24px) saturate(185%);
-      border: 1px solid rgba(255, 255, 255, 0.92);
+      background: rgba(214, 222, 234, 0.78);
+      backdrop-filter: blur(26px) saturate(170%);
+      -webkit-backdrop-filter: blur(26px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.62);
       border-radius: 999px;
       box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.38),
-        inset 0 1px 1px rgba(255, 255, 255, 0.95);
+        0 16px 36px rgba(15, 23, 42, 0.22),
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.72);
       overflow: hidden;
       width: 100%;
       touch-action: pan-y;
       cursor: grab;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
     }
 
     body:not(.mode-pagi) .nav {
-      background: rgba(26, 29, 39, 0.82);
-      border-color: rgba(255, 255, 255, 0.24);
+      background: rgba(24, 27, 37, 0.8);
+      border-color: rgba(255, 255, 255, 0.18);
       box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        0 18px 40px rgba(0, 0, 0, 0.46),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .nav.sliding {
       cursor: grabbing;
+      transform: scale(1.015);
     }
 
     .nav::before {
       content: "";
       position: absolute;
-      inset: 0 0 58% 0;
+      inset: 0 0 60% 0;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent);
       pointer-events: none;
       z-index: 2;
     }
 
+    /* Kapsul liquid bening lembut tanpa silau berlebihan */
     .blok {
       --shine-shift: 0px;
       position: absolute;
@@ -443,13 +467,13 @@
       left: 0;
       width: 68px;
       background:
-        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.12) 64%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.38), rgba(180, 210, 255, 0.14) 55%, rgba(255, 255, 255, 0.28));
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
+        radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.08) 65%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.26), rgba(145, 185, 240, 0.12) 55%, rgba(255, 255, 255, 0.18));
+      border: 1.25px solid rgba(255, 255, 255, 0.65);
       border-radius: 999px;
       box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.2),
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+        0 6px 16px rgba(15, 23, 42, 0.14),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.72);
       will-change: transform, width;
       transform-origin: center center;
       z-index: 3;
@@ -458,23 +482,23 @@
 
     body:not(.mode-pagi) .blok {
       background:
-        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.05) 64%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(120, 170, 255, 0.08) 55%, rgba(255, 255, 255, 0.16));
-      border-color: rgba(255, 255, 255, 0.62);
+        radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04) 65%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.17), rgba(110, 160, 245, 0.07) 55%, rgba(255, 255, 255, 0.12));
+      border-color: rgba(255, 255, 255, 0.42);
       box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.34),
-        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.68);
+        0 6px 18px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.45);
     }
 
     .blok::before {
       content: "";
       position: absolute;
       top: 3px;
-      left: 11px;
-      right: 11px;
-      height: 14px;
+      left: 12px;
+      right: 12px;
+      height: 11px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent);
       transform: translate3d(var(--shine-shift), 0, 0);
       pointer-events: none;
     }
@@ -486,6 +510,7 @@
     .nav button {
       --lens-zoom: 1;
       --icon-zoom: 1;
+      --lift-y: 0px;
       position: relative;
       z-index: 1;
       flex: 1 1 0;
@@ -498,19 +523,19 @@
       gap: 4px;
       padding: 10px 2px;
       cursor: pointer;
-      color: rgba(15, 23, 42, 0.72);
+      color: rgba(20, 27, 41, 0.68);
       font-size: 10.5px;
       font-weight: 500;
       letter-spacing: -0.01em;
-      transform: scale(var(--lens-zoom));
+      transform: translate3d(0, var(--lift-y), 0) scale(var(--lens-zoom));
       transform-origin: center center;
       will-change: transform;
-      transition: color 0.18s ease, font-weight 0.18s ease;
+      transition: color 0.22s ease, font-weight 0.22s ease;
       min-width: 0;
     }
 
     body:not(.mode-pagi) .nav button {
-      color: rgba(248, 250, 252, 0.66);
+      color: rgba(238, 242, 248, 0.62);
     }
 
     .nav button .ikon {
@@ -535,7 +560,7 @@
     }
 
     .nav button.aktif {
-      color: #0a84ff;
+      color: #006ee6;
       font-weight: 600;
     }
 
@@ -547,22 +572,39 @@
       stroke-width: 2.15;
     }
 
-    .nav button:active {
-      --lens-zoom: 0.96;
-    }
-
     .hilang {
       display: none;
     }
 
-    .muncul {
-      animation: muncul 0.25s cubic-bezier(.22,1,.36,1) both;
+    /* Animasi perpindahan halaman & staggered kartu */
+    .muncul .page-header {
+      animation: headerMasuk 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    @keyframes muncul {
+    .muncul .kartu {
+      animation: kartuMasuk 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .muncul .kartu:nth-of-type(1) { animation-delay: 0.03s; }
+    .muncul .kartu:nth-of-type(2) { animation-delay: 0.08s; }
+    .muncul .kartu:nth-of-type(3) { animation-delay: 0.13s; }
+    .muncul .kartu:nth-of-type(4) { animation-delay: 0.18s; }
+
+    @keyframes headerMasuk {
       from {
         opacity: 0;
-        transform: translateY(5px);
+        transform: translateY(8px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes kartuMasuk {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.975);
       }
       to {
         opacity: 1;
@@ -582,7 +624,7 @@
   <div class="konten">
 
     <!-- PAGE HOME -->
-    <div id="page-home">
+    <div id="page-home" class="muncul">
       <div class="page-header">
         <h1>AIRR</h1>
         <p>iOS 26 · Treat Your Better</p>
@@ -600,7 +642,7 @@
           <h2 style="margin:0;">Appearance Shift</h2>
           <span class="badge badgeBiru" id="statusShiftBadge">Mode: Auto</span>
         </div>
-        <p id="ketShift" style="font-size:12px; margin-top:4px;">Pagi terang, Siang hangat, Malam gelap, Auto ikut jam HP.</p>
+        <p id="ketShift" style="font-size:12px; margin-top:4px;">Pagi teduh, Siang hangat, Malam gelap, Auto ikut jam HP.</p>
 
         <div class="shift-grid">
           <button class="shift-btn" id="btn-shift-pagi" onclick="setModeShift('pagi')">Pagi</button>
@@ -771,6 +813,49 @@
     const blok = document.getElementById('blok');
     const navButtons = Array.from(document.querySelectorAll('.nav button'));
 
+    /* === TACTILE HAPTIC & MICRO-AUDIO ENGINE === */
+    let audioCtx = null;
+    function playMicroTick(type = 'tick') {
+      try {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;
+        if (!audioCtx) audioCtx = new Ctx();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        if (type === 'tick') {
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(260, now + 0.018);
+          gain.gain.setValueAtTime(0.025, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
+        } else {
+          osc.frequency.setValueAtTime(420, now);
+          osc.frequency.exponentialRampToValueAtTime(640, now + 0.032);
+          gain.gain.setValueAtTime(0.035, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.032);
+        }
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.036);
+      } catch (_) {}
+    }
+
+    function triggerHaptic(kind = 'tap') {
+      if (navigator.vibrate) {
+        if (kind === 'tick') navigator.vibrate(4);
+        else if (kind === 'snap') navigator.vibrate([7, 18, 4]);
+        else navigator.vibrate(9);
+      }
+      playMicroTick(kind === 'tick' ? 'tick' : 'tap');
+    }
+
+    /* === ULTRA-SMOOTH LIQUID SPRING === */
     const spring = {
       x: 4,
       vx: 0,
@@ -778,8 +863,8 @@
       w: 68,
       vw: 0,
       targetW: 68,
-      stiffness: 0.18,
-      damping: 0.76
+      stiffness: 0.14,
+      damping: 0.8
     };
 
     let isDragging = false;
@@ -800,7 +885,7 @@
 
     function updateLensZoom() {
       const lensCenterX = spring.x + spring.w / 2;
-      const radius = Math.max(40, spring.w * 0.65);
+      const radius = Math.max(46, spring.w * 0.72);
 
       for (let i = 0; i < navButtons.length; i++) {
         const btn = navButtons[i];
@@ -809,17 +894,19 @@
         const proximity = Math.max(0, 1 - dist / radius);
         const smooth = proximity * proximity * (3 - 2 * proximity);
 
-        const btnZoom = 1 + smooth * 0.14;
-        const iconZoom = 1 + smooth * 0.1;
+        const btnZoom = 1 + smooth * 0.16;
+        const iconZoom = 1 + smooth * 0.12;
+        const liftY = -smooth * 1.4;
 
         btn.style.setProperty('--lens-zoom', btnZoom.toFixed(3));
         btn.style.setProperty('--icon-zoom', iconZoom.toFixed(3));
+        btn.style.setProperty('--lift-y', `${liftY.toFixed(2)}px`);
       }
     }
 
     function stepSpring() {
-      const k = isDragging ? 0.36 : spring.stiffness;
-      const d = isDragging ? 0.68 : spring.damping;
+      const k = isDragging ? 0.28 : spring.stiffness;
+      const d = isDragging ? 0.74 : spring.damping;
 
       const ax = (spring.targetX - spring.x) * k;
       spring.vx = (spring.vx + ax) * d;
@@ -830,13 +917,15 @@
       spring.w += spring.vw;
 
       const speedX = Math.abs(spring.vx);
-      const stretchX = Math.min(1.12, Math.max(1, 1 + speedX * 0.005));
+      const dragBoost = isDragging ? 1.05 : 1;
+      const stretchX = Math.min(1.16, Math.max(0.98, dragBoost + speedX * 0.0065));
+      const squashY = Math.min(1.06, Math.max(0.93, dragBoost - speedX * 0.003));
 
-      blok.style.width = `${Math.max(24, spring.w).toFixed(1)}px`;
-      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, 0, 0) scaleX(${stretchX.toFixed(3)})`;
+      blok.style.width = `${Math.max(24, spring.w).toFixed(2)}px`;
+      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, 0, 0) scale(${stretchX.toFixed(3)}, ${squashY.toFixed(3)})`;
       blok.style.borderRadius = '999px';
 
-      const shineX = Math.max(-8, Math.min(8, spring.vx * 0.3));
+      const shineX = Math.max(-9, Math.min(9, spring.vx * 0.35));
       blok.style.setProperty('--shine-shift', `${shineX.toFixed(1)}px`);
 
       updateLensZoom();
@@ -867,10 +956,10 @@
       const tgt = getBtnTarget(btn);
       spring.targetX = tgt.x;
       spring.targetW = tgt.w;
-      spring.vx += (tgt.x - spring.x) * 0.08;
+      spring.vx += (tgt.x - spring.x) * 0.06;
 
       showPage(page);
-      if (navigator.vibrate) navigator.vibrate(5);
+      triggerHaptic('tap');
     }
 
     function handleNavClick(btn, page, index) {
@@ -914,7 +1003,7 @@
         navButtons.forEach(b => b.classList.remove('aktif'));
         nearBtn.classList.add('aktif');
         showPage(nearBtn.getAttribute('data-page'));
-        if (navigator.vibrate) navigator.vibrate(3);
+        triggerHaptic('tick');
       }
     }
 
@@ -926,6 +1015,7 @@
       lastMoveTime = performance.now();
       dragVelocity = 0;
       navEl.classList.add('sliding');
+      triggerHaptic('tick');
       if (navEl.setPointerCapture) {
         try { navEl.setPointerCapture(e.pointerId); } catch (_) {}
       }
@@ -935,11 +1025,11 @@
       if (!isDragging) return;
       const now = performance.now();
       const dt = Math.max(8, now - lastMoveTime);
-      dragVelocity = ((e.clientX - lastPointerX) / dt) * 16;
+      dragVelocity = dragVelocity * 0.4 + (((e.clientX - lastPointerX) / dt) * 16) * 0.6;
       lastPointerX = e.clientX;
       lastMoveTime = now;
 
-      if (Math.abs(e.clientX - pointerStartX) > 6) {
+      if (Math.abs(e.clientX - pointerStartX) > 5) {
         hasSlid = true;
         slideBlokToX(e.clientX);
       }
@@ -954,9 +1044,8 @@
       }
 
       if (hasSlid) {
-        const flickX = e.clientX + dragVelocity * 2.2;
+        const flickX = e.clientX + dragVelocity * 2.0;
         const targetBtn = getNearestButtonByX(flickX);
-        const idx = navButtons.indexOf(targetBtn);
         const pageName = targetBtn.getAttribute('data-page');
 
         navButtons.forEach(b => b.classList.remove('aktif'));
@@ -966,10 +1055,10 @@
         const tgt = getBtnTarget(targetBtn);
         spring.targetX = tgt.x;
         spring.targetW = tgt.w;
-        spring.vx += dragVelocity * 0.65;
+        spring.vx += dragVelocity * 0.45;
 
         showPage(pageName);
-        if (navigator.vibrate) navigator.vibrate(5);
+        triggerHaptic('snap');
         setTimeout(() => { hasSlid = false; }, 60);
       }
     }
@@ -1027,6 +1116,7 @@
       modeShift = mode;
       localStorage.setItem('shiftMode', mode);
       terapkanLatarShift();
+      triggerHaptic('tap');
     }
 
     setInterval(() => {
