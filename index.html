@@ -446,7 +446,7 @@
       cursor: grabbing;
     }
 
-    /* Kapsul liquid: pas di dalam bar saat diam, sedikit over + blur saat bergerak */
+    /* Kapsul liquid: ukuran pas di dalam bar, blur aktif saat gerak & bersih saat berhenti */
     .blok {
       --shine-shift: 0px;
       --lens-blur: 0px;
@@ -454,7 +454,7 @@
       top: 4px;
       bottom: 4px;
       left: 0;
-      width: 74px;
+      width: 72px;
       background:
         radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0.02) 65%),
         linear-gradient(155deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 55%, rgba(255, 255, 255, 0.14));
@@ -845,7 +845,7 @@
       playMicroTick(kind === 'tick' ? 'tick' : 'tap');
     }
 
-    /* === LIQUID SPRING: OVER & BLUR ONLY WHILE MOVING, CRISP & FLUSH WHEN SETTLED === */
+    /* === DAMPED LIQUID SPRING: NO FAR-JUMP VIBRATION, MATCHED SIZE & MOTION BLUR === */
     const spring = {
       x: 4,
       vx: 0,
@@ -856,8 +856,8 @@
       overScale: 1,
       vOver: 0,
       blur: 0,
-      stiffness: 0.14,
-      damping: 0.8
+      stiffness: 0.16,
+      damping: 0.84
     };
 
     let isDragging = false;
@@ -889,9 +889,9 @@
         const smooth = proximity * proximity * (3 - 2 * proximity);
 
         const activeBoost = smooth * motionFactor;
-        const btnZoom = 1 + activeBoost * 0.1;
-        const iconZoom = 1 + activeBoost * 0.08;
-        const liftY = -activeBoost * 1.2;
+        const btnZoom = 1 + activeBoost * 0.08;
+        const iconZoom = 1 + activeBoost * 0.06;
+        const liftY = -activeBoost * 1;
 
         btn.style.setProperty('--lens-zoom', btnZoom.toFixed(4));
         btn.style.setProperty('--icon-zoom', iconZoom.toFixed(4));
@@ -908,11 +908,11 @@
     }
 
     function stepSpring() {
-      const k = isDragging ? 0.3 : spring.stiffness;
-      const d = isDragging ? 0.76 : spring.damping;
+      const k = isDragging ? 0.34 : spring.stiffness;
+      const d = isDragging ? 0.78 : spring.damping;
 
       const ax = (spring.targetX - spring.x) * k;
-      spring.vx = (spring.vx + ax) * d;
+      spring.vx = Math.max(-18, Math.min(18, (spring.vx + ax) * d));
       spring.x += spring.vx;
 
       const aw = (spring.targetW - spring.w) * k;
@@ -920,19 +920,19 @@
       spring.w += spring.vw;
 
       const speedX = Math.abs(spring.vx);
-      const moveFactor = Math.min(1, speedX / 12);
-      const targetOver = isDragging ? (1.07 + moveFactor * 0.02) : (1 + moveFactor * 0.065);
+      const moveFactor = Math.min(1, speedX / 14);
+      const targetOver = isDragging ? 1.035 : (1 + moveFactor * 0.035);
 
-      const aOver = (targetOver - spring.overScale) * 0.22;
-      spring.vOver = (spring.vOver + aOver) * 0.75;
+      const aOver = (targetOver - spring.overScale) * 0.24;
+      spring.vOver = (spring.vOver + aOver) * 0.76;
       spring.overScale += spring.vOver;
 
       const isSettled =
         !isDragging &&
-        Math.abs(spring.targetX - spring.x) < 0.06 &&
-        Math.abs(spring.vx) < 0.06 &&
-        Math.abs(spring.targetW - spring.w) < 0.06 &&
-        Math.abs(spring.vw) < 0.06 &&
+        Math.abs(spring.targetX - spring.x) < 0.08 &&
+        Math.abs(spring.vx) < 0.08 &&
+        Math.abs(spring.targetW - spring.w) < 0.08 &&
+        Math.abs(spring.vw) < 0.08 &&
         Math.abs(1 - spring.overScale) < 0.002 &&
         Math.abs(spring.vOver) < 0.002;
 
@@ -950,13 +950,13 @@
         return;
       }
 
-      const activeMotion = Math.min(1, (isDragging ? 0.65 : 0) + moveFactor);
-      const scaleX = spring.overScale * (1 + activeMotion * 0.05);
-      const scaleY = spring.overScale * (1 + activeMotion * 0.025);
+      const activeMotion = Math.min(1, (isDragging ? 0.55 : 0) + moveFactor);
+      const scaleX = spring.overScale * (1 + activeMotion * 0.025);
+      const scaleY = spring.overScale * (1 + activeMotion * 0.015);
 
-      const targetBlur = activeMotion * 6.5;
+      const targetBlur = activeMotion * 6;
       spring.blur += (targetBlur - spring.blur) * 0.28;
-      const shineX = Math.max(-8, Math.min(8, spring.vx * 0.28));
+      const shineX = Math.max(-6, Math.min(6, spring.vx * 0.22));
 
       applyBlokTransform(scaleX, scaleY, spring.blur, shineX);
       updateLensZoom(activeMotion);
@@ -993,7 +993,7 @@
       const tgt = getBtnTarget(btn);
       spring.targetX = tgt.x;
       spring.targetW = tgt.w;
-      spring.overScale = Math.max(spring.overScale, 1.055);
+      spring.overScale = Math.max(spring.overScale, 1.03);
 
       showPage(page);
       triggerHaptic('tap');
@@ -1084,7 +1084,7 @@
       }
 
       if (hasSlid) {
-        const flickX = e.clientX + dragVelocity * 1.3;
+        const flickX = e.clientX + dragVelocity * 0.8;
         const targetBtn = getNearestButtonByX(flickX);
         const pageName = targetBtn.getAttribute('data-page');
 
@@ -1095,7 +1095,6 @@
         const tgt = getBtnTarget(targetBtn);
         spring.targetX = tgt.x;
         spring.targetW = tgt.w;
-        spring.vx += dragVelocity * 0.2;
 
         showPage(pageName);
         triggerHaptic('snap');
