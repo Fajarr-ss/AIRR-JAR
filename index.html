@@ -401,7 +401,7 @@
       color: var(--text-muted);
     }
 
-    /* Liquid Glass Pill Bar + Overflowing Lens Bubble (mirip video referensi) */
+    /* Liquid Glass Pill Bar + Controlled Overflow Bubble */
     .nav-wrap {
       position: fixed;
       left: 0;
@@ -446,26 +446,26 @@
       cursor: grabbing;
     }
 
-    /* Gelembung lensa kaca yang menonjol keluar (over) saat dipegang / digeser */
+    /* Gelembung lensa: blur kuat saat gerak, jernih saat berhenti */
     .blok {
       --shine-shift: 0px;
+      --lens-blur: 1.5px;
       position: absolute;
       top: 2px;
       bottom: 2px;
       left: 0;
       width: 74px;
       background:
-        radial-gradient(circle at 26% 20%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.06) 58%, rgba(210, 228, 255, 0.18) 100%),
-        linear-gradient(155deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.24));
-      backdrop-filter: blur(3px) brightness(1.05) contrast(1.06) saturate(155%);
-      -webkit-backdrop-filter: blur(3px) brightness(1.05) contrast(1.06) saturate(155%);
-      border: 1.5px solid rgba(255, 255, 255, 0.85);
+        radial-gradient(circle at 26% 20%, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.04) 60%, rgba(210, 228, 255, 0.14) 100%),
+        linear-gradient(155deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.18));
+      backdrop-filter: blur(var(--lens-blur)) brightness(1.04) contrast(1.04) saturate(145%);
+      -webkit-backdrop-filter: blur(var(--lens-blur)) brightness(1.04) contrast(1.04) saturate(145%);
+      border: 1.5px solid rgba(255, 255, 255, 0.82);
       border-radius: 999px;
       box-shadow:
-        0 10px 24px rgba(15, 23, 42, 0.16),
-        0 0 0 1px rgba(255, 255, 255, 0.35),
-        inset 0 1.5px 2.5px rgba(255, 255, 255, 0.9),
-        inset 0 -2px 4px rgba(255, 255, 255, 0.35);
+        0 8px 20px rgba(15, 23, 42, 0.14),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.85),
+        inset 0 -1.5px 3px rgba(255, 255, 255, 0.28);
       will-change: transform, width;
       transform-origin: center center;
       z-index: 3;
@@ -474,40 +474,38 @@
 
     body:not(.mode-pagi) .blok {
       background:
-        radial-gradient(circle at 26% 20%, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.03) 58%, rgba(140, 185, 255, 0.14) 100%),
-        linear-gradient(155deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.14));
-      border-color: rgba(255, 255, 255, 0.56);
+        radial-gradient(circle at 26% 20%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.02) 60%, rgba(140, 185, 255, 0.12) 100%),
+        linear-gradient(155deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.015) 50%, rgba(255, 255, 255, 0.12));
+      border-color: rgba(255, 255, 255, 0.52);
       box-shadow:
-        0 12px 26px rgba(0, 0, 0, 0.38),
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.58),
-        inset 0 -1.5px 3px rgba(255, 255, 255, 0.2);
+        0 10px 22px rgba(0, 0, 0, 0.34),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.52),
+        inset 0 -1.5px 2.5px rgba(255, 255, 255, 0.16);
     }
 
-    /* Highlight lengkung atas khas lensa kaca */
     .blok::before {
       content: "";
       position: absolute;
       top: 3px;
       left: 12px;
       right: 12px;
-      height: 11px;
+      height: 10px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent);
       transform: translate3d(var(--shine-shift), 0, 0);
       pointer-events: none;
     }
 
-    /* Kilau pantulan tepi bawah lensa */
     .blok::after {
       content: "";
       position: absolute;
       bottom: 3px;
       left: 16px;
       right: 16px;
-      height: 7px;
+      height: 6px;
       border-radius: 999px;
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.36), transparent);
-      transform: translate3d(calc(var(--shine-shift) * -0.5), 0, 0);
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.3), transparent);
+      transform: translate3d(calc(var(--shine-shift) * -0.4), 0, 0);
       pointer-events: none;
     }
 
@@ -858,7 +856,7 @@
       playMicroTick(kind === 'tick' ? 'tick' : 'tap');
     }
 
-    /* === LIQUID GLASS OVER-BUBBLE PHYSICS === */
+    /* === STABILIZED LIQUID SPRING WITH MOTION-ONLY BLUR === */
     const spring = {
       x: 2,
       vx: 0,
@@ -869,8 +867,9 @@
       overScale: 1,
       vOver: 0,
       targetOver: 1,
-      stiffness: 0.14,
-      damping: 0.78
+      blur: 1.5,
+      stiffness: 0.13,
+      damping: 0.81
     };
 
     let isDragging = false;
@@ -884,14 +883,14 @@
 
     function getBtnTarget(btn) {
       if (!btn) return { x: 2, w: 74 };
-      const w = Math.max(32, btn.offsetWidth + 4);
+      const w = Math.max(32, btn.offsetWidth + 2);
       const x = btn.offsetLeft + (btn.offsetWidth - w) / 2;
       return { x, w };
     }
 
     function updateLensZoom() {
       const lensCenterX = spring.x + spring.w / 2;
-      const radius = Math.max(46, spring.w * 0.68);
+      const radius = Math.max(46, spring.w * 0.65);
 
       for (let i = 0; i < navButtons.length; i++) {
         const btn = navButtons[i];
@@ -900,9 +899,9 @@
         const proximity = Math.max(0, 1 - dist / radius);
         const smooth = proximity * proximity * (3 - 2 * proximity);
 
-        const btnZoom = 1 + smooth * 0.18;
-        const iconZoom = 1 + smooth * 0.14;
-        const liftY = -smooth * 1.6;
+        const btnZoom = 1 + smooth * 0.12;
+        const iconZoom = 1 + smooth * 0.1;
+        const liftY = -smooth * 1.1;
 
         btn.style.setProperty('--lens-zoom', btnZoom.toFixed(4));
         btn.style.setProperty('--icon-zoom', iconZoom.toFixed(4));
@@ -911,8 +910,8 @@
     }
 
     function stepSpring() {
-      const k = isDragging ? 0.34 : spring.stiffness;
-      const d = isDragging ? 0.72 : spring.damping;
+      const k = isDragging ? 0.3 : spring.stiffness;
+      const d = isDragging ? 0.76 : spring.damping;
 
       const ax = (spring.targetX - spring.x) * k;
       spring.vx = (spring.vx + ax) * d;
@@ -923,21 +922,50 @@
       spring.w += spring.vw;
 
       const speedX = Math.abs(spring.vx);
-      const moveFactor = Math.min(1, speedX / 12);
-      spring.targetOver = isDragging ? 1.24 + moveFactor * 0.08 : (1 + moveFactor * 0.18);
+      const moveFactor = Math.min(1, speedX / 13);
 
-      const aOver = (spring.targetOver - spring.overScale) * 0.2;
-      spring.vOver = (spring.vOver + aOver) * 0.74;
+      /* Goyangan stabil & tidak berlebih */
+      spring.targetOver = isDragging ? (1.07 + moveFactor * 0.03) : (1 + moveFactor * 0.05);
+
+      const aOver = (spring.targetOver - spring.overScale) * 0.18;
+      spring.vOver = (spring.vOver + aOver) * 0.78;
       spring.overScale += spring.vOver;
 
-      const scaleX = spring.overScale * (1 + moveFactor * 0.08);
-      const scaleY = spring.overScale * (1 + moveFactor * 0.06);
+      /* Kunci bersih saat benar-benar berhenti agar tidak ada goyangan sisa */
+      const isSettled =
+        !isDragging &&
+        Math.abs(spring.targetX - spring.x) < 0.08 &&
+        Math.abs(spring.vx) < 0.08 &&
+        Math.abs(spring.targetW - spring.w) < 0.08 &&
+        Math.abs(1 - spring.overScale) < 0.003 &&
+        Math.abs(spring.vOver) < 0.003;
+
+      if (isSettled) {
+        spring.x = spring.targetX;
+        spring.vx = 0;
+        spring.w = spring.targetW;
+        spring.vw = 0;
+        spring.overScale = 1;
+        spring.vOver = 0;
+      }
+
+      const activeMotion = isSettled ? 0 : Math.min(1, (isDragging ? 0.65 : 0) + moveFactor);
+      const scaleX = spring.overScale * (1 + activeMotion * 0.045);
+      const scaleY = spring.overScale * (1 + activeMotion * 0.035);
+
+      /* Blur hanya terasa saat bergerak; saat berhenti jadi sangat jernih */
+      const targetBlur = isSettled ? 1.2 : (1.2 + activeMotion * 5.8);
+      spring.blur += (targetBlur - spring.blur) * 0.25;
+      if (isSettled && Math.abs(spring.blur - 1.2) < 0.05) {
+        spring.blur = 1.2;
+      }
 
       blok.style.width = `${Math.max(32, spring.w).toFixed(2)}px`;
       blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, 0, 0) scale(${scaleX.toFixed(4)}, ${scaleY.toFixed(4)})`;
       blok.style.borderRadius = '999px';
+      blok.style.setProperty('--lens-blur', `${spring.blur.toFixed(2)}px`);
 
-      const shineX = Math.max(-10, Math.min(10, spring.vx * 0.35));
+      const shineX = isSettled ? 0 : Math.max(-8, Math.min(8, spring.vx * 0.28));
       blok.style.setProperty('--shine-shift', `${shineX.toFixed(1)}px`);
 
       updateLensZoom();
@@ -968,7 +996,7 @@
       const tgt = getBtnTarget(btn);
       spring.targetX = tgt.x;
       spring.targetW = tgt.w;
-      spring.overScale = Math.max(spring.overScale, 1.16);
+      spring.overScale = Math.max(spring.overScale, 1.05);
 
       showPage(page);
       triggerHaptic('tap');
@@ -999,10 +1027,10 @@
 
     function slideBlokToX(clientX) {
       const nearBtn = getNearestButtonByX(clientX);
-      const blokW = nearBtn ? Math.max(32, nearBtn.offsetWidth + 4) : spring.targetW;
+      const blokW = nearBtn ? Math.max(32, nearBtn.offsetWidth + 2) : spring.targetW;
       const navRect = navEl.getBoundingClientRect();
-      const minX = -4;
-      const maxX = Math.max(-4, navRect.width + 4 - blokW);
+      const minX = -2;
+      const maxX = Math.max(-2, navRect.width + 2 - blokW);
 
       let rawX = clientX - navRect.left - blokW / 2;
       let clampedX = Math.max(minX, Math.min(maxX, rawX));
@@ -1027,7 +1055,7 @@
       lastMoveTime = performance.now();
       dragVelocity = 0;
       navEl.classList.add('sliding');
-      spring.targetOver = 1.24;
+      spring.targetOver = 1.07;
       triggerHaptic('tick');
       if (navEl.setPointerCapture) {
         try { navEl.setPointerCapture(e.pointerId); } catch (_) {}
@@ -1058,7 +1086,7 @@
       }
 
       if (hasSlid) {
-        const flickX = e.clientX + dragVelocity * 1.8;
+        const flickX = e.clientX + dragVelocity * 1.4;
         const targetBtn = getNearestButtonByX(flickX);
         const pageName = targetBtn.getAttribute('data-page');
 
@@ -1069,7 +1097,7 @@
         const tgt = getBtnTarget(targetBtn);
         spring.targetX = tgt.x;
         spring.targetW = tgt.w;
-        spring.vx += dragVelocity * 0.35;
+        spring.vx += dragVelocity * 0.22;
 
         showPage(pageName);
         triggerHaptic('snap');
@@ -1092,6 +1120,7 @@
       spring.vw = 0;
       spring.overScale = 1;
       spring.targetOver = 1;
+      spring.blur = 1.2;
       updateLensZoom();
     }
 
