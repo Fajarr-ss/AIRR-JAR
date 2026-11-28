@@ -381,13 +381,13 @@
       color: var(--text-muted);
     }
 
-    /* iOS 26 Liquid Glass Tab Bar */
+    /* iOS 26 Liquid Glass Tab Bar simetris & presisi */
     .nav-wrap {
       position: fixed;
       left: 0;
       right: 0;
       margin: 0 auto;
-      bottom: 18px;
+      bottom: 16px;
       z-index: 10;
       width: min(404px, calc(100vw - 24px));
     }
@@ -397,15 +397,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 5px;
-      background: rgba(236, 240, 248, 0.84);
+      padding: 4px;
+      background: rgba(236, 240, 248, 0.86);
       backdrop-filter: blur(24px) saturate(185%);
       -webkit-backdrop-filter: blur(24px) saturate(185%);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.92);
       border-radius: 999px;
       box-shadow:
-        0 18px 42px rgba(0, 0, 0, 0.42),
-        0 2px 8px rgba(0, 0, 0, 0.14),
+        0 16px 38px rgba(0, 0, 0, 0.38),
         inset 0 1px 1px rgba(255, 255, 255, 0.95);
       overflow: hidden;
       width: 100%;
@@ -414,10 +413,10 @@
     }
 
     body:not(.mode-pagi) .nav {
-      background: rgba(28, 31, 42, 0.78);
+      background: rgba(26, 29, 39, 0.8);
       border-color: rgba(255, 255, 255, 0.24);
       box-shadow:
-        0 18px 42px rgba(0, 0, 0, 0.52),
+        0 16px 38px rgba(0, 0, 0, 0.48),
         inset 0 1px 0 rgba(255, 255, 255, 0.28);
     }
 
@@ -430,30 +429,28 @@
       position: absolute;
       inset: 0 0 58% 0;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent);
       pointer-events: none;
       z-index: 2;
     }
 
-    /* Lens kaca bening meluncur dengan specular rim khas iOS 26 */
+    /* Kapsul liquid simetris & proporsional di semua ukuran layar */
     .blok {
       --shine-shift: 0px;
-      --shine-y: 0px;
       position: absolute;
       top: 4px;
-      left: 8px;
-      width: 72px;
-      height: 56px;
+      bottom: 4px;
+      left: 0;
+      width: 64px;
       background:
-        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.12) 62%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.38), rgba(180, 210, 255, 0.15) 55%, rgba(255, 255, 255, 0.28));
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.12) 64%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.36), rgba(180, 210, 255, 0.14) 55%, rgba(255, 255, 255, 0.28));
       border: 1.5px solid rgba(255, 255, 255, 0.88);
       border-radius: 999px;
       box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.2),
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.96),
-        inset 0 -3px 8px rgba(255, 255, 255, 0.45);
-      will-change: transform, width, border-radius;
+        0 6px 16px rgba(0, 0, 0, 0.18),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+      will-change: transform, width;
       transform-origin: center center;
       z-index: 3;
       pointer-events: none;
@@ -461,25 +458,24 @@
 
     body:not(.mode-pagi) .blok {
       background:
-        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.05) 62%),
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.05) 64%),
         linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(120, 170, 255, 0.08) 55%, rgba(255, 255, 255, 0.16));
       border-color: rgba(255, 255, 255, 0.6);
       box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.34),
-        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.68),
-        inset 0 -2px 6px rgba(255, 255, 255, 0.22);
+        0 6px 18px rgba(0, 0, 0, 0.32),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.68);
     }
 
     .blok::before {
       content: "";
       position: absolute;
-      top: 3px;
+      top: 2px;
       left: 10px;
       right: 10px;
-      height: 14px;
+      height: 12px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent);
-      transform: translate3d(var(--shine-shift), var(--shine-y), 0);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), transparent);
+      transform: translate3d(var(--shine-shift), 0, 0);
       pointer-events: none;
     }
 
@@ -490,23 +486,23 @@
     .nav button {
       --lens-zoom: 1;
       --icon-zoom: 1;
-      --lift-y: 0px;
       position: relative;
       z-index: 1;
-      flex: 1;
+      flex: 1 1 0;
       border: none;
       background: transparent;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 2px;
-      padding: 8px 0 7px;
+      padding: 7px 2px;
       cursor: pointer;
       color: rgba(15, 23, 42, 0.72);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: -0.01em;
-      transform: translate3d(0, var(--lift-y), 0) scale(var(--lens-zoom));
+      transform: scale(var(--lens-zoom));
       transform-origin: center center;
       will-change: transform;
       transition: color 0.18s ease, font-weight 0.18s ease;
@@ -521,7 +517,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 21px;
+      height: 20px;
       line-height: 1;
       transform: scale(var(--icon-zoom));
       transform-origin: center center;
@@ -529,8 +525,8 @@
     }
 
     .nav button .ikon svg {
-      width: 19px;
-      height: 19px;
+      width: 18px;
+      height: 18px;
       stroke: currentColor;
       fill: none;
       stroke-width: 1.85;
@@ -552,7 +548,7 @@
     }
 
     .nav button:active {
-      --lens-zoom: 0.95;
+      --lens-zoom: 0.96;
     }
 
     .hilang {
@@ -776,17 +772,14 @@
     const navButtons = Array.from(document.querySelectorAll('.nav button'));
 
     const spring = {
-      x: 0,
+      x: 4,
       vx: 0,
-      targetX: 0,
-      y: 0,
-      vy: 0,
-      targetY: 0,
-      w: 72,
+      targetX: 4,
+      w: 64,
       vw: 0,
-      targetW: 72,
-      stiffness: 0.16,
-      damping: 0.75
+      targetW: 64,
+      stiffness: 0.18,
+      damping: 0.76
     };
 
     let isDragging = false;
@@ -798,31 +791,16 @@
     let currentHoverBtn = navButtons[0];
     let activePage = 'home';
 
-    let lastScrollY = window.scrollY || 0;
-    let scrollVelocity = 0;
-
-    window.addEventListener('scroll', () => {
-      const currentY = window.scrollY || 0;
-      const deltaY = currentY - lastScrollY;
-      lastScrollY = currentY;
-
-      const clampedDelta = Math.max(-36, Math.min(36, deltaY));
-      scrollVelocity = scrollVelocity * 0.65 + clampedDelta * 0.35;
-
-      spring.targetY = Math.max(-4.5, Math.min(4.5, -clampedDelta * 0.14));
-      spring.vy += -clampedDelta * 0.08;
-    }, { passive: true });
-
     function getBtnTarget(btn) {
-      return {
-        x: btn ? (btn.offsetLeft - 8) : 0,
-        w: btn ? btn.offsetWidth : 72
-      };
+      if (!btn) return { x: 4, w: 64 };
+      const w = Math.max(24, btn.offsetWidth - 4);
+      const x = btn.offsetLeft + (btn.offsetWidth - w) / 2;
+      return { x, w };
     }
 
     function updateLensZoom() {
-      const lensCenterX = spring.x + 8 + spring.w / 2;
-      const radius = Math.max(48, spring.w * 0.62);
+      const lensCenterX = spring.x + spring.w / 2;
+      const radius = Math.max(40, spring.w * 0.65);
 
       for (let i = 0; i < navButtons.length; i++) {
         const btn = navButtons[i];
@@ -831,60 +809,35 @@
         const proximity = Math.max(0, 1 - dist / radius);
         const smooth = proximity * proximity * (3 - 2 * proximity);
 
-        const btnZoom = 1 + smooth * 0.18;
-        const iconZoom = 1 + smooth * 0.12;
-        const liftY = -smooth * 1.5;
+        const btnZoom = 1 + smooth * 0.14;
+        const iconZoom = 1 + smooth * 0.1;
 
         btn.style.setProperty('--lens-zoom', btnZoom.toFixed(3));
         btn.style.setProperty('--icon-zoom', iconZoom.toFixed(3));
-        btn.style.setProperty('--lift-y', `${liftY.toFixed(2)}px`);
       }
     }
 
     function stepSpring() {
-      const k = isDragging ? 0.34 : spring.stiffness;
-      const d = isDragging ? 0.66 : spring.damping;
-
-      spring.targetY *= 0.82;
-      scrollVelocity *= 0.84;
+      const k = isDragging ? 0.36 : spring.stiffness;
+      const d = isDragging ? 0.68 : spring.damping;
 
       const ax = (spring.targetX - spring.x) * k;
       spring.vx = (spring.vx + ax) * d;
       spring.x += spring.vx;
-
-      const ay = (spring.targetY - spring.y) * 0.22;
-      spring.vy = (spring.vy + ay) * 0.72;
-      spring.y += spring.vy;
 
       const aw = (spring.targetW - spring.w) * k;
       spring.vw = (spring.vw + aw) * d;
       spring.w += spring.vw;
 
       const speedX = Math.abs(spring.vx);
-      const speedY = Math.abs(spring.vy) + Math.abs(scrollVelocity) * 0.22;
+      const stretchX = Math.min(1.12, Math.max(1, 1 + speedX * 0.005));
 
-      const lensBoost = isDragging ? 1.12 : (1 + Math.min(0.12, speedX * 0.006));
-      const stretchX = Math.min(1.24, Math.max(0.98, lensBoost + speedX * 0.01 - speedY * 0.004));
-      const squashY = Math.min(1.12, Math.max(0.9, lensBoost - speedX * 0.006 + speedY * 0.005));
+      blok.style.width = `${Math.max(24, spring.w).toFixed(1)}px`;
+      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, 0, 0) scaleX(${stretchX.toFixed(3)})`;
+      blok.style.borderRadius = '999px';
 
-      const dirX = spring.vx >= 0 ? 1 : -1;
-      const dirY = (spring.vy + scrollVelocity * 0.15) >= 0 ? 1 : -1;
-      const morphX = Math.min(14, speedX * 0.45);
-      const morphY = Math.min(9, speedY * 0.55);
-
-      const rTopLeft = Math.max(22, Math.min(44, 30 + (dirX > 0 ? -morphX * 0.4 : morphX * 0.6) + (dirY > 0 ? morphY * 0.35 : -morphY * 0.25)));
-      const rTopRight = Math.max(22, Math.min(44, 30 + (dirX > 0 ? morphX * 0.6 : -morphX * 0.4) + (dirY > 0 ? -morphY * 0.25 : morphY * 0.35)));
-      const rBotRight = Math.max(22, Math.min(44, 30 + (dirX > 0 ? morphX * 0.5 : -morphX * 0.3) + (dirY > 0 ? -morphY * 0.35 : morphY * 0.25)));
-      const rBotLeft = Math.max(22, Math.min(44, 30 + (dirX > 0 ? -morphX * 0.3 : morphX * 0.5) + (dirY > 0 ? morphY * 0.25 : -morphY * 0.35)));
-
-      blok.style.width = `${Math.max(42, spring.w)}px`;
-      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, ${spring.y.toFixed(2)}px, 0) scale(${stretchX.toFixed(3)}, ${squashY.toFixed(3)})`;
-      blok.style.borderRadius = `${rTopLeft.toFixed(1)}% ${rTopRight.toFixed(1)}% ${rBotRight.toFixed(1)}% ${rBotLeft.toFixed(1)}% / 55% 45% 55% 45%`;
-
-      const shineX = Math.max(-10, Math.min(10, spring.vx * 0.35));
-      const shineY = Math.max(-3.5, Math.min(3.5, (spring.vy + scrollVelocity * 0.12) * 0.35));
+      const shineX = Math.max(-8, Math.min(8, spring.vx * 0.3));
       blok.style.setProperty('--shine-shift', `${shineX.toFixed(1)}px`);
-      blok.style.setProperty('--shine-y', `${shineY.toFixed(1)}px`);
 
       updateLensZoom();
 
@@ -945,12 +898,12 @@
 
     function slideBlokToX(clientX) {
       const nearBtn = getNearestButtonByX(clientX);
-      const blokW = nearBtn ? nearBtn.offsetWidth : spring.targetW;
+      const blokW = nearBtn ? Math.max(24, nearBtn.offsetWidth - 4) : spring.targetW;
       const navRect = navEl.getBoundingClientRect();
-      const minX = 0;
-      const maxX = Math.max(0, navRect.width - 16 - blokW);
+      const minX = 4;
+      const maxX = Math.max(4, navRect.width - 4 - blokW);
 
-      let rawX = clientX - navRect.left - 8 - blokW / 2;
+      let rawX = clientX - navRect.left - blokW / 2;
       let clampedX = Math.max(minX, Math.min(maxX, rawX));
 
       spring.targetX = clampedX;
@@ -1031,9 +984,6 @@
       spring.x = tgt.x;
       spring.targetX = tgt.x;
       spring.vx = 0;
-      spring.y = 0;
-      spring.targetY = 0;
-      spring.vy = 0;
       spring.w = tgt.w;
       spring.targetW = tgt.w;
       spring.vw = 0;
@@ -1095,7 +1045,9 @@
       const b = document.querySelector('.nav button.aktif') || navButtons[0];
       if (!b) return;
       const tgt = getBtnTarget(b);
+      spring.x = tgt.x;
       spring.targetX = tgt.x;
+      spring.w = tgt.w;
       spring.targetW = tgt.w;
     });
 
