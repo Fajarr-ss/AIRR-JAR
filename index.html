@@ -41,7 +41,6 @@
       transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
     }
 
-    /* Mode Pagi lebih kalem & nyaman di mata (tidak silau) */
     body.mode-pagi {
       --bg-base: #e2e7f0;
       --text-main: #141b29;
@@ -123,7 +122,7 @@
     .konten {
       position: relative;
       z-index: 1;
-      padding: 36px 18px 140px;
+      padding: 36px 18px 144px;
       max-width: 432px;
       margin: 0 auto;
     }
@@ -402,15 +401,15 @@
       color: var(--text-muted);
     }
 
-    /* iOS 26 Liquid Glass Tab Bar — Soft Frosted & Silky Smooth */
+    /* iOS 27 Liquid Glass Tab Bar — Overflow Liquid Over Glass */
     .nav-wrap {
       position: fixed;
       left: 0;
       right: 0;
       margin: 0 auto;
-      bottom: 20px;
+      bottom: 22px;
       z-index: 10;
-      width: min(412px, calc(100vw - 22px));
+      width: min(414px, calc(100vw - 22px));
     }
 
     .nav {
@@ -420,60 +419,65 @@
       align-items: center;
       padding: 5px;
       min-height: 68px;
-      background: rgba(214, 222, 234, 0.78);
-      backdrop-filter: blur(26px) saturate(170%);
-      -webkit-backdrop-filter: blur(26px) saturate(170%);
-      border: 1px solid rgba(255, 255, 255, 0.62);
+      background: rgba(212, 220, 232, 0.72);
+      backdrop-filter: blur(28px) saturate(175%);
+      -webkit-backdrop-filter: blur(28px) saturate(175%);
+      border: 1px solid rgba(255, 255, 255, 0.58);
       border-radius: 999px;
       box-shadow:
-        0 16px 36px rgba(15, 23, 42, 0.22),
-        inset 0 1px 0.5px rgba(255, 255, 255, 0.72);
-      overflow: hidden;
+        0 18px 40px rgba(15, 23, 42, 0.2),
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.68);
+      overflow: visible;
       width: 100%;
       touch-action: pan-y;
       cursor: grab;
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease;
     }
 
     body:not(.mode-pagi) .nav {
-      background: rgba(24, 27, 37, 0.8);
-      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(20, 23, 33, 0.74);
+      border-color: rgba(255, 255, 255, 0.16);
       box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.46),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        0 20px 44px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
     .nav.sliding {
       cursor: grabbing;
-      transform: scale(1.015);
+      transform: scale(1.012);
     }
 
     .nav::before {
       content: "";
       position: absolute;
-      inset: 0 0 60% 0;
+      inset: 0;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 65%);
       pointer-events: none;
-      z-index: 2;
+      z-index: 1;
     }
 
-    /* Kapsul liquid bening lembut tanpa silau berlebihan */
+    /* Liquid bubble meluncur di atas glass & sedikit menyembul keluar saat bergerak */
     .blok {
       --shine-shift: 0px;
+      --over-y: 0px;
       position: absolute;
-      top: 4px;
-      bottom: 4px;
+      top: -2px;
+      bottom: -2px;
       left: 0;
       width: 68px;
       background:
-        radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.08) 65%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.26), rgba(145, 185, 240, 0.12) 55%, rgba(255, 255, 255, 0.18));
-      border: 1.25px solid rgba(255, 255, 255, 0.65);
+        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.08) 62%),
+        linear-gradient(150deg, rgba(255, 255, 255, 0.32), rgba(130, 185, 255, 0.14) 52%, rgba(255, 255, 255, 0.2));
+      backdrop-filter: blur(12px) saturate(185%);
+      -webkit-backdrop-filter: blur(12px) saturate(185%);
+      border: 1.25px solid rgba(255, 255, 255, 0.72);
       border-radius: 999px;
       box-shadow:
-        0 6px 16px rgba(15, 23, 42, 0.14),
-        inset 0 1px 1.5px rgba(255, 255, 255, 0.72);
+        0 10px 24px rgba(10, 132, 255, 0.16),
+        0 4px 12px rgba(0, 0, 0, 0.14),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.78),
+        inset 0 -1.5px 3px rgba(255, 255, 255, 0.28);
       will-change: transform, width;
       transform-origin: center center;
       z-index: 3;
@@ -482,12 +486,13 @@
 
     body:not(.mode-pagi) .blok {
       background:
-        radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04) 65%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.17), rgba(110, 160, 245, 0.07) 55%, rgba(255, 255, 255, 0.12));
-      border-color: rgba(255, 255, 255, 0.42);
+        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.04) 62%),
+        linear-gradient(150deg, rgba(255, 255, 255, 0.2), rgba(110, 165, 255, 0.1) 52%, rgba(255, 255, 255, 0.14));
+      border-color: rgba(255, 255, 255, 0.48);
       box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.3),
-        inset 0 1px 1px rgba(255, 255, 255, 0.45);
+        0 12px 26px rgba(0, 0, 0, 0.38),
+        0 0 18px rgba(100, 180, 255, 0.12),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.52);
     }
 
     .blok::before {
@@ -496,9 +501,9 @@
       top: 3px;
       left: 12px;
       right: 12px;
-      height: 11px;
+      height: 12px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.52), transparent);
       transform: translate3d(var(--shine-shift), 0, 0);
       pointer-events: none;
     }
@@ -512,7 +517,7 @@
       --icon-zoom: 1;
       --lift-y: 0px;
       position: relative;
-      z-index: 1;
+      z-index: 4;
       flex: 1 1 0;
       border: none;
       background: transparent;
@@ -530,7 +535,7 @@
       transform: translate3d(0, var(--lift-y), 0) scale(var(--lens-zoom));
       transform-origin: center center;
       will-change: transform;
-      transition: color 0.22s ease, font-weight 0.22s ease;
+      transition: color 0.25s ease, font-weight 0.25s ease;
       min-width: 0;
     }
 
@@ -565,7 +570,7 @@
     }
 
     body:not(.mode-pagi) .nav button.aktif {
-      color: #409cff;
+      color: #55a8ff;
     }
 
     .nav button.aktif .ikon svg {
@@ -576,13 +581,12 @@
       display: none;
     }
 
-    /* Animasi perpindahan halaman & staggered kartu */
     .muncul .page-header {
-      animation: headerMasuk 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: headerMasuk 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .muncul .kartu {
-      animation: kartuMasuk 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: kartuMasuk 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .muncul .kartu:nth-of-type(1) { animation-delay: 0.03s; }
@@ -627,7 +631,7 @@
     <div id="page-home" class="muncul">
       <div class="page-header">
         <h1>AIRR</h1>
-        <p>iOS 26 · Treat Your Better</p>
+        <p>iOS 27 · Treat Your Better</p>
       </div>
 
       <div class="kartu">
@@ -855,7 +859,7 @@
       playMicroTick(kind === 'tick' ? 'tick' : 'tap');
     }
 
-    /* === ULTRA-SMOOTH LIQUID SPRING === */
+    /* === IOS 27 SMOOTH LIQUID SPRING WITH OVERFLOW === */
     const spring = {
       x: 4,
       vx: 0,
@@ -863,8 +867,8 @@
       w: 68,
       vw: 0,
       targetW: 68,
-      stiffness: 0.14,
-      damping: 0.8
+      stiffness: 0.095,
+      damping: 0.82
     };
 
     let isDragging = false;
@@ -878,14 +882,14 @@
 
     function getBtnTarget(btn) {
       if (!btn) return { x: 4, w: 68 };
-      const w = Math.max(24, btn.offsetWidth - 4);
+      const w = Math.max(24, btn.offsetWidth - 2);
       const x = btn.offsetLeft + (btn.offsetWidth - w) / 2;
       return { x, w };
     }
 
     function updateLensZoom() {
       const lensCenterX = spring.x + spring.w / 2;
-      const radius = Math.max(46, spring.w * 0.72);
+      const radius = Math.max(48, spring.w * 0.75);
 
       for (let i = 0; i < navButtons.length; i++) {
         const btn = navButtons[i];
@@ -894,19 +898,19 @@
         const proximity = Math.max(0, 1 - dist / radius);
         const smooth = proximity * proximity * (3 - 2 * proximity);
 
-        const btnZoom = 1 + smooth * 0.16;
-        const iconZoom = 1 + smooth * 0.12;
-        const liftY = -smooth * 1.4;
+        const btnZoom = 1 + smooth * 0.17;
+        const iconZoom = 1 + smooth * 0.13;
+        const liftY = -smooth * 1.8;
 
-        btn.style.setProperty('--lens-zoom', btnZoom.toFixed(3));
-        btn.style.setProperty('--icon-zoom', iconZoom.toFixed(3));
+        btn.style.setProperty('--lens-zoom', btnZoom.toFixed(4));
+        btn.style.setProperty('--icon-zoom', iconZoom.toFixed(4));
         btn.style.setProperty('--lift-y', `${liftY.toFixed(2)}px`);
       }
     }
 
     function stepSpring() {
-      const k = isDragging ? 0.28 : spring.stiffness;
-      const d = isDragging ? 0.74 : spring.damping;
+      const k = isDragging ? 0.22 : spring.stiffness;
+      const d = isDragging ? 0.78 : spring.damping;
 
       const ax = (spring.targetX - spring.x) * k;
       spring.vx = (spring.vx + ax) * d;
@@ -917,15 +921,21 @@
       spring.w += spring.vw;
 
       const speedX = Math.abs(spring.vx);
-      const dragBoost = isDragging ? 1.05 : 1;
-      const stretchX = Math.min(1.16, Math.max(0.98, dragBoost + speedX * 0.0065));
-      const squashY = Math.min(1.06, Math.max(0.93, dragBoost - speedX * 0.003));
+      const motionRatio = Math.min(1, speedX / 14);
+
+      /* Saat meluncur, kapsul sedikit mengembang ke atas/bawah melewati batas glass (over) */
+      const overY = isDragging
+        ? -2.5 - motionRatio * 2.5
+        : -motionRatio * 3.5;
+
+      const stretchX = Math.min(1.18, Math.max(1, 1 + motionRatio * 0.13));
+      const overScaleY = Math.min(1.11, Math.max(1, 1 + motionRatio * 0.085));
 
       blok.style.width = `${Math.max(24, spring.w).toFixed(2)}px`;
-      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, 0, 0) scale(${stretchX.toFixed(3)}, ${squashY.toFixed(3)})`;
+      blok.style.transform = `translate3d(${spring.x.toFixed(2)}px, ${overY.toFixed(2)}px, 0) scale(${stretchX.toFixed(4)}, ${overScaleY.toFixed(4)})`;
       blok.style.borderRadius = '999px';
 
-      const shineX = Math.max(-9, Math.min(9, spring.vx * 0.35));
+      const shineX = Math.max(-10, Math.min(10, spring.vx * 0.35));
       blok.style.setProperty('--shine-shift', `${shineX.toFixed(1)}px`);
 
       updateLensZoom();
@@ -956,7 +966,6 @@
       const tgt = getBtnTarget(btn);
       spring.targetX = tgt.x;
       spring.targetW = tgt.w;
-      spring.vx += (tgt.x - spring.x) * 0.06;
 
       showPage(page);
       triggerHaptic('tap');
@@ -987,10 +996,10 @@
 
     function slideBlokToX(clientX) {
       const nearBtn = getNearestButtonByX(clientX);
-      const blokW = nearBtn ? Math.max(24, nearBtn.offsetWidth - 4) : spring.targetW;
+      const blokW = nearBtn ? Math.max(24, nearBtn.offsetWidth - 2) : spring.targetW;
       const navRect = navEl.getBoundingClientRect();
-      const minX = 4;
-      const maxX = Math.max(4, navRect.width - 4 - blokW);
+      const minX = 2;
+      const maxX = Math.max(2, navRect.width - 2 - blokW);
 
       let rawX = clientX - navRect.left - blokW / 2;
       let clampedX = Math.max(minX, Math.min(maxX, rawX));
@@ -1025,7 +1034,7 @@
       if (!isDragging) return;
       const now = performance.now();
       const dt = Math.max(8, now - lastMoveTime);
-      dragVelocity = dragVelocity * 0.4 + (((e.clientX - lastPointerX) / dt) * 16) * 0.6;
+      dragVelocity = dragVelocity * 0.45 + (((e.clientX - lastPointerX) / dt) * 16) * 0.55;
       lastPointerX = e.clientX;
       lastMoveTime = now;
 
@@ -1044,7 +1053,7 @@
       }
 
       if (hasSlid) {
-        const flickX = e.clientX + dragVelocity * 2.0;
+        const flickX = e.clientX + dragVelocity * 1.8;
         const targetBtn = getNearestButtonByX(flickX);
         const pageName = targetBtn.getAttribute('data-page');
 
@@ -1055,7 +1064,7 @@
         const tgt = getBtnTarget(targetBtn);
         spring.targetX = tgt.x;
         spring.targetW = tgt.w;
-        spring.vx += dragVelocity * 0.45;
+        spring.vx += dragVelocity * 0.32;
 
         showPage(pageName);
         triggerHaptic('snap');
